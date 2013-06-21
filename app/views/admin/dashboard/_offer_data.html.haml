@@ -3,7 +3,7 @@
   #on.one_admin
     =image_tag("artist.jpg")
     - if offer.offer_end_date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") 
-      %i.icon-certificate.pointer{:style=>"display:block;position:absolute;z-index:1;top:53px;right:159px"}
+      %i.icon-certificate.pointer{:style=>"display:inline;position:absolute;z-index:1;left:116px;margin-top:12px;"}
     %h1
       %u
         -if offer.artwork.artist
@@ -15,7 +15,7 @@
       - elsif offer.offer_end_date.strftime("%Y-%m-%d") > Date.today.strftime("%Y-%m-%d")
         %p= "remaining - #{humanize_time (offer.offer_end_date - Time.now)}"
       -elsif offer.offer_end_date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d")
-        %p= "remaining - #{((offer.offer_end_date - Time.now)/1.hour).round}"
+        %p= "remaining - #{((offer.offer_end_date - Time.now)/1.hour).round}" " hours"
       - else
         %p= "-"
     %h2

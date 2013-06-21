@@ -48,9 +48,10 @@
       if (endDateTextBox.val() != '') {
         var testStartDate = new Date(dateText);
         var testEndDate = new Date(endDateTextBox.val());
-        if (testStartDate > testEndDate)
+        if (testStartDate > testEndDate){
           endDateTextBox.val(dateText);
           alert("End Date should be greater than Start Date");
+        }
       }
       else {
         alert('Enter end date')
@@ -69,9 +70,10 @@
       if (startDateTextBox.val() != '') {
         var testStartDate = new Date(startDateTextBox.val());
         var testEndDate = new Date(dateText);
-        if (testStartDate > testEndDate)
+        if (testStartDate > testEndDate){
           startDateTextBox.val(dateText);
           alert("End Date should be greater than Start Date");
+        }
       }
       else {
         alert('Enter start date')

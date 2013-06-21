@@ -9,6 +9,11 @@ if (location.pathname == "/admin/reports") {
    				start_date: $('#start_date').val(),
    				end_date: $('#end_date').val()
 			},
+			beforeSend: function(){
+				if($('#statistics_select').val() == "" || $('#interval_select').val() == "" || $('#start_date').val() == "" || $('#end_date').val() == ""){
+					alert('Please fill all the fields to generate chart')
+				}
+			},
 			complete: function(data){
 				temp = Function(data.responseText);
 				temp();
