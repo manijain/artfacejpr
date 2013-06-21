@@ -173,7 +173,7 @@ $(function() {
             // alert($("#search_data_4 .count").text());
             $(".forum_result").text($("#forum_data .count").text());
             $(".layout_part_three h3.pull-left span.forum_result").show();
-        },500);
+        },300);
     })
 
     $(document).off("click", "#admin_forum_advanced_search")
@@ -185,7 +185,7 @@ $(function() {
       setTimeout(function(){
           $(".forum_result").text($("#forum_data .count").text());
           $(".layout_part_three h3.pull-left span.forum_result").show();
-      },500);
+      },300);
     })  
   }
 
