@@ -9,8 +9,9 @@
   %u="No limit"
   %u{:style=>"font-weight: bold;"}="Total"
   %br
-  -@user= User.all      
-  -@user = @user.uniq{|x| x.user_country}
+  //-@user= User.all
+  //-@user = @user.uniq{|x| x.user_country}
+  -@user = User.find_by_sql "SELECT users.user_country FROM users GROUP BY user_country ORDER BY count(user_country)DESC"
 
   %ul
     -@user.each do |user|

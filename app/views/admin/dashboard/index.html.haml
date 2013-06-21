@@ -1,7 +1,8 @@
 =render :partial=> "admin/layouts/header"
 %div{:align=>"center"}
   #head2.wrapper_admin.head2_admin
-    %h2 THIS NEEDS YOUR ATTENSION
+    %h2{:style=>"float:left;"} THIS NEEDS YOUR ATTENTION
+    %br
     %table.table_admin
       %tr
         %td.td_admin.color1
@@ -18,7 +19,8 @@
 
   #head3.head3_admin
     %h2= "STATISTICS: " "#{Time.now.strftime("%d %B %Y")}"
-    For the year
+    %br
+    %span{:style=>"clear:both;"}="For the year"
     %select{:id=> "year_to_pop"}
       %option{:value=> "all"} All
       %option{:value=> "today"} Today
@@ -35,6 +37,7 @@
 
   #head4.wrapper_admin.head4_admin
     %h1 WHAT'S HAPPENING ?
+    %br
     %table{:style=>"margin-right: 290px"}
       %th
         Sort list by

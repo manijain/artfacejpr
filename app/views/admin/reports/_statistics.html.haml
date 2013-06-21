@@ -609,5 +609,10 @@
 
 %br
 %br
+
+#ajax-loader-big_for_offers_data{:style=>"left: 400px;position: absolute;top: 1100px;z-index: 100;display:none;"}
+  %img{:src=>"/images/ajax-loader-big.gif"}
+#overlay_div_data{:style=>"background-color: white;display: block;height: 100%;left: 0;opacity: 0.4;position: absolute;top: 1000px;width: 100%;z-index: 2;display:none;"}
+
 #head3_report.head3_summary_report
   =render :partial=>"/admin/reports/summary"

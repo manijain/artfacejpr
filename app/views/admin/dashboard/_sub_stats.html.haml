@@ -217,7 +217,7 @@
         %p= @subscriptions.where("auto_renewal = true AND subscription_renewal_date IS NULL").where(:subscription_plan_id=>4).count
       %td.color3
         %p= @subscriptions.where("auto_renewal = true AND subscription_renewal_date IS NULL").where(:subscription_plan_id=>5).count
-  .input= link_to "SHOW DETAILS", admin_reports_path
+  .input.pull-left= link_to "SHOW DETAILS", admin_reports_path
 #ajax-loader-big_for_statsdash_data{:style=>"left: 400px;position: absolute;top: 600px;z-index: 100;display:none;"}
   %img{:src=>"/images/ajax-loader-big.gif"}
 #overlay_div_statsdash{:style=>"background-color: white;display: block;height: 500px;left: 0;opacity: 0.4;position: absolute;top: 400px;width: 100%;z-index: 2;display:none;"}

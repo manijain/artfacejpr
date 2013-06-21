@@ -2,6 +2,8 @@
 - @offers.each do |offer|
   #on.one_admin
     =image_tag("artist.jpg")
+    - if offer.offer_end_date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") 
+      %i.icon-certificate.pointer{:style=>"display:block;position:absolute;z-index:1;top:53px;right:159px"}
     %h1
       %u
         -if offer.artwork.artist

@@ -39,7 +39,7 @@ class Admin::DashboardController < ApplicationController
     if sort_by == "Most Clicked"
       @offers = Offer.where("offer_status=true").order("offers.offer_popularity desc")
     elsif sort_by == "Most messages"
-      @offers = Offer.where("offer_status=true").find(:all, :include => :messages).sort_by { |p| p.messages.size}
+      @offers = Offer.where("offer_status=true").find(:all, :include => :messages).sort_by { |p| p.messages.size}.reverse
     elsif sort_by == "Most forum activities"      
       @offers = Offer.where("offer_status=true").find(:all, :include => :forum_messages).sort_by { |p| p.forum_messages.size}.reverse
     elsif sort_by == "Newest"
@@ -47,7 +47,7 @@ class Admin::DashboardController < ApplicationController
     elsif sort_by == "Highest offer"
        @offers = Offer.where("offer_status=true").find(:all, :include => :messages).sort_by { |p| p.messages.maximum(:offer_price).to_i}.reverse
     elsif sort_by == "Time left"  
-      @offers = Offer.where("offer_status=true").order("offers.offer_end_date asc")
+      @offers = Offer.where("offer_status=true").order("offers.offer_end_date desc")
     else
       @offers = Offer.where("offer_status=true")
     end          

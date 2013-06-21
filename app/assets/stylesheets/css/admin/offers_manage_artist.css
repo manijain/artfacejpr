@@ -84,3 +84,28 @@
     top: 15px;
     width: auto;
 }
+
+.head1_admin_offer{
+  background-color: #AEAEAE;
+  margin-bottom: 20px;
+  width:846px;
+}
+
+.head1_admin_offer_select1{
+  background-color: #AEAEAE;
+  border: 2px solid white;
+  color: white;
+  margin: 0 0 6px 16px;
+  padding-bottom: 6px;
+  padding-top: 6px;
+  width: auto;
+}
+
+.details_admin_artist h6{
+    width: 110px;
+    display: inline-block;
+}
+.details_admin_artist{
+  margin:-30px 0 0px 120px;
+  padding-top: 30px;
+}

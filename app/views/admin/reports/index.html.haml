@@ -41,8 +41,44 @@
 
 :javascript
   $("#start_date").datepicker({
-        dateFormat: "yy-mm-dd"
-  })  
+    dateFormat: "yy-mm-dd",
+    onClose: function(dateText, inst) {
+      console.log('in start on close')
+      var endDateTextBox = $('#end_date');
+      if (endDateTextBox.val() != '') {
+        var testStartDate = new Date(dateText);
+        var testEndDate = new Date(endDateTextBox.val());
+        if (testStartDate > testEndDate)
+          endDateTextBox.val(dateText);
+          alert("End Date should be greater than Start Date");
+      }
+      else {
+        alert('Enter end date')
+      }
+    },
+    onSelect: function (selectedDate){
+      console.log('in start on select')
+      var start = $(this).datepicker('getDate');
+      // $('#example16_end').datetimepicker('option', 'minDate', new Date(start.getTime()));
+    }
+  }); 
   $("#end_date").datepicker({
-  	dateFormat: "yy-mm-dd"
-  })
+  	dateFormat: "yy-mm-dd",
+    onClose: function(dateText, inst) {
+      var startDateTextBox = $('#start_date');
+      if (startDateTextBox.val() != '') {
+        var testStartDate = new Date(startDateTextBox.val());
+        var testEndDate = new Date(dateText);
+        if (testStartDate > testEndDate)
+          startDateTextBox.val(dateText);
+          alert("End Date should be greater than Start Date");
+      }
+      else {
+        alert('Enter start date')
+      }
+    },
+    onSelect: function (selectedDate){
+      var end = $(this).datepicker('getDate');
+      //$('#example16_start').datetimepicker('option', 'maxDate', new Date(end.getTime()) );
+    }
+  });

@@ -93,7 +93,7 @@ font-weight:bold;
 
 .head2_admin{
 background:#F6F6F6;
-padding-bottom:25px;
+padding-bottom:135px;
 }
 .head2_admin h1
 {
@@ -104,6 +104,7 @@ letter-spacing:2px;
 .table_admin
 {
 margin:0px 0 0 35px;
+float: left;
 }
 .td_admin
 {
@@ -113,6 +114,8 @@ padding:10px 20px 10px 10px;
 
 .head3_admin{
 padding:25px 0 0 25px;
+float:left;
+  margin-left: 85px;
 }
 .head3_admin h1
 {
@@ -153,7 +156,7 @@ padding:10px 0 10px 0;
 .input
 {
 color:white;
-margin:14px 0 20px 25px;
+margin:14px 0 20px 0px;
 background:#AEAEAE;
 border-radius: 6px;
 -webkit-border-radius: 6px;
@@ -166,9 +169,11 @@ width: 100px;
 .head4_admin
 {
 background:#F6F6F6;
+clear:both;
 }
 .head4_admin h1{
 padding:20px 20px 20px 30px;
+float: left;
 }
 .head4_admin th{
 padding:0 20px 0 15px;

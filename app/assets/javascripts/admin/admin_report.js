@@ -55,6 +55,7 @@ if (location.pathname == "/admin/reports") {
     	var  len = (String(base || 10).length - String(this).length)+1;
     	return len > 0? new Array(len).join(chr || '0')+this : this;
 	}
+
 }
 
 if(location.pathname == "/admin/reports" && location.search == ""){
@@ -67,7 +68,13 @@ if(location.pathname == "/admin/reports" && location.search == ""){
 		$('#end_date').val([today.getFullYear(), (today.getMonth()+1).padLeft(), today.getDate()].join('-'))
 	})
 }
-
+if(location.pathname == "/admin/reports" && location.search != ""){
+	$(document).ready(function(){
+		setTimeout(function(){
+			$('#interval_select').val('yearly')
+		},20)
+	})
+}
 
 if(location.pathname == "/admin/reports"){
 	var today = new Date();
@@ -128,7 +135,7 @@ if(location.pathname == "/admin/reports"){
 		},20);
 	}
 	else if(location.search.contains('All') == true){
-		var first = new Date(today.getFullYear()-5, 0, 01);
+		var first = new Date(today.getFullYear()-3, 0, 01);
 		var last = new Date(today);
 		setTimeout(function(){
 			setdates(first, last);
