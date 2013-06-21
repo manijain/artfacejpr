@@ -6,12 +6,12 @@
 development:
   adapter: postgresql
   host: localhost
-  database: artface_new
+  database: artface_8april
   pool: 5
   timeout: 5000
   username: postgres
   password: postgres
-  port: 5433
+  port: 5432
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -24,7 +24,7 @@ test: &test
   timeout: 5000
   username: postgres
   password: postgres
-  port: 5433
+  port: 5432
 
 production:
   adapter: sqlite3
@@ -40,7 +40,7 @@ selenium:
   timeout: 5000
   username: postgres
   password: postgres
-  port: 5433
+  port: 5432
 
 cucumber:
   <<: *test
