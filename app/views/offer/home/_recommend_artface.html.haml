@@ -1,0 +1,27 @@
+.span10.span10recommend_artface
+  %h4="RECOMMEND ARTFACE.COM"
+  .span10recommend_artface_container{:style=>"position:relative"}
+    %div{:style=>"width:20%"}
+      %p=t '.text_one'
+    %div{:style=>"width:80%"}
+      = form_for :user_recommendation, :url=>user_recommendation_create_path, :remote => true do |f|
+        %ul
+          %li
+            %span=t '.email'
+            = f.text_field :email, :placeholder => "#{t '.email_placeholder'}"
+            %img#user_recommendation_email_error{"data-original-title"=>"Please enter the email", :src=>"/images/exclamation_mark.png", :style=>"display: none;right:0;position: absolute;z-index:2;"}
+          %li
+            %span=t '.name'
+            = f.text_field :name, :placeholder => "#{t '.name_placeholder'}"
+            %img#user_recommendation_name_error{"data-original-title"=>"Please enter the name", :src=>"/images/exclamation_mark.png", :style=>"display: none;right:0;position: absolute;z-index:2;"}
+          %li
+            %span=t '.your_message'
+            = f.text_area :message, :placeholder => "#{t '.your_message_placeholder'}"
+            %img#user_recommendation_message_error{"data-original-title"=>"Please enter the message", :src=>"/images/exclamation_mark.png", :style=>"display: none;right:0;position: absolute;z-index:2;"}
+          %li{:style=>"display:none;"}
+            = f.hidden_field :user_id, :value=>"#{@user.id}"
+        %div{:style=>"width:25%"}
+          %p="You have #{@user.subscription.recommendations_successful} successful and #{@user.subscription.recommendations_pending} pending recommendations. With 5 successful recommendations your subscription plan will be upgraded for free to \"#{@upgraded_subscription_plan}\" for one year."
+          = f.submit :style=>"margin-left:10px;font-size:11px;", :value=>"#{t '.send_recommendation'}", :class=>"btn"
+    %p#success_message.recommend_artface_flash_message_success
+    %p#error_message.recommend_artface_flash_message_error

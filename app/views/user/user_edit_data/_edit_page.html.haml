@@ -1,0 +1,157 @@
+.sign_up_layout_one
+  .sign_up_section_one
+    %h2
+      EDIT YOUR PERSONAL DATA
+  .sign_up_section_two  
+    .sign_up_section_three
+    .sign_up_section_four
+      %h2 YOUR PERSONAL DATA
+      %p Your personal data is treated 100% confidentially and is only needed for invoicing reasons. Your personal data will not be visible to other users unless you give the explicit permission.
+
+      %table
+        %tbody
+          %tr
+            %td.sign_up_section_four_td_left FULL NAME
+            %td.sign_up_section_four_td_right
+              %span
+                %select#user_salutation
+                  - if current_user.user_gender == "Mr."
+                    %option{:selected=>"selected"}="Mr."
+                  - else
+                    %option="Mr."
+                  - if current_user.user_gender == "Mrs."
+                    %option{:selected=>"selected"}="Mrs."
+                  - else
+                    %option="Mrs."
+              %input#user_first_name{:type=>"text", :placeholder=>"FIRST NAME*", :maxlength=>"40", :value=>current_user.user_first_name}
+              %img#error_user_first_name{"data-original-title"=>"Please enter your first name", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+              %input#user_last_name{:type=>"text", :placeholder=>"LAST NAME*", :maxlength=>"40", :value=>current_user.user_last_name}
+              %img#error_user_last_name{"data-original-title"=>"Please enter your last name", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+          %tr
+            %td.sign_up_section_four_td_left COMPANY
+            %td.sign_up_section_four_td_right
+              %input#user_company{:type=>"text", :placeholder=>"COMPANY NAME", :maxlength=>"40", :value=>current_user.user_company}
+              %img#error_company{"data-original-title"=>"Please enter company name", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+          %tr
+            %td.sign_up_section_four_td_left ADDRESS
+            %td.sign_up_section_four_td_right
+              %input#user_street{:type=>"text", :placeholder=>"STREET", :maxlength=>"40", :value=>current_user.user_street}
+              %img#error_user_street{"data-original-title"=>"Please enter your street number", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"} 
+          %tr
+            %td.sign_up_section_four_td_left
+            %td.sign_up_section_four_td_right
+              %input#user_zip_code{:type=>"text", :placeholder=>"ZIP CODE", :maxlength=>"15", :value=>current_user.user_zip_code}
+              %img#error_user_zip_code{"data-original-title"=>"Please enter your zip code", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+              %input#user_city{:type=>"text", :placeholder=>"CITY", :maxlength=>"40", :value=>current_user.user_city}
+              %img#error_user_city{"data-original-title"=>"Please enter your city name", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+          %tr
+            %td.sign_up_section_four_td_left COUNTRY
+            %td.sign_up_section_four_td_right
+              - country_select_data
+              %select.sign_up_section_four_td_country#user_country
+                %option= "Please choose a country"
+                - @countries.each do |country|
+                  - if current_user.user_country == country.country_name
+                    %option{:selected=>"selected"}=country.country_name
+                  - else
+                    %option=country.country_name
+            %td
+              %span#user_country_error Please select your country
+          %tr
+            %td.sign_up_section_four_td_left PHONE & FAX
+            %td.sign_up_section_four_td_right
+              %input#user_phone_number{:type=>"text", :placeholder=>"TELEPHONE NUMBER", :maxlength=>"30", :value=>current_user.user_phone_number}
+              %img#error_user_phone_number{"data-original-title"=>"Please enter your phone number", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+              %input#user_fax_number{:type=>"text", :placeholder=>"FAX NUMBER", :maxlength=>"30", :value=>current_user.user_fax_number}
+              %img#error_user_fax_number{"data-original-title"=>"Please enter your fax number", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+          %tr
+            %td.sign_up_section_four_td_left=t ".tax_id"
+            %td.sign_up_section_four_td_right
+              %input#user_tax_id{:type=>"text", :placeholder=>"TAX ID", :maxlength=>"40", :value=>current_user.user_tax_id}
+              If you are a company
+    .sign_up_section_five
+      %h2 YOUR LOGIN DATA
+      %p Your email adress only serves as a login and will never be shown to anyone else unless you grant the explicit permission.
+      %table
+        %tbody
+          %tr
+            %td.sign_up_section_four_td_left{:style=>"width:150px;"} EMAIL ADDRESS
+            %td.sign_up_section_four_td_right
+              %span
+                %input#user_email{:type=>"text", :placeholder=>"EMAIL*", :maxlength=>"40", :value=>current_user.email}
+                %img#error_user_email{"data-original-title"=>"Please enter your email address", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+                %span (serves as login)
+
+          %tr
+            %td.sign_up_section_four_td_left NEW PASSWORD
+            %td.sign_up_section_four_td_right
+              %span
+                %input#user_password{:type=>"password", :placeholder=>"PASSWORD*"}
+                %span#password_notice at least 8 characters with at least 1 number and 1 character (!§$%&)
+                %img#error_user_password{"data-original-title"=>"Please enter a password", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+                %input#user_password_confirmation{:type=>"password", :placeholder=>"RETYPE PASSWORD*"}
+    .sign_up_section_six
+      %h2 YOUR PAYMENT METHOD
+      %p Finish your sign-up process by chosing your payment method. The annual subscription fee is paid in advance.
+      .sign_up_section_six_container
+        .sign_up_section_six_container_step_one{:style=>"width:820px;float:left;"}
+          %input#radio_payment_card{:type=>"radio", :name=>"radio_payment_type", :checked=>"true", :style=>"float:left;"}
+          %div#radio_payment_card_div_one
+            %div
+              %strong#payment_card_title PAYMENT BY CREDIT CARD
+              %br
+              We accept Visa, Master Card, Amex.
+            %div
+              %select#card_type
+                %option{:value=>"Credit Card type"}="Credit Card type"
+                %option{:value=>"Visa"}="Visa"
+                %option{:value=>"American Express"}="American Express"
+                %option{:value=>"MasterCard"}="MasterCard"
+              %img#error_card_type{"data-original-title"=>"Please choose a credit card type", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}  
+              %br
+              %strong EXPIRES
+              %select#card_expiry_month{:style=>"width:80px;", :type=>"text", :maxlength=>"40"}
+                - (1..12).each do |i|
+                  %option="#{i}"
+              %img#error_card_expiry_month{"data-original-title"=>"Please enter valid expiry month", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+              %select#card_expiry_year{:style=>"width:80px;", :type=>"text", :maxlength=>"40"}
+                -(Date.today.year..(Date.today.year + 30)).each do |i|
+                  %option="#{i}"
+              %img#error_card_expiry_year{"data-original-title"=>"Please enter valid expiry year", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+            %div
+              %ul.unstyled
+                %li
+                  %input#card_number{:type=>"text", :placeholder=>"CREDIT CARD NUMBER*", :maxlength=>"40"}
+                  %img#error_card_number{"data-original-title"=>"Please enter your card number", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+                %li
+                  %input#card_owner{:type=>"text", :placeholder=>"NAME CREDIT CARD OWNER*", :maxlength=>"40"}
+                  %img#error_card_owner{"data-original-title"=>"Please enter card holder's name", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+                %li
+                  %input#card_code{:type=>"text", :placeholder=>"VERIFICATION CODE*", :maxlength=>"40"}
+                  %img#error_card_code{"data-original-title"=>"Please enter your card code", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+          #radio_payment_card_div_two{:style=>"display:none;width:90%;float:left;"}
+            %strong#payment_card_title PAYMENT BY CREDIT CARD
+            %br
+        .sign_up_section_six_container_step_two{:style=>"width:820px;float:left;"}
+          %input#radio_payment_paypal{:type=>"radio", :name=>"radio_payment_type", :style=>"float:left;"}
+          #radio_payment_paypal_div_one{:style=>"display: inline;width:655px;float:left;"}
+            %div{:style=>"width:40%"}
+              %strong#payment_paypal_title PAYMENT BY PAYPAL
+              %p Check this option to use you Paypal account for hassle-free, quick and free-of-charge payment.
+            %div{:style=>"width:40%"}
+              %p Paypal payment details will be collected in a new window after you have completed the sign-up process
+          #radio_payment_paypal_div_two.pull-left{:style=>"display:none;width:90%;"}
+            %strong#payment_paypal_title PAYMENT BY PAYPAL
+        .sign_up_section_six_container_step_three{:style=>"width:820px;float:left;"}
+          %input#radio_payment_bank{:type=>"radio", :name=>"radio_payment_type", :style=>"float:left;"}
+          #radio_payment_bank_div_one{:style=>"display: inline;width:655px;float:left;"}
+            %div{:style=>"width:40%"}
+              %strong PAYMENT BY BANK TRANSFER
+              %p Check this option to use a standard bank transfer to settle your payment. After we have received your payment we will activate your account.
+            %div{:style=>"width:40%"}
+              %p Bank details will be sent by email after you have completed the sign-up process
+          #radio_payment_bank_div_two{:style=>"display:none;width:90%;float:left;"}
+            %strong#payment_paypal_title PAYMENT BY BANK TRANSFER
+    %div{:style=>"float:right"}
+      %br
+      %button.btn#submit_changes SUBMIT CHANGES

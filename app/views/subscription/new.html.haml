@@ -1,0 +1,14 @@
+= render :partial =>"layouts/header"
+
+%div{:style=>"margin-left:2%"}
+	%h2="User details registered"
+	%p="Please proceed to paypal checkout to complete the sign up process"
+	
+	= link_to image_tag('https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif'), "subscription/express_checkout", :id=>"paypal_checkout_button"
+
+%br
+%br
+
+= render :partial =>"layouts/footer"
+
+

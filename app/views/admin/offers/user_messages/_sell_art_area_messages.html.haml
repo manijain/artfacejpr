@@ -1,0 +1,35 @@
+.sell-art-area-messages{:style=>"position:relative;"}
+  %span{:style=>"font-size:15px;font-weight:bold;position:relative;left:10px;top:10px;"}="MESSAGES BY USER ##{@user.id} (#{@user.user_first_name} #{@user.user_last_name})  "
+  %a.btn.pull-left{:style=>"float:right;margin-top:10px;", :href=>"/offer/new"}="BACK TO USER OVER"
+  .nav-sort-bar
+    %span="Sort list by"
+    %select#messages_sort_id_one{:style=>"margin-right:10px;margin-left:10px;width:135px;"}
+      %option{:value=>"Artist Name"}="Artist Name"
+      %option{:value=>"offer_end_date"}="offer end date"
+      %option{:value=>"new messages"}="new messages"
+    %span="Show"
+    %select#messages_sort_id_two{:style=>"margin-right:130px;margin-left:10px;width:130px;"}
+      %option{:value=>"All offers"}="All offers"
+      %option{:value=>"Active offers"}="Active offers"
+      %option{:value=>"Inactive offers"}="Inactive offers"
+    -#%span="Pictures per page"
+    -#%select#sort_id_three
+      %option="6"
+      %option="12"
+      %option="18"
+      %option="24"
+    #sort_id_four{:style=>"float:left;width:230px;"}
+      
+    -##sort_id_five1
+      %span{:style=>"line-height:20px;"}="Page"
+      %i.icon-arrow-left
+      %span{:style=>"line-height:20px;"}="1/22"
+      %i.icon-arrow-right
+  #ajax-loader-big{:style=>"left: 400px;position: absolute;top: 30%;z-index: 100;display:none;"}
+    %img{:src=>"/images/ajax-loader-big.gif"}
+  #offers_messages
+    = render :partial => "admin/offer/user_messages/sell_art_area_messages_data"
+  - unless @offer_with_messages.blank?
+    #messages_unfold_div
+      %input{:type=>"button", :class=>"btn",:id=>"messages_unfold_collapse", :value=>"UNFOLD ALL MESSAGES","data-toggle"=>"0"}
+  #overlay_div{:style=>"background-color: white;display: block;height: 100%;left: 0;opacity: 0.4;position: absolute;top: 0;width: 100%;z-index: 2;display:none;"}

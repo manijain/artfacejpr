@@ -1,0 +1,309 @@
+function get_domain_name() {
+  var url = window.location.href;
+  var url_parts = url.split('/');
+  var domain_name_parts = url_parts[3].split(':');
+  var domain_name = domain_name_parts[0];
+  return domain_name;
+}
+
+function set_nav()
+{
+	var temp = get_domain_name();
+	switch(temp) {
+		case '':
+			$('.c_nav_link_bar').css({'font-weight':'bold'});
+			break;
+		case 'about':
+			$('.c_nav_link_bar').css({'font-weight':'bold'});
+			console.log("about");
+			break;
+		case 'offers':
+			$('.c_nav_link_bar').css({'font-weight':'bold'});
+			console.log("offers");
+			break;
+		case 'memberfees':
+			$('.c_nav_link_bar').css({'font-weight':'bold'});
+			console.log("memberfees");
+			break;
+		case 'users/sign_up':
+			$('.c_nav_link_bar').css({'font-weight':'bold'});
+			console.log("signup");
+			break;
+		case 'users/sign_in':
+			$('.c_nav_link_bar').css({'font-weight':'bold'});
+			console.log("home");
+			break;
+	}
+}
+
+function hide_layout_one() {
+	$('.sign_up_layout_one').hide();
+}
+function show_layout_one() {
+	$('.sign_up_layout_one').show();
+}
+function layout_one_to_two() {
+	$("#confirm_user_gender").html($("#user_salutation").val());
+	$("#confirm_user_first_name").html($("#user_first_name").val());
+	$("#confirm_user_last_name").html($("#user_last_name").val());
+	$("#confirm_user_company").html($("#user_company").val());
+	$("#confirm_user_street").html($("#user_street").val());
+	$("#confirm_user_zip_code").html($("#user_zip_code").val());
+	$("#confirm_user_city").html($("#user_city").val());
+	$("#confirm_user_country").html($("#user_country").val());  
+	$("#confirm_user_phone_number").html($("#user_phone_number").val());
+	$("#confirm_user_fax_number").html($("#user_fax_number").val());
+	$("#confirm_user_tax_id").html($("#user_tax_id").val());
+	$("#confirm_user_email").html($("#user_email").val());
+	$("#confirm_user_password").html($("#user_password").val()); 
+	$("#confirm_credit_card_type").html($("#credit_card_type").val()); 
+	$("#confirm_card_number").html($("#card_number").val());
+	$("#confirm_card_owner").html($("#card_owner").val());
+	$("#confirm_card_code").html($("#card_code").val());
+	$("#confirm_card_expiry_month").html($("#card_expiry_month").val());
+	$("#confirm_card_expiry_year").html($("#card_expiry_year").val());
+}
+function one_to_two() {
+	if (validate_step_one() == true)
+	{
+		hide_layout_one();
+		layout_one_to_two();
+		show_layout_two();
+	}
+	else
+	{
+		console.log("false returned");
+	}
+}
+function show_layout_two() {
+	$('.sign_up_layout_two').show();	
+}
+function hide_layout_two() {
+	$('.sign_up_layout_two').hide();	
+}
+function exists(temp) {
+	return temp.length > 0;
+}
+function clear_errors()
+{
+	$("#user_first_name").css({"box-shadow": "none"});
+	$("#user_last_name").css({"box-shadow": "none"});
+	$("#user_company").css({"box-shadow": "none"});
+	$("#user_street").css({"box-shadow": "none"});
+	$("#user_zip_code").css({"box-shadow": "none"});
+	$("#user_city").css({"box-shadow": "none"});
+	$("#user_country").css({"font-weight": "normal"});
+	$("#user_phone_number").css({"box-shadow": "none"});
+	$("#user_fax_number").css({"box-shadow": "none"});
+	$("#user_tax_id").css({"box-shadow": "none"});
+	$("#user_email").css({"box-shadow": "none"});
+	$("#user_password").css({"box-shadow": "none"});
+	$("#card_number").css({"box-shadow": "none"});
+	$("#card_owner").css({"box-shadow": "none"});
+	$("#card_code").css({"box-shadow": "none"});
+	$("#card_expiry_month").css({"box-shadow": "none"});
+	$("#card_expiry_year").css({"box-shadow": "none"});
+	$("#card_number").css({"box-shadow": "none"});
+	$("#card_type").css({"font-weight": "normal"});
+	$("#user_email_error_taken").css({"display":"none"});
+	$("#user_email_error_invalid").css({"display":"none"});
+	$("#user_password").css({"box-shadow":"none"});
+  $("user_password_confirmation").css({"box-shadow":"none"});
+  $("#password_mismatch_error").css({"display":"none"});
+  $("#user_country_error").css({"display":"none"});
+}
+function validate_step_one()
+{
+	clear_errors();
+
+	var validations = [];
+	var return_value       				 = false;
+	var temp_return_value  				 = true;
+	var user_gender        				 = $("#user_salutation");
+	var user_first_name    				 = $("#user_first_name");
+	var user_last_name     				 = $("#user_last_name");
+	var user_company       				 = $("#user_company");
+	var user_street        				 = $("#user_street");
+	var user_zip_code      				 = $("#user_zip_code");
+	var user_city          				 = $("#user_city");
+	var user_phone_number  				 = $("#user_phone_number");
+	var user_fax_number    				 = $("#user_fax_number");
+	var user_tax_id        				 = $("#user_tax_id");
+	var user_email         				 = $("#user_email");
+	var user_password      				 = $("#user_password");
+	var user_password_confirmation = $("#user_password_confirmation");
+	var card_number        				 = $("#card_number");
+	var card_owner         				 = $("#card_owner");
+	var card_code          				 = $("#card_code");
+	var card_expiry_month  				 = $("#card_expiry_month");
+	var card_expiry_year   				 = $("#card_expiry_year");
+	var user_country       				 = $("#user_country");
+	var card_type          				 = $("#card_type");
+	
+	validations.push(user_first_name);
+	validations.push(user_last_name);
+	validations.push(user_company);
+	validations.push(user_street);
+	validations.push(user_zip_code);
+	validations.push(user_city);
+	validations.push(user_phone_number);
+	validations.push(user_fax_number);
+	validations.push(user_tax_id);
+	validations.push(user_email);
+	validations.push(user_password);
+	validations.push(card_number);
+	validations.push(card_owner);
+	validations.push(card_code);
+	
+	$.each(validations, function() {
+		if (this.val() == "") {
+			this.css({"box-shadow":"0px 0px 4px red"});
+			temp_return_value = false;
+		}
+	});
+
+	//first name validation
+	if (!user_first_name.val().match(/^[A-Za-z -/]+$/)) {};
+	//last name validation
+
+	//company name validation
+
+	//street
+
+	//zip code
+
+	//city
+
+
+	//email validation using regex
+	if (!(user_email.val().match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}/i))) {
+    $("#user_email_error_invalid").css({"display":"inline"});
+    temp_return_value = false;
+  }
+
+  //password validation
+  if (user_password.val().match("((?=.*\d)(?=.*[0-9])(?=.*\W).{8,})") {
+  	console.log("damn");
+  }
+
+
+  if (user_password.val != user_password_confirmation.val) {
+  	user_password.css({"box-shadow":"0px 0px 4px red"});
+  	user_password_confirmation.css({"box-shadow":"0px 0px 4px red"});
+  	$("#password_mismatch_error").css({"display":"block"});
+  	temp_return_value = false;
+  }
+
+  //Making user select country
+	if (user_country.val() == "Choose your country") {
+  	$("#user_country_error").css({"display":"block"});
+  	temp_return_value = false;
+	}
+
+	//phone
+
+	//fax
+
+
+	if (card_type == "Credit Card type") {
+  	card_type.css({"font-weight": "bold"});
+  	temp_return_value = false;
+	}
+
+	return temp_return_value;
+}
+
+function one_to_two()
+{
+	if (validate_step_one() == true)
+	{
+		hide_layout_one();
+		layout_one_to_two();
+		show_layout_two();
+	}
+	else
+	{
+		console.log("false returned");
+	}
+}
+function show_layout_two()
+{
+	$('.sign_up_layout_two').show();	
+}
+function hide_layout_two()
+{
+	$('.sign_up_layout_two').hide();	
+}
+
+function go_back()
+{
+	hide_layout_two();
+	show_layout_one();	
+}
+
+function temp()
+{
+	hide_layout_one();
+	show_layout_two();
+}
+
+//window.onload = temp;
+
+
+$.fn.serializeObject = function() {
+  var values = {}
+  values["user[email]"]             = $("#user_email").val();
+  values["user[password]"]          = $("#user_password").val();
+	values["user[user_first_name]"]   = $("#user_first_name").val();
+	values["user[user_last_name]"]    = $("#user_last_name").val();
+	values["user[user_company]"]      = $("#user_company").val();
+	values["user[user_street]"]       = $("#user_street").val();
+	values["user[user_zip_code]"]     = $("#user_zip_code").val();
+	values["user[user_country]"]      = $("#user_country").val();
+	values["user[user_phone_number]"] = $("#user_phone_number").val();
+  values["user[user_salutation]"]   = $("#user_salutation").val();
+	values["user[user_fax_number]"]   = $("#user_fax_number").val();
+	values["user[user_city]"]         = $("#user_city").val();
+	values["user[user_tax_id]"]       = $("#user_tax_id").val();
+  return values;
+}
+
+$(function(){
+  $("#form_submit").click(function(e){
+    //e.preventDefault();
+    var user_info = $(this).serializeObject();
+    console.log("About to post to /users: " + JSON.stringify(user_info));
+    $.ajax({
+      type: "POST",
+      url: "http://127.0.0.1:3000/users",
+      data: user_info,
+      success: function(json){
+        console.log("The Devise Response: " + JSON.stringify(json));
+        console.log(json);
+      },
+      error: function(json) {
+      	var obj = jQuery.parseJSON(json.responseText);
+      	if(typeof(obj.errors) == "object")
+      	{
+      		if (exists(obj.errors.email)) {
+      			show_layout_one();
+      			$("#user_email").css({"box-shadow":"0px 0px 4px blue"});
+      			switch(String(obj.errors.email)) {
+      				case 'has already been taken':
+      					$("#user_email_error_taken").css({"display":"inline"});
+      				break;
+      				default:
+      					console.log(obj.errors.email);
+      				break;
+      			}
+      			//$("#user_email").css({"box-shadow":"0px 0px 4px blue"});
+      			//$("#user_email_error").css({"display":"inline"});
+      		}
+      	}
+      	console.log("The json responseText is : " + json.responseText);
+      },
+      dataType: "json"
+    });
+  });
+  
+});

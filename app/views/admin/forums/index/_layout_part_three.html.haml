@@ -1,0 +1,11 @@
+/ .layout_part_three
+/   %h3.heading= t '.SEARCH FORUM'
+
+= content_tag :div, :class=>"layout_part_three pull-left", :style=>"width:800px;border:1px solid #727272;border-radius:8px;background-color:#727272;padding:5px;" do
+	= content_tag :h3, :class=>"pull-left", :style=> "width:131px;" do
+		= content_tag :span, :class=>"detailed_search", :style=>"margin-right:25px;display:block;" do
+			= "SEARCH FORUM"
+		= content_tag :span, :class=>"forum_result", :style=>"width:340px;display:block;font-size:14px;margin-bottom:-10px;" do
+			= ""	
+	= render :partial =>"admin/forums/forum_search/forum_search_basic"
+	= render :partial =>"admin/forums/forum_search/forum_search_advanced"

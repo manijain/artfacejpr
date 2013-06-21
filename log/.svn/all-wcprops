@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 44
+/ongraphrorapps/!svn/ver/214/artface_svn/log
+END
+test.log
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/ongraphrorapps/!svn/ver/208/artface_svn/log/test.log
+END
+development.log
+K 25
+svn:wc:ra_dav:version-url
+V 60
+/ongraphrorapps/!svn/ver/221/artface_svn/log/development.log
+END
+.gitkeep
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/ongraphrorapps/!svn/ver/208/artface_svn/log/.gitkeep
+END

@@ -1,0 +1,9 @@
+= javascript_include_tag "js/jquery-ui-1.9.2.datepicker.js"
+.span10.span10 
+  %br  
+  %span{:style=>"font-size:20px;font-weight:bold;position:relative;left:10px;top:10px;"}="WISHLISTS BY USER ##{@user.id} (#{@user.user_first_name} #{@user.user_last_name})  "
+  %a.btn.pull-left{:style=>"float:right;margin-top:10px;", :href=>"/admin/users/#{@user.id}"}="BACK TO USER OVERVIEW"
+  .pull-left
+    %ul.unstyled.pull-left#wishlists_container{:style=>"width:100%"}
+      = render :partial => "admin/users/user_wishlists/saved_wishlists"
+  %button.btn#add_new_wishlist{:style=>"float:right;", "data-user-id"=>"#{params[:id]}"}="ADD NEW WISH"

@@ -1,0 +1,10 @@
+= content_tag :div, :class=>"pull-left nav_sort_1", :style=>"width:800px;margin-top:15px;padding-left:10px;padding-right:10px;" do 
+  = content_tag :label, :class=>"pull-left", :style=>"width:250px;margin:0" do
+    =content_tag :span, :class=>"pull-left", :style=>"line-height:30px;" do
+      %h5="Sort list by"
+    = select_tag(:sort_by, options_for_select(["country","city","company_name"]), :id=>"sort_by_attr2", :class=>"pull-left service_sort") 
+
+  = content_tag :label, :class=>"pull-left", :style=>"width:250px;margin:0" do
+    =content_tag :span, :class=>"pull-left", :style=>"line-height:30px;" do
+      %h5="Address Per Page"  
+    = select_tag(:per_page, options_for_select([6,12,18,24]), :id=>"per_page_item2", :class=>"pull-left service_sort")

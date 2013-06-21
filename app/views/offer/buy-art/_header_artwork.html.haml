@@ -1,0 +1,70 @@
+.offer_home_container.container
+  %div{:style=>"float: left; height: 300px; width: 300px;background:black;"}
+    - if @header_artwork[0].artwork.nil?
+      %img{:src=>"/images/placeholder_header.jpg", :class=>"width_height_inherit", :id=>"image_1"}
+    - else
+      = image_tag PAPERCLIP_STORAGE_PATH + "images/uploaded/artwork/originals/artwork_hires/" + @header_artwork[0].artwork.id.to_s + "/" + @header_artwork[0].artwork.artwork_hires_file_name, :style=>";background:black", :id=> "image_1", :class=>"width_height_inherit"
+  %div{:style=>"float: left; border-left: 10px solid white; border-right: 10px solid white;"}
+    %div{:style=>"float: left; width: 200px; height: 148px; border-bottom: 2px solid white;"}
+      - if @header_artwork[1].artwork.nil?
+        %img{:src=>"/images/placeholder_header.jpg", :class=>"width_height_inherit", :id=>"image_2"}
+      - else
+        = image_tag PAPERCLIP_STORAGE_PATH + "images/uploaded/artwork/originals/artwork_hires/" + @header_artwork[1].artwork.id.to_s + "/" + @header_artwork[1].artwork.artwork_hires_file_name, :style=>"", :id=> "image_2", :class=>"width_height_inherit"
+    %div{:style=>"width: 200px; height: 148px; border-top: 2px solid white; float: left; clear: left;"}
+      - if @header_artwork[2].artwork.nil?
+        %img{:src=>"/images/placeholder_header.jpg", :class=>"width_height_inherit", :id=>"image_3"}
+      - else
+        = image_tag PAPERCLIP_STORAGE_PATH + "images/uploaded/artwork/originals/artwork_hires/" + @header_artwork[2].artwork.id.to_s + "/" + @header_artwork[2].artwork.artwork_hires_file_name, :style=>"", :id=> "image_3", :class=>"width_height_inherit"
+  %div{:style=>"width: 300px; height: 300px; float: right;background:black"}
+    - if @header_artwork[3].artwork.nil?
+      %img{:src=>"/images/placeholder_header.jpg", :class=>"width_height_inherit", :id=>"image_4"}
+    - else
+      = image_tag PAPERCLIP_STORAGE_PATH + "images/uploaded/artwork/originals/artwork_hires/" + @header_artwork[3].artwork.id.to_s + "/" + @header_artwork[3].artwork.artwork_hires_file_name, :style=>";background:black", :id=> "image_4", :class=>"width_height_inherit"
+  .overlay_1.header_overlay_1
+    %a{:href=>"/memberfees"}
+      - if @header_artwork[0].artwork.nil?
+        %img{:src=>"/images/placeholder_header.jpg", :class=>"width_height_inherit", :id=>"image_1_copy"}
+      - else
+        = image_tag PAPERCLIP_STORAGE_PATH + "images/uploaded/artwork/originals/artwork_hires/" + @header_artwork[0].artwork.id.to_s + "/" + @header_artwork[0].artwork.artwork_hires_file_name, :id =>"image_1_copy"
+      %span.header_overlay_1_span_first="New on Artface"
+      %span.header_overlay_1_span_second
+        - if @header_artwork[0].artwork.nil?
+          ="Title"
+        - else
+          =@header_artwork[0].artwork.artwork_title.artwork_title_en
+  .overlay_2.header_overlay_2
+    %a{:href=>"/memberfees"}
+      - if @header_artwork[1].artwork.nil?
+        %img{:src=>"/images/placeholder_header.jpg", :class=>"width_height_inherit", :id=>"image_2_copy"}
+      - else
+        = image_tag PAPERCLIP_STORAGE_PATH + "images/uploaded/artwork/originals/artwork_hires/" + @header_artwork[1].artwork.id.to_s + "/" + @header_artwork[1].artwork.artwork_hires_file_name, :id =>"image_2_copy"
+      %span.header_overlay_1_span_first="New on Artface"
+      %span.header_overlay_1_span_second
+        - if @header_artwork[1].artwork.nil?
+          ="Title"
+        - else
+          =@header_artwork[1].artwork.artwork_title.artwork_title_en
+  .overlay_3.header_overlay_3
+    %a{:href=>"/memberfees"}
+      - if @header_artwork[2].artwork.nil?
+        %img{:src=>"/images/placeholder_header.jpg", :class=>"width_height_inherit", :id=>"image_3_copy"}
+      - else
+        = image_tag PAPERCLIP_STORAGE_PATH + "images/uploaded/artwork/originals/artwork_hires/" + @header_artwork[2].artwork.id.to_s + "/" + @header_artwork[2].artwork.artwork_hires_file_name, :id =>"image_3_copy"
+      %span.header_overlay_1_span_first="New on Artface"
+      %span.header_overlay_1_span_second
+        - if @header_artwork[2].artwork.nil?
+          ="Title"
+        - else
+          =@header_artwork[2].artwork.artwork_title.artwork_title_en
+  .overlay_4.header_overlay_4
+    %a{:href=>"/memberfees"}
+      - if @header_artwork[3].artwork.nil?
+        %img{:src=>"/images/placeholder_header.jpg", :class=>"width_height_inherit", :id=>"image_4_copy"}
+      - else
+        = image_tag PAPERCLIP_STORAGE_PATH + "images/uploaded/artwork/originals/artwork_hires/" + @header_artwork[3].artwork.id.to_s + "/" + @header_artwork[3].artwork.artwork_hires_file_name, :id =>"image_4_copy"
+      %span.header_overlay_1_span_first="New on Artface"
+      %span.header_overlay_1_span_second
+        - if @header_artwork[3].artwork.nil?
+          ="Title"
+        - else
+          =@header_artwork[3].artwork.artwork_title.artwork_title_en

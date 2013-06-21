@@ -1,0 +1,9 @@
+= render :partial => "admin/layouts/application"
+= render :partial => "admin/layouts/header"
+.container_forum_index
+    %span{:style=>"font-size:15px;font-weight:bold;position:relative;left:10px;top:10px;"}="FORUM PARTICIPATION BY USER ##{@user.id} (#{@user.user_first_name} #{@user.user_last_name})  "
+    %a.btn.pull-left{:style=>"float:right;margin-top:10px;", :href=>"/offer/new"}="BACK TO USER OVER"   
+    = render :partial => "admin/offer/user_forum_messages/layout_part_three"
+    = render :partial => "admin/offer/user_forum_messages/layout_part_four"
+
+= render :partial => "admin/layouts/footer"

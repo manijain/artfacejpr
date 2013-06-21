@@ -1,0 +1,41 @@
+= will_paginate @offers, :link_separator=>"#{@offers.current_page}/#{@offers.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"float: right;margin:0;position:relative;width: 70px;"
+- @offers.each do |offer|
+  #on.one_admin
+    =image_tag("artist.jpg")
+    %h1
+      %u
+        -if offer.artwork.artist
+          %b= link_to offer.artwork.artist.artist_name, {:controller=>"/admin/users", :action=>"users_offer_show", :user_id=>offer.seller_id, :id=>offer.id}
+        -else
+          %b= "Anonymous" 
+      - if offer.offer_end_date.nil?
+        = "-"
+      - elsif offer.offer_end_date.strftime("%Y-%m-%d") > Date.today.strftime("%Y-%m-%d")
+        %p= "remaining - #{humanize_time (offer.offer_end_date - Time.now)}"
+      -elsif offer.offer_end_date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d")
+        %p= "remaining - #{((offer.offer_end_date - Time.now)/1.hour).round}"
+      - else
+        %p= "-"
+    %h2
+      -if !offer.artwork.artwork_title.artwork_title_en
+        = "No title" 
+      -else 
+        = offer.artwork.artwork_title.artwork_title_en 
+      %p= "highest Offer: " "#{offer.messages.maximum(:offer_price)}"
+    -if offer.offer_popularity.nil?
+      %h3
+        = "views: 0"
+        %p= "messages: " "#{offer.messages.count}"
+    -else
+      %h3
+        = "views: " "#{offer.offer_popularity}"
+        %p= "messages: " "#{offer.messages.count}"
+    -if offer.offer_start_date.nil?
+      %h4= "online since: NA"
+    -else
+      %h4= "online since: " "#{offer.offer_start_date.to_date}"
+= will_paginate @offers, :link_separator=>"#{@offers.current_page}/#{@offers.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"float: right;margin:0;position:static;width: 70px;"    
+#ajax-loader-big_for_offers_data{:style=>"left: 400px;position: absolute;top: 1100px;z-index: 100;display:none;"}
+  %img{:src=>"/images/ajax-loader-big.gif"}
+#overlay_div_data{:style=>"background-color: white;display: block;height: 100%;left: 0;opacity: 0.4;position: absolute;top: 1000px;width: 100%;z-index: 2;display:none;"}
+

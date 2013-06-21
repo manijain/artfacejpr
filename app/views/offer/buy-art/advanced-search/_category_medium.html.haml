@@ -1,0 +1,86 @@
+%select#select_input_category_medium_1_{:style=>"float:left;width:50px;margin-bottom:0;margin-right:5px",:name=>"select[category]search_type"}
+  %option="is"
+  %option="is not"
+%select#select_input_category_medium_2_{:style=>"float:left;width:125px;margin-bottom:0;margin-right:5px",:name=>"select[category]name"}
+  %option="any"
+  %option="painting"
+  %option="drawing/watercolor"
+  %option="print/multiple"
+  %option="tapestry"
+  %option="photography"
+%select#select_input_category_medium_sub_select_1_{:style=>"display:none;float:left;width:125px;margin-bottom:0;margin-right:5px;"}
+  %option="acrylic"
+  %option="enamel"
+  %option="mixed media"
+  %option="oil"
+  %option="oil/canvas"
+  %option="oil/panel"
+  %option="stained glass"
+  %option="tempera"
+  %option="waterpaint"
+  %option="mosaic"
+%select#select_input_category_medium_sub_select_2_{:style=>"display:none;float:left;width:125px;margin-bottom:0;margin-right:5px;"}
+  %option="calligraph"
+  %option="chalk"
+  %option="charcoal"
+  %option="coloured pencils"
+  %option="felt pen"
+  %option="gouache"
+  %option="indian ink"
+  %option="lead pencil"
+  %option="mixed media/paper"
+  %option="pastel"
+  %option="pencil"
+  %option="red chalk"
+  %option="watercolour"
+%select#select_input_category_medium_sub_select_3_{:style=>"display:none;float:left;width:125px;margin-bottom:0;margin-right:5px;"}
+  %option="aquatint"
+  %option="copper engraving"
+  %option="drypoint"
+  %option="engraving"
+  %option="etching"
+  %option="linocut"
+  %option="lithograph"
+  %option="offset"
+  %option="poster"
+  %option="serigraph"
+  %option="woodcut"
+%select#select_input_category_medium_sub_select_5_{:style=>"display:none;float:left;width:125px;margin-bottom:0;margin-right:5px;"}
+  %option="bromoil gelatin silver print"
+  %option="c print"
+  %option="cibachrome print"
+  %option="daguerreotype"
+  %option="diapositive"
+  %option="digital image"
+  %option="gelatin silver print"
+  %option="hologram"
+  %option="polaroid"
+  
+:javascript
+  $("select[id^=select_input_category_medium_2]").change(function() {
+  temp_index = $("select[id^=select_input_category_medium_2] option:selected").index()  
+  switch(temp_index) {
+  case 0: $("select[id^=select_input_category_medium_sub_select_]").css("display","none")
+  $("select[id^=select_input_category_medium_sub_select_]").attr("name","")
+  break;
+  case 1: $("select[id^=select_input_category_medium_sub_select_]").css("display","none")
+  $("select[id^=select_input_category_medium_sub_select_1]").css("display","block")
+  $("select[id^=select_input_category_medium_sub_select_1]").attr("name","select[category]sub_name")
+  break;
+  case 2: $("select[id^=select_input_category_medium_sub_select_]").css("display","none")
+  $("select[id^=select_input_category_medium_sub_select_2]").css("display","block")
+  $("select[id^=select_input_category_medium_sub_select_2]").attr("name","select[category]sub_name")
+  break;
+  case 3: $("select[id^=select_input_category_medium_sub_select_]").css("display","none")
+  $("select[id^=select_input_category_medium_sub_select_3]").css("display","block")
+  $("select[id^=select_input_category_medium_sub_select_3]").attr("name","select[category]sub_name")
+  break; 
+  case 4: $("select[id^=select_input_category_medium_sub_select_]").css("display","none")
+  $("select[id^=select_input_category_medium_sub_select_]").attr("name","")
+  break;
+  case 5: $("select[id^=select_input_category_medium_sub_select_]").css("display","none")
+  $("select[id^=select_input_category_medium_sub_select_5]").css("display","block")
+  $("select[id^=select_input_category_medium_sub_select_5]").attr("name","select[category]sub_name")
+  break;
+  }
+  })

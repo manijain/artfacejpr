@@ -1,0 +1,96 @@
+=javascript_include_tag "admin/admin_edit_service_partner.js"
+
+#wrapper.wrapper_admin
+  #head_service.head_admin_service
+    %h3
+      ="EDIT ART LAWYER: " "#{@service_partner.company_name}"
+    = link_to "CANCEL", "/admin/services", :class=>"btn", :style=>"float:right;margin-top:-42px"
+  #head1_service.head1_admin_service
+    //%i.icon-arrow-left
+    = link_to (image_tag "/images/prev.png", :style=>"margin-top:30px; margin-left:15px;"), "#", {:id=>"previous_lawyer"}
+    = link_to (image_tag "/images/next.png", :style=>"margin-top:30px; margin-left:5px;"), "#", {:id=>"next_lawyer"}
+    //%i.icon-arrow-right
+    =hidden_field_tag :partner_id, params[:id]
+    =form_for @service_partner, :url=>{:action=>"update_service_partner"}, :html=>{:id=>"form1"} do |f|
+      .details_admin_service_partner
+        %h6 FULL NAME
+        = f.select :salutation, options_for_select(['Mr.', 'Ms.'], :selected=>@service_partner.salutation), {}, {:class=>"head1_admin_service_select1"}
+        = f.text_field :first_name, {:placeholder=>"FIRST NAME*", :class=>"head1_admin_service_input1"}
+        %img#error_partner_first_name{"data-original-title"=>"Please enter first name", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        = f.text_field :last_name, {:placeholder=>"LAST NAME*", :class=>"head1_admin_service_input1"}
+        %img#error_partner_last_name{"data-original-title"=>"Please enter last name", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        %h6 COMPANY
+        = f.text_field :company_name, {:placeholder=>"COMPANY NAME*", :class=>"head1_admin_service_input2"}
+        %img#error_partner_company_name{"data-original-title"=>"Please enter company name", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        %h6 ADDRESS
+        = f.text_field :street, {:placeholder=>"STREET*", :class=>"head1_admin_service_input2"}
+        %img#error_partner_street{"data-original-title"=>"Please enter street", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        = f.text_field :zip_code, {:placeholder=>"ZIP CODE*", :class=>"head1_admin_service_input4"}
+        %img#error_partner_zip_code{"data-original-title"=>"Please enter zip code", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        = f.text_field :city, {:placeholder=>"CITY*", :class=>"head1_admin_service_input5"}
+        %img#error_partner_city{"data-original-title"=>"Please enter city", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        %h6 COUNTRY
+        = f.select :country, options_for_select(Country.order(:country_name).pluck(:country_name), :selected=>@service_partner.country), {}, {:class=>"head1_admin_service_select2"}
+        %br
+        %h6 PHONE & FAX
+        = f.text_field :telephone_number, {:placeholder=>"TELEPHONE NUMBER*", :class=>"head1_admin_service_input6"}
+        %img#error_partner_telephone_number{"data-original-title"=>"Please enter telephone number", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        = f.text_field :fax_number, {:placeholder=>"FAX NUMBER*", :class=>"head1_admin_service_input7"}
+        %img#error_partner_fax_number{"data-original-title"=>"Please enter fax number", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        %h6 WEBSITE
+        = f.text_field :website, {:placeholder=>"COMAPNIES WEBSITE URL (EG. WWW.COMPANY.COM)", :class=>"head1_admin_service_input2"}
+        %br
+        %h6 EMAIL (SERVES AS LOGIN)
+        = f.text_field :email, {:placeholder=>"CONTACT PERSONS EMAIL ADDRESS*", :class=>"head1_admin_service_input9"}
+        %img#error_partner_email{"data-original-title"=>"Please enter email id", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        %h6 PASSWORD
+        = f.password_field :password, {:placeholder=>"PASSWORD", :class=>"head1_admin_service_input2"}
+        %h6 RETYPE PASSWORD
+        = f.password_field :retype_password, {:placeholder=>"PASSWORD", :class=>"head1_admin_service_input2"}
+        %img#error_partner_password{"data-original-title"=>"Please renter password", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        %h6 EMPLOYEES
+        = f.text_field :number_of_employees, {:placeholder=>"NUMBER OF EMPLOYEES", :class=>"head1_admin_service_input2"}
+        %br
+        %h6 FOUNDED
+        = f.text_field :founded, {:placeholder=>"YEAR WHEN COMPANY WAS FOUNDED (YYYY)", :class=>"head1_admin_service_input2"}
+        %br
+        %h6 SPECIALITIES
+        = f.text_field :specialities, {:placeholder=>"DEFINE SPECIALTIES OF THE OFFICE/LAWYER", :class=>"head1_admin_service_input2"}
+        %br
+        %h6 DESCRIPTION (1000 CHARACTERS)
+        = f.text_area :description, {:placeholder=>"DESCRIBE THE BENEFITS", :class=>"head1_admin_service_textarea1"}
+        = f.hidden_field :partner_type
+      #head3_service.head3_admin_service
+        %h6 INVITATION STATUS
+        -if "#{@service_partner[:contact_data_approval]}" == "true"
+          %p.head3_admin_service_p="approved on " "#{@service_partner[:updated_at].to_date}"
+        -elsif "#{@service_partner[:confirmation_sent_at]}" == ""
+          %p.head3_admin_service_p
+        -else
+          %p.head3_admin_service_p="waiting for approval, invitation sent on " "#{@service_partner[:confirmation_sent_at].to_date}"
+        -if "#{@service_partner[:contact_data_approval]}" == "true"
+          %button{:disabled => "", :type => "button", :class=>"btn", :style=>"float:right; margin-top:-31px;"}="MANUAL ADMIN APPROVAL"
+        -else
+          = link_to "MANUAL ADMIN APPROVAL", "#", :class=>"btn", :style=>"float:right; margin-top:-31px;", :id=>"manual_approval_#{@service_partner[:id]}"
+        %br
+        %h6 ONLINE STATUS
+        = f.select :status, options_for_select(['Offline', 'Online'], :selected=>@service_partner.status), {}, :class=>"head1_admin_service_select2"
+  #head2_service.head2_admin_service
+    = link_to "CANCEL", "/admin/services", :class=>"btn", :style=>"float:left;"
+    = link_to "DELETE THIS CONTACT", "#", :class=>"btn", :style=>"float:left; margin-left:7px;", :id=>"delete_service_partner_#{@service_partner[:id]}"
+    = link_to "UPDATE", "#", :class=>"btn", :style=>"float:right; margin-left:7px;", :onclick=>"check_partner_validations()"
+    -if "#{@service_partner[:contact_data_approval]}" == "true"
+      %button{:disabled => "", :type=>"button", :class=>"btn", :style=>"float:right;"}="RE-SEND INVITATION"
+    -else
+      = link_to "RE-SEND INVITATION", "#", :class=>"btn", :style=>"float:right;", :id=>"resend_invitation"
+    
+#ajax-loader-big_for_services_data{:style=>"left: 400px;position: absolute;top: 500px;z-index: 100;display:none;"}
+  %img{:src=>"/images/ajax-loader.gif"}
+#overlay_div_data{:style=>"background-color: white;display: block;height: 500%;left: 0;opacity: 0.4;position: absolute;top: 110px;width: 100%;z-index: 2;display:none;"}

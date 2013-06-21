@@ -1,0 +1,33 @@
+= hidden_field_tag :basic_search_two, ""
+= hidden_field_tag :advance_search_two, 'false'
+
+= content_tag :div, :class=>"search pull-left", :style=>"width:778px;border:1px solid #727272;border-radius:8px;background-color:#727272;padding:5px;" do
+	= content_tag :h3, :class=>"pull-left", :style=> "width:131px;" do
+		= content_tag :span, :class=>"detailed_search", :style=>"margin-right:25px;display:block;" do
+			= "SEARCH"
+		= content_tag :span, :class=>"result_found_2", :style=>"width:340px;display:block;font-size:14px;" do
+			= ""
+	= form_for :service_partner, :url=>'/service_directory/search_basic',:method=>"POST",:remote=>"true", :html=>{:class=>"filter_0_basic pull-left", :style=>"margin-top:20px;display:block;"} do |f|
+		= f.hidden_field :search_basic, :value=>true
+		= f.hidden_field :search_in, :value=>4
+		= f.text_field :search_term, :class=>"basic_search_term pull-left", :placeholder=>"SEARCH", :style=>"border:1px solid black;width:450px;margin-right:5px", :id => "search_by_value2"
+		= image_tag "/images/plus.png", :class=>"pull-left admin_search_toggle_0 pointer", :style=>"margin-right:5px;"
+		= f.submit "SEARCH", :class=>"btn pull-left", :id => "basic_search_for_layout_two"
+
+	= form_for :service_partner, :url=>'/service_directory/search_advanced', :method=>"POST", :remote=>"true", :html=>{:class=>"filter_0_advanced pull-left", :style=>"display:none;margin-top:20px;padding-right:84px;position:relative;"} do |f|
+		= f.hidden_field :search_advanced, :value=>true
+		= f.hidden_field :search_in, :value=>4
+		= content_tag :ul, :class=>"search_filters unstyled pull-left", :style=>"width:550px;" do
+			= content_tag :li, :class=>"filter_li pull-left" do
+				%select#advanced_select_1.select_first.pull-left{:style=>"width:130px;"}
+					%option{"data-function"=>"$(a).html('')", :value=>"#{t '.select_0'}"}="Please choose"
+					%option{"data-function"=>"if (check_option('Concern')!=false){$(a).html(\"#{escape_javascript(render("service_directory_admin\/show\/layout_part_two\/advanced_search\/expert_location"))}\");} else {alert('Error: Value already used ');}", :value=>"Expert Location"}="Expert Location"
+					%option{"data-function"=>"if (check_option('Concern')!=false){$(a).html(\"#{escape_javascript(render("service_directory_admin\/show\/layout_part_two\/advanced_search\/speciality"))}\");} else {alert('Error: Value already used ');}", :value=>"Speciality"}="Speciality"
+					%option{"data-function"=>"if (check_option('Concern')!=false){$(a).html(\"#{escape_javascript(render("service_directory_admin\/show\/layout_part_two\/advanced_search\/description"))}\");} else {alert('Error: Value already used ');}", :value=>"Description"}="Description"
+					%option{"data-function"=>"if (check_option('Concern')!=false){$(a).html(\"#{escape_javascript(render("service_directory_admin\/show\/layout_part_two\/advanced_search\/contact_data_approval"))}\");} else {alert('Error: Value already used ');}", :value=>"Contact Data Approval"}="Contact Data Approval"
+					%option{"data-function"=>"if (check_option('Concern')!=false){$(a).html(\"#{escape_javascript(render("service_directory_admin\/show\/layout_part_two\/advanced_search\/status"))}\");} else {alert('Error: Value already used ');}", :value=>"Status"}="Status"
+				= content_tag :span, :id=>"span_1", :class=>"append_span_field", :style=>"width:340px;" do
+					=""
+				= image_tag "/images/minus.png", :class=>"pointer admin_remove_search_field_0 pull-right"
+				= image_tag "/images/plus.png", :class=>"pointer admin_add_search_field_0 pull-right"
+		= f.submit "SEARCH", :class=>"btn submit_button pull-left", :id => "advance_search_for_layout_two", :style=> "position:absolute;right:0;bottom: 21px;"

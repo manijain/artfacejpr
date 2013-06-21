@@ -1,0 +1,13 @@
+// Place all the styles related to the static controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#overlay_div_for_static_offers {
+  background-color: white;display: block;height: 100%;left: 0;opacity: 0.4;position: absolute;top: 0;width: 100%;z-index: 2;display:none;
+}
+#ajax_loader_big_for_static_offers {
+  left: 400px;height: 50px; width: 50px; position: absolute;top: 100px;z-index: 100;display:none;
+}
+#ajax_loader_big_for_static_offers img {
+  width:100%;height:100%;
+}

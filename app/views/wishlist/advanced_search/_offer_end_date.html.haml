@@ -1,0 +1,12 @@
+%select#select_input_offer_end_date.pull-left{:style=>"margin-bottom: 0;margin-right: 5px;width: 100px",:name=>"search_params[offer_end_date]search_type"}
+  %option{:value=>"is exactly"}="is exactly"
+  %option{:value=>"is before"}="is before"
+  %option{:value=>"is after"}="is after"
+%input#date_input_offer_end_date_.pull-left{:type=>"text", :style=>"margin-bottom:0;float:left;margin-right:5px;width:190px",:name=>"search_params[offer_end_date]value"}
+%img#error_text_input_offer_end_date_{"data-original-title"=>"Please choose a date", :src=>"/images/exclamation_mark.png", :style=>"display:none;position:absolute;right:163px;"}
+:javascript
+  $("#date_input_offer_end_date_").datepicker({
+  onSelect: function() {
+    $("#error_text_input_offer_end_date_").hide()
+  }
+  })

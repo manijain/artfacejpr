@@ -1,0 +1,128 @@
+.sell-art-area-offers
+  %h4{:style=>"margin-top: 53px;width: 600px;"}="OFFERS BY USER##{@user.id}(#{@user.user_first_name} #{@user.user_last_name})"
+  %a.btn.pull-left{:style=>"float:right;margin-top: -41px;", :href=>"/admin/users/#{@user.id}" , :id=> "mmmbtn"}="BACK TO USER OVERVIEW"
+= hidden_field_tag :last_search_params_basic, :value=>session[:search_item]
+= hidden_field_tag :last_search_params_advanced, :value=>session[:select]
+= hidden_field_tag :last_search_advanced, :value=>session[:last_search_advanced]
+= hidden_field_tag :last_search_basic, :value=>session[:last_search_basic]
+
+#select_search_filter_string.display_none
+  %li{:style=>"width:100%"}
+    %select#advanced_select_{:style=>"width:90px;float:left;"}
+      %option{"data-function"=>"", :selected=>"true"}="Please choose an option"
+      %option{"data-function"=>"if (check_option('Artist Name')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/artist"))}\");} else {alert('Error: Value already used ');}", :value=>"Artist Name"}="Artist Name"
+      %option{"data-function"=>"if (check_option('Title')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/title"))}\");} else {alert('Error: Value already used ');}", :value=>"Title"}="Title"
+      %option{"data-function"=>"if (check_option('Description')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/description"))}\");} else {alert('Error: Value already used ');}", :value=>"Description"}="Description"
+      %option{"data-function"=>"if (check_option('year of creation')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/year_of_creation"))}\");} else {alert('Error: Value already used ');}", :value=>"year of creation"}="year of creation"
+      %option{"data-function"=>"if (check_option('category/medium')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/category_medium"))}\");} else {alert('Error: Value already used ');}", :value=>"category/medium"}="category/medium"
+      %option{"data-function"=>"if (check_option('offer type')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/offer_type"))}\");} else {alert('Error: Value already used ');}", :value=>"offer type"}="offer type"
+      %option{"data-function"=>"if (check_option('movement/period')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/movement_period"))}\");} else {alert('Error: Value already used ');}", :value=>"movement/period"}="movement/period"
+      %option{"data-function"=>"if (check_option('height')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/height"))}\");} else {alert('Error: Value already used ');}", :value=>"height"}="height"
+      %option{"data-function"=>"if (check_option('width')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/width"))}\");} else {alert('Error: Value already used ');}", :value=>"width"}="width"
+      %option{"data-function"=>"if (check_option('depth')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/depth"))}\");} else {alert('Error: Value already used ');}", :value=>"depth"}="depth"
+      %option{"data-function"=>"if (check_option('signature')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/signature"))}\");} else {alert('Error: Value already used ');}", :value=>"signature"}="signature"
+      %option{"data-function"=>"if (check_option('frame')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/frame"))}\");} else {alert('Error: Value already used ');}", :value=>"frame"}="frame"
+      %option{"data-function"=>"if (check_option('certificate')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/certificate"))}\");} else {alert('Error: Value already used ');}", :value=>"certificate"}="certificate"
+      %option{"data-function"=>"if (check_option('country')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/country"))}\");} else {alert('Error: Value already used ');}", :value=>"country"}="country"
+      %option{"data-function"=>"if (check_option('submit date')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/submit_date"))}\");} else {alert('Error: Value already used ');}", :value=>"submit date"}="submit date"
+      %option{"data-function"=>"if (check_option('offer end date')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/offer_end_date"))}\");} else {alert('Error: Value already used ');}", :value=>"offer end date"}="offer end date"
+    %span#span_{:style=>"float: left;height: 30px;margin-right: 5px;width: 320px;"}
+    %img.pointer.remove_search_field{:src=>"/images/minus.png", :style=>"margin-right:0;float:right !important;"}
+    %img.pointer.add_search_field{:src=>"/images/plus.png", :style=>"margin-right:5px;float:right !important;"}
+
+.buy_art_search.span10 
+  .search
+    %span{:style=>"width:120px;"}
+      %span{:style=>"line-height: 30px;width:inherit;color:white;"}="SEARCH"
+      %span{:style=>"width:inherit;color:white;"}="In User Offers"
+    = form_for :offer_new, :url=>{:action=>"user_offers_search_page"}, :remote=>true do |f|
+      = f.text_field :search_item, :placeholder=>"please enter your search term", :style=>"width:500px;height:30px;"
+      = f.hidden_field :id, :value=>params[:id]
+      = f.hidden_field :user_id, :value=>params[:user_id]
+      = f.hidden_field :temp_sort_one, :name=>"sort_by"
+      = f.hidden_field :temp_sort_two, :name=>"offer_status"
+      = f.hidden_field :temp_sort_three, :name=>"per_page"
+      %img.pointer{:src=>"/images/plus.png", :style=>"margin-left:10px;margin-right:10px;marin-top:2px;"}
+      = f.submit :class=> "btn", :value=>"SEARCH"
+  .search_advanced{:style=>"float:left;width:86%"}
+    %div{:style=>"width:15%;margin-right:15px;"}
+      %h4{:style=>"color:white;"}="DETAILED SEARCH"
+      %span{:style=>"color:white;"}
+        %span#search_data_offers_count{:style=>"margin-right:2px;"}="#{@offers.count}"
+        %span="  Results found"
+    = form_for :offer_new, :url=>{:action=>"user_offers_search_page"}, :method=>"POST",:remote=>true, :html => {:style=>"float:left;width:82%"} do |f|
+      = f.hidden_field :id, :value=>params[:id]
+      = f.hidden_field :user_id, :value=>params[:user_id]
+      = f.hidden_field :temp_sort_one, :name=>"sort_by"
+      = f.hidden_field :temp_sort_two, :name=>"offer_status"
+      = f.hidden_field :temp_sort_three, :name=>"per_page"
+      = f.hidden_field :search_advanced, :value=>true
+      %div#search_filters{:style=>"width:84%"}
+        %ul{:style=>"list-style:none;margin-left:0;width:100%"}
+          %li{:style=>"width:100%"}
+            %select#advanced_select_1{:style=>"width:90px;float:left;"}
+              %option{"data-function"=>"", :selected=>"true"}="Please choose an option"
+              %option{"data-function"=>"if (check_option('Artist Name')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/artist"))}\");} else {alert('Error: Value already used ');}", :value=>"Artist Name"}="Artist Name"
+              %option{"data-function"=>"if (check_option('Title')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/title"))}\");} else {alert('Error: Value already used ');}", :value=>"Title"}="Title"
+              %option{"data-function"=>"if (check_option('Description')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/description"))}\");} else {alert('Error: Value already used ');}", :value=>"Description"}="Description"
+              %option{"data-function"=>"if (check_option('year of creation')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/year_of_creation"))}\");} else {alert('Error: Value already used ');}", :value=>"year of creation"}="year of creation"
+              %option{"data-function"=>"if (check_option('category/medium')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/category_medium"))}\");} else {alert('Error: Value already used ');}", :value=>"category/medium"}="category/medium"
+              %option{"data-function"=>"if (check_option('offer type')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/offer_type"))}\");} else {alert('Error: Value already used ');}", :value=>"offer type"}="offer type"
+              %option{"data-function"=>"if (check_option('movement/period')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/movement_period"))}\");} else {alert('Error: Value already used ');}", :value=>"movement/period"}="movement/period"
+              %option{"data-function"=>"if (check_option('height')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/height"))}\");} else {alert('Error: Value already used ');}", :value=>"height"}="height"
+              %option{"data-function"=>"if (check_option('width')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/width"))}\");} else {alert('Error: Value already used ');}", :value=>"width"}="width"
+              %option{"data-function"=>"if (check_option('depth')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/depth"))}\");} else {alert('Error: Value already used ');}", :value=>"depth"}="depth"
+              %option{"data-function"=>"if (check_option('signature')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/signature"))}\");} else {alert('Error: Value already used ');}", :value=>"signature"}="signature"
+              %option{"data-function"=>"if (check_option('frame')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/frame"))}\");} else {alert('Error: Value already used ');}", :value=>"frame"}="frame"
+              %option{"data-function"=>"if (check_option('certificate')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/certificate"))}\");} else {alert('Error: Value already used ');}", :value=>"certificate"}="certificate"
+              %option{"data-function"=>"if (check_option('country')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/country"))}\");} else {alert('Error: Value already used ');}", :value=>"country"}="country"
+              %option{"data-function"=>"if (check_option('submit date')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/submit_date"))}\");} else {alert('Error: Value already used ');}", :value=>"submit date"}="submit date"
+              %option{"data-function"=>"if (check_option('offer end date')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/offer_end_date"))}\");} else {alert('Error: Value already used ');}", :value=>"offer end date"}="offer end date"
+            %span#span_1{:style=>"float: left;height: 30px;margin-right: 5px;width: 320px;"}
+            %img.pointer.remove_search_field{:src=>"/images/minus.png", :style=>"margin-right:0;float:right !important;"}
+            %img.pointer.add_search_field{:src=>"/images/plus.png", :style=>"margin-right:5px;float:right !important;"}
+      = f.submit "SEARCH", :style=>"float:right;", :class=>"btn", :id=>"buy_art_search_submit_button"
+
+.sell-art-area-offers  
+  - if @offers.blank?
+    %p="user have 0 offers online"
+    %div{:style=>"float: left;"}
+      %a.btn{:href=>"/offer/new"}="ADD NEW OFFER"
+  - else    
+    .public_offers_page_step_three{:style=>"float:left;margin-top:10px;position:relative;"}
+      %div{:style=>"float:left;width:810px;"}
+        %span{:style=>"float:left;"}
+          %span="Sort list by"
+          %select{:style=>"margin:0;padding-left:0;width:100px;", :id=>"offers_public_page_sort_select"}
+            %option{:value=>"artist name"}="artist name"
+            %option{:value=>"end date"}="end date"
+            %option{:value=>"new messages"}="new messages"
+        %span{:style=>"float:left;margin-left:5px;"}
+          %span="Show"
+          %select{:style=>"margin:0;padding-left:0;width:120px;", :id=>"offers_public_page_sort_active_inactive"}
+            %option{:value=>"show all offers"}="show all offers"
+            %option{:value=>"active"}="active"
+            %option{:value=>"inactive"}="inactive"
+        %span{:style=>"float:left;margin-left:5px;"}
+          %span{:style=>"margin-right:5px;line-height:30px;float:left;"}="Pictures per page"
+          %select#offers_public_page_per_page{:style=>"width:45px;margin:0;padding-left:0;"}
+            %option{:value=>"6"}="6"
+            %option{:value=>"12"}="12"
+            %option{:value=>"18"}="18"
+            %option{:value=>"24"}="24"
+        %span{:style=>"float:left;margin-left:5px;"}
+          %span{:style=>"margin-right:5px;line-height:30px;float:left;"}="Layout"
+          %select#basic_search_layout_select{:style=>"width:95px;padding-left:0;"}
+            %option="Small previews"
+            %option="Medium preview"
+            %option="Large previews"
+      %div{:style=>"float:left;width:810px;"}
+        #search_data{:style=>"float:left;width:inherit;position:relative;"}
+          = render :partial => "admin/users/users_offer_show/user_offers_data_page"
+      %div{:style=>"bottom: 28px;float: left;position: absolute;width: 350px;"}
+        %a.btn.pull-left{:href=>"/offer/new"}="ADD NEW OFFER"
+        %input.pull-left.btn#delete_offer{:type=>"button", :value=>"DELETE OFFER", :style=>"height: 30px; margin-left: 5px"}
+        %input.pull-left.btn#stop_delete_offer{:type=>"button", :value=>"STOP DELETE", :style=>"display:none; height: 30px; margin-left: 5px"}
+  #ajax-loader-big_for_offers{:style=>"left: 400px;position: absolute;top: 200px;z-index: 100;display:none;"}
+    %img{:src=>"/images/ajax-loader-big.gif"}
+  #overlay_div{:style=>"background-color: white;display: block;height: 100%;left: 0;opacity: 0.4;position: absolute;top: 0;width: 100%;z-index: 2;display:none;"}

@@ -1,0 +1,1 @@
+$('.message_#{@parent_message_id}').after('#{escape_javascript(render :partial => "immediate_children")} ').next().hide().fadeIn(1000)

@@ -1,0 +1,181 @@
+.subscription_data_container
+  %h4="YOUR SUBSCRIPTION DATA"
+  .hr_user_settings
+  .subscription_data_relative_fields_container
+    %a.btn#user_edit_subscription{:href=>"/user/edit_subscription"}="EDIT SUBSCRIPTION"
+    - unless @user.subscription.subscription_renewal_date.blank?
+      %input.btn#user_end_subscription{:value=>"END SUBSCRIPTION", :type=>"button"}
+    #cancel_subscription_container
+      %div
+        %h4="You are about to cancel your subscription"
+        - if @user.subscription.subscription_renewal_date.blank?
+          %p="You dont have an active subscription"
+        - else
+          %p="Your subscription is going to end on #{@user.subscription.subscription_renewal_date.to_date}"
+        %span
+          %input.btn#user_end_subscription_cancel{:value=>"CANCEL", :type=>"button"}
+          %input.btn#user_end_subscription_confirm{:value=>"CONFIRM", :type=>"button"}
+    %a.user_edit_data.btn{:href=>"/user/edit_data"}="CHANGE"
+    %a.user_edit_data.btn{:href=>"/user/edit_data", :style=>"top:300px;"}="CHANGE"
+    %a.user_edit_data.btn{:href=>"/user/edit_data", :style=>"top:380px;"}="CHANGE"
+    %a.user_edit_data.btn{:href=>"/user/edit_data", :style=>"top:434px;"}="CHANGE"
+
+  %ul.user_settings
+    %li
+      %span="SUBSCRIPTION PACKAGE"
+      %span=@user.subscription.subscription_plan.subscription_name
+    %li
+      %span="ANNUAL PRICE"
+      %span="$ #{@user.subscription.subscription_plan.subscription_fee}" 
+    %li
+      %span="AVAILABLE OFFERS/YEAR"
+      %span=@user.subscription.subscription_plan.subscription_paintings_allowed
+    %li
+      %span="VIEWABLE OFFERS/YEAR"
+      %span="unlimited"
+    %li
+      %span="ENDS"
+      - if @user.subscription.auto_renewal == true
+        %span="auto-renewal"
+      - else
+        - if @user.subscription.subscription_renewal_date.blank?
+          %span="canceled"
+        - else
+          %span=@user.subscription.subscription_renewal_date.to_date
+  .hr_user_settings
+  %ul.user_settings
+    %li
+      %span="GENDER"
+      %span
+        - if @user.user_gender.blank?
+          = "unknown"
+        - else
+          =@user.user_gender
+    %li
+      %span="FIRST NAME"
+      %span
+        - if @user.user_first_name.blank?
+          = "unknown"
+        - else
+          = @user.user_first_name
+    %li
+      %span="LAST NAME"
+      %span
+        - if @user.user_last_name.blank?
+          = "unknown"
+        - else
+          = @user.user_last_name
+    %li
+      %span="COMPANY"
+      %span
+        - if @user.user_company.blank?
+          ="unknown"
+        - else 
+          =@user.user_company
+    %li
+      %span="STREET"
+      %span
+        - if @user.user_street.blank?
+          ="unknown"
+        - else
+          =@user.user_street
+    %li
+      %span="ZIP CODE"
+      %span
+        - if @user.user_gender.blank?
+          = "unknown"
+        - else
+          = @user.user_gender
+    %li
+      %span="CITY"
+      %span
+        - if @user.user_city.blank?
+          = "unknown"
+        - else
+          = @user.user_city
+  .hr_user_settings
+  %ul.user_settings
+    %li
+      %span="PHONE NUMBER"
+      %span
+        - if @user.user_phone_number.blank?
+          ="unknown"
+        - else
+          = @user.user_phone_number
+    %li
+      %span="FAX NUMBER"
+      %span
+        - if @user.user_fax_number.blank?  
+          ="unknown"
+        - else
+          = @user.user_fax_number
+    %li
+      %span="TAX ID"
+      %span
+        - if @user.user_tax_id.blank?
+          ="unknown"
+        - else
+          =@user.user_tax_id
+  .hr_user_settings
+  %ul.user_settings
+    %li
+      %span="EMAIL & LOGIN"
+      %span
+        - if @user.email.blank?
+          ="unknown"
+        - else
+          =@user.email
+    %li
+      %span="PASSWORD"
+      %span="**********"
+  .hr_user_settings
+  %ul.user_settings
+    %li
+      %span="PAYMENT METHOD"
+      %span
+        - if @user.subscription.payment_type.blank?
+          ="unknown"
+        - else
+          =@user.subscription.payment_type
+
+    - if @user.subscription.payment_type == "bank_transfer"
+      %li
+        %span="PAYMENT DETAILS"
+        %span
+          - if @user.subscription.payment_details.blank?
+            ="unknown"
+          - else
+            =@user.subscription.payment_details
+
+    - if @user.subscription.payment_type == "credit_card"
+      %li
+        %span="CARD TYPE"
+        %span
+          - if @user.subscription.card_type.blank?
+            ="unknown"
+          - else
+            =@user.subscription.card_type
+      %li
+        %span="CARD OWNER"
+        %span
+          - if @user.subscription.card_owner.blank?
+            ="unknown"
+          - else
+            =@user.subscription.card_owner
+      %li
+        %span="CARD NUMBER"
+        %span
+          - if @user.subscription.card_number.blank?
+            ="unknown"
+          - else
+            ="#### #### #### #### #{@user.subscription.card_number}"
+      %li
+        %span="CARD EXPIRES"
+        %span
+          - if @user.subscription.card_expires.blank?
+            ="unknown"
+          - else
+            =@user.subscription.card_expires
+      %li
+        %span="VERIFICATION CODE"
+        %span="###"

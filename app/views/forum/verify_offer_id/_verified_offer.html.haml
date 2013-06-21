@@ -1,0 +1,13 @@
+- if @offer.blank?
+	= content_tag :div, :class=>"pull-left", :style=>"float:left;width:100%;padding-left:350px;" do
+		= "No painting found"
+- else 
+	= content_tag :div, :class=>"pull-left", :style=>"float:left;width:100%;padding-left:350px;" do 
+		= image_tag "https://artfacedev-pro.s3.amazonaws.com/public/images/uploaded/artwork/smalls/artwork_thumbnails/#{@offer.artwork.id}/#{@offer.artwork.artwork_thumbnail_file_name}", :alt=>"image not found", :style=>"float:left;width:50px;height:50px;"
+		= label_tag "artist", :class=>"pull-left" do
+			%span{:style=>"float:left;height:100%;margin-left:20px;margin-right:10px;"}="Artist: "
+			= @offer.artwork.artist.artist_name if @offer.artwork.artist.approved_status
+			= "unknown" unless @offer.artwork.artist.approved_status
+		= label_tag "title", :class=>"pull-left" do
+			%span{:style=>"float:left;height:100%;margin-left:20px;margin-right:10px;"}="Title: "
+			= @offer.artwork.artwork_title.artwork_title_en

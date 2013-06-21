@@ -1,0 +1,36 @@
+- unless @messages.blank?
+  %ul.offers_messages_data.pull-left.width_100.unstyled{:style=>"margin-left: 0;padding-left: 10px;padding-right: 10px"}
+    %li.offers.pull-left.width_100
+      %span.pull-left{:style=>"background-color: #E9E9E9;margin-bottom: 10px;padding: 7px;position: relative;width: 806px;"}
+        %a{:href=>"/offers/show/#{@offer.id}"}
+          %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/originals/artwork_hires/#{@offer.artwork.id}/#{@offer.artwork.artwork_hires_file_name}", :alt=>"Image Not found", :style=>"float:left;width:60px;height:60px;margin-right:10px;"}
+        %i.icon-arrow-down.pointer{:style=>"position:absolute;right:10px;top:10px;", :id=>"offer_#{@offer.id}"}
+        %ul.pull-left.unstyled
+          %li.pull-left{:style=>"clear:both;"}
+            %span.pull-left{:style=>"text-decoration:underline;font-weight:bolder;margin-right:5px;"}=@offer.artwork.artist.artist_name
+            %span.pull-left{:style=>"margin-right:5px;"}="|"
+            %span.pull-left{:style=>"margin-right:5px;"}="highest offer: $10,000,000"
+            %span.pull-left{:style=>"margin-right:5px;"}="|"
+            %span.pull-left{:style=>"margin-right:5px;"}="offer remaining: #{(@offer.offer_end_date.to_date - Date.today).to_i } days"
+          %li.pull-left{:style=>"clear:both"}
+            %span.pull-left{:style=>"margin-top:0;"}="#{@messages.count} messages"
+    - @message_array.each_with_index do |message, index|
+      %li.pull-left{:style=>"width:804px;padding:8px;position:relative;"}
+        %span.pull-left{:style=>"font-weight:bold;"}=message[:message].created_at.to_date
+        %span.pull-left{:style=>"margin-left:5px;margin-right:5px;"}="|"
+        %span.pull-left{:style=>"font-weight:bold;"}=message[:message].created_at.strftime('%H:%M')
+        %span.pull-left{:style=>"margin-left:5px;margin-right:5px;"}="|"
+        %span.pull-left{:style=>"font-weight:bold;"}="offer: #{message[:message].currency} #{message[:message].offer_price}"
+        %span.pull-left{:style=>"margin-left:5px;margin-right:5px;"}="|"
+        - if current_user.id == message[:message].user.id
+          %span.pull-left{:style=>"font-weight:bold;margin-right:2px;"}="Your message: "
+        - elsif @offer.id == message[:message].user.id
+          %span.pull-left{:style=>"margin-right:2px;"}="Sellers reply: "
+        %span.pull-left{:style=>"font-weight:bold;"}=message[:message].message_title
+        %div{:style=>"position:absolute;top:15px;right:40px;"}
+          %i.icon-remove-sign.pointer{:id=>"delete_message_#{message[:message].id}"}
+          %i.icon-arrow-left.pointer{:id=>"reply_message_#{message[:message].id}"}
+          %i.icon-arrow-down.pointer{:id=>"dropdown_#{message[:message].id}"}
+      %li.pull-left{:style=>"width:804px;"}
+        =message[:message].message_text
+      %li.pull-left.width_100{:id=>"reply_container_#{message[:message].id}"}

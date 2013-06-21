@@ -1,0 +1,20 @@
+#head3.head3_admin   
+  %h1 These artist are unacknowledged 
+  %table
+    %th SrNo
+    %th Artist Name
+    %th Death Year
+    %th Birth Year
+    -count=1
+    - @artists.each do |artist|      
+      %tr        
+        %td.color1
+          %p= count
+          -count = count + 1
+        %td.color2
+          %p= artist.artist_name
+        %td.color3
+          %p= artist.artist_death_year
+        %td.color1
+          %p= artist.artist_birth_year
+   

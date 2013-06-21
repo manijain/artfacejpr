@@ -1,0 +1,7 @@
+#head2_user.head2_user_admin{:style=>"height: 150px"}
+  %h1 Change Subscription plan
+  -@subscription = Subscription.where(:user_id => @user.id).first
+  = form_for @subscription, :url => {:action => "update"} do |f|
+    %h2=f.label :subscription_package
+    %h3=f.select :subscription_plan_id, options_for_select([['Basic', '1'], ['Plus', '2'], ['Pro', '3'], ['Premium', '4'], ['No Limit', '5']], :selected=> @subscription.subscription_plan_id)
+  =link_to "save the plan", "",  :id=>"savesub", :class=>"input4_user_admin"

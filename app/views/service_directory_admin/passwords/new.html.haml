@@ -1,0 +1,21 @@
+= render :partial=> 'service_directory_admin/layouts/header'
+
+%div{:style=>"margin-left:2%;width:820px;float:left"}
+	%h2="FORGOT YOUR PASSWORD?"
+	%div{:style=>"float:left;"}
+		="Please type in your email adress and we will send your"
+		%br
+		="password to the specified email."
+
+	%div{:style=>"float:left;margin-left:30px;width:430px"}
+		= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+			= devise_error_messages!
+
+			= f.label "EMAIL ADDRESS", :style=>"display:inline;margin-right:20px;", :placeholder=>"EMAIL*"
+			= f.email_field :email, :style=>"width:300px;"
+			%br
+			= f.submit "Send", :class=>"btn", :style=>"float:right"
+			%br
+			%br
+
+= render :partial=> 'service_directory_admin/layouts/footer'

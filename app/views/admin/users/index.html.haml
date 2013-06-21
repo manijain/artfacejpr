@@ -1,0 +1,36 @@
+=render :partial => "admin/layouts/header"
+.wrapper_admin
+  %br
+  %br
+  %h1{:align=> "center"} Users Overview
+.container_forum_index
+  .layout_part_three{:style=>"margin-top: -10px;padding-left: 14px;width: 808px; margin-bottom: 20px;"}
+    %h3.heading="Search in Users"
+    = render :partial =>"admin/users/users_search/user_search_basic"
+    = render :partial =>"admin/users/users_search/user_search_advanced"
+#hhhh.head4_admin  
+#head4.wrapper_admin.head4_admin
+  %h1
+  %table{:style=>"margin-right: 290px; margin-top:110px; margin-bottom: 25px;"}
+    %th
+      Sort list by
+      %select{:id=>"usersort", :style=>"width:130px;"}
+        %option{:value => "select"}="Select" 
+        %option{:value => "first name"} First Name 
+        %option{:value => "last name"} Last Name
+        %option{:value => "country"} Country
+        %option{:value => "membership"} Membership Date
+ 
+    %th 
+      Items per page
+      %select{:id=>"userperpage",:style=>"width:100px;"}
+        %option{:selected=>"true",:value => "7"}="7"
+        %option{:value => "8"}="8"
+        %option{:value => "9"}="9"
+        %option{:value => "10"}="10"
+
+    
+  #myuser     
+    =render :partial => "user_data"
+  .mybutton_admin= button_to " ADD USER", admin_users_new_path , :method=> :get, :style=>"width:110px; height:35px;color: white;background-color:#86929C;"
+=render :partial => "admin/layouts/footer"

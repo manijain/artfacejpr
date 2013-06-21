@@ -1,0 +1,9 @@
+%select#select_input_depth_1_{:style=>"width:120px;margin-right:5px;float:left;margin-left:-15px;margin-bottom:0;",:name=>"select[depth]search_type"}
+  %option="is exactly"
+  %option="is smaller than"
+  %option="is larger than"
+%input#text_input_depth_{:style=>"margin-bottom: 0;margin-right: 5px;width: 80px;float:left;", :type=>"text",:name=>"select[depth]value"}
+%select#select_input_depth_2_{:style=>"margin-right:10px;width:60px;float:left;margin-bottom:0;",:name=>"select[depth]measurement"}
+  %option="cm"
+  %option="inch"
+%img#error_text_input_depth_{"data-original-title"=>"Only Numbers allowed", :src=>"/images/exclamation_mark.png", :style=>"margin-right: 449px;display:none;position:absolute;right:210px;"}

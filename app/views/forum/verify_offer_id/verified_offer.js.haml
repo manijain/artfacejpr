@@ -1,0 +1,3 @@
+$("#verified_offer").html( '#{escape_javascript(render :partial => "forum/verify_offer_id/verified_offer")} ')
+- unless @offer.blank?
+	$("#forum_message_offer_id").val("#{@offer.id}")

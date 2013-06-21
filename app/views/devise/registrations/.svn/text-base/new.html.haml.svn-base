@@ -1,0 +1,4 @@
+= render :partial=> 'layouts/header'
+= render :partial=> 'devise/registrations/layout_one'
+= render :partial=> 'devise/registrations/layout_two'
+= render :partial=> 'layouts/footer'

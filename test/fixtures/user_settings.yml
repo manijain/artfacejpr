@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  notification_by: MyString
+  show_identity: false
+  notification_email: MyString
+  wishlist_notification: false
+  seller_message_notification: false
+  buyer_message_notification: false
+  forum_notification: false
+  user_offer_forum_discussion: false
+
+two:
+  notification_by: MyString
+  show_identity: false
+  notification_email: MyString
+  wishlist_notification: false
+  seller_message_notification: false
+  buyer_message_notification: false
+  forum_notification: false
+  user_offer_forum_discussion: false

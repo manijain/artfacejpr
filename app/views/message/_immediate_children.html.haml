@@ -1,0 +1,25 @@
+- class_array = []
+- @parent_messages_array.each do |id|
+  - class_array << " child_of_message_#{id} "
+- class_array.shift
+- class_array = class_array.split(',').join()
+- @messages.each do |message|
+  %li{:style=>"float:left;width:100%;border-bottom:1px solid black;margin-bottom:8px;background-color:#727272;margin-left:#{@parent_counts}px;", :class=>"message_#{message.id} #{class_array}"}
+    %ul{:style=>"float:left;list-style:none;margin:0;background-color:#727272;width:100%;"}
+      %li{:style=>"float:left;width:100%"}
+        %span{:style=>"float:left;font-weight:bold;"}=message.created_at.to_date
+        %span{:style=>"float:left;margin-right:5px;margin-left:5px"}="|"
+        %span{:style=>"float:left;font-weight:bold;"}=message.created_at.strftime("%I:%M")
+        %span{:style=>"float:left;margin-right:5px;margin-left:5px;"}="|"
+        %span{:style=>"float:left;font-weight:bold;margin-right:2px;"}
+          ="#{message.user.user_first_name} #{message.user.user_last_name}: " unless message.user.nil?
+        %span{:style=>"float:left;font-weight:bold;margin-right:2px;"}="Anonymous: " if message.user.nil?                
+        %span{:style=>"float:left;font-weight:bold;"}="#{message.message_title}"
+        %span.message_navigation{:style=>"float:right;margin-right:10px;"}
+          %i.icon-remove-sign{:id=>"message_delete_#{message.id}", :style=>"cursor:pointer;"}
+          %i.icon-arrow-left{:id=>"message_reply_#{message.id}", :style=>"cursor:pointer;"}
+          - if message.sub_messages.blank?
+          
+          - else
+            %i.icon-arrow-down{:id=>"message_#{message.id}", :style=>"cursor:pointer;", :class=>"message_parent"}
+      %li{:style=>"float:left;width:100%"}=message.message_text

@@ -1,0 +1,38 @@
+- unless user_signed_in?
+  .header{:style=>"float:left;width:950px;height:120px;"}
+    %h2
+      = link_to image_tag("artface.png"), root_path, :class => "artface"
+    %ul.nav-container
+      %li.c_nav_link_bar_home
+        = link_to "HOME", root_path
+      %li.c_nav_link_bar_offers
+        = link_to "OFFERS", offers_path
+      %li.c_nav_link_bar_about
+        = link_to "ABOUT", about_path
+      %li.c_nav_link_bar_memberfees
+        = link_to "MEMBER FEES", memberfees_path
+      %li.c_nav_link_bar_register
+        = link_to "SIGN UP", new_user_registration_path
+      %li.c_nav_link_bar_login
+        - if user_signed_in?
+          = link_to "LOG OUT", destroy_user_session_path
+        - else
+          = link_to "LOG IN ", new_user_session_path, :id=>"login_popout_link", :style=>"top:29px;"
+          %div{:id=>"login_popout"}
+            = form_for :user, :url => new_user_session_path do |f|
+              %ul{:style=>"list-style:none;margin:0;"}
+                %li
+                  = f.email_field :email, :id=>"test_user_name", :placeholder=>"YOUR LOGIN", :style=>"width:140px;"
+                %li
+                  = f.password_field :password, :id=> "test_user_pass", :placeholder=>"YOUR PASSWORD", :style=>"width:140px;"
+                  %br
+                %li{:style=>"color:black;float:left;width:155px;"}
+                  = link_to "Forgot password?", new_user_password_path, :style=>"float:left;width:50px;top:0px;position:static", :id=>"forgot_pass_link"
+                  = f.submit "LOGIN", :style=>"float:right", :id=>"login_submit_btn", :class=>"submit btn"
+      %li.c_nav_link_bar_locale
+        %div{:style=>"background-color: black;height: 15px;margin-top: 2px;width: 21px;position:relative;", :id=>"localisation_select_div"}
+          %p.hidden=I18n.locale
+    .site_wide_error{:style=>"display:none;position:absolute;top:80px;"}
+      %pre.prettyprint.linenums{:style=>"width: 820px;height: 20px;white-space:nowrap"}
+        %span.tag.site_wide_error_text
+        %span.tag#header_flash_message="#{flash[:notice]} #{flash[:error]}"

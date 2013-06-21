@@ -1,0 +1,25 @@
+.span10.span10favourites{:style=>"position:relative;"}
+  .span10{:style=>"margin-left:0;border-bottom:2px solid black;"}
+    %h4{:style=>"float:left;"}=t '.heading'
+    - if @buy_your_favourites.blank?
+
+    - else
+      %span{:style=>"float:right;line-height:40px;"}
+        %span#favourites_sort_label="Sort list by"
+        %select#buy_your_favourites_select{:style=>"width:150px;"}
+          %option="artist name"
+          %option="end date of offer"
+          %option="popularity"
+  #ajax-loader-big-for-favourites{:style=>"left: 400px;height: 50px; width: 50px; position: absolute;top: 100px;z-index: 100;display:none;"}
+    %img{:src=>"/images/ajax-loader-big.gif", :style=>"width: 100%; height: 100%;"}
+  #overlay_div_for_favourites{:style=>"background-color: white;display: block;height: 100%;left: 0;opacity: 0.4;position: absolute;top: 0;width: 100%;z-index: 2;display:none;"}
+  - if @buy_your_favourites.blank?
+    %p="No favourites found. Start adding favourites by checking out the offers"  
+  - else
+    .span10favourites_first_div
+      = render :partial => "offer/home/favourites/favourites_data" 
+  .span5{:style=>"margin-top:10px"}
+    %a.btn{:href=>"/offer/your-favourites"}="GO TO FAVOURITES"
+    - if @buy_your_favourites.blank?
+    - else
+      %input.btn#delete_favourite{:type=>"button", :value=>"DELETE A FAVOURITE"}

@@ -1,0 +1,93 @@
+%div.sign_up_layout_two
+	%div.sign_up_layout_two_section_one
+		%h2=t ".sign_up_title"
+	%div.sign_up_layout_two_section_two
+		%div
+			%ul
+				%li
+				%strong=t ".subscription_package"
+				%span{:id=>""}= "Hello"
+				%li
+				%strong=t ".annual_price"
+				%span{:id=>""}= "Hello"
+				%li
+				%strong=t ".available_offers"
+				%span{:id=>""}= "Hello"
+				%li
+				%strong=t ".viewable_offers"
+				%span{:id=>""}= "Hello"
+				%li
+				%strong=t ".subscription_method"
+				%span{:id=>""}= "Hello"
+		%div
+			%ul
+				%li
+				%strong=t ".gender"
+				%span{:id=>"confirm_user_gender"}=""
+				%li
+				%strong=t ".first_name"
+				%span{:id=>"confirm_user_first_name"}=""
+				%li
+				%strong=t ".last_name"
+				%span{:id=>"confirm_user_last_name"}=""
+				%li
+				%strong=t ".company"
+				%span{:id=>"confirm_user_company"}=""
+				%li
+				%strong=t ".street"
+				%span{:id=>"confirm_user_street"}=""
+				%li
+				%strong=t ".zip_code"
+				%span{:id=>"confirm_user_zip_code"}=""
+				%li
+				%strong=t ".city"
+				%span{:id=>"confirm_user_city"}=""
+				%li
+				%strong=t ".country"
+				%span{:id=>"confirm_user_country"}=""
+		%div
+			%ul
+				%li
+				%strong=t ".phone_number"
+				%span{:id=>"confirm_user_phone_number"}=""
+				%li
+				%strong=t ".fax_number"
+				%span{:id=>"confirm_user_fax_number"}=""
+				%li
+				%strong=t ".tax_id"
+				%span{:id=>"confirm_user_tax_id"}=""
+		%div
+			%ul
+				%li
+				%strong=t ".email_login"
+				%span{:id=>"confirm_user_email"}=""
+				%li
+				%strong=t ".password"
+				%span{:id=>""}="xxxxxxxxxx"
+		%div
+			%ul
+				%li
+				%strong=t ".payment_method"
+				%span{:id=>""}="Hello"
+				%li
+				%strong=t ".card_number"
+				%span{:id=>"confirm_card_number"}=""
+				%li
+				%strong=t ".card_owner"
+				%span{:id=>"confirm_card_owner"}=""
+				%li
+				%strong=t ".expires"
+				%span{:id=>"confirm_card_expiry_month"}=""
+				%span="/"
+				%span{:id=>"confirm_card_expiry_year"}=""
+				%li
+				%strong=t ".verification_code"
+				%span{:id=>""}="xxx"
+	%div.sign_up_layout_two_section_three
+		%input{:type=>"checkbox"}
+		%span=t ".accept_agree_terms"
+		%p=t ".agree_terms"
+		%input{:type=>"button", :value=>"COMPLETE SIGN UP", :style=>"float:right;", :class=>"btn", :id=>"form_submit"}
+		%input{:type=>"button", :value=>"GO BACK", :style=>"float:right;", :class=>"btn", :onmouseup=>"go_back();"}
+%br
+%br

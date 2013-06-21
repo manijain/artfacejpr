@@ -1,0 +1,7 @@
+= "Hi #{@data.name}"
+%br
+= "#{@user.user_first_name} has recommended you to join Artface.com"
+%br
+= "kindly visit the link "
+= "http://artfacedev.herokuapp.com/recommended/register/?recommended-by=#{@user.id} & email=#{@data.email}".delete(" ").html_safe
+=  " to register"

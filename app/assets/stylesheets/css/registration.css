@@ -1,0 +1,132 @@
+.sign_up_layout_zero_div {
+  width:820px;
+  margin-left:2%
+}
+.sign_up_layout_one {
+  width: 820px;
+  margin-left: 2%;
+}
+.sign_up_section_three {
+  background-color: #E9E9E9;
+}
+
+.sign_up_section_four {
+  background-color: #A5A5A5;
+
+}
+.sign_up_section_four h2 {
+  margin: 0 auto;
+}
+.sign_up_section_four_td_left {
+  float: right;
+  vertical-align: middle;
+  padding-top: 5px;
+}
+.sign_up_section_four_td_right select {
+  width: 75px;
+}
+.sign_up_section_four_td_country {
+  width: 100% !important;
+}
+
+.sign_up_section_five {
+  background-color: #EBEBEB;
+}
+
+.sign_up_section_five h2 {
+  margin: 0 auto;
+}
+
+.sign_up_section_six {
+  background-color: #A5A5A5;
+  float: left;
+  width: 100%;
+}
+
+.sign_up_section_six h2 {
+  margin: 0 auto;
+}
+.sign_up_section_six_container {
+  float: left;
+}
+.sign_up_section_six_container div{
+  float: left;
+  margin: 3px 10px 0px 5px;
+}
+.sign_up_section_six_checkbox {
+
+}
+.sign_up_layout_two {
+  margin-left: 2%;
+  display: none;
+  width: 820px;
+}
+
+.sign_up_layout_two_section_two {
+  background-color:#E9E9E9;
+}
+.sign_up_layout_two_section_two div {
+  width: 400px;
+}
+
+.sign_up_layout_two_section_two div ul {
+  text-align: right;
+  list-style: none outside none;
+}
+.sign_up_layout_two_section_two div ul li span {
+  margin-left: 10px;
+  float: right;
+}
+
+.sign_up_section_three table {
+  table-layout: fixed;
+}
+
+.sign_up_section_three table td {
+  width: 40%;
+  vertical-align: top;
+}
+#user_email_error_taken {
+  display: none;
+  color: red;
+}
+#user_email_error_invalid {
+  display: none;
+  color: red;
+}
+#password_mismatch_error {
+  display: none;
+  color: red;
+}
+#user_country_error {
+  padding-bottom: 8px;
+  color: red;
+  display: none;
+}
+.sign_up_layout_two_section_two {
+  padding:5px;
+  float:left;
+  width:820px;
+}
+.sign_up_layout_two_section_two_change_buttons
+{
+  float: right;
+  height: 600px;
+  width: 150px !important;
+}
+.sign_up_layout_two_section_two_summary_list_ul li {
+  float:left;
+  width:600px;
+}
+
+.sign_up_layout_two_section_two strong {
+  display: block;
+  float: left;
+  margin-right: 20px;
+  text-align: right;
+  margin-bottom:2px;
+  width: 350px;
+}
+.sign_up_layout_two_section_two span {
+  float:left !important;
+}

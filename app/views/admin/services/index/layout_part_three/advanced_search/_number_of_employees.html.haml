@@ -1,0 +1,5 @@
+%select#select_input_number_of_employees{:style=>"margin-bottom: 0;margin-right: 5px;width: 100px;float:left;",:name=>"select[number_of_employees]search_type"}
+  %option{:value=>"is higher than"}="is higher than"
+  %option{:value=>"is lower than"}="is lower than"
+%input#text_input_number_of_employees{:type=>"text", :style=>"float: left;margin-bottom: 0;width: 200px;float:left;" ,:name=>"select[number_of_employees]value"}
+%img#error_text_input_number_of_employees{"data-original-title"=>"Characters not allowed", :src=>"/images/exclamation_mark.png", :style=>"display:none;position:absolute;right:135px;"}

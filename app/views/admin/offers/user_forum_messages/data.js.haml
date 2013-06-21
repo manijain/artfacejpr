@@ -1,0 +1,4 @@
+$("#forum_data").html('#{escape_javascript(render :partial => "admin/offer/user_forum_messages/data")} ');
+$(".pagination a").each(function() {
+$(this).attr("data-remote","true");
+})

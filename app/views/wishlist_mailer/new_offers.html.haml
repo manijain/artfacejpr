@@ -1,0 +1,8 @@
+%p="Hi #{@user.user_first_name[0]} #{@user.user_last_name}"
+
+%p="There are new offers added for the wishlist - #{@wishlist.wishlist_name} you created. You can check them out at - "
+
+- @new_offers_id.each do |offer_id|
+  = link_to "Offer # #{offer_id}", "http://artfacedev.herokuapp.com/offer/show/#{offer_id}"
+
+%p="Thank you"

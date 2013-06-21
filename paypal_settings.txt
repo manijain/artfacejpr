@@ -1,0 +1,33 @@
+paypal settings
+
+1. seller - sudipt_1350636371_biz@ongraph.com
+password - artfacedev!23
+Visa   4976160704518517
+Exp Date:  10/2017
+Checking (Confirmed)
+Routing Number: 325272063
+Bank Account Number: 548279233971713
+
+2. buyer - sudipt_1351248814_per@ongraph.com
+pass - 351248758
+
+card - 4617630463479221
+10/2017
+Routing Number: 325272063
+Bank Account Number: 567841489619498
+
+Test Account:   sudipt_1350636371_biz@ongraph.com
+API Username:   sudipt_1350636371_biz_api1.ongraph.com
+API Password:   1350636401
+Signature:  ADiiNoBZz.RNJqdkC2sY9sR47yVUA8wIZs5fdHtH9rEmzlmflw04PNqJ
+
+
+paypal account
+abh_chdhry@yahoo.co.in
+ONGRAPH@123
+
+
+test account buyer
+sudipta_mondal@ongraph.com
+artfacedev!23
+

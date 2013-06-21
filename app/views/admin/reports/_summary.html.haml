@@ -1,0 +1,81 @@
+%div#summary_details{:style=>"background-color:#F6F6F6"}
+  %h3="SUMMARY #{@start_date} TO #{@end_date}"
+  %br
+  %u=""
+  %u{:style=>"margin-left:200px;"}="Basic"
+  %u="Plus"
+  %u="Pro"
+  %u="Premium"
+  %u="No limit"
+  %u{:style=>"font-weight: bold;"}="Total"
+  %br
+  %ul
+    %li{:style=>"background-color:#AEAEAE; width:700px;"}
+      %p{:style=>"font-weight:bold;"}="Paid Subscriptions"
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 1).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 2).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 3).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 4).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 5).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription IS NOT true").count
+
+    %li{:style=>"background-color:#E2E2E2; width:700px;"}
+      %p{:style=>"font-weight:bold;"}="Free Subscriptions"
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription = true").where(:subscription_plan_id => 1).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription = true").where(:subscription_plan_id => 2).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription = true").where(:subscription_plan_id => 3).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription = true").where(:subscription_plan_id => 4).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription = true").where(:subscription_plan_id => 5).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription = true").count
+
+    %li{:style=>"background-color:#AEAEAE; width:700px;"}
+      %p{:style=>"font-weight:bold;"}="Total Subscriptions"
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true").where(:subscription_plan_id => 1).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true").where(:subscription_plan_id => 2).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true").where(:subscription_plan_id => 3).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true").where(:subscription_plan_id => 4).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true").where(:subscription_plan_id => 5).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true").count
+
+    %li{:style=>"background-color:#E2E2E2; width:700px;"}
+      %p{:style=>"font-weight:bold;"}="Total Earnings"
+      %span= (SubscriptionPlan.where(:id => 1).first.subscription_fee) * (Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 1).count)
+      %span= (SubscriptionPlan.where(:id => 2).first.subscription_fee) * (Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 2).count)
+      %span= (SubscriptionPlan.where(:id => 3).first.subscription_fee) * (Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 3).count)
+      %span= (SubscriptionPlan.where(:id => 4).first.subscription_fee) * (Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 4).count)
+      %span= (SubscriptionPlan.where(:id => 5).first.subscription_fee) * (Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 5).count)
+      %span= ((SubscriptionPlan.where(:id => 1).first.subscription_fee) * (Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 1).count) + (SubscriptionPlan.where(:id => 2).first.subscription_fee) * (Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 2).count) + (SubscriptionPlan.where(:id => 3).first.subscription_fee) * (Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 3).count) + (SubscriptionPlan.where(:id => 4).first.subscription_fee) * (Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 4).count) + (SubscriptionPlan.where(:id => 5).first.subscription_fee) * (Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 5).count))
+
+    %li{:style=>"background-color:#AEAEAE; width:700px;"}
+      %p{:style=>"font-weight:bold;"}="New Subscriptions"
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where(:subscription_plan_id => 1).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where(:subscription_plan_id => 2).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where(:subscription_plan_id => 3).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where(:subscription_plan_id => 4).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where(:subscription_plan_id => 5).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").count
+
+    %li{:style=>"background-color:#E2E2E2; width:700px;"}
+      %p{:style=>"font-weight:bold;"}="Unfinished Sign-ups"
+      //%span= User.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("date(users.created_at) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 1").count
+      //%span= User.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("date(users.created_at) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 2").count
+      //%span= User.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("date(users.created_at) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 3").count
+      //%span= User.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("date(users.created_at) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 4").count
+      //%span= User.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("date(users.created_at) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 5").count
+      //%span= User.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("date(users.created_at) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("users.confirmation_token IS NOT NULL").count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where(:subscription_confirmed => false).where(:subscription_plan_id => 1).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where(:subscription_confirmed => false).where(:subscription_plan_id => 2).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where(:subscription_confirmed => false).where(:subscription_plan_id => 3).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where(:subscription_confirmed => false).where(:subscription_plan_id => 4).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where(:subscription_confirmed => false).where(:subscription_plan_id => 5).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where(:subscription_confirmed => false).count
+
+    %li{:style=>"background-color:#AEAEAE; width:700px;"}
+      %p{:style=>"font-weight:bold;"}="Cancelled Subscriptions"
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("auto_renewal = true AND subscription_renewal_date IS NULL").where(:subscription_plan_id => 1).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("auto_renewal = true AND subscription_renewal_date IS NULL").where(:subscription_plan_id => 2).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("auto_renewal = true AND subscription_renewal_date IS NULL").where(:subscription_plan_id => 3).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("auto_renewal = true AND subscription_renewal_date IS NULL").where(:subscription_plan_id => 4).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("auto_renewal = true AND subscription_renewal_date IS NULL").where(:subscription_plan_id => 5).count
+      %span= Subscription.where("date(subscription_start_date) BETWEEN '#{@start_date}' AND '#{@end_date}'").where("auto_renewal = true AND subscription_renewal_date IS NULL").count
+

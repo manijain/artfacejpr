@@ -1,0 +1,9 @@
+%select#select_input_width_1_.pull-left{:style=>"width:120px;margin-right:5px;float:left;margin-bottom:0;",:name=>"search_params[width]search_type"}
+  %option{:value=>"is exactly"}="is exactly"
+  %option{:value=>"is smaller than"}="is smaller than"
+  %option{:value=>"is larger than"}="is larger than"
+%input#text_input_width_.pull-left{:style=>"margin-bottom: 0;margin-right: 5px;width: 80px;float:left;", :type=>"text" ,:name=>"search_params[width]value"}
+%select#select_input_width_2_.pull-left{:style=>"margin-right:10px;width:60px;float:left;margin-bottom:0;" ,:name=>"search_params[width]measurement"}
+  %option{:value=>"cm"}="cm"
+  %option{:value=>"inch"}="inch"
+%img#error_text_input_width_{"data-original-title"=>"Only Characters allowed", :src=>"/images/exclamation_mark.png", :style=>"display:none;position:absolute;right:200px;"}

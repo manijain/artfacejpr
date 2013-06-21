@@ -1,0 +1,2 @@
+//$("#new_reply_container").html('#{escape_javascript(render :partial => "admin/forums/new_reply/edit_reply")}')
+$("#forum_message_#{@parent_message_id}").after('#{escape_javascript(render :partial => "admin/forums/new_reply/edit_reply")}')

@@ -1,0 +1,20 @@
+1. 	12-04-2013
+	Add migration on artists table. Datatype of years changed from integer to string.
+
+
+3. changes in artist table (Added some columns). See migration
+	(done all changes accordingly, check all your work related to artist year)
+	(need to drop birth and death year, but still left for pe=rventing being effected all changes by all team)
+
+4.	Wishlist Controller 
+	method - update (some changes)
+	method - wishlist_advanced_artist_match (create)
+
+5. All birth_year and death_year is changed
+
+6.I think redirection of add new offer (when user crossed the limit of adding new offers) is wrong on front-end. 
+There is <redirect_to '/offer/show'>  in offer_controller, while nothing is defined on this page. So it should be <redirect_to '/dashboard/sell-art-area'> or change it to according to your need who are working on front-end.
+
+7. Changes from "for sale and lend" in properties instead of "for sale or lend"
+
+8. It needs chenges(trim before and after white-spaces) all placed where data is being stored on db.

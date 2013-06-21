@@ -1,0 +1,6 @@
+%select#select_input_description_.pull-left{:style=>"margin-bottom: 0;margin-right: 5px;width: 100px",:name=>"search_params[description]search_type"}
+  %option{:value=>"contains"}="contains"
+  %option{:value=>"is exactly"}="is exactly"
+  %option{:value=>"is not"}="is not"
+%input#text_input_description_.pull-left{:type=>"text", :style=>"margin-bottom: 0;width: 200px;",:name=>"search_params[description]value"}
+%img#error_text_input_description_{"data-original-title"=>"Only Characters allowed", :src=>"/images/exclamation_mark.png", :style=>"display:none;position:absolute;right:170px;"}

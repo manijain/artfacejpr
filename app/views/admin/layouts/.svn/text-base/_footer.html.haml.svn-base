@@ -1,0 +1,20 @@
+%div.footer
+	%div.footer_content
+		%div
+			%p{:style=>"text-align:center;"}="<strong>ARTFACE.COM</strong><br />".html_safe
+			%p="Artface.com is a completely new and innova-<br />tive way to permit art collectors, art historians<br />and art lovers to meet each others in the most<br />discrete way with out dicriminating the work of<br />art with prices or names of owners, they can<br />get in contact directly and make business with<br />no fees or commissions.".html_safe
+		%div
+			%p{:style=>"text-align:center;"}="<strong>STAY CONNECTED</strong><br />".html_safe
+			%p="Artface is a hub for art lovers. Lorem ipsum<br />dolor sit amet, consectetuer adipiscing elit.".html_safe
+		%div
+			%p{:style=>"text-align:center;"}="<strong>CONTACT</strong><br />".html_safe
+			%p="Artface.com Limited<br />Apollo Hous<br />359 Kennington Lane<br />London<br />SE11 5QY<br />T: +44(0)20 7091 7950<br />E: info@artface.com".html_safe
+		%div.footer_links
+			= "© 2012 Artface.com |"
+			= link_to "Disclaimer", disclaimer_path
+			= " | "
+			= link_to "Privacy Statement", privacy_statement_path
+			= " | "
+			= link_to "Contact", contact_path
+			= " | "
+			= link_to "Terms & Conditions", terms_conditions_path

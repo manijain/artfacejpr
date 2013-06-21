@@ -1,0 +1,85 @@
+.pull-left#wishlist_new_0{:style=>"width:820px"}
+  .search.pull-left{:style=>"background-color: #727272;border: 1px solid #727272;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px;color:white;"}
+    %span.pull-left{:style=>"width:120px;"}
+      %h4="ADD A NEW LIST"
+      %p="add one or more attributes to you your new wishlist"
+    = form_for :wishlist, :url =>"/wishlist/update", :html => {:style=>"float:left;width:84%;"} do |f|
+      = f.hidden_field :wishlist_id, :id=>"wishlist_id", :value=>"#{@wishlist.id}"
+      = f.text_field :wishlist_name, :style=>"float:left;width:435px;", :placeholder=>"Enter a name for your wishlist"
+      = f.hidden_field :search_advanced, :value=>false
+      = f.text_field :wishlist_search_params, :placeholder=>"Enter your search term", :style=>"width:435px;"
+      %img.basic_to_advance.pointer{:src=>"/images/plus.png", :style=>"margin-left:10px;margin-right:10px;marin-top:2px;"}
+      = f.hidden_field :user_id, :value=>"#{current_user.id}"
+      %div.pull-left{:style=>"width:100%;"}
+        = f.check_box :email_notification, :style=>"margin-right:5px;float:left;"
+        -#s%input.checkbox#email_verification.pull-left{:name=>"wishlist[email_notification]", :type=>"checkbox", :style=>"margin-right:5px;"}
+        %span.label_text.pull-left="notify me by email when new matches occur"
+        %input.btn#add_wishlist.pull-right{:style => "margin-right:10px", :type => "submit", :value => "ADD"}
+        %input.btn.pull-right{:style => "margin-right:10px;", :value => "CANCEL", :id=>"cancel_wishlist_#{@wishlist.id}", :type=>"button"}
+  .search_advanced.pull-left{:style=>"width:100%;display:none;background-color: #727272;border: 1px solid #727272;border-top-left-radius: 10px;border-top-right-radius: 10px;padding: 10px;color:white;"}
+    %span.pull-left{:style=>"width:120px;"}
+      %h4="ADD A NEW LIST"
+      %p="add one more attribute to your new wishlist"
+    .pull-left{:style=>"width:15%;margin-right:15px;"}
+    = form_for :wishlist, :url =>"/wishlist/update", :html => {:style=>"float:left;width:82%"} do |f|
+      = f.hidden_field :wishlist_id, :id=>"wishlist_id", :value=>"#{@wishlist.id}"
+      = f.hidden_field :search_advanced, :value=>false
+      = f.hidden_field :user_id, :value=>"#{current_user.id}"
+      = f.text_field :wishlist_name, :style=>"float:left;width:435px;", :placeholder=>"Enter a name for your wishlist"
+      %div#search_filters.pull-left{:style=>"width:100%"}
+        %ul.pull-left.unstyled{:style=>"width:100%"}
+          %li.pull-left{:style=>"width:84%"}
+            %select#advanced_select_1{:style=>"width:90px;float:left;margin-right:5px;"}
+              %option{"data-function"=>"$(a).html('')", :selected=>"true"}="Please choose an option"
+              %option{"data-function"=>"if (check_option('Artist Name')!=false){$(a).html(\"#{escape_javascript(render("wishlist\/advanced_search\/artist"))}\");} else {alert('Error: Value already used ');}", :value=>"Artist Name"}="Artist Name"
+              %option{"data-function"=>"if (check_option('Title')!=false){$(a).html(\"#{escape_javascript(render("wishlist\/advanced_search\/title"))}\");} else {alert('Error: Value already used ');}", :value=>"Title"}="Title"
+              %option{"data-function"=>"if (check_option('Description')!=false){$(a).html(\"#{escape_javascript(render("wishlist\/advanced_search\/description"))}\");} else {alert('Error: Value already used ');}", :value=>"Description"}="Description"
+              %option{"data-function"=>"if (check_option('year of creation')!=false){$(a).html(\"#{escape_javascript(render("wishlist\/advanced_search\/year_of_creation"))}\");} else {alert('Error: Value already used ');}", :value=>"year of creation"}="year of creation"
+              %option{"data-function"=>"if (check_option('category/medium')!=false){$(a).html(\"#{escape_javascript(render("wishlist\/advanced_search\/category_medium"))}\");} else {alert('Error: Value already used ');}", :value=>"category/medium"}="category/medium"
+              %option{"data-function"=>"if (check_option('offer type')!=false){$(a).html(\"#{escape_javascript(render("wishlist\/advanced_search\/offer_type"))}\");} else {alert('Error: Value already used ');}", :value=>"offer type"}="offer type"
+              %option{"data-function"=>"if (check_option('movement/period')!=false){$(a).html(\"#{escape_javascript(render("wishlist\/advanced_search\/movement_period"))}\");} else {alert('Error: Value already used ');}", :value=>"movement/period"}="movement/period"
+              %option{"data-function"=>"if (check_option('height')!=false){$(a).html(\"#{escape_javascript(render("wishlist\/advanced_search\/height"))}\");} else {alert('Error: Value already used ');}", :value=>"height"}="height"
+              %option{"data-function"=>"if (check_option('width')!=false){$(a).html(\"#{escape_javascript(render("wishlist\/advanced_search\/width"))}\");} else {alert('Error: Value already used ');}", :value=>"width"}="width"
+              %option{"data-function"=>"if (check_option('depth')!=false){$(a).html(\"#{escape_javascript(render("wishlist\/advanced_search\/depth"))}\");} else {alert('Error: Value already used ');}", :value=>"depth"}="depth"
+              %option{"data-function"=>"if (check_option('signature')!=false){$(a).html(\"#{escape_javascript(render("wishlist\/advanced_search\/signature"))}\");} else {alert('Error: Value already used ');}", :value=>"signature"}="signature"
+              %option{"data-function"=>"if (check_option('frame')!=false){$(a).html(\"#{escape_javascript(render("wishlist\/advanced_search\/frame"))}\");} else {alert('Error: Value already used ');}", :value=>"frame"}="frame"
+              %option{"data-function"=>"if (check_option('certificate')!=false){$(a).html(\"#{escape_javascript(render("wishlist\/advanced_search\/certificate"))}\");} else {alert('Error: Value already used ');}", :value=>"certificate"}="certificate"
+              %option{"data-function"=>"if (check_option('country')!=false){$(a).html(\"#{escape_javascript(render("wishlist\/advanced_search\/country"))}\");} else {alert('Error: Value already used ');}", :value=>"country"}="country"
+              %option{"data-function"=>"if (check_option('submit date')!=false){$(a).html(\"#{escape_javascript(render("wishlist\/advanced_search\/submit_date"))}\");} else {alert('Error: Value already used ');}", :value=>"submit date"}="submit date"
+              %option{"data-function"=>"if (check_option('offer end date')!=false){$(a).html(\"#{escape_javascript(render("wishlist\/advanced_search\/offer_end_date"))}\");} else {alert('Error: Value already used ');}", :value=>"offer end date"}="offer end date"
+            %span#span_1{:style=>"float: left;height: 30px;margin-right: 5px;width: 320px;"}
+            %img.remove_search_field{:src=>"/images/minus.png", :style=>"margin-right:0;float:right !important;cursor:pointer"}
+            %img.add_search_field{:src=>"/images/plus.png", :style=>"margin-right:5px;float:right !important;cursor:pointer"}
+      %div.pull-left{:style=>"width:100%;"}
+        = f.check_box :email_notification, :style=>"margin-right:5px;float:left;"
+        -#%input.checkbox#email_notification.pull-left{:name=>"wishlist[email_notification]", :type=>"checkbox", :style=>"margin-right:5px;"}        
+        %span.label_text.pull-left="notify me by email when new matches occur"
+        %input.btn.pointer#add_wishlist.pull-right{:style => "margin-right:10px;", :type => "submit", :value => "ADD"}
+        %input.btn.pointer.pull-right{ :style => "margin-right:10px;", :value => "CANCEL", :id=>"cancel_wishlist_#{@wishlist.id}", :type=>"button"}
+  .public_offers_page_step_three{:style=>"float:left;position:relative;margin-top:20px;"}
+    %div.nav_sort_bar{:style=>"float:left;width:810px;display:none;"}
+      %span{:style=>"float:left;"}
+        %span{:style=>"margin-right:10px;"}="Sort list by"
+        %select{:style=>"margin:0;width:120px;", :id=>"offers_public_page_sort_select"}
+          %option{:value=>"artist name"}="artist name"
+          %option{:value=>"date"}="date"
+          %option{:value=>"popularity"}="popularity"
+          %option{:value=>"offer end date"}="offer end date"
+      %span{:style=>"float:left;"}
+        %span{:style=>"margin-left:10px;margin-right:10px;line-height:30px;float:left;"}="Pictures per page"
+        %select#offers_public_page_per_page{:style=>"width:50px;margin:0;"}
+          %option{:value=>"6"}="6"
+          %option{:value=>"12"}="12"
+          %option{:value=>"18"}="18"
+          %option{:value=>"24"}="24"
+      %span{:style=>"float:left;"}
+        %span{:style=>"margin-left:10px;margin-right:10px;line-height:30px;float:left;"}="Layout"
+        %select#basic_search_layout_select{:style=>"width:180px;"}
+          %option="Small previews"
+          %option="Medium previews"
+          %option="Large previews"
+    %div{:style=>"float:left;width:810px;"}
+      #search_data{:style=>"float:left;width:inherit;position:relative;"}
+        =# render :partial => "wishlist/search_data"
+    %img#buy_art_search_loader_gif{:src=>"/images/ajax-loader-big.gif", :style=>"position:absolute;top:45%;left:45%;display:none;"}
+    #buy_art_search_loader_div{:style=>"background-color: white;display: block;height: 100%;left: 0;opacity: 0.4;position: absolute;top: 0;width: 100%;z-index: 2;display:none;"}

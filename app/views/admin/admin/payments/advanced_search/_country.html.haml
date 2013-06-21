@@ -1,0 +1,7 @@
+%select#select_input_country_1_{:style=>"width:72px;margin-right:5px;float:left;margin-bottom:0;",:name=>"select[country]search_type"}
+  %option="is"
+  %option="is not"
+- country_select_data
+%select#select_input_country_{:style=>"float:left;width:245px;" ,:name=>"select[country]name"}
+  - @countries.each do |country|
+    %option=country.country_name

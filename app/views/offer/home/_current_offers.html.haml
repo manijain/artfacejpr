@@ -1,0 +1,22 @@
+.span10.span10current_offers
+  .span10{:style=>"margin-left:0"}
+    %h4{:style=>"float:left;"}=t '.heading'
+    %span{:style=>"float:right;line-height:40px;"}="Your offers: #{@sell_current_offers.count} * New Requests: 4"
+  .span10current_offers_first_div
+    %ul{:style=>"margin-left:30px;"}
+      - @sell_current_offers.each_with_index do |offer, index|
+        %li
+          %a{:href=>"/offer/show/#{offer.id}"}
+            - if offer.messages.count != 0
+              %span=offer.messages.count 
+            =image_tag "https://artfacedev-pro.s3.amazonaws.com/public/images/uploaded/artwork/smalls/artwork_thumbnails/#{offer.artwork.id}/#{offer.artwork.artwork_thumbnail_file_name}", :alt=>"image not found", :alt=>"image not found"
+            %i.icon-certificate
+          %span{:style=>"text-align:center"}
+            %span.span10current_offers_span_artist=offer.artwork.artist.artist_name || ""
+            - if (humanize_time(offer.offer_end_date.to_i - Time.now.to_i)).blank?
+              %span.span10current_offers_span_time="Remaining Time: unknown"
+            - else
+              %span.span10current_offers_span_time="Remaining Time: #{humanize_time(offer.offer_end_date.to_i - Time.now.to_i)}"
+  .span5{:style=>"margin-top:10px"}
+    %a.btn{:href=>"/dashboard/sell-art-area"}="SELL ART DETAILS"
+    %a.btn{:href=>"/offer/new"}="ADD NEW OFFER"

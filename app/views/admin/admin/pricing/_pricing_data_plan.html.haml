@@ -1,0 +1,71 @@
+= content_tag :ul, :class=>"pull-left unstyled main_ul", :style=>"width:100%;" do 
+  = content_tag :li, :class=>"pull-left main_li", :style=>"background-color: #F1F1F1;margin-bottom: 10px;margin-left: 6px;padding: 8px;width:97%;" do
+    = content_tag :ul, :class=>"unstyled pull-left", :style=>"width:20%;" do
+      = content_tag :li, :class=>"pull-left", :style=>"width:100%;" do
+        = content_tag :span, :class=>"pull-left", :style=>"width:100%;font-weight:bold;visibility:hidden" do
+          %p= "plan"
+        = content_tag :span, :class=>"pull-left", :style=>"width:100%;font-weight:bold" do
+          %p= "annual fee (€)"
+        = content_tag :span, :class=>"pull-left", :style=>"width:100%;font-weight:bold" do
+          %p= "paintings/year"
+        = content_tag :span, :class=>"pull-left", :style=>"width:100%;font-weight:bold" do
+          %p= "offer views/year"
+        = content_tag :span, :class=>"pull-left", :style=>"width:100%;font-weight:bold" do
+          %p= "wishlist"
+
+
+
+    -#= form_for :subscription_plans, :remote=>true do |f|
+    - @pricing.each do |pricingRow|
+    
+      = content_tag :ul, :class=>"unstyled pull-left", :style=>"width:15%;" do
+        = content_tag :li, :id=>"row_#{pricingRow.id}", :class=>"pull-left", :style=>"width:100%;" do
+          
+          = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+            %p= pricingRow.subscription_name
+          
+          = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+            %p{:style=>"display:block",:id=>"fee_row_#{pricingRow.id}"}= pricingRow.subscription_fee
+            %p= text_field_tag :fee_row_text, "#{pricingRow.subscription_fee}", :size => 5, :style=>"width:60px;margin-bottom:0px;height:13px;display:none"
+            -#= f.text_field :fee_row_text, :value=>"#{pricingRow.subscription_fee}", :style=>"width:60px;margin-bottom:0px;height:13px;display:none"
+          
+
+          = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+            %p{:style=>"display:block;", :id=>"paintings_allowed_row_#{pricingRow.id}"}= pricingRow.subscription_paintings_allowed
+            %p= text_field_tag :paintings_row_text, "#{pricingRow.subscription_paintings_allowed}", :size => 5, :style=>"width:60px;margin-bottom:0px;height:13px;display:none"
+          
+          = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+            %p{:style=>"display:block", :id=>"offers_allowed_row_#{pricingRow.id}"}= pricingRow.subscription_offers_allowed
+            %p= text_field_tag :offers_row_text, "#{pricingRow.subscription_offers_allowed}", :size => 5, :style=>"width:60px;margin-bottom:0px;height:13px;display:none"
+          
+          = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+            -#= pricingRow.wishlist_allowed
+            - if(pricingRow.wishlist_allowed ==true)
+              %p.icon-ok{:id=>"wishlists_allowed_row_#{pricingRow.id}"}
+              %p{:style=>"width:60px;margin-bottom:0px;height:13px;display:none"}= check_box_tag :wishlists_row_checkbox, 'yes', true
+            - else
+              %p.icon-remove{:id=>"wishlists_allowed_row_#{pricingRow.id}"}
+              %p{:style=>"width:60px;margin-bottom:0px;height:13px;display:none"}= check_box_tag :wishlists_row_checkbox
+
+
+            
+
+      -#= f.submit "Update", :style=>"float:right", :class=>"btn", :id=>"update_button"
+%p{:class=>"pull-left", :style=>"width:660px;margin-left:13px"}= "If you update the pricing information all the affected existing clients will be informed about the changes by email. In case of higher prices the user has to approve the new conditions to automatically prolong his auto-renewal subscription. The new prices and conditions only apply to new subscriptions or approved prolongiations."
+%input.btn#update_button{:class=>"pull-right", :type=>"button", :value=>"Update Pricing Now"}
+#ajax-loader-big_for_services_data{:style=>"left: 400px;position: absolute;top: 500px;z-index: 100;display:none;"}
+  %img{:src=>"/images/ajax-loader.gif"}
+#overlay_div_data{:style=>"background-color: white;display: block;height: 500%;left: 0;opacity: 0.4;position: absolute;top: 110px;width: 100%;z-index: 2;display:none;"}
+
+
+
+
+          
+
+
+
+	
+	
+
+
+	

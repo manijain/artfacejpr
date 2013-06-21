@@ -1,0 +1,13 @@
+= javascript_include_tag "js/jquery-ui-1.9.2.datepicker.js"
+= render :partial => "dashboard/header"
+.span10.span10
+  .span10{:style=>"margin-left:0"}
+    %h2.pull-left="BUY: YOUR WISHLISTS"
+  %ul.pull-left.unstyled
+    %li.pull-left{:style=>"width:30%"}="If you cannot find a desired painting on Artface.com just create a wishlist be informed as one of the first when matching offer becomes available. You can "
+    %li.pull-left{:style=>"width:30%;margin-left:20px"}="create a list based on a specific artist, a period, a specific size or just everything together. Get a notification by email if you like."
+    %button.btn#add_new_wishlist{:style=>"float:right;"}="ADD NEW WISH"
+  .pull-left
+    %ul.unstyled.pull-left#wishlists_container{:style=>"width:100%"}
+      = render :partial => "wishlist/saved_wishlists"
+= render :partial => "dashboard/footer"

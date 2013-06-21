@@ -1,0 +1,32 @@
+.footer
+	/ .site_wide_error{:style=>"display:none;"}
+	/ 	%pre.prettyprint.linenums{:style=>"width: 820px;height: 20px;white-space:nowrap"}
+	/ 		%span.tag.site_wide_error_text
+	/ 		%span.tag#footer_flash_message=flash[:notice]
+	.footer_content
+		%div{:style=>"width:31%;float:left"}
+			%p{:style=>"text-align:center;"}
+				%strong="ARTFACE.COM"
+				%br
+			%p{:style=>"float:left;margin-right:10px"}
+				="Artface.com is a completely new and innovative way to permit art collectors, art historians and art lovers to meet each others in the most discrete way with out dicriminating the work of art with prices or names of owners, they can get in contact directly and make business with no fees or commissions."
+		%div{:style=>"width:31%;float:left"}
+			%p{:style=>"text-align:center;margin-right:10px"}
+				%strong="STAY CONNECTED"
+				%br
+			%p="Artface is a hub for art lovers. Lorem ipsum dolor sit amet, consectetuer adipiscing elit."
+		%div{:style=>"width:31%;float:left"}
+			%p{:style=>"text-align:center;"}
+				%strong="CONTACT"
+				%br
+			%p
+				="Artface.com Limited <br> Apollo Hous <br /> 359 Kennington Lane <br /> London <br /> SE11 5QY <br /> T: +44(0)20 7091 7950 <br /> E: info@artface.com".html_safe
+		.footer_links
+			= " 2012 Artface.com |"
+			= link_to "Disclaimer", "/#disclaimer", :id=>"show_disclaimer"
+			= " | "
+			= link_to "Privacy Statement", "/#privacy_statement", :id=>"show_privacy_statement"
+			= " | "
+			= link_to "Contact", contact_path, :id=> "contact_page"
+			= " | "
+			= link_to "Terms & Conditions", terms_conditions_path, :id=> "terms_conditions_page"

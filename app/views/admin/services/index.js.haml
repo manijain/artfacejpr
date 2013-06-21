@@ -1,0 +1,13 @@
+-if (params[:partner_type] == "4")
+ console.log("1")
+ $("#search_data_4").html('#{escape_javascript(render :partial => "admin/services/index/layout_part_two/data")}')
+-elsif (params[:partner_type] == "3")
+ console.log("2")
+ $("#search_data_3").html('#{escape_javascript(render :partial => "admin/services/index/layout_part_three/data")}')
+-elsif (params[:partner_type] == "2")
+ console.log("3")
+ $("#search_data_2").html('#{escape_javascript(render :partial => "admin/services/index/layout_part_four/data")}')
+-elsif (params[:partner_type] == "1")
+ console.log("4")
+ $("#search_data_1").html('#{escape_javascript(render :partial => "admin/services/index/layout_part_five/data")}')
+ $('.pagination a').attr('data-remote', 'true');

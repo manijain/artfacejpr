@@ -1,0 +1,66 @@
+- if @offers.count == 0
+  %p="No Results Found"
+- else 
+  = will_paginate @offers, :link_separator=>"#{@offers.current_page}/#{@offers.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false
+  .search_data_outer_div
+    %ul
+      - @offers.each do |offer|
+        %li.large_preview
+          .image_area
+            %a{:href=>"/memberfees"}
+              - if offer.messages.count != 0
+                %span{:style=>"background-color: #727272;border: 2px solid white;color: white;left: 2px;position: absolute;text-align: center;top: 20%;width: 16px;z-index: 30;"}=offer.messages.count
+              =image_tag "https://artfacedev-pro.s3.amazonaws.com/public/images/uploaded/artwork/originals/artwork_hires/#{offer.artwork.id}/#{offer.artwork.artwork_hires_file_name}", :alt=>"image not found" unless offer.artwork.nil?
+          %span{:style=>"text-align:center"}
+            ="Not Found" if offer.artwork.nil?
+            %span.artist_name=offer.artwork.artist.artist_name unless offer.nil? && offer.artwork.nil? && offer.artwork.artist.nil?
+            %span.remaining_time
+              ="Remaining Time - "
+              = humanize_time (offer.offer_end_date.to_i - Time.now.to_i) unless offer.offer_end_date.nil?
+              = "NA" if offer.offer_end_date.nil?
+    %div{:style=>"clear: both;color: black;float: right;width: 500px;"}  
+      = will_paginate @offers, :link_separator=>"#{@offers.current_page}/#{@offers.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"float: right;position:static;margin:0;"
+      %input{:id=>"offers_public_page_input_button", :type=>"button", :value=>"go", :style=>"float:right;height:30px;width:40px;margin-right:20px;"}
+      %input{:id=>"offers_public_page_input", :type=>"text", :style=>"width:30px;float:right;margin-right:20px;margin-bottom:0;"}
+      %span{:style=>"float:right;margin-right:20px;line-height:30px;"}="Enter the page number"
+      :javascript  
+        $(function(){
+        if ($("#basic_search_layout_select option:selected").index() == 0)
+        {
+        $("div.search_data_outer_div ul li").addClass("small_preview")
+        $("div.search_data_outer_div ul li").removeClass("medium_preview")
+        $("div.search_data_outer_div ul li").removeClass("large_preview")
+        }
+        if ($("#basic_search_layout_select option:selected").index() == 1)
+        {
+        $("div.search_data_outer_div ul li").removeClass("small_preview") 
+        $("div.search_data_outer_div ul li").addClass("medium_preview")
+        $("div.search_data_outer_div ul li").removeClass("large_preview")
+        }
+        if ($("#basic_search_layout_select option:selected").index() == 2)
+        {
+        $("div.search_data_outer_div ul li").removeClass("small_preview")
+        $("div.search_data_outer_div ul li").removeClass("medium_preview")
+        $("div.search_data_outer_div ul li").addClass("large_preview") 
+        }
+        $("#basic_search_layout_select").change(function() {
+        if ($("#basic_search_layout_select option:selected").index() == 0)
+        {
+        $("div.search_data_outer_div ul li").addClass("small_preview")
+        $("div.search_data_outer_div ul li").removeClass("medium_preview")
+        $("div.search_data_outer_div ul li").removeClass("large_preview")
+        }
+        if ($("#basic_search_layout_select option:selected").index() == 1)
+        {
+        $("div.search_data_outer_div ul li").removeClass("small_preview")
+        $("div.search_data_outer_div ul li").addClass("medium_preview")
+        $("div.search_data_outer_div ul li").removeClass("large_preview")
+        }
+        if ($("#basic_search_layout_select option:selected").index() == 2)
+        {
+        $("div.search_data_outer_div ul li").removeClass("small_preview")
+        $("div.search_data_outer_div ul li").removeClass("medium_preview")
+        $("div.search_data_outer_div ul li").addClass("large_preview")
+        }
+        })
+        })

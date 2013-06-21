@@ -1,0 +1,12 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  slide_order: 1
+  image_text: "hello 1"
+  heading_text: ""
+
+two:
+  name: MyString
+  slide_order: 2
+  image_text: "hello 2"

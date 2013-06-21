@@ -1,0 +1,58 @@
+.head1_statistics_report select{
+	background: none repeat scroll 0 0 #AEAEAE;
+	border-radius: 5px 5px 5px 5px;
+}
+
+.head2_statictics_report span{
+	margin-left:60px;
+}
+
+.head2_statictics_report u{
+	margin-left:32px;
+	text-decoration: none;
+}
+
+.head2_statictics_report ul li {
+	list-style: none;
+	width: 700px;
+}
+.head2_statictics_report ul li.even{
+	background-color: #AEAEAE;
+}
+.head2_statictics_report ul li.odd{
+	background-color: #E2E2E2
+}
+
+.head4_subscribers_location_report u{
+	margin-left:32px;
+	text-decoration: none;
+}
+
+.head4_subscribers_location_report ul li {
+	list-style: none;
+	width: 700px;
+	clear: both;
+}
+.head4_subscribers_location_report ul li.even {
+	background-color: #AEAEAE;
+}
+.head4_subscribers_location_report ul li.odd {
+	background-color: #E2E2E2;
+}
+
+.head4_subscribers_location_report span{
+	margin-left:60px;
+}
+.head2_chart_report{
+	clear:both;
+}
+
+.head3_summary_report p{
+	float:left;
+	font-weight: bold;
+	width: 180px;
+	margin: 0 0 0 0!important;
+}
+.changeColor{
+	background-color: #F6F6F6!important;
+}

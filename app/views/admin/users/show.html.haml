@@ -1,0 +1,327 @@
+:javascript  
+  $(function() {
+  $('#updt_user_setting').live('click', function(){
+    var values = {}  
+    values["user_id"]= $("#user_id").val() 
+    if($("#identity").is(":checked")) {
+        values["user_identity"] = true
+      } else {
+        values["user_identity"] = false
+      }
+    if($("#wish_not").is(":checked")) {
+        values["wishist_notification"] = true
+      } else {
+        values["wishist_notification"] = false
+      }
+    if($("#disc_not").is(":checked")) {
+        values["user_offer_forum_discussion"] = true
+      } else {
+        values["user_offer_forum_discussion"] = false
+     }
+    if($("#buy_not").is(":checked")) {
+        values["user_buyer_message_notification"] = true
+      } else {
+        values["user_buyer_message_notification"] = false
+      }
+    if($("#sell_not").is(":checked")) {
+        values["user_seller_message_notification"]  = true
+      } else {
+        values["user_seller_message_notification"]  = false
+      }
+    if($("#forum_not").is(":checked")) {
+        values["user_forum_notifications"] = true
+      } else {
+        values["user_forum_notifications"] = false
+      }    
+    
+    values["user_notification_by"] = $("#notify").val()
+    values["user_notification_email"] = $("#notif_email").val()
+    $.ajax({
+      url: '/admin/users/update_settings',
+      data: values,
+      success: function(text) {
+       if(text == "true") {
+        alert("Settings Updated")
+        }
+       }
+    });
+  });
+  });
+
+  $(function() {
+  $('#subscr').live('click', function(){
+    $.ajax({
+      url: this.href,
+      dataType: 'script', 
+      data: {choice: "1"}
+    });
+    return false;
+  });
+  });
+
+  $(function() {
+  $('#savesub').live('click', function(){
+    $.ajax({
+      url: this.href,
+      dataType: 'script', 
+      data: {choice: "2", 
+             subplan: $('#subscription_subscription_plan_id').val()}
+    });
+    return false;
+  });
+  });
+
+  function t(){
+   alert("subscription ended");
+  };
+
+
+  
+
+#div{:align=>"center"}
+  =render :partial=>"admin/layouts/header"
+#wrapper.wrapper_admin
+  #head_user.head_user_admin
+    %h3
+      ="Details User#" "#{@user.id}" 
+    %h6
+      ="(" "#{@user.user_first_name}" " #{@user.user_last_name}" ")"
+    =link_to "BACK TO OVERVIEW", admin_users_path, :class => "input1_user_admin"
+    .input1_user_first_div
+      %h5
+        Member since:
+        -if @user.confirmed_at.blank?
+          %label{:style => "display:inline-block"}="Not Confirmed"
+        -else
+          %label{:style => "display:inline-block"}=@user.confirmed_at.strftime("%Y-%m-%d")
+        %span
+          ="Active offers since " "#{@user.created_at.strftime("%Y")} :"
+          %label{:style => "display:inline-block"} 
+            =@user.offers.where(:offer_status => true).where("extract (year from offer_start_date) = '#{@user.created_at.strftime("%Y")}'").count
+        %span
+          Forum activity:
+          - if @user.forum_messages.count < 5
+            %label{:style => "display:inline-block"} low
+          - elsif @user.forum_messages.count < 10
+            %label{:style => "display:inline-block"} medium
+          - else
+            %label{:style => "display:inline-block"} high
+      %h5
+        Currently Active Offers :
+        %label{:style => "display:inline-block"}
+          =@user.offers.where(:offer_status => true).count        
+        %span
+          Messages :
+          %label{:style => "display:inline-block"} 
+            =@user.messages.count
+        %span
+          Main Activity:  
+          %label{:style => "display:inline-block"}
+            -@sell = Offer.where(:seller_id => @user.id).count
+            -@buy = Offer.where(:buyer_id => @user.id).count
+            -if @sell == 0 &&  @buy == 0
+              ="No Any Activity"
+            -elsif @sell == @buy
+              ="Seller & Buyer"  
+            -elsif @sell > @buy
+              ="Seller"
+            -elsif @sell < @buy
+              ="Buyer"      
+    = link_to "LOG IN AS THIS USER", {:controller => "admin/users", :action => "login_as_user", :id => @user.id }, :class=>"input2_user_admin"    
+  #head2_user.head2_user_admin    
+    =render :partial=>"subscription"
+  #p_user.head2_user_admin  
+    .line_user_admin
+    %h2 GENDER
+    %h3
+      -if @user.user_salutation=="Mr."
+        ="Male"
+      -else
+        ="Female"
+    %h2 FIRST NAME
+    %h3
+      =@user.user_first_name
+    %h2 LAST NAME
+    %h3
+      =@user.user_last_name
+    %h2 COMPANY
+    %h3
+      -if @user.user_company != '' 
+        =@user.user_company || "-"
+      -else
+        = "-"
+    %h2 STREET
+    %h3
+      -if @user.user_street != '' 
+        =@user.user_street || "-"
+      -else
+        = "-"
+    %h2 ZIP CODE
+    %h3
+      -if @user.user_zip_code != '' 
+        =@user.user_zip_code || "-"
+      -else
+        = "-"
+    %h2 TOWN
+    %h3
+      -if @user.user_city != '' 
+        =@user.user_city || "-"
+      -else
+        = "-"
+    %h2 COUNTRY
+    %h3 
+      =@user.user_country
+    =link_to "CHANGE" , "/admin/users/#{@user.id}/edit" , :class=>"input4_user_admin"
+    .line_user_admin
+    %h2 PHONE NUMBER
+    %h3
+      -if @user.user_phone_number != '' 
+        =@user.user_phone_number || "-"
+      -else
+        = "-"
+    %h2 FAX NUMBER
+    %h3 
+      -if @user.user_fax_number != '' 
+        =@user.user_fax_number || "-"
+      -else
+        = "-"
+    %br
+    %h2 TEX ID
+    %h3
+      -if @user.user_tax_id != '' 
+        =@user.user_tax_id || "-"
+      -else
+        = "-"
+    =link_to "CHANGE", "/admin/users/#{@user.id}/edit" , :class=>"input4_user_admin"
+    .line_user_admin
+    %h2 EMAIL & LOGIN
+    %h3
+      =@user.email
+    %h2 PASSWORD
+    %h3 
+      = "********"
+    =link_to "CHANGE" , "/admin/users/#{@user.id}/edit" , :class=>"input4_user_admin"
+    .line_user_admin
+    %h2 PAYMENT METHOD
+    %h3 
+      -if @user.subscription.payment_type != '' 
+        =@user.subscription.payment_type || "-"
+      -else
+        = "-"
+    %h2 CARD OWNER
+    %h3 
+      -if @user.subscription.card_owner != '' 
+        =@user.subscription.card_owner || "-"
+      -else
+        = "-"
+    %h2 CARD NUMBER
+    %h3
+      -if @user.subscription.credit_card != '' 
+        =@user.subscription.credit_card || "-"
+      -else
+        = "-"
+    %h2 EXPIRES
+    %h3 
+      -if @user.subscription.card_expires != '' 
+        =@user.subscription.card_expires || "-"
+      -else
+        = "-"
+    %h2 VERIFICATION CODE
+    %h3
+      = "######"
+    =link_to "CHANGE", "/admin/users/#{@user.id}/edit" , :class=>"input4_user_admin"
+    .line_user_admin
+    %h2 ADMINISTRATOR RIGHTS
+    %h3 
+      - if @user.user_setting.admin_rights == true
+        ="YES"
+      -else  
+        = "NO"
+    %h2 FORUM MODERNATOR RIGHTS
+    %h3 
+      - if @user.user_setting.forum_rights == true
+        ="YES"
+      -else  
+        = "NO"
+    %h2 SERVICE DIRECTORY RIGHTS
+    %h3{:style=>"margin:0px;"} 
+      - if @user.user_setting.service_dir_rights == true
+        ="YES"
+      -else  
+        = "NO"
+    =link_to "CHANGE", "/admin/users/#{@user.id}/edit" , :class=>"input4_user_admin"
+  
+  #head3_user.head3_user_admin
+    %h1{:style=>"margin:0px;"} PRIVACY SETTINGS        
+    .line_user_admin
+    %h2 SHOW MY IDENITY BYDEFAULT
+    %h3
+      = check_box_tag "identity", @user.user_setting.show_identity == true, @user.user_setting.show_identity == true
+    %h2 NOTIFICATION BY
+    %h3
+      =select_tag :notify, options_for_select(['email', 'sms', 'none'], :selected=>@user.user_setting.notification_by),{ :style=>"float:right; margin-top: -11px; margin-right: -52px;" }      
+    %h2 NOTIFICATION EMAIL ADDRESS
+    %h3
+      %input{:name => "email", :type => "email", :style=>"margin-left: 430px; margin-top: -10px", :value=>"#{@user.user_setting.notification_email}", :id=>"notif_email"}
+      %input{:name => "email", :type => "hidden", :style=>"margin-left: 430px; margin-top: -10px", :value=>"#{@user.id}", :id=>"user_id"}
+    %h2 WHISHLIST NOTIFICATION
+    %h3
+      = check_box_tag "wish_not", @user.user_setting.wishlist_notification == true, @user.user_setting.wishlist_notification == true
+    %h2 MESSAGE FROM SELLER NOTIFICATION
+    %h3
+      = check_box_tag "sell_not", @user.user_setting.seller_message_notification == true, @user.user_setting.seller_message_notification == true
+    %h2 MESSAGE FROM BUYER NOTIFICATION
+    %h3
+      = check_box_tag "buy_not", @user.user_setting.buyer_message_notification == true, @user.user_setting.buyer_message_notification == true
+    %h2 FORUM NOTIFICATION FOR REPLIES
+    %h3
+      = check_box_tag "forum_not", @user.user_setting.forum_notification == true, @user.user_setting.forum_notification == true
+    %h2 NOTIFY ME WHEN ONE OF MY OFFERS
+    %h3
+      = check_box_tag "disc_not", @user.user_setting.user_offer_forum_discussion == true, @user.user_setting.user_offer_forum_discussion == true
+    %h2 IS DISCUSSED IN THE FORUM    
+    
+    %input.input4_user_admin{:type => "submit", :value => "UPDATE", :id=>"updt_user_setting"}
+
+
+  #head4_user.head4_user_admin
+    %h1{:style=>"margin:0px;"} INVOICES AND COMMUNICATION
+    .line_user_admin
+    - @user.documents.each do |document|    
+      %h2=document.file_name
+      %h3
+        ="#{document.created_at.to_date} "      
+        %a{:href=>"#{document.file_path}", :target=>"_blank"}="download"    
+    -if @user.documents.count == 0
+      = button_tag "DOWNLOAD ALL" , :class=>"input4_user_admin"   
+    -else
+      = link_to "DOWNLOAD ALL", {:controller => "admin/users", :action => "zip_download", :id => @user.id }, :class=>"input4_user_admin", :target=>"_blank"    
+  #head5_user.head5_user_admin
+    %h1 OFFERS
+    %h2 
+      ="(" "#{@user.offers.count}" " offers)"
+    =link_to "SHOW USERS OFFERS", "/admin/users/user_offers/#{@user.id}"
+  #head6_user_admin.head6_user_admin
+    %h1 MESSAGES
+    %h2
+      ="(" "#{@user.messages.count}" " messages)"
+    =link_to "SHOW USERS MESSAGES", "/admin/users/user_messages/#{@user.id}"
+  #head7_user_admin.head7_user_admin
+    %h1 FAVOURITES
+    %h2
+      ="(" "#{@user.favourites.count}" " favourites)"
+    = link_to "SHOW USERS FAVOURITES", "/admin/users/user_favourites/#{@user.id}"
+  #head8_user_admin.head8_user_admin
+    %h1 WISHLIST
+    %h2
+      ="(" "#{Wishlist.where("user_id = '#{@user.id}'").count}" " wishlists)"
+    =link_to "SHOW USERS WISHLIST", "/admin/users/user_wishlists/#{@user.id}"
+  #head9_user_admin.head9_user_admin
+    %h1 FORUM
+    %h2 
+      ="(" "#{@user.forum_messages.count}" " posts)"
+    =link_to "SHOW USERS FORUM THREADS" , "/admin/users/#{@user.id}/forum_list"
+  %br
+  =link_to "BACK TO OVERVIEW", admin_users_path, :class => "main_user_input_admin"
+#div{:align=>"center"}
+  =render :partial=>"admin/layouts/footer"

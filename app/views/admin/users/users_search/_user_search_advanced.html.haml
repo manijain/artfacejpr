@@ -1,0 +1,29 @@
+= form_for :user, :url=>"/admin/users/search", :method=>"POST", :remote=>"true", :html=>{:class=>"pull-left forum_advanced_search", :id=>"user_advanced_search", :style=>"margin-top:30px;" } do |f|
+	= f.hidden_field "sort_by", :name=>"sort_by"
+	= f.hidden_field "per_page", :name=>"per_page"
+	= f.hidden_field "search_basic", :name=>"search_advanced", :value=>"true"
+	= content_tag :ul, :class=>"search_filters unstyled pull-left" do
+		= content_tag :li, :class=>"filter_li pull-left" do
+			%select#advanced_select_1.select_first.pull-left
+				%option{"data-function"=>"", :value=>"select-option"}="choose one option"
+				%option{"data-function"=>"if (check_option('username')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/users_search\/user_name"))}\");} else {alert('Error: Value already used ');}", :value=>"username"}="user-name"
+				%option{"data-function"=>"if (check_option('userlocation')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/users_search\/user_location"))}\");} else {alert('Error: Value already used ');}", :value=>"userlocation"}="location"
+				%option{"data-function"=>"if (check_option('useraddress')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/users_search\/user_address"))}\");} else {alert('Error: Value already used ');}", :value=>"useraddress"}="address"
+				%option{"data-function"=>"if (check_option('usergender')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/users_search\/user_gender"))}\");} else {alert('Error: Value already used ');}", :value=>"usergender"}="gender"
+				%option{"data-function"=>"if (check_option('userpaymentmethod')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/users_search\/user_paymethod"))}\");} else {alert('Error: Value already used ');}", :value=>"userpaymethod"}="payment-method"
+				%option{"data-function"=>"if (check_option('usersubscriptiontype')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/users_search\/user_subscription_type"))}\");} else {alert('Error: Value already used ');}", :value=>"usersubscriptiontype"}="subscription-type"
+				%option{"data-function"=>"if (check_option('usersubscriptionmethod')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/users_search\/user_subscription_method"))}\");} else {alert('Error: Value already used ');}", :value=>"usersubscriptionmethod"}="subcription-method"
+				%option{"data-function"=>"if (check_option('userpaymentbalance')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/users_search\/user_payment_balance"))}\");} else {alert('Error: Value already used ');}", :value=>"userpaymentbalance"}="payment-balance"
+				%option{"data-function"=>"if (check_option('usermembership')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/users_search\/user_membership"))}\");} else {alert('Error: Value already used ');}", :value=>"usermembership"}="membership"
+				%option{"data-function"=>"if (check_option('userbackendstatus')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/users_search\/user_backend_status"))}\");} else {alert('Error: Value already used ');}", :value=>"Backend-status"}="Backend-status"
+				%option{"data-function"=>"if (check_option('useroffers')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/users_search\/user_number_of_offers"))}\");} else {alert('Error: Value already used ');}", :value=>"Number of offers"}="offers"
+				%option{"data-function"=>"if (check_option('usermessages')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/users_search\/user_number_of_messages"))}\");} else {alert('Error: Value already used ');}", :value=>"Number of msgs"}="messages"
+				%option{"data-function"=>"if (check_option('userforummessages')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/users_search\/user_number_of_forummessages"))}\");} else {alert('Error: Value already used ');}", :value=>"number of forum-msg"}="forum-messages"
+				%option{"data-function"=>"if (check_option('usermainactivity')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/users_search\/user_main_activity"))}\");} else {alert('Error: Value already used ');}", :value=>"Main activity"}="main-activity"
+				%option{"data-function"=>"if (check_option('userinvited')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/users_search\/user_invited"))}\");} else {alert('Error: Value already used ');}", :value=>"Invited"}="Invited"
+				%option{"data-function"=>"if (check_option('userinvitedloggedin')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/users_search\/user_invited_logged_in"))}\");} else {alert('Error: Value already used ');}", :value=>"Invited logged-in"}="invited-logged-in"
+			= content_tag :span, :id=>"span_1", :class=>"append_span_field" do
+				=""
+			= image_tag "/images/minus.png", :class=>"pointer remove_search_field pull-right"
+			= image_tag "/images/plus.png", :class=>"pointer add_search_field pull-right", :style=>"margin-right:5px;"
+	= f.submit "search", :class=>"btn submit_button pull-left"

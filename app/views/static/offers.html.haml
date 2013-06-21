@@ -1,0 +1,40 @@
+= render :partial=> 'layouts/header'
+
+.public_offers_page{:style=>"margin-left:2%"}
+  = render :partial=> 'home_header_artwork'
+  .public_offers_page_step_two{:style=>"width:820px;float:left;height:300px;"}
+    %h3="LOOKING FOR FINE ART? HERE\'S A GOOD POINT TO START FROM."
+    %div{:style=>"float:left;width:32%;margin-right:10px"}
+      ="Artface will provide to all subscribers the easiest way to search there favourite artist, with a questions of seconds. They will ﬁnd the photo or there favour-"
+    %div{:style=>"float:left;width:32%;margin-right:10px"}
+      ="ite artist and get in touch directly with the owner. They can use also a wish list, so as soon there favourite artist get’s on our database artface will send"
+    %div{:style=>"float:left;width:32%;"}
+      ="them an alert email so they will be the ﬁrst to know that a new work of art is there."
+  .public_offers_page_step_three{:style=>"float:left;"}
+    %div{:style=>"float:left;width:810px;"}
+      %h4{:style=>"float:left;display:inline;margin:0;line-height:30px;"}="OFFERS"
+      %span{:style=>"float:left;width:80px;height:1px;"}
+      %span{:style=>"float:left;"}
+        %span{:style=>"margin-right:10px;"}="Sort list by"
+        %select{:style=>"margin:0;", :id=>"offers_public_page_sort_select"}
+          %option="artist name"
+          %option="popularity"
+          %option="date"
+          %option="time left"
+      %span{:style=>"float:left;"}
+        %span{:style=>"margin-left:10px;margin-right:10px;line-height:30px;float:left;"}="Pictures per page"
+        %select#offers_public_page_per_page{:style=>"width:50px;margin:0;"}
+          %option="6"
+          %option="12"
+          %option="18"
+          %option="24"
+      %span{:style=>"float:left;line-height:30px;margin-left:5px;"}
+        ="Page"
+    %div{:style=>"float:left;width:810px;position:relative;"}
+      #public_offers_data{:style=>"float:left;width:inherit;position:relative;"}
+        = render :partial => "static/public_offers_data"
+      #overlay_div_for_static_offers
+      #ajax_loader_big_for_static_offers
+        %img{:src=>"/images/ajax-loader-big.gif"}
+    
+= render :partial=> 'layouts/footer'

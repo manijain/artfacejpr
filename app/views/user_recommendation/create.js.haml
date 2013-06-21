@@ -1,0 +1,11 @@
+- if @errors.empty?
+  $("#dashboard_recommend_artface").html('#{escape_javascript(render("offer\/home\/recommend_artface"))} ');
+  $('#success_message').html("Recommendation sent successfully")
+  $(".recommend_artface_flash_message_success").css("display","block")
+  setTimeout('$(".recommend_artface_flash_message_success").css("display","none")', 3000)
+- else
+  - @errors.each do |error|
+    - if error == "Email address already registered with artface"
+      $("#user_recommendation_email_error").css("display","inline").attr("data-original-title","#{error}").tooltip()
+    - elsif error == "Email - User already recommended"
+      $("#user_recommendation_email_error").css("display","inline").attr("data-original-title","#{error}").tooltip()

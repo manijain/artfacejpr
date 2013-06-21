@@ -1,0 +1,30 @@
+= content_tag :div, :class=>"pull-left offer_show_messages", :style=>"margin-left:2%;width:820px;" do
+  - if @offer.messages.blank?
+    = content_tag :div, :class=>"width_100 pull-left" do
+      = content_tag :h4, :class=>"pull-left", :style=>"margin-right:15px" do
+        ="YOUR OFFER: MESSAGES"
+      = content_tag :p, :class=>"pull-left", :style=>"margin-top:10px;" do
+        ="There are no messages for this offer"
+  - else
+    = content_tag :div, :class=>"width_100 pull-left" do
+      = content_tag :h4, :class=>"pull-left", :style=>"margin-right:15px;" do
+        ="YOUR OFFER: MESSAGES"
+      = content_tag :p, :class=>"pull-left", :style=>"margin-top:10px;" do
+        ="There are 0 new messages for this offers. Click for details"
+    = content_tag :div, :class=>"nav-sort-bar pull-left", :style=>"width:85%;padding:5px;" do
+      = content_tag :span, :class=>"pull-left", :style=>"margin-right:10px;line-height:30px;" do
+        ="Sort list by"
+      %select#messages_sort_id_one.pull-left{:style=>"width:120px;"}
+        %option{:value=>"date"}="date"
+        %option{:value=>"highest offer"}="highest offer"
+        %option{:value=>"read"}="read"
+        %option{:value=>"unread"}="unread"
+        %option{:value=>"author"}="author"
+      = content_tag :div, :class=>"pull-right", :id=>"sort_id_four" do
+        = content_tag :div, :class=>"input-append" do
+          = text_field_tag :search,nil, :class=>"span2", :id=>"appendedInput", :placeholder=>"search in user messages", :style=>"width:200px;"
+          = content_tag :span, :class=>"add-on" do
+            = content_tag :i, :class=>"icon-plus-sign" do
+              =""
+    = content_tag :div, :id=>"offers_messages" do
+      = render :partial => "offer/show/messages_data"

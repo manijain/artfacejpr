@@ -1,0 +1,16 @@
+= render :partial=> 'layouts/header'
+	
+%div{:style=>"margin-left:2%;width:820px;float:left"}
+	%h3="Resend confirmation instructions"
+
+	= form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
+		#devise_error_messages= devise_error_messages!
+
+		%div
+			= f.label :email, :style=>"display:inline;margin-right:20px;float:left;line-height:30px"
+			= f.email_field :email, :style=>"width: 300px;float: left;margin-right: 20px;"
+			= f.submit "Resend confirmation instructions", :class=>"btn"
+
+		%br
+		%br
+= render :partial=> 'layouts/footer'

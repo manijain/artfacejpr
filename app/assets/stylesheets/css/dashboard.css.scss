@@ -1,0 +1,39 @@
+// Place all the styles related to the dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.span10dashboard {
+  width:85%
+}
+.dashboard_home {
+  background-color:#E0E0E0;
+  padding:10px;
+}
+.span3dashboard_home {
+  background-color:#727272;
+  padding:10px;
+  height:280px;
+}
+.span3dashboard_home div {
+  float:right;
+  text-align:left;
+  width:70%;
+  position:relative;
+  height:100%
+}
+.span3dashboard_home h5 {
+  color:white;
+  margin-top:0;
+}
+.span3dashboard_home a {
+  bottom:0;
+  position:absolute;
+  right:0;
+}
+.span3dashboard_home img {
+  float:left;
+  width:40px;
+  height:40px;
+  margin-right:6px;
+  font-size:9px;
+}

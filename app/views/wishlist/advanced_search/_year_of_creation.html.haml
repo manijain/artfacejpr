@@ -1,0 +1,9 @@
+%select#select_input_year_of_creation_1_.pull-left{:style=>"margin-bottom: 0;margin-right: 5px;width: 140px",:name=>"search_params[year_of_creation]search_type"}
+  %option{:value=>"is exactly"}="is exactly"
+  %option{:value=>"is before"}="is before"
+  %option{:value=>"is after"}="is after"
+%input#text_input_year_of_creation_.pull-left{:type=>"text", :style=>"float: left;margin-bottom: 0;width: 50px;margin-right:5px", :maxlength=>"10",:name=>"search_params[year_of_creation]value"}
+%select#select_input_year_of_creation_2_.pull-left{:style=>"margin-bottom: 0;margin-right: 5px;width: 60px",:name=>"search_params[year_of_creation]duration"}
+  %option{:value=>"AD"}="AD"
+  %option{:value=>"BC"}="BC"
+%img#error_text_input_year_of_creation_{"data-original-title"=>"Only Numbers allowed", :src=>"/images/exclamation_mark.png", :style=>"display:none;position:absolute;right:200px;"}

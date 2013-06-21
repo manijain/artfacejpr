@@ -1,0 +1,50 @@
+- if @offer_sell_art_area_messages.nil? || @offer_sell_art_area_messages.blank?
+  %p.pull-left="There are no new messages for your offers"
+- else
+  %ul.offers_messages_data.width_100.pull-left.unstyled{:style=>"margin-left: 0;padding-left: 10px;padding-right: 10px;"}
+    - @offer_sell_art_area_messages.each_with_index do |offer, index_1|
+      %li.offers.width_100.pull-left
+        %span.pull-left.width_100{:style=>"background-color: #E9E9E9;margin-bottom: 10px;padding: 7px;position: relative"}
+          %a{:href=>"#"}
+            %img{:src=>"https://artfacedev-pro.s3.amazonaws.com/public/images/uploaded/artwork/smalls/artwork_thumbnails/#{offer.artwork.id}/#{offer.artwork.artwork_thumbnail_file_name}", :alt=>"Image Not found", :style=>"float:left;width:60px;height:60px;margin-right:10px;"}
+          %i.icon-arrow-down{:style=>"position:absolute;right:10px;top:10px;cursor:pointer;", :id=>"offer_#{offer.id}"}
+          %ul.pull-left.unstyled
+            %li.pull-left{:style=>"clear:both;"}
+              %span.pull-left{:style=>"text-decoration:underline;font-weight:bolder;margin-right:5px;"}=offer.artwork.artist.artist_name                                          
+              %span.pull-left{:style=>"margin-right:5px;"}="|"
+              %span.pull-left{:style=>"margin-right:5px;"}="highest offer: $#{offer.messages.maximum(:offer_price)}"
+              %span.pull-left{:style=>"margin-right:5px;"}="|"
+              %span.pull-left{:style=>"margin-right:5px;"}="offer remaining: #{(offer.offer_end_date.to_date - Date.today).to_i } days"
+            %li.pull-left{:style=>"clear:both"}
+              %span.pull-left{:style=>"margin-top:0;"}="#{offer.messages.count} messages"
+        %ul.messages.pull-left.width_100.unstyled{:style=>"margin-left:0;margin-bottom:10px;display:none;", :id=>"offer_#{offer.id}_message"}
+          - @message_array[index_1].each_with_index do |message,index|
+            %li.pull-left.width_100{:style=>"border-bottom:1px solid black;margin-bottom:8px;background-color:#f1f1f1;margin-left:#{message[:count]*10}px;", :class=>"message_#{message[:message].id} child_of_#{message[:message].parent_message.id unless message[:message].parent_message.blank? }"}
+              %ul.pull-left.unstyled.width_100{:style=>"margin:0;background-color:#f1f1f1" , :id=> "message_data_part_#{message[:message].id}"}
+                %li.pull-left.width_100
+                  %span.pull-left{:style=>"font-weight:bold;"}=message[:message].created_at.to_date
+                  %span.pull-left{:style=>"margin-right:5px;margin-left:5px"}="|"
+                  %span.pull-left{:style=>"font-weight:bold;"}=message[:message].created_at.strftime("%I:%M")
+                  %span.pull-left{:style=>"margin-right:5px;margin-left:5px;"}="|"
+                  %span.pull-left{:style=>"font-weight:bold;margin-right:2px;"}
+                    ="#{message[:message].user.user_first_name} #{message[:message].user.user_last_name}: " unless message[:message].user.nil?
+                  %span.pull-left{:style=>"font-weight:bold;margin-right:2px;"}="Anonymous: " if message[:message].user.nil?                
+                  %span.pull-left{:style=>"font-weight:bold;"}="#{message[:message].message_title}"
+                  - @flag = false
+                  -if message[:message].delete_admin==true
+                    %span.pull-left{:style=>"padding-left: 225px;font-weight:bold; color:red;"}="(deleted_by_admin)"
+                    - @flag = true
+                  -elsif message[:message].edit_admin==true
+                    %span.pull-left{:style=>"padding-left: 225px;font-weight:bold; color:blue;"}="(edited_by_admin)"
+                    - @flag = false   
+                  %span.message_navigation.pull-right{:style=>"margin-right:10px;"}
+                    - unless @flag == true
+                      %i.icon-remove-sign.pointer{:id=>"message_delete_#{message[:message].id}"}
+                      %i.icon-pencil.pointer{:id=>"message_edit_#{message[:message].id}"}
+                      %i.icon-arrow-left.pointer{:id=>"message_reply_#{message[:message].id}"}
+                    - if message[:message].sub_messages.blank?
+                    
+                    - else
+                      %i.icon-arrow-up.message_parent.pointer{:id=>"message_#{message[:message].id}"}
+
+                %li.pull-left.width_100=message[:message].message_text

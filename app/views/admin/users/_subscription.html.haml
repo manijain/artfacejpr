@@ -1,0 +1,40 @@
+
+= javascript_include_tag "admin/admin_user_show.js"
+
+%h1{:style=>"margin:0px;"} SUBSCRIPTION DATA
+.line_user_admin
+%input.input3_user_admin{:type => "submit", :value => "EDIT SUBSCRIPTION", :id=>"subscr"}
+%h2 SUBSCRIPTION PACKAGE
+%h3
+  = SubscriptionPlan.find(@user.subscription.subscription_plan_id).subscription_name
+%h2 ANNUAL PRICE
+%h3 
+  = SubscriptionPlan.find(@user.subscription.subscription_plan_id).subscription_fee
+%h2 AVAILABLE OFFERS/YEAR
+%h3 
+  = SubscriptionPlan.find(@user.subscription.subscription_plan_id).subscription_paintings_allowed
+%h2 VIEWABLE OFFERS/YEAR
+%h3
+  ="unlimited"# SubscriptionPlan.find(@user.subscription.subscription_plan_id).subscription_name
+%h2 ENDS
+%h3{:style=>"margin:0px;"}
+  - if @user.subscription.auto_renewal == true
+    ="auto-renewal"
+  - else
+    - if @user.subscription.subscription_renewal_date.blank?
+      ="canceled"
+    - else
+      =@user.subscription.subscription_renewal_date.to_date 
+- unless @user.subscription.subscription_renewal_date.blank?  
+  %input.input4_user_admin{:type => "submit", :value => "END SUBSCRIPTION", :id=>"admin_cancel_user_subscription"}
+#cancel_subscription_container_admin
+  -#{:style=> "background-color: #ABDDD7;border: 4px solid olive;float: right;margin: -105px 40px 0 0;width: 358px;display:none"}
+  %div
+    %h4="You are about to cancel your subscription"
+    - if @user.subscription.subscription_renewal_date.blank?
+      %p="You dont have an active subscription"
+    - else
+      %p="Your subscription is going to end on #{@user.subscription.subscription_renewal_date.to_date}"
+    %span
+      %input.btn#user_end_subscription_cancel_admin{:value=>"CANCEL", :type=>"button"}
+      %input.btn#user_end_subscription_confirm_admin{:value=>"CONFIRM", :type=>"button"}  

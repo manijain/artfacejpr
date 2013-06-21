@@ -1,0 +1,48 @@
+-	dashboard = "font-weight:bold" if (controller_name == "dashboard" && action_name == "home") || (controller_name == "offer" && action_name == "home") 
+- offer = "font-weight:bold" if controller_name == "offer" && (action_name == "new" || action_name == "show")
+%body{:style=>"width:1000px;"}
+	.header
+		%div{:style=>"float: left;height: 30px;left: 190px;position: absolute;width: 640px;z-index: 10;"}
+		%div.c_nav_image{:style=>"display: inline;float: left;margin-top: 0;position: relative;top: 20px;width: 180px;"}
+			= link_to image_tag("artface.png"), root_path, :class => "artface"
+		%ul.nav.nav-pills
+			%li.c_nav_link_bar
+				%a{:href=>"/dashboard/home", :style=>"#{dashboard}"}=t '.dashboard_link_text'
+			%li.dropdown.c_nav_link_bar
+				%a.dropdown-toggle#drop4{:role=>"button", :href=>"/dashboard/sell-art-area", :style=>"#{offer}"}
+					=t '.sell_art'
+					%b.caret
+				%ul#menu1.dropdown-menu{:role=>"menu", "aria-labelledby"=>"drop4", :style=> "top:150%"}
+					%li
+						%a{:tabindex=>"-1", :href=>"/dashboard/sell-art-area", :style=>"top:0px"}=t '.offer_overview'
+						= link_to "#{t'.add_new_offer'}", new_offer_path, :tabindex=>"-1", :style=>"top:0px"
+			%li.dropdown.c_nav_link_bar
+				%a.dropdown-toggle#drop4{:role=>"button", :href=>"/dashboard/buy-art-area", :style=>"color:black"}
+					=t '.buy_art'
+					%b.caret
+				%ul#menu1.dropdown-menu{:role=>"menu", "aria-labelledby"=>"drop4", :style=> "top:150%"}
+					%li
+						%a{:tabindex=>"-1", :href=>"/dashboard/buy-art-area", :style=>"top:0px;"}=t '.offer_overview'
+						%a{:tabindex=>"-1", :href=>"/buy-art/search/redirect", :style=>"top:0px;"}="SEARCH"
+						%a{:tabindex=>"-1", :href=>"/offer/your-wishlists", :style=>"top:0px;"}=t '.your_wishlists'
+						%a{:tabindex=>"-1", :href=>"/offer/your-favourites", :style=>"top:0px;"}=t '.your_favourites'
+						%a{:tabindex=>"-1", :href=>"#", :style=>"top:0px;"}=t '.messages'
+			%li.c_nav_link_bar
+				%a{:href=>"/forum", :style=>"color:black"}=t '.forum'
+			%li.c_nav_link_bar
+				%a{:href=>"/dashboard/service", :style=>"color:black;"}=t '.service'
+			%li.dropdown.c_nav_link_bar
+				%a.dropdown-toggle#drop4{:role=>"button", "data-toggle"=>"dropdown", :href=>"#", :style=>"color:black"}
+					="#{current_user.user_first_name} #{current_user.user_last_name}" unless current_user.nil?
+					%b.caret
+				%ul#menu1.dropdown-menu{:role=>"menu", "aria-labelledby"=>"drop4", :style=> "top:150%"}
+					%li
+						%a{:tabindex=>"-1", :href=>"/user/settings", :style=>"top:0px;"}=t '.edit_my_setting'
+						%a{:tabindex=>"-1", :href=>"#", :style=>"top:0px;"}=t '.invoice_and_messages'
+						= link_to "LOG OUT", destroy_user_session_path, :tabindex=>"-1", :style=>"top:0px;"
+			%li.c_nav_link_bar.c_nav_link_bar_locale
+			%div{:style=>"background-color: black;height: 22px;margin-top: 32px;width: 22px;position:relative;float:left;cursor:pointer;", :id=>"localisation_select_div"}
+				%p.hidden=I18n.locale
+		.site_wide_error{:style=>"display:none;"}
+			%pre.prettyprint.linenums{:style=>"width: 820px;height: 20px;"}
+				%span.tag.site_wide_error_text

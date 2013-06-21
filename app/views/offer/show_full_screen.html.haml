@@ -1,0 +1,202 @@
+%script{:src => "http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js", :type => "text/javascript"}
+%script{:src => "/assets/ddpowerzoomer.js", :type => "text/javascript"}
+= link_to image_tag("artface.png"), root_path, :class => "artface", :style=>"position:absolute; margin-left:4%; margin-top:7px; z-index:9"
+%i.icon-zoom-in.icon-white.pointer#offer_show_zoom_in{:style=>"left:0px; top:0px; position:absolute; z-index:1;cursor:none;display:none;"}
+#full_screen_hi_res_1{:style=>"background-color:black; height:100%; width:100%; top:0%; left:0%; overflow:hidden; position:fixed;"}
+  %div{:style=>"margin-top:80px;"}
+    %div.full_screen_img_hover{:style=>"height:560px; width:94.5%; margin-left:4%; text-align:center;"}
+      %img{:id=>"full_screen_img_magnifier", :src=>"/images/cricket.jpg", :style=>"width:auto;height:auto;max-height:100%; max-width:92%;"}
+      %div{:style=>"position:absolute;left:0px;top:0px;display:none;cursor:pointer",:id=>"full_screen_remove_magnifier_zoom"}
+        %img{:src=>"/images/cross_btn.png"}
+      %div{:style=>"position:absolute;left:0px;top:0px;display:none;cursor:pointer",:id=>"full_screen_plus_magnifier_zoom"}
+        %img{:src=>"/images/plus_btn.png"}
+      %div{:style=>"position:absolute;left:0px;top:0px;display:none;cursor:pointer",:id=>"full_screen_minus_magnifier_zoom"}
+        %img{:src=>"/images/minus_btn.png"}
+    %div.full_screen_icon_img_hover#full_screen_icon_img_hover{:style=>"position:relative; height:500px; margin-top:-500px; width:4%; float:right; display:none;"}
+      %div#full_screen_close_popup{:style=>"position:absolute; top:-60px;height:20px; width:20px;"}
+        %img{:src=>"/images/btn2.png", :style=>"cursor:pointer"}
+      %div{:style=>"position:absolute; margin-top:470px;height:20px; width:20px;"}
+        %img#offer_show_zoom_button{:src=>"/images/zoom_btn.png", :style=>"cursor:pointer"}
+          %div#offer_show_zoom_button_box{:style=>"display:none; position:absolute; height:50px; width:200px; left:-200px; top:-30px; background-color:gray"}
+            %p{:style=>"font-weight:bold; font-size:20px; color:#FFFFFF"} Click On the Image To zoom
+      %div{:style=>"position:absolute; margin-top:410px;height:20px; width:20px;"}
+        %img#offer_show_zoom{:src=>"/images/btn7.png", :style=>"cursor:pointer"}
+          %div#offer_show_zoom_box{:style=>"display:none; position:absolute; height:170px; width:595px; left:-595px; top:-165px; background-color:gray"}
+            %div{:style=>"position:absolute; height: 130px; width:130px; left:15px; top:20px; background-color:white;"}
+              %div{:style=>"position:absolute; height:95px; width:110px; top:6px; left:8px; border:1px solid black;"}            
+                %img{:id=>"full_screen_img_show_hi_res", :src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_hires/#{@offer.artwork.id}/#{@offer.artwork.artwork_hires_file_name}", :style=>"height:100%; width:100%;", :alt=>"Image not added"}
+                %i.icon-white.icon-zoom-in.hi-res{:style => "position: absolute;right: 0px;top: 0;z-index: 10;"}
+              %span{:style=>"position:relative; float:left; top:110px; left:5px;"} Complete View
+            %div{:style=>"position:absolute; height: 130px; width:130px; left:160px; top:20px; background-color:white;"}
+              %div{:style=>"position:absolute; height:95px; width:110px; top:6px; left:8px; border:1px solid black;"}            
+                %img{:id=>"full_screen_img_show_detail_1", :src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_ones/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_one_file_name}", :style=>"height:100%; width:100%;", :alt=>"Image not added"}
+                %i.icon-white.icon-zoom-in.detail_1{:style => "position: absolute;right: 0px;top: 0;z-index: 10;"}
+              %span{:style=>"position:relative; float:left; top:110px; left:5px;"} Detail 1
+            %div{:style=>"position:absolute; height: 130px; width:130px; left:305px; top:20px; background-color:white;"}
+              %div{:style=>"position:absolute; height:95px; width:110px; top:6px; left:8px; border:1px solid black;"}            
+                %img{:id=>"full_screen_img_show_detail_2", :src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_twos/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_two_file_name}", :style=>"height:100%; width:100%;", :alt=>"Image not added"}
+                %i.icon-white.icon-zoom-in.detail_2{:style => "position: absolute;right: 0px;top: 0;z-index: 10;"}
+              %span{:style=>"position:relative; float:left; top:110px; left:5px;"} Detail 2
+            %div{:style=>"position:absolute; height: 130px; width:130px; left:450px; top:20px; background-color:white;"}
+              %div{:style=>"position:absolute; height:95px; width:110px; top:6px; left:8px; border:1px solid black;"}            
+                %img{:id=>"full_screen_img_show_documents", :src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_documentations/#{@offer.artwork.id}/#{@offer.artwork.artwork_documentation_file_name}", :style=>"height:100%; width:100%;", :alt=>"Image not added"}
+                %i.icon-white.icon-zoom-in.documents{:style => "position: absolute;right: 0px;top: 0;z-index: 10;"}
+              %span{:style=>"position:relative; float:left; top:110px; left:5px;"} Certificate
+      %div{:style=>"position:absolute; margin-top:440px;height:20px; width:20px;"}
+        %img#offer_show_color{:src=>"/images/color_btn.png", :style=>"cursor:pointer;"}
+          %div#offer_show_color_box{:style=>"display:none;padding:10px;padding-top:20px; position:absolute; width:600px; left:-620px; top:-150px; background-color:gray"}
+            %ul.unstyled.pull-left{:style=>"width:580px; margin-left:10px;"}
+              %li.pull-left.offer_show_data_color{"data-color"=>"blue", :style=>"height:60px; width:60px; border:1px solid black;margin-right:8px; background-color: blue;"}
+              %li.pull-left.offer_show_data_color{"data-color"=>"white", :style=>"height:60px; width:60px; border:1px solid black;margin-right:8px; background-color: white;"}
+              %li.pull-left.offer_show_data_color{"data-color"=>"gray", :style=>"height:60px; width:60px; border:1px solid black;margin-right:8px; background-color: gray;"}
+              %li.pull-left.offer_show_data_color{"data-color"=>"orange", :style=>"height:60px; width:60px; border:1px solid black;margin-right:8px; background-color: orange;"}
+              %li.pull-left.offer_show_data_color{"data-color"=>"yellow", :style=>"height:60px; width:60px; border:1px solid black;margin-right:8px; background-color: yellow;"}
+              %li.pull-left.offer_show_data_color{"data-color"=>"green", :style=>"height:60px; width:60px; border:1px solid black;margin-right:8px; background-color: green;"}
+              %li.pull-left.offer_show_data_color{"data-color"=>"blue", :style=>"height:60px; width:60px; border:1px solid black;margin-right:8px; background-color: blue;"}
+              %li.pull-left.offer_show_data_color{"data-color"=>"black", :style=>"height:60px; width:60px; border:1px solid black;margin-right:8px; background-color: black;"}
+            %ul.unstyled.pull-left{:style=>"width:580px; margin-left:10px;"}
+              %li.pull-left.offer_show_data_color{"data-color"=>"blue", :style=>"height:60px; width:60px; border:1px solid black;margin-right:8px; background-color:blue;"}
+              %li.pull-left.offer_show_data_color{"data-color"=>"white", :style=>"height:60px; width:60px; border:1px solid black;margin-right:8px; background-color:white;"}
+              %li.pull-left.offer_show_data_color{"data-color"=>"gray", :style=>"height:60px; width:60px; border:1px solid black;margin-right:8px; background-color:gray;"}
+              %li.pull-left.offer_show_data_color{"data-color"=>"orange", :style=>"height:60px; width:60px; border:1px solid black;margin-right:8px; background-color:orange;"}
+              %li.pull-left.offer_show_data_color{"data-color"=>"yellow", :style=>"height:60px; width:60px; border:1px solid black;margin-right:8px; background-color:yellow;"}
+              %li.pull-left.offer_show_data_color{"data-color"=>"green", :style=>"height:60px; width:60px; border:1px solid black;margin-right:8px; background-color:green;"}
+              %li.pull-left.offer_show_data_color{"data-color"=>"blue", :style=>"height:60px; width:60px; border:1px solid black;margin-right:8px; background-color:blue;"}
+              %li.pull-left.offer_show_data_color{"data-color"=>"black", :style=>"height:60px; width:60px; border:1px solid black;margin-right:8px; background-color:black;"}
+      %div{:style=>"position:absolute; margin-top:380px;height:20px; width:20px;"}
+        %img#offer_show_info{:src=>"/images/info_btn.png", :style=>"cursor:pointer;"}
+        %div#offer_show_info_box{:style=>"display:none; position:absolute; height:400px; width:600px; left:-600px; top:-320px; display:none; background-color:gray"}
+          %div{:style=>"position:absolute; height:55px; width: 570px; top:8px; left:20px;"}
+            %h3{:style=>"font-size:19px; line-height:1"} ARTIST NAME (1834 - 1901)
+            %h3{:style=>"font-size:19px; line-height:1"} TITLE OF THE PAINTING
+          %div{:style=>"position:absolute; height:310px; width: 280px; top:70px; left:20px;"}
+            %h5 ABOUT THE PAINTING
+            %p Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibuset magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellen- 
+          %div{:style=>"position:absolute; height:310px; width: 250px; top:80px; left:324px;"}
+            %ul.unstyled{:style=>"width:100%; float:left; margin-left:0;"}
+              %li{:style=>"float:left;"}
+                %span{:style=>"float:left; width:125px;"} Offer Number
+                %span{:style=>"float:left;"} #23456
+              %li{:style=>"float:left; margin-top:3px;"}
+                %span{:style=>"float:left; width:125px;"} Fine art category
+                %span{:style=>"float:left;"} Painting
+              %li{:style=>"float:left; margin-top:3px;"}
+                %span{:style=>"float:left; width:125px;"} Medium 
+                %span{:style=>"float:left;"} Oil
+              %li{:style=>"float:left; margin-top:3px;"}
+                %span{:style=>"float:left; width:125px;"} Sizes 
+                %span{:style=>"float:left; width:125px;"} 27x35 cm (prefer inches?)
+              %li{:style=>"float:left; margin-top:3px;"}
+                %span{:style=>"float:left; width:125px;"} Date of creation 
+                %span{:style=>"float:left;"} 1884
+              %li{:style=>"float:left; margin-top:3px;"}
+                %span{:style=>"float:left; width:125px;"} Period 
+                %span{:style=>"float:left;"} naturalism
+              %li{:style=>"float:left; margin-top:3px;"}
+                %span{:style=>"float:left; width:125px; margin-top:3px;"} Signature 
+                %span{:style=>"float:left;"} a
+              %li{:style=>"float:left; margin-top:3px;"}
+                %span{:style=>"float:left; width:125px;"} Frame 
+                %span{:style=>"float:left;"} sd
+              %li{:style=>"float:left; margin-top:3px;"}
+                %span{:style=>"float:left; width:125px;"} Authentication 
+                %span{:style=>"float:left;"} wer
+              %li{:style=>"float:left; margin-top:3px;"}
+                %span{:style=>"float:left; width:125px;"} certificate  
+                %span{:style=>"float:left;"}
+              %li{:style=>"float:left; margin-top:3px;"}
+                %span{:style=>"float:left; width:125px;"} country 
+                %span{:style=>"float:left;"} France
+              %li{:style=>"float:left; margin-top:3px;"}
+                %span{:style=>"float:left; width:125px;"} submitted 
+                %span{:style=>"float:left;"} 2012-01-16
+    %input.btn#back_to_regular_view{:type=>"button", :value=>"BACK TO REGULAR VIEW", :style=>"margin-top:11px; margin-left:4%;"}
+
+    %input.btn#contact_owner_1{:type=>"button", :style=>"width:175px; margin:11px 20px; float:right; margin-left:4%;", :value=>"CONTACT OWNER"}
+    = content_tag :div, :class=>"pull-left",:id=>"contact_owner_container", :style=>"display:none;position: absolute; background-color: rgb(114, 114, 114); padding: 8px; width: 820px; height:430px; left: 300px; top:660px; z-index: 1; border-radius: 5px 5px 5px 5px;" do
+      = content_tag :h4, :class=>"pull-left", :style=>"width:100%;" do
+        ="CONTACT THE OWNER"
+      = content_tag :p, :class=>"pull-left", :style=>"width:25%;" do 
+        ="You can contact the owner anonymously or reveal your identity if you like. If you want to make a price proposal please enter the amount in the form field for the sellers convenience."
+      = form_for :message, :url=> contact_owner_path,:remote=>true, :html=>{:class=>"pull-left", :style=>"width:75%;margin:0;padding:0;"} do |f|
+        = f.hidden_field :offer_id, :value=>"#{@offer.id}"
+        = f.hidden_field :is_parent, :value=>true
+        = f.hidden_field :user_id, :value=>"#{current_user.id}"
+        = content_tag :ul, :class=>"pull-left unstyled", :style=>"width:100%;" do
+          = content_tag :li,:class=>"pull-left", :style=>"width:100%" do
+            =content_tag :span, :class=>"pull-left", :style=>"text-align:right;width:100px;margin-right:5px;" do
+              ="CONCERN"
+            =f.text_field :message_title, :class=>"pull-left", :style=>"margin-right:5px;width:280px;"
+            =select_tag "message[concern]", options_for_select(["I am interested to buy", "I am interested to lend", "I need more details"]), :class=>"pull-left", :style=>"width:150px;"
+          = content_tag :li,:class=>"pull-left", :style=>"width:100%" do
+            =content_tag :span, :class=>"pull-left", :style=>"text-align:right;width:100px;margin-right:5px;" do
+              ="OFFER PROPOSAL"
+            =f.text_field :offer_price, :class=>"pull-left", :style=>"margin-right:5px;width:380px;"
+            =select_tag "message[currency]", options_for_select(["$", "€", "£"]), :class=>"pull-left", :style=>"width:50px;"
+          = content_tag :li,:class=>"pull-left", :style=>"width:100%;" do
+            = content_tag :div, :class=>"pull-left", :style=>"width:100px;" do
+              =content_tag :span, :class=>"pull-left", :style=>"text-align:right;margin-right:5px;" do
+                ="YOUR MESSAGE"
+              =content_tag :span, :id=>"contact_owner_word_count", :class=>"pull-left", :style=>"text-align:right;margin-right:5px;width:95px;" do
+                ="0/1000"
+            =f.text_area :message_text, :class=>"pull-left", :style=>"margin-right:5px;width:435px;height:250px;resize:none;margin-left:5px;", :maxlength=>"1000"
+          = content_tag :li,:class=>"pull-left", :style=>"width:100%" do
+            =""
+          = content_tag :li,:class=>"pull-left", :style=>"width:100%" do
+            =content_tag :span, :class=>"pull-left", :style=>"text-align:right;width:100px;margin-right:5px;" do
+              ="HIDE MY IDENTITY"
+            = f.check_box :hide_identity
+            = f.submit "SEND MESSAGE", :class=>"btn pull-right"
+            = input_tag("cancel_contact_owner_1","btn pull-right","CANCEL","margin-right:10px;")  
+      
+
+    - if @offer_in_favourite
+      %input.btn.delete_from_favourite{:type=>"button", :value=>"DELETE FROM FAVOURITES", :style=>"float:right;margin-top:11px; display:block", "data-attribute"=>"offer_id=#{@offer.id}"}
+      %input.btn.add_to_favourite{:type=>"button", :value=>"ADD TO FAVOURITES", :style=>"float:right; display:none;margin-top:11px;width:175px", "data-attribute"=>"favourite[offer_id]=#{@offer.id}&favourite[user_id]=#{current_user.id}"}
+    - else
+      %input.btn.delete_from_favourite{:type=>"button", :value=>"DELETE FROM FAVOURITES", :style=>"float:right; margin-top:11px; display:none", "data-attribute"=>"offer_id=#{@offer.id}"}
+      %input.btn.add_to_favourite{:type=>"button", :value=>"ADD TO FAVOURITES", :style=>"float:right; display:block;margin-top:11px;width:175px", "data-attribute"=>"favourite[offer_id]=#{@offer.id}&favourite[user_id]=#{current_user.id}"}
+  / %span#full_screen_hi_res_close
+  /   ="Close x"
+#full_screen_detail_1_2{:style=>"background-color:black; height:100%; width:100%; top:0%; left:0%; overflow:hidden; position:fixed; z-index: 20000"}
+  %div{:style=>"margin-top:80px;"}
+    %div{:style=>"height:500px; position:relative; width:94.5%; margin-left:4%; margin-top:2%;"}
+      %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_ones/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_one_file_name}", :style=>"width:100%;height:100%"}
+    %input.btn#back_to_regular_view_1{:type=>"button", :value=>"BACK TO REGULAR VIEW", :style=>"margin-top:11px; margin-left:4%"}
+    %input.btn#contact_owner_1{:type=>"button", :style=>"width:175px; margin:11px 20px; float:right;", :value=>"CONTACT OWNER"}
+    - if @offer_in_favourite
+      %input.btn.delete_from_favourite{:type=>"button", :value=>"DELETE FROM FAVOURITES", :style=>"float:right;margin-top:11px; display:block", "data-attribute"=>"offer_id=#{@offer.id}"}
+      %input.btn.add_to_favourite{:type=>"button", :value=>"ADD TO FAVOURITES", :style=>"float:right; display:none;margin-top:11px;width:175px", "data-attribute"=>"favourite[offer_id]=#{@offer.id}&favourite[user_id]=#{current_user.id}"}
+    - else
+      %input.btn.delete_from_favourite{:type=>"button", :value=>"DELETE FROM FAVOURITES", :style=>"float:right; margin-top:11px; display:none", "data-attribute"=>"offer_id=#{@offer.id}"}
+      %input.btn.add_to_favourite{:type=>"button", :value=>"ADD TO FAVOURITES", :style=>"float:right; display:block;margin-top:11px;width:175px", "data-attribute"=>"favourite[offer_id]=#{@offer.id}&favourite[user_id]=#{current_user.id}"}
+  %span#full_screen_detail_1_close
+    ="Close x"
+#full_screen_detail_2_3{:style=>"background-color:black; height:100%; width:100%; top:0%; left:0%; overflow:hidden; position:fixed; z-index: 20000"}
+  %div{:style=>"margin-top:80px;"}
+    %div{:style=>"height:500px; position:relative; width:94.5%; margin-left:4%; margin-top:2%;"}
+      %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_twos/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_two_file_name}", :style=>"width:100%;height:100%"}
+    %input.btn#back_to_regular_view_2{:type=>"button", :value=>"BACK TO REGULAR VIEW", :style=>"margin-top:11px; margin-left:4%"}
+    %input.btn{:type=>"button", :value=>"CONTACT OWNER", :style=>"margin:11px 20px; float:right;"}
+    - if @offer_in_favourite
+      %input.btn.delete_from_favourite{:type=>"button", :value=>"DELETE FROM FAVOURITES", :style=>"float:right;margin-top:11px; display:block", "data-attribute"=>"offer_id=#{@offer.id}"}
+      %input.btn.add_to_favourite{:type=>"button", :value=>"ADD TO FAVOURITES", :style=>"float:right; display:none;margin-top:11px;width:175px", "data-attribute"=>"favourite[offer_id]=#{@offer.id}&favourite[user_id]=#{current_user.id}"}
+    - else
+      %input.btn.delete_from_favourite{:type=>"button", :value=>"DELETE FROM FAVOURITES", :style=>"float:right; margin-top:11px; display:none", "data-attribute"=>"offer_id=#{@offer.id}"}
+      %input.btn.add_to_favourite{:type=>"button", :value=>"ADD TO FAVOURITES", :style=>"float:right; display:block;margin-top:11px;width:175px", "data-attribute"=>"favourite[offer_id]=#{@offer.id}&favourite[user_id]=#{current_user.id}"}
+  %span#full_screen_detail_2_close
+    ="Close x"
+#full_screen_documents_4{:style=>"background-color:black; height:100%; width:100%; top:0%; left:0%; overflow:hidden; position:fixed; z-index: 20000"}
+  %div{:style=>"margin-top:80px;"}
+    %div{:style=>"height:500px; position:relative; width:94.5%; margin-left:4%; margin-top:2%;"}
+      %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_documentations/#{@offer.artwork.id}/#{@offer.artwork.artwork_documentation_file_name}", :style=>"width:100%;height:100%;"}
+    %input.btn#back_to_regular_view_documents{:type=>"button", :value=>"BACK TO REGULAR VIEW", :style=>"margin-top:11px; margin-left:4%;"}
+    %input.btn{:type=>"button", :value=>"CONTACT OWNER", :style=>"margin:11px 20px; float:right;"}
+    - if @offer_in_favourite
+      %input.btn.delete_from_favourite{:type=>"button", :value=>"DELETE FROM FAVOURITES", :style=>"float:right;margin-top:11px; display:block", "data-attribute"=>"offer_id=#{@offer.id}"}
+      %input.btn.add_to_favourite{:type=>"button", :value=>"ADD TO FAVOURITES", :style=>"float:right; display:none;margin-top:11px;width:175px", "data-attribute"=>"favourite[offer_id]=#{@offer.id}&favourite[user_id]=#{current_user.id}"}
+    - else
+      %input.btn.delete_from_favourite{:type=>"button", :value=>"DELETE FROM FAVOURITES", :style=>"float:right; margin-top:11px; display:none", "data-attribute"=>"offer_id=#{@offer.id}"}
+      %input.btn.add_to_favourite{:type=>"button", :value=>"ADD TO FAVOURITES", :style=>"float:right; display:block;margin-top:11px;width:175px", "data-attribute"=>"favourite[offer_id]=#{@offer.id}&favourite[user_id]=#{current_user.id}"}
+  %span#full_screen_documents_close
+    ="Close x"

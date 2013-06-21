@@ -1,0 +1,120 @@
+.sign_up_layout_two
+	.sign_up_layout_two_section_one
+		%h2=t ".sign_up_title"
+	.sign_up_layout_two_section_two
+		%div
+			%h2=t '.your_subscription_data'
+			%br
+		.sign_up_layout_two_section_two_change_buttons
+			%button.btn{:style=>"margin-bottom:100px", :onclick=>"go_back_section(1);"}=t '.button_change'
+			%button.btn{:style=>"margin-bottom:150px", :onclick=>"go_back_section(2);"}=t '.button_change'
+			%button.btn{:style=>"margin-bottom:50px",  :onclick=>"go_back_section(3);"}=t '.button_change'
+			%button.btn{:style=>"margin-bottom:15px",  :onclick=>"go_back_section(4);"}=t '.button_change'
+			%button.btn{:style=>"margin-bottom:0px",   :onclick=>"go_back_section(5);"}=t '.button_change'
+		.sign_up_layout_two_section_two_summary_list_on1
+			%ul.sign_up_layout_two_section_two_summary_list_ul
+				%li
+					%strong=t ".subscription_package"
+					%span#confirm_subscription_package
+				%li
+					%strong=t ".annual_price"
+					%span#confirm_annual_price
+				%li
+					%strong=t ".available_offers"
+					%span#confirm_available_offers
+				%li
+					%strong=t ".viewable_offers"
+					%span#confirm_viewable_offers
+				%li
+					%strong=t ".subscription_method"
+					%span#confirm_subscription_method_paypal.display_none=t ".confirm_subscription_method_paypal"
+					%span#confirm_subscription_method_card.display_none=t ".confirm_subscription_method_card"
+					%span#confirm_subscription_method_bank_transfer.display_none=t ".confirm_subscription_method_bank_transfer"
+				%li
+					%strong=t '.subscription_package_renewal'
+					%span#confirm_subscription_package_renewal
+		%div
+			%ul.sign_up_layout_two_section_two_summary_list_ul
+				%li
+					%strong=t ".gender"
+					%span#confirm_user_gender
+				%li
+					%strong=t ".first_name"
+					%span#confirm_user_first_name
+				%li
+					%strong=t ".last_name"
+					%span#confirm_user_last_name
+				%li
+					%strong=t ".company"
+					%span#confirm_user_company
+				%li
+					%strong=t ".street"
+					%span#confirm_user_street
+				%li
+					%strong=t ".zip_code"
+					%span#confirm_user_zip_code
+				%li
+					%strong=t ".city"
+					%span#confirm_user_city
+				%li
+					%strong=t ".country"
+					%span#confirm_user_country
+		%div
+			%ul.sign_up_layout_two_section_two_summary_list_ul
+				%li
+					%strong=t ".phone_number"
+					%span#confirm_user_phone_number
+				%li
+					%strong=t ".fax_number"
+					%span#confirm_user_fax_number
+				%li
+					%strong=t ".tax_id"
+					%span#confirm_user_tax_id
+		%div
+			%ul.sign_up_layout_two_section_two_summary_list_ul
+				%li
+					%strong=t ".email_login"
+					%span#confirm_user_email
+				%li
+					%strong=t ".password"
+					%span="xxxxxxxxxx"
+		#confirm_payment_method_card.display_none
+			%ul.sign_up_layout_two_section_two_summary_list_ul
+				%li
+					%strong=t ".payment_method"
+					%span=t '.credit_card'
+				%li
+					%strong=t ".card_number"
+					%span#confirm_card_number
+				%li
+					%strong=t ".card_owner"
+					%span#confirm_card_owner
+				%li
+					%strong=t ".expires"
+					%span#confirm_card_expiry_month
+					%span="/"
+					%span#confirm_card_expiry_year
+				%li
+					%strong=t ".verification_code"
+					%span="xxx"
+		#confirm_payment_method_paypal.display_none
+			%ul.sign_up_layout_two_section_two_summary_list_ul
+				%li
+					%strong=t ".payment_method"
+					%span=t '.paypal_express_checkout'
+		#confirm_payment_method_bank_transfer.display_none
+			%ul.sign_up_layout_two_section_two_summary_list_ul
+				%li
+					%strong=t '.payment_method'
+					%span=t '.'
+	.sign_up_layout_two_section_three
+		%input{:type=>"checkbox", :id=>"terms_agree_check"}
+		%span="#{t '.accept_agree_terms'}".html_safe
+		%p#agree_terms_text_two
+			=t ".agree_terms_one".html_safe
+			%span#email_placeholder
+			=t ".agree_terms_two".html_safe
+		%button#form_submit.btn{:style=>"float:right;"}=t '.complete_sign_up'
+		%button.btn{:style=>"float:right;", :onclick=>"go_back();"}=t '.go_back'
+%br
+%br

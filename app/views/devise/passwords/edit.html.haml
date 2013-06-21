@@ -1,0 +1,21 @@
+= render :partial=> 'layouts/header'
+	
+%div{:style=>"margin-left:2%;width:820px;float:left"}
+	%h2="Change your password"
+
+	= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
+		= devise_error_messages!
+		= f.hidden_field :reset_password_token
+		%span
+			= f.label :password, "New password", :style=>"display:inline;margin-right:60px"
+			= f.password_field :password
+		%br
+		%span
+			= f.label :password_confirmation, "Confirm new password", :style=>"display:inline;margin-right:8px"
+			= f.password_field :password_confirmation
+		%br
+		%div{:style=>"float:left;width:377px"}
+			= f.submit "Change my password", :class=>"btn", :style=>"float:right"
+		%br
+		%br
+= render :partial=> 'layouts/footer'

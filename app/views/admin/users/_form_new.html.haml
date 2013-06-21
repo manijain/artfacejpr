@@ -1,0 +1,150 @@
+= javascript_include_tag "admin/admin_add_user.js"
+
+#wrapper.wrapper_admin
+  #head_user.head_user_update_admin
+    %h3 ADD USER #12345
+    %h6 
+    =link_to "ADD USER" , "#"  , :class=>"input1_user_update_admin", :onclick=>"check_validations()", :id=> "add_new_user"
+    =link_to "CANCEL" , admin_users_path , :class=>"input1_user_update_admin"
+  -if @user.errors.any?
+    %div#error_explanation
+      .alert.alert-error
+        = "The form contains #{pluralize(@user.errors.full_messages.uniq.count, "error")}."
+        %ul
+        - @user.errors.full_messages.uniq.each do |msg|
+          %li
+            =msg
+  #head1_user.head1_user_update_admin
+    %h1{:style=>"margin: 0 !important;"} SUBSCRIPTION TYPE
+    = form_for @subscription, :url => {:action => "create"}, :html=>{:id=> "form1", :onsubmit => 'func2()', :style=>"margin: 0 !important;"} do |s|
+      .head1_user_sec_div_update_admin
+        =s.label :subscription_package
+        =s.select :subscription_plan_id, options_for_select([['Basic', '1'], ['Plus', '2'], ['Pro', '3'], ['Premium', '4'], ['No Limit', '5']])
+        %br      
+        %label SUBSCRIPTION TYPE
+        =s.select :auto_renewal, options_for_select([['auto-renewal', 'TRUE'],['one-year', 'FALSE']])
+      .head1_user_first_div_update_admin
+        %label
+          annual price:
+          %span= @basic_plan.subscription_fee
+        %br
+        %label
+          available offersyears:
+          %span= @basic_plan.subscription_paintings_allowed
+        %br
+        %label
+          viewable offers/years:
+          %span unlimited  
+  #head2_user.head2_user_update_admin
+    %h1{:style=>"margin: 0 !important;"} PERSONAL DATA
+    = form_for @user, :url => {:action => "create"}, :html=>{:id=> "form2", :style=>"margin: 0 !important;"} do |f|
+      .details_user_update_admin
+        %label FULL NAME
+        =f.select :user_salutation, options_for_select(['Mr.', 'Mrs.']), {} ,{ :class => 'head2_user_select1_update_admin' }
+        =f.text_field :user_first_name , {:placeholder => "FIRST NAME*", :class=>"head2_user_input1_update_admin"}
+        %img#error_new_user_first_name{"data-original-title"=>"Please enter the user first name", :src=>"/images/exclamation_mark.png", :style => "display:none"}
+        =f.text_field :user_last_name, {:placeholder => "LAST NAME*", :class=>"head2_user_input2_update_admin"}
+        %img#error_new_user_last_name{"data-original-title"=>"Please enter the user last name", :src=>"/images/exclamation_mark.png", :style => "display:none"}
+        %br
+        %label COMPANY
+        =f.text_field :user_company, {:placeholder => "COMPANY NAME", :class=> "head2_user_input3_update_admin"}
+        %br
+        %label ADDRESS
+        =f.text_field :user_street, {:placeholder => "STREET", :class=>"head2_user_input4_update_admin"}
+        %br
+        =f.text_field :user_zip_code, {:placeholder => "ZIPCODE", :class=>"head2_user_input5_update_admin"}
+        =f.text_field :user_city, {:placeholder => "CITY", :class=>"head2_user_input6_update_admin"}
+        %br
+        %label COUNTRY
+        =f.select :user_country, options_for_select(Country.order(:country_name).pluck(:country_name)), {} ,{ :class => 'head2_user_select2_update_admin' }
+        %br
+        %label PHONE & FAX
+        =f.text_field :user_phone_number, {:placeholder => "TELEPHONE NUMBER", :class=> "head2_user_input7_update_admin"}
+        =f.text_field :user_fax_number, {:placeholder => "FAX NUMBER", :class=>"head2_user_input8_update_admin"}
+        %br
+        %label TAX ID
+        =f.text_field :user_tax_id, {:placeholder => "TAX ID", :class=>"head2_user_input9_update_admin"}
+        %label if you are a company
+        %br
+        %br  
+      .head3_user_update_admin
+        %h1{:style=>"margin: 0 !important;"} LOGIN DATA    
+        %label EMAIL ADDRESS
+        =f.text_field :email, {:placeholder => "EMAIL*"}
+        %img#error_new_user_email{"data-original-title"=>"Please enter the user email", :src=>"/images/exclamation_mark.png", :style => "display:none"}
+        %a (serves as login)
+        %br
+        %label NEW PASSWORD
+        =f.text_field :password, {:type => "password", :placeholder => "PASSWORD*"}
+        %img#error_new_user_password{"data-original-title"=>"Please enter the user email", :src=>"/images/exclamation_mark.png", :style => "display:none"}
+        %a (at least 8 characters with at least 1 number and 1 character (!§$%&))
+        =f.text_field :password_confirmation, {:style => "margin-left:223px !important", :type => "password", :placeholder => "RETYPE PASSWORD*", :class=>"renter_pass_admin"}
+
+  
+  #head4_user.head4_user_update_admin
+    %h1{:style=>"margin: 0 !important;"} PAYMENT METHOD
+    = form_for @subscription, :url => {:action => "create"}, :html=>{:id=> "form3", :style=>"margin: 0 !important;"} do |v|
+      .payment_method_user_update_admin
+        =v.radio_button :payment_type, "credit_card", id: 'radio_payment_type'
+        %label.head4_user_label1_update_admin PAYMENT BY CREDITCARD        
+        =v.select :card_type, options_for_select(['VISA', 'MASTERCARD', 'AMEX'])  
+        =v.text_field :credit_card , {:type => "text", :placeholder => "CREDITCARD NUMBER*", :class=>"head4_user_input1_update_admin"}
+        %img#error_credit_card_number{"data-original-title"=>"Please enter the credit card nubmer", :src=>"/images/exclamation_mark.png", :style => "display:none"}
+        %br
+        %label.head4_user_label2_update_admin We accept Visa, Mastercard and Amex.
+        =v.text_field :card_owner, {:type => "text", :placeholder => "NAME CREDITCARD OWNER*", :class=>"head4_user_input2_update_admin"}
+        %img#error_credit_card_owner{"data-original-title"=>"Please enter the credit card owner", :src=>"/images/exclamation_mark.png", :style => "display:none"}
+        %br
+        %img{:alt => "visa", :src => "visa.jpg"}
+        %img{:alt => "mastercard", :src => "master.jpg"}
+        %img{:alt => "amex", :src => "amex.jpg"}
+        %label.head4_user_label3_update_admin EXPIRES
+        =v.select :card_expires, options_for_select(['1','2','3','4','5','6','7','8','9','10','11','12']), {}, {:class=>"head4_user_select2_update_admin"}
+
+        =v.select :user_id, options_for_select(['2013','2014','2015','2016','2017','2018']), {}, {:class=>"head4_user_select3_update_admin"}
+        %input.head4_user_input3_update_admin{:type => "password", :placeholder => "VERRIFICATION CODE*"}
+        %input.head4_user_submit_update_admin{:type => "submit", :value => "?"}
+        .head4_user_line_update_admin
+      #head4_user_paypal.head4_user_paypal_update_admin
+        =v.radio_button :payment_type, "paypal", id: 'radio_payment_type'
+        %label.head4_user_label1_update_admin PAYMENT BY PAYPAL
+        .head4_user_line_update_admin
+      #head4_user_bank.head4_user_paypal_update_admin
+        =v.radio_button :payment_type, "bank_transfer", id: 'radio_payment_type', :checked=>true
+        %label.head4_user_label1_update_admin PAYMENT BY BANK TRANSFER
+  #head5_user.head5_user_update_admin
+    %h1{:style=>"margin: 0 !important;"} ADVANCED USER RIGHTS    
+    .head_div_set_update_admin
+      #head5_user_rights.head5_user_rights_update_admin
+        =form_for @user_setting, :url =>{:action=>"create"}, :html =>{:id=>"form4"} do |r|
+          =r.check_box :admin_rights, :checked=> @user_setting.admin_rights, :class => "head5_user_rights_update_admin", :style=>"width: auto !important;"
+          %label.head5_user_label1_update_admin ADMINISTRATOR
+          =r.check_box :forum_rights, :checked=> @user_setting.forum_rights, :class => "head5_user_rights_update_admin" , :style=>"width: auto !important;"
+          %label.head5_user_label1_update_admin FORUM MODERATOR
+          =r.check_box :service_dir_rights, :checked=> @user_setting.service_dir_rights, :class => "head5_user_rights_update_admin"  ,  :style=>"width: auto !important;"    
+          %label.head5_user_label1_update_admin SERVICE DIRECTORY
+        .head5_user_line_update_admin
+    .head_div_set_update_admin
+      = form_for @subscription, :url => {:action => "create"}, :html=>{:id=> "form5", :style=>"margin: 0 !important;"} do |free|
+        #head5_user_rights4.head5_user_rights_update_admin.head5_user_float_update_admin
+          =free.check_box :free_subscription,  :style=>"width: auto !important;"#, :class => "head5_user_rights_update_admin"
+          %label.head5_user_label1_update_admin FREE SUBSCRIPTION
+        #head5_user_rights5.head5_user_rights_update_admin.head5_user_float_update_admin        
+          =free.select :subscription_plan_id, options_for_select([['BASIC PACKAGE(10 OFFERS)', '1'], ['PLUS PACKAGE(20 OFFERS)', '2'], ['PRO PACKAGE(30 OFFERS)', '3'], ['PREMIUM PACKAGE(50 OFFERS)', '4'], ['NO LIMIT PACKAGE(100 OFFERS)', '5']]), {}, {:class=>"head4_user_select1_update_admin head5_user_margin_update_admin"}        
+          %label{:style=>"display: block;margin-left: 221px;margin-top: 37px;width: 50px;"}="ENDS : "  
+          = free.text_field :subscription_renewal_date, {:type=>"text", :style=>"float: right;margin-right: 395px;margin-top: -33px;width: 118px;"}            
+  .head_div_set_update_admin
+    #head5_user_rights7.head5_user_rights_update_admin.head5_user_float_update_admin
+      %input.head5_user_float_update_admin.head5_user_main_submit_update_admin{:type => "submit", :value => "SEND INVITATION" , :id=>"admin_send_user_invitation", :style=>"height:30px;"}   
+
+    #head5_user_rights8.head5_user_rights_update_admin.head5_user_float_update_admin
+    =link_to "ADD USER" , "#"  , :class=>"input1_user_update_admin", :onclick=>"check_validations()", :id=> "add_new_user"
+    =link_to "CANCEL" , admin_users_path , :class=>"input1_user_update_admin"
+#ajax-loader-big_for_offers_data{:style=>"left: 400px;position: absolute;top: 1500px;z-index: 100;display:none;"}
+  %img{:src=>"/images/ajax-loader-big.gif"}
+#overlay_div_data{:style=>"background-color: white;display: block;height: 500%;left: 0;opacity: 0.4;position: absolute;top: 200px;width: 100%;z-index: 2;display:none;"}
+:javascript
+  $("#subscription_subscription_renewal_date").datepicker({
+        dateFormat: "yy-mm-dd"
+  })
+  

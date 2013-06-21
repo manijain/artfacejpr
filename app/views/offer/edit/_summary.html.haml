@@ -1,0 +1,144 @@
+.offer_layout_two.span10{:style=>"width:820px;margin-left:2%;display:none;"}
+  .section_one{:style=>"background-color:#727272;margin-bottom:10px;color:#FFF;float:left;width:760px;padding: 10px 30px;"}
+    %h3{:style=>"display:inline"}=t '.section_one_heading'
+    %span{:style=>"font-size:10px"}=t '.section_one_text_one'
+    %span
+      %input{:class=>"btn new_offer_edit", :style=>"width:114px;margin-left:80px;", :value=>"#{t '.section_one_button_edit'}", :type=>"button"}
+      %input{:class=>"new_offer_submit btn", :style=>"width:114px;", :value=>"#{t '.section_one_button_submit'}", :type=>"button"}
+  .section_two{:style=>"margin-left:3%;float:left;width:796px;"}
+    .section_two_one{:style=>"width:62%;float:left;margin-right:10px;"}
+      #img_show_hi_res_all{:style=>"position:relative;float:left;width:480px;height:480px;margin-bottom:10px"}          
+        #large_preview_for_hires{:style=>"position:relative;width:480px;height:480px;z-index:1;overflow:hidden"}
+          %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_hires/#{@offer.artwork.id}/#{@offer.artwork.artwork_hires_file_name}", :style=>"height:100%;width:100%"}
+        .hidden#large_preview_for_detail1{:style=>"position:relative;width:480px;height:480px;z-index:1;overflow:hidden"}
+          %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_ones/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_one_file_name}", :style=>"height:100%;width:100%"}
+        .hidden#large_preview_for_detail2{:style=>"position:relative;width:480px;height:480px;z-index:1;overflow:hidden"}
+          %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_twos/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_two_file_name}", :style=>"height:100%;width:100%"}
+        .hidden#large_preview_for_documents{:style=>"position:relative;width:480px;height:480px;z-index:1;overflow:hidden"}
+          %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_documentations/#{@offer.artwork.id}/#{@offer.artwork.artwork_documentation_file_name}", :style=>"height:100%;width:100%"}
+        %i.icon-white.icon-zoom-in.hi-res{:style=>"position: absolute;right: 0px;top: 0;z-index: 2; cursor:pointer;display: block"}
+        %i.hidden.icon-white.icon-zoom-in.detail-1{:style=>"position: absolute;right: 0px;top: 0;z-index: 2; cursor:pointer;display: block"}
+        %i.hidden.icon-white.icon-zoom-in.detail-2{:style=>"position: absolute;right: 0px;top: 0;z-index: 2; cursor:pointer;display: block"}
+        %i.hidden.icon-white.icon-zoom-in.documents{:style=>"position: absolute;right: 0px;top: 0;z-index: 2; cursor:pointer;display: block"}
+        %i.icon-fullscreen.icon-white.hi-res{:style=>"position:absolute;right:5px; bottom:5px; cursor:pointer;z-index:1"}
+        %i.hidden.icon-fullscreen.icon-white.detail-1{:style=>"position:absolute;right:5px; bottom:5px; cursor:pointer;z-index:1"}
+        %i.hidden.icon-fullscreen.icon-white.detail-2{:style=>"position:absolute;right:5px; bottom:5px; cursor:pointer;z-index:1"}
+        %i.hidden.icon-fullscreen.icon-white.documents{:style=>"position:absolute;right:5px; bottom:5px; cursor:pointer;z-index:1"}
+    .section_two_two{:style=>"width:35%;float:left"}
+      %ul{:style=>"float:left;display:inline;list-style:none;margin-left:0;width:100%"}
+        %li{:style=>"float:left;"}
+          - if @offer.artwork.artist.approved_status
+            %h3#summary_artist_name.summary_artist_name=@offer.artwork.artist.artist_name
+            %h4#summary_artist_life_span.summary_artist_life_span
+              = @offer.artwork.artist.artist_birth_year == "0" ? "( Unknown": "( #{@offer.artwork.artist.artist_birth_year}"
+              ="-"
+              = @offer.artwork.artist.artist_death_year == "0" ? " Unknown )": " #{@offer.artwork.artist.artist_death_year} ) "
+          - else
+            %h3="Unknown"
+          %h3#summary_painting_title.summary_painting_title="UNTITLED" if @offer.artwork.artwork_title.artwork_title_en.nil?
+      %ul{:style=>"list-style:none;margin-left:0px;float:left;width:100%;"}
+        %li{:style=>"float:left;"}
+          %span{:style=>"width:155px;float:left;"}="Fine art category"
+          %span#summary_category{:style=>"float:left;"}=@offer.artwork.artwork_category || "unknown"
+        %li{:style=>"float:left;"}
+          %span{:style=>"width:155px;float:left;"}="Medium"
+          %span#summary_medium{:style=>"float:left;"}=@offer.artwork.artwork_medium || "unknown"
+        %li{:style=>"float:left;"}
+          %span{:style=>"width:155px;float:left;"}="Sizes"
+          %span#summary_size{:style=>"float:left;"}
+            ="#{@offer.artwork.artwork_height} x #{@offer.artwork.artwork_width} x #{@offer.artwork.artwork_depth}" if @offer.artwork.artwork_height && @offer.artwork.artwork_width && @offer.artwork.artwork_depth
+            ="UNKNOWN" unless @offer.artwork.artwork_height && @offer.artwork.artwork_width && @offer.artwork.artwork_depth
+        %li{:style=>"float:left;"}
+          %span{:style=>"width:155px;float:left;"}="Date of creation"
+          %span#summary_year{:style=>"float:left;"}="#{@offer.artwork.artwork_creation_year} #{@offer.artwork.artwork_creation_year_era}" if @offer.artwork.artwork_creation_year
+        %li{:style=>"float:left;"}
+          %span{:style=>"width:155px;float:left;"}="Period"
+          %span#summary_period{:style=>"float:left;"}=@offer.artwork.artwork_movement_period || "UNKNOWN"
+        %li{:style=>"float:left;"}
+          %span{:style=>"width:155px;float:left;"}="Signature"
+          %span#summary_signature{:style=>"float:left;"}
+            = "√" if @offer.artwork.artwork_signature_check
+            = "No" unless @offer.artwork.artwork_signature_check
+        %li{:style=>"float:left;"}
+          %span{:style=>"width:155px;float:left;"}="Frame"
+          %span#summary_frame{:style=>"float:left;"}
+            = "√" if @offer.artwork.artwork_frame_check
+            = "No" unless @offer.artwork.artwork_frame_check
+        %li{:style=>"float:left;"}
+          %span{:style=>"width:155px;float:left;"}="Authentication Certificate"
+          %span#summary_certificate{:style=>"float:left;"}
+            = "√" if @offer.artwork.artwork_certificate_check
+            = "No" unless @offer.artwork.artwork_certificate_check
+        %li{:style=>"float:left;"}
+          %span{:style=>"width:155px;float:left;"}="Country"
+          %span#summary_country{:style=>"float:left;"}= @offer.artwork.artwork_country || "UNKNOWN"
+        %li{:style=>"float:left;"}
+          %span{:style=>"width:155px;float:left;"}="Submitted"
+          %span#summary_submitted{:style=>"float:left;"}= @offer.created_at.to_date
+        %li{:style=>"float:left;"}
+          %span{:style=>"width:155px;float:left;"}="Purpose"
+          %span#summary_purpose{:style=>"float:left;"}=@offer.offer_type || "UNKNOWN"
+  .section_three{:style=>"margin-left:3%;margin-right:3%;margin-top:10px;float:left;width:100%;height:140px;"}
+    .section_three_one{:style=>"width:65%;float:left;position:relative"}
+      %div{:style=>"float:left;width:100%;"}
+        #img_show_hi_res_parent_div{:style=>"float:left;position:relative;width:100px;margin-right:15px;height:100px;"}
+          #img_show_hi_res{:style=>"overflow:hidden;display:inline;margin-right:10px;float:left;padding-left:5px;width:100px;height:100px;cursor:pointer"}  
+            %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_hires/#{@offer.artwork.id}/#{@offer.artwork.artwork_hires_file_name}", :style=>"height:100%;width:100%", :alt=>"Image not added"}
+          %i.icon-white.icon-zoom-in.hi-res{:style=>"position: absolute;right: 0px;top: 0;z-index: 10000;cursor:pointer"}
+        #img_show_detail_1_parent_div{:style=>"float:left;position:relative;width:100px;margin-right:15px;height:100px;"}
+          #img_show_detail_1{:style=>"overflow:hidden;display:inline;margin-right:10px;float:left;width:100px;height:100px;cursor:pointer"}  
+            %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_ones/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_one_file_name}", :style=>"height:100%;width:100%", :alt=>"Image not added"}
+          %i.icon-white.icon-zoom-in.detail-1{:style=>"position: absolute;right: 0px;top: 0;z-index: 10000;cursor:pointer"}
+        #img_show_detail_2_parent_div{:style=>"float:left;position:relative;width:100px;margin-right:15px;height:100px;"}
+          #img_show_detail_2{:style=>"overflow:hidden;display:inline;margin-right:10px;float:left;width:100px;height:100px;cursor:pointer"}  
+            %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_twos/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_two_file_name}", :style=>"height:100%;width:100%", :alt=>"Image not added"}
+          %i.icon-white.icon-zoom-in.detail-2{:style=>"position: absolute;right: 0px;top: 0;z-index: 10000;cursor:pointer"}
+        #img_show_documents_parent_div{:style=>"float:left;position:relative;width:100px;margin-right:15px;height:100px;"}
+          #img_show_documents{:style=>"overflow:hidden;display:inline;margin-right:10px;float:left;width:100px;height:100px;cursor:pointer"}  
+            %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_documentations/#{@offer.artwork.id}/#{@offer.artwork.artwork_documentation_file_name}", :style=>"height:100%;width:100%", :alt=>"Image not added"}
+          %i.icon-white.icon-zoom-in.documents{:style=>"position: absolute;right: 0px;top: 0;z-index: 10000;cursor:pointer"}
+      %div{:style=>"float:left;width:100%;margin-top:10px"}
+        %p{:style=>"font-size:10px;display:inline;width:110px;float:left;margin-right:0px;"}=t '.complete_view'
+        %p{:style=>"font-size:10px;display:inline;width:110px;float:left;margin-right:0px;"}=t '.detail_one'
+        %p{:style=>"font-size:10px;display:inline;width:110px;float:left;margin-right:0px;"}=t '.detail_two'
+        %p{:style=>"font-size:10px;display:inline;width:110px;float:left;margin-right:0px;"}=t '.document'
+    .section_three_two{:style=>"float:left;width:35%"}
+      %strong=t '.section_three_two_strong_text'
+      %p=t '.section_three_two_text'
+      %br
+      %input{:type=>"button", :style=>"width:175px", :value=>"#{t '.section_three_two_button_one'}", :class=>"btn", :disabled=>"disable"}
+  .section_four{:style=>"margin-left:3%;margin-right:3%;margin-top:10px;float:left;width:100%"}
+    .section_four_one{:style=>"float:left;width:65%"}
+      %h3="ABOUT THE PAINTING"
+      %p#summary_description{:style=>"margin: 0px 0px 9px;width: 450px;height: 200px;"}
+        =@offer.artwork.artwork_description.get_description
+    .section_four_two{:style=>"float:left;width:32%;"}
+      %input{:type=>"button", :value=>"#{t '.section_four_two_button_one'}", :style=>"margin-top:65px;width:175px", :class=>"btn", :disabled=>"disable"}
+      %input{:type=>"button", :value=>"#{t '.section_four_two_button_two'}", :style=>"margin-top:10px;width:175px", :class=>"btn", :disabled=>"disable"}
+      %input{:type=>"button", :value=>"#{t '.section_four_two_button_three'}", :style=>"margin-top:10px;width:175px", :class=>"btn", :disabled=>"disable"}
+  
+  .section_five{:style=>"background-color:#727272;margin-bottom:10px;color:#FFF;float:left;width:100%;padding-bottom: 10px;padding-top: 10px;"}
+    %span{:style=>"font-size:10px;float:left;width:60%;line-height:15px;margin-left:10px;"}=t '.section_five_text_one'
+    %span
+    %input{:id=>"", :class=>"btn new_offer_edit", :style=>"width:100px;margin-top:5px;width:110px;margin-left:80px;", :value=>"#{t '.section_five_button_one'}", :type=>"button"}
+    %input{:class=>"btn new_offer_submit", :style=>"width:100px;margin-top:5px;width:110px;", :value=>"#{t '.section_five_button_two'}", :type=>"button"}
+    / .hidden#full_screen_hi_res
+    /   %div
+    /     %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_hires/#{@offer.artwork.id}/#{@offer.artwork.artwork_hires_file_name}", :style=>"width:100%;height:100%"}
+    /   %span#full_screen_hi_res_close
+    /     ="Close x"
+    / .hidden#full_screen_detail_1
+    /   %div
+    /     %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_ones/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_one_file_name}", :style=>"width:100%;height:100%"}
+    /   %span#full_screen_detail_1_close
+    /     ="Close x"
+    / .hidden#full_screen_detail_2
+    /   %div
+    /     %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_twos/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_two_file_name}", :style=>"width:100%;height:100%"}
+    /   %span#full_screen_detail_2_close
+    /     ="Close x"
+    / .hidden#full_screen_documents
+    /   %div
+    /     %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_documentations/#{@offer.artwork.id}/#{@offer.artwork.artwork_documentation_file_name}", :style=>"width:100%;height:100%;"}
+    /   %span#full_screen_documents_close
+    /     ="Close x"

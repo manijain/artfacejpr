@@ -1,0 +1,175 @@
+.container_forum_index {
+	width:820px;
+	float:left;
+	margin-left:2%;
+}
+.container_forum_index div.layout_part_one {
+	float:left;
+}
+
+.container_forum_index div.layout_part_one h2 {
+	float:left;
+	font-size: 24px;
+}
+
+.container_forum_index div.layout_part_one ul li {
+	float:left;
+	width: 30%;
+	padding: 10px;
+}
+.container_forum_index div.layout_part_two {
+	float: left;
+}
+
+.container_forum_index div.layout_part_two input.forum_message_title {
+	margin-left:10px;
+	float: left;
+	width: 500px;
+	margin-right: 30px;
+	border: 1px solid black;
+}
+.container_forum_index div.layout_part_three {
+	float: left;
+	width: 798px;
+	padding-left:10px;
+	padding-right:10px;
+	background-color: #727272;
+	border: 1px solid #727272;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	margin-top: 20px;
+}
+.container_forum_index div.layout_part_three h3.heading {
+	float: left;
+	width: 150px;
+}
+.container_forum_index div.layout_part_three div.search {
+	float: left;
+}
+.container_forum_index div.layout_part_three form.forum_basic_search {
+	float: left;
+	margin-top: 20px;
+}
+
+.container_forum_index div.layout_part_three form.forum_basic_search input.basic_search_term {
+	float: left;
+	border: 1px solid black;
+	width: 470px;
+}
+
+.container_forum_index div.layout_part_three form.forum_basic_search img.search_toggle {
+	float: left;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-top: 2px;
+	cursor: pointer;	
+}
+
+.container_forum_index div.layout_part_three form.forum_advanced_search {
+	float: left;
+	display: none;
+	margin-top: 20px;
+}
+
+.container_forum_index div.layout_part_three form.forum_advanced_search input.submit_button {
+	margin-left: 10px;
+}
+
+.container_forum_index div.layout_part_three form.forum_advanced_search ul.search_filters {
+	width: 530px;
+}
+
+.container_forum_index div.layout_part_three form.forum_advanced_search ul.search_filters li.filter_li {
+	width: 100%;
+}
+.container_forum_index div.layout_part_three form.forum_advanced_search ul.search_filters li.filter_li select.select_first {
+	width: 100px;
+}
+.container_forum_index div.layout_part_three form.forum_advanced_search ul.search_filters li.filter_li span.append_span_field {
+	width: auto;
+}
+
+.container_forum_new_question	{
+	width: 820px;
+	float: left;
+	margin-left: 2%;
+}
+
+.container_forum_new_question div.layout_part_one {
+	float: left;
+}
+
+.container_forum_new_question div.layout_part_one h2 {
+	float: left;
+}
+
+.container_forum_new_question div.layout_part_one ul {
+	float: left;
+}
+
+.container_forum_new_question div.layout_part_one ul li {
+	float: left;
+	width: 31%;
+	padding: 5px;
+}
+.container_forum_new_question div.layout_part_two {
+	float: left;
+	width: 100%;
+}
+.container_forum_new_question div.layout_part_two form.forum_new_message {
+	float: left;
+	width: 100%;
+	margin:0;
+	padding: 0;
+	position: relative;
+}
+.container_forum_new_question div.layout_part_two form.forum_new_message ul {
+	float: left;
+	width: 100%;
+}
+.container_forum_new_question div.layout_part_two form.forum_new_message li {
+	float: left;
+	width: 100%;
+}
+.container_forum_new_question div.layout_part_two form.forum_new_message ul li label {
+	float: left;
+	line-height: 30px;
+  padding-right: 20px;
+  text-align: right;
+  width: 40%;
+  font-weight: bold;
+}
+
+.container_forum_new_question div.layout_part_two form.forum_new_message ul li input[type=text] {
+	float: left;
+	width: 55%;
+	border: 1px solid black;
+}
+
+.container_forum_new_question div.layout_part_two form.forum_new_message ul li textarea {
+	float: left;
+	width: 55%;
+	border: 1px solid black;
+	resize:none;
+	height: 300px;
+}
+
+.container_forum_new_question div.layout_part_two form.forum_new_message ul li input[id=offer_id] {
+	width: 35%;
+}
+
+.container_forum_new_question div.layout_part_two form.forum_new_message div.ajax_overlay {
+	width:100%;
+	height:100%;
+	position:absolute;
+	top:0;
+	left:0;
+	background-color:white;
+	opacity:0.6;
+	display: none;
+}
+.container_forum_new_question div.layout_part_two form.forum_new_message div.ajax_overlay img {
+	position: absolute;
+	left: 50%;
+	top: 45%;
+}

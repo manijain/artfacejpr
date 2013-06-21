@@ -1,0 +1,41 @@
+.sell-art-area-messages{:style=>"position:relative;"}
+  %h4="SELL ART: MESSAGES"
+  - unless @user_messages_exists.blank?
+    - if @unread_messages == 0
+      %p{:style=>"display:inline"}="There are no new message for your offers."
+    - elsif @unread_messages == 1
+      %p{:style=>"display:inline"}="There is #{@unread_messages} new message for your offers. Click for details"
+    - else
+      %p{:style=>"display:inline"}="There are #{@unread_messages} new messages for your offers. Click for details"
+    .nav-sort-bar
+      %span#messages_sort_id_one_text="Sort list by"
+      %select#messages_sort_id_one{:style=>"margin-right:10px;margin-left:10px;width:135px;"}
+        %option{:value=>"Artist Name"}="Artist Name"
+        %option{:value=>"offer_end_date"}="offer end date"
+        %option{:value=>"new messages"}="new messages"
+      %span#messages_sort_id_two_text="Show"
+      %select#messages_sort_id_two{:style=>"margin-right:130px;margin-left:10px;width:130px;"}
+        %option{:value=>"All offers"}="All offers"
+        %option{:value=>"Active offers"}="Active offers"
+        %option{:value=>"Inactive offers"}="Inactive offers"
+      #sort_id_four{:style=>"float:left;width:230px;"}
+        = form_for :offer, :url=> "/offer/sell_art_area_messages_sorting", :remote=>true, :html=> {:style=>"margin:0;"} do |f|
+          = f.hidden_field "message_search", :value=>"0"
+          = f.hidden_field "sort_option_one", :name=>"sort_one"
+          = f.hidden_field "sort_option_two", :name=>"sort_two"
+          = f.hidden_field "messages_sort", :name=>"messages_sort", :value=>"true"
+          .input-append
+            = f.text_field :search_item_in_messages, :class=>"span2", :id=>"appendedInput", :placeholder=>"search in user messages"
+            -#%span.add-on
+              %i.icon-plus-sign
+          =# f.submit :id=>"offers_messages_search_submit", :value=>"Go", :class=>"btn", :style=>"margin-left: 5px;margin-top: 0.5px;"
+    #ajax-loader-big{:style=>"left: 400px;position: absolute;top: 30%;z-index: 100;display:none;"}
+      %img{:src=>"/images/ajax-loader-big.gif"}
+    #offers_messages
+      = render :partial => "offer/sell-art/sell_art_area_messages_data"
+    - unless @user_messages_exists.blank?
+      #messages_unfold_div
+        %input#messages_unfold_collapse.btn{:type=>"button", :value=>"UNFOLD ALL MESSAGES", "data-toggle"=>"0"}
+    #overlay_div{:style=>"background-color: white;display: block;height: 100%;left: 0;opacity: 0.4;position: absolute;top: 0;width: 100%;z-index: 2;display:none;"}
+  - else
+    %p.pull-left{:style=>"margin-top:12px;"}="You have no messages for your offers"

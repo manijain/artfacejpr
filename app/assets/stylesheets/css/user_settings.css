@@ -1,0 +1,139 @@
+.subscription_data_container {
+  width:780px;
+  padding-left:20px;
+  padding-right:20px;
+  background-color:#c9c9c9;
+  float: left;
+}
+.hr_user_settings {
+  width:760px;
+  border-bottom:1px dashed black;
+  height:0;
+  margin-top:5px;
+  margin-bottom:5px;
+  float: left;
+}
+ul.user_settings {
+  width:500px;
+  margin-left:100px;
+  float:left;
+  list-style: none;
+}
+ul.user_settings li {
+  float:left;
+}
+ul.user_settings li span:nth-child(2n+1) {
+  width:200px;
+  text-align: right;
+  float:left;
+}
+ul.user_settings li span:nth-child(2n) {
+  margin-left:20px;
+  width:200px;
+  text-align:left;
+  float:left;
+}
+
+.privacy_settings_container {
+  width:780px;
+  padding-left:20px;
+  padding-right:20px;
+  background-color:#e1e1e1;
+  float: left;
+  position: relative;
+}
+ul.privacy_settings {
+  float: left;
+  margin-left: 40px;
+  width:600px;
+  list-style: none;
+}
+ul.privacy_settings li {
+  float: left;
+  margin-top: 10px;
+}
+ul.privacy_settings li span {
+  float: left;
+  width:350px;
+}
+ul.privacy_settings li input {
+  float: left;
+}
+
+.user_documents_container {
+  width:780px;
+  padding-left:20px;
+  padding-right:30px;
+}
+ul.user_documents {
+  float: left;
+  margin-left: 40px;
+  width:600px;
+  list-style: none;
+}
+ul.user_documents li {
+  float:left;
+}
+ul.user_documents li span:nth-child(2n+1) {
+  width:200px;
+  text-align: right;
+  float:left;
+}
+ul.user_documents li span:nth-child(2n) {
+  margin-left:20px;
+  width:200px;
+  text-align:left;
+  float:left;
+}
+#user_end_subscription {
+  position: absolute;
+  right: 20px;
+  top: 70px;
+  width: 174px;
+}
+#cancel_subscription_container {
+  width:420px;
+  height:auto;
+  background-color:white;
+  position:absolute;
+  border-radius:10px;
+  top:100px;
+  left:135px;
+  float:left;
+  display: none;
+}
+#cancel_subscription_container div {
+  width:380px;
+  height:auto;
+  border-radius:10px;
+  border:10px solid #e1e1e1;
+  padding:10px;
+  float:left;
+}
+#cancel_subscription_container div span {
+  float:left;
+  width:380px;
+  text-align:center;
+}
+#user_end_subscription_cancel {
+  float:left;
+  width:80px;
+}
+#user_end_subscription_confirm {
+  float: right;
+  width:80px;
+}
+.subscription_data_relative_fields_container {
+  position:relative;
+}
+#user_edit_subscription {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+  width: 145px;
+}
+.user_edit_data {
+  position: absolute;
+  right: 20px;
+  top: 140px;
+}

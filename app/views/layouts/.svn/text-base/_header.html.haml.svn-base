@@ -1,0 +1,16 @@
+%div.header
+	%ul.nav.nav-pills
+		%li.c_nav_image
+			= link_to image_tag("artface.png"), root_path, :class => "artface"
+		%li.c_nav_link_bar
+			= link_to "HOME", root_path
+		%li.c_nav_link_bar
+			= link_to "OFFERS", offers_path
+		%li.c_nav_link_bar
+			= link_to "ABOUT", about_path
+		%li.c_nav_link_bar
+			= link_to "MEMBER FEES", memberfees_path
+		%li.c_nav_link_bar
+			= link_to "SIGN UP", new_user_registration_path
+		%li.c_nav_link_bar
+			= link_to "LOG IN", new_user_session_path

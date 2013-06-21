@@ -1,0 +1,9 @@
+= render :partial => "user_header"
+%br
+%br
+= "You have recently registered at our website, but there has been some difficulty in processing your payment. Please contact our support team at &lt;a href='mailto:help@[Name].com'&gt; cloud.test.dev@gmail.com &lt;/a&gt; to complete the payment process to avoid deactivation of account.".html_safe
+= "There has been some error in processing your credit card."
+= @error_messages
+%br
+%br
+= render :partial => "user_footer"

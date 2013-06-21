@@ -1,0 +1,167 @@
+%div.sign_up_layout_one
+	%div.sign_up_section_one
+		%h2
+			=t ".sign_up"
+	%div.sign_up_section_two	
+		%table
+			%tbody
+				%tr
+					%td=t ".text_one"
+					%td=t ".text_two"
+					%td=t ".text_three"
+		%div.sign_up_section_three
+			%table
+				%tr
+					%th=t ".subscription_title"
+					%th="BASIC"
+					%th=""
+				%tr
+					%td=t ".subscription_text"
+					%td
+						="annual price: &pound: 100.00<br />available offers/year: 10<br />viewable offers/year: unlimited.<br />".html_safe
+						%select
+							%option="auto-renewal"
+							%option="one-year"
+					%td
+						=link_to t(".change_subscription"), "#"
+	
+		%div.sign_up_section_four
+			%h2=t ".personal_data_title"
+			%p=t ".personal_data_text"
+		
+			%table
+				%tbody
+					%tr
+						%td.sign_up_section_four_td_left=t ".full_name"
+						%td.sign_up_section_four_td_right
+							%span
+								%select{:id=>"user_salutation"}
+									%option="Mr."
+									%option="Mrs."
+									%option="Miss"
+									%option="Sir"
+							%input{:type=>"text", :id=>"user_first_name", :placeholder=>"#{t('.first_name_placeholder')}"}
+							%input{:type=>"text", :id=>"user_last_name", :placeholder=>"#{t('.last_name_placeholder')}"}
+					%tr
+						%td.sign_up_section_four_td_left=t ".company"
+						%td.sign_up_section_four_td_right
+							%input{:type=>"text", :id=>"user_company", :placeholder=>"#{t('.company_placeholder')}"}
+					%tr
+						%td.sign_up_section_four_td_left=t ".address"
+						%td.sign_up_section_four_td_right
+							%input{:type=>"text", :id=>"user_street", :placeholder=>"#{t('.street_placeholder')}"}
+					%tr
+						%td.sign_up_section_four_td_left
+						%td.sign_up_section_four_td_right
+							%input{:type=>"text", :id=>"user_zip_code", :placeholder=>"#{t('.zip_code_placeholder')}"}
+							%input{:type=>"text", :id=>"user_city", :placeholder=>"#{t('.city_placeholder')}"}
+					%tr
+						%td.sign_up_section_four_td_left=t ".country"
+						%td.sign_up_section_four_td_right
+							%select.sign_up_section_four_td_country#user_country
+								%option=t '.country_select_default'
+								%option="United Kingdom"
+								%option="Russia"
+								%option="Italy"
+								%option="Germany"
+						%td
+							%span#user_country_error=t ".user_country_error"
+					%tr
+						%td.sign_up_section_four_td_left=t ".phone_fax"
+						%td.sign_up_section_four_td_right
+							%input{:type=>"text", :id=>"user_phone_number", :placeholder=>"#{t('.phone_number_placeholder')}"}
+							%input{:type=>"text", :id=>"user_fax_number", :placeholder=>"#{t('.fax_number_placeholder')}"}
+					%tr
+						%td.sign_up_section_four_td_left=t ".tax_id"
+						%td.sign_up_section_four_td_right
+							%input{:type=>"text", :id=>"user_tax_id", :placeholder=>"#{t('.tax_id_placeholder')}"}
+							=t(".tax_id_notice")
+		%div.sign_up_section_five
+			%h2=t ".login_data_title"
+			%p=t ".login_data_text"
+			%table
+				%tbody
+					%tr
+						%td.sign_up_section_four_td_left=t ".email"
+						%td.sign_up_section_four_td_right
+							%span
+								%input{:type=>"text", :id=>"user_email", :placeholder=>"#{t('.email_placeholder')}"}
+								%span#user_email_error_taken=t ".user_email_error_taken"
+								%span#user_email_error_invalid=t ".user_email_error_invalid"
+								= t ".email_notice"
+					%tr
+						%td.sign_up_section_four_td_left=t ".password"
+						%td.sign_up_section_four_td_right
+							%span
+								%input{:type=>"text", :id=>"user_password", :placeholder=>"#{t('.password_placeholder')}"}
+								%span#password_mismatch_error=t ".password_mismatch_error"
+								= t ".password_notice"
+					%tr
+						%td
+						%td
+							%input{:type=>"text", :id=>"user_password_confirmation", :placeholder=>"#{t('.retype_password_placeholder')}"}
+		%div.sign_up_section_six
+			%h2=t ".payment_method_title"
+			%p=t ".payment_method_text"
+			%div.sign_up_section_six_container
+				%div.sign_up_section_six_container_step_one
+					%div
+						="check<br />box".html_safe
+					%div
+						%strong=t ".payment_card_title"
+						%br
+						=t(".payment_card_text").html_safe
+						%input{:style=>"width:30px;", :type=>"text"}
+						%input{:style=>"width:30px;", :type=>"text"}
+						%input{:style=>"width:30px;", :type=>"text"}
+					%div
+						%select#card_type
+							%option="Credit Card type"
+							%option="VISA"
+							%option="Mastercard"
+							%option="Maestro"
+						%br
+						%strong=t ".expires"
+						%select{:style=>"width:80px;", :type=>"text", :id=>"card_expiry_month"}
+							%option="Jan"
+							%option="Feb"
+							%option="Mar"
+							%option="Apr"
+							%option="May"
+							%option="Jun"
+							%option="Jul"
+							%option="Aug"
+							%option="Sep"
+							%option="Oct"
+							%option="Nov"
+							%option="Dec"
+						%select{:style=>"width:80px;", :type=>"text", :id=>"card_expiry_year"}
+							-(2012..2040).each do |i|
+								%option="#{i}"
+					%div
+						%ul.unstyled
+							%li{:style=>"width:210px;"}
+								%input{:type=>"text",:id=>"card_number", :placeholder=>"#{t('.card_number_placeholder')}"}
+							%li
+								%input{:type=>"text",:id=>"card_owner", :placeholder=>"#{t('.card_holder_name_placeholder')}"}
+							%li
+								%input{:type=>"text",:id=>"card_code", :placeholder=>"#{t('.card_verification_code')}"}
+				%div.sign_up_section_six_container_step_two
+					%div
+						="check<br />box".html_safe
+					%div
+						%strong=t ".payment_paypal_title"
+						%p=t(".payment_paypal_text_one").html_safe
+					%div
+						%p=t(".payment_paypal_text_one").html_safe
+				%div.sign_up_section_six_container_step_three
+					%div
+						="check<br />box".html_safe
+					%div
+						%strong=t ".payment_bank_title"
+						%p=t(".payment_bank_text_one").html_safe
+					%div
+						%p=t(".payment_bank_text_two").html_safe
+		%div{:style=>"float:right"}
+			%br
+			%input{:class=>"btn", :value=>"#{t('.continue_sign_up')}", :type=>"button", :onclick=>"one_to_two();"}

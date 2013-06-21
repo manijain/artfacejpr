@@ -1,0 +1,196 @@
+# Additional translations at https://github.com/plataformatec/devise/wiki/I18n
+
+en:
+  errors:
+    messages:
+      expired: "has expired, please request a new one"
+      not_found: "not found"
+      already_confirmed: "was already confirmed, please try signing in"
+      not_locked: "was not locked"
+      not_saved:
+        one: "1 error prohibited this %{resource} from being saved:"
+        other: "%{count} errors prohibited this %{resource} from being saved:"
+
+  devise:
+    failure:
+      already_authenticated: 'You are already signed in.'
+      unauthenticated: 'You need to sign in or sign up before continuing.'
+      unconfirmed: 'You have to confirm your account before continuing.'
+      locked: 'Your account is locked.'
+      invalid: 'Invalid email or password.'
+      invalid_token: 'Invalid authentication token.'
+      timeout: 'Your session expired, please sign in again to continue.'
+      inactive: 'Your account was not activated yet.'
+    sessions:
+      signed_in: 'Signed in successfully.'
+      signed_out: 'Signed out successfully.'
+    passwords:
+      send_instructions: 'You will receive an email with instructions about how to reset your password in a few minutes.'
+      updated: 'Your password was changed successfully. You are now signed in.'
+      updated_not_active: 'Your password was changed successfully.'
+      send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
+      no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
+    confirmations:
+      send_instructions: 'You will receive an email with instructions about how to confirm your account in a few minutes.'
+      send_paranoid_instructions: 'If your email address exists in our database, you will receive an email with instructions about how to confirm your account in a few minutes.'
+      confirmed: 'Your account was successfully confirmed. You are now signed in.'
+    registrations:
+      signed_up: 'Welcome! You have signed up successfully.'
+      signed_up_but_unconfirmed: 'A message with a confirmation link has been sent to your email address. Please open the link to activate your account.'
+      signed_up_but_inactive: 'You have signed up successfully. However, we could not sign you in because your account is not yet activated.'
+      signed_up_but_locked: 'You have signed up successfully. However, we could not sign you in because your account is locked.'
+      updated: 'You updated your account successfully.'
+      update_needs_confirmation: "You updated your account successfully, but we need to verify your new email address. Please check your email and click on the confirm link to finalize confirming your new email address."
+      destroyed: 'Bye! Your account was successfully cancelled. We hope to see you again soon.'
+      step_one:
+        title: "CHOOSE YOUR SUBSCRIPTION"
+        text_one: "Artface.com is a very easy to use service - and so is the pricing model. We only charge a annual sub-scription fee which already gives you"
+        text_two: "unlimited access to all availbale paintings and also allows you to offer 10 paintings per year. If you have more to show you can upgrade your subscription in"
+        text_three: "order to offer more paintings per year. And that't it! No more provisions. Just you and art"
+        basic: "BASIC"
+        plus: "PLUS"
+        pro: "PRO"
+        premium: "PREMIUM"
+        no_limit: "NO LIMIT"
+        row_one: "Annual Fee (1 year)"
+        row_two: "number of paintings you <br>can offer per year"
+        row_three: "numbers of offers you <br>can view per year"
+        row_four: "wishlist (be alerted <br>automatically if new art <br>is offered matching your <br> interests)"
+        price_basic: "$ 100,00"
+        price_plus: "$ 170,00"
+        price_pro: "$ 240,00"
+        price_premium: "$ 350,00"
+        price_no_limit: "$ 500,00"
+        limit_basic: "10"
+        limit_plus: "20"
+        limit_pro: "30"
+        limit_premium: "50"
+        limit_no_limit: "unlimited"
+        unlimited_text: "unlimited"
+        check: "√"
+        sign_up: "SIGN UP"
+        subscription_title: "AUTO-RENEWAL OR I-YEAR SUBSCRIPTION"
+        upgrades_title: "UPGRADES"
+        subscription_text_one: "Your subscrition will be automatically prolonged for <br>another year - unless you can can cancel it any time before <br>the end of the subscription period"
+        subscription_text_two: "You can also chose a limited 1-year subscription <br>which will not automatically renew itself.<br> You will not be notified by email 1 month in advance"
+        subscription_text_three: "about the end of your subscription and the possibi-<br>lities to continue it."
+        upgrades_text_one: "if you need want to offer more painting <br>than your current subscription allows you can <br>get an upgrade at any time. you just pay the difference to the price"
+        upgrades_text_two: "of your active subscription plan and get <br>additional paintings you can put on offer (eg. with the --Basic-- subscription you can <br>get 20 more pantings by up-"
+        upgrades_text_three: "about the end of your subscription <br>and the possibilities to continue it."
+      step_two:
+        sign_up: "Sign up"
+        text_one: "You are just a few steps away from using the full power of Artface.com. All data you enter here is treated 100% confidentially."
+        text_two: "Your personal data will not be issued to other users unless you give the explicit permission. See our privacy policy and Terms & conditions. If you have"
+        text_three: "any further question. All your personal data will be given to nobody."
+        subscription_title: "YOUR SUBSCRIPTION"
+        personal_data_title: "YOUR PERSONAL DATA"
+        personal_data_text: "Your personal data is treated 100% confidentially and is only needed for invoicing reasons. Your personal data will not be visible to others unless you give explicit permission."
+        subscription_text: "Click here to learn more about the other subscription plans or change your selection"
+        change_subscription: "CHANGE SUBSCRIPTION"
+        full_name: "FULL NAME"
+        first_name_placeholder: "FIRST NAME*"
+        last_name_placeholder: "LAST NAME*"
+        company_placeholder: "COMPANY NAME"
+        street_placeholder: "STREET"
+        city_placeholder: "CITY"
+        zip_code_placeholder: "ZIP CODE"
+        country_select_default: "Choose your country"
+        phone_number_placeholder: "TELEPHONE NUMBER"
+        fax_number_placeholder: "FAX NUMBER"
+        tax_id_placeholder: "TAX ID"
+        tax_id_notice: "if you are a company"
+        email_placeholder: "EMAIL*"
+        password_placeholder: "PASSWORD*"
+        retype_password_placeholder: "RETYPE PASSWORD*"
+        card_number_placeholder: "CREDIT CARD NUMBER*"
+        card_holder_name_placeholder: "NAME CREDITCARD OWNER*"
+        card_verification_code: "VERIFICATION CODE"
+        company: "COMPANY"
+        address: "ADDRESS"
+        country: "COUNTRY"
+        phone_fax: "PHONE & FAX"
+        tax_id: "TAX ID"
+        expires: "EXPIRES"
+        price_basic: "$ 100,00"
+        price_plus: "$ 170,00"
+        price_pro: "$ 240,00"
+        price_premium: "$ 350,00"
+        price_no_limit:  "$ 500,00"
+        limit_basic: "10"
+        limit_plus: "20"
+        limit_pro: "30"
+        limit_premium: "50"
+        limit_no_limit: "unlimited"
+        login_data_title: "YOUR LOGIN DATA"
+        login_data_text: "Your email address only serves as a login and will never be shown to anyone else unless you grant the explicit permission."
+        email:  "EMAIL ADDRESS"
+        password: "PASSWORD"
+        user_country_error: "Please select your country"
+        email_notice: "(serves as login)"
+        user_email_error_taken: "Email address already taken"
+        user_email_error_invalid: "Email address is not valid"
+        password_notice: "(at least 8 characters with at least 1 number and 1 special character.)"
+        password_mismatch_error: "Password Mismatch"
+        payment_card_title: "PAYMENT BY CREDIT CARD"
+        payment_card_text: "We accept Visa, Mastercard, Amex<br /> and Diners Club.<br />"
+        payment_paypal_title: PAYMENT BY PAYPAL
+        payment_paypal_text_one: "Check this option to use your Paypal<br />account for hassle-free,quick and<br />free-of-charge payment."
+        payment_paypal_text_one: "<br />Paypal payment details will be col-<br />lected in a new window after you have<br />completed the sign-up process"
+        payment_method_title: "YOUR PAYMENT METHOD"
+        payment_method_text: "Finish your sign-up process by chosing your payment method. The annual subscription fee is paid in advance."
+        payment_bank_title: "PAYMENT BY BANK TRANSFER"
+        payment_bank_text_one: "Check this option to use a standard<br />bank transfer to settle your payment.<br />After we have received your payment<br />we will activate your account."
+        payment_bank_text_two: "<br />Bank details will be sent by email<br />after you have completed the sign-up<br />process"
+        continue_sign_up: "CONTINUE SIGN UP"
+      step_three:
+        sign_up_title: "SIGN UP SUMMARY"
+        subscription_package: "SUBSCRIPTION PACKAGE"
+        annual_price: "ANNUAL PRICE"
+        available_offers: "AVAILABLE OFFERS/YEAR"
+        viewable_offers: "VIEWABLE OFFERS/YEAR"
+        subscription_method: "SUBSCRIPTION METHOD"
+        confirm_subscription_method_paypal: "PAYMENT BY PAYPAL"
+        confirm_subscription_method_card: "PAYMENT BY CREDIT CARD"
+        confirm_subscription_method_bank_transfer: "PAYMENT BY BANK TRANSFER"
+        gender: "GENDER"
+        first_name: "FIRST NAME"
+        last_name: "LAST NAME"
+        company: "COMPANY"
+        street: "STREET"
+        zip_code: "ZIP CODE"
+        city: "CITY"
+        country: "COUNTRY"
+        phone_number: "PHONE NUMBER"
+        fax_number: "FAX NUMBER"
+        tax_id: "TAX ID"
+        email_login: "EMAIL & LOGIN"
+        password: "PASSWORD"
+        payment_method: "PAYMENT METHOD"
+        card_number: "CARD NUMBER"
+        card_owner: "CARD OWNER"
+        expires: "EXPIRES"
+        verification_code: "VERIFICATION CODE"
+        accept_agree_terms: "I agree to the <a href=\"/terms_conditions\">Terms & Conditions</a> and the <a href=\"/#privacy_statement\">Privacy Policy</a> of Artface.com."
+        agree_terms_one: "After clicking “complete sign-up” you will receive an email with a verification link in order to approve your identity.This email will be sent to "
+        agree_terms_two: ". Please click the verification link in the email within 48 hours otherwise the subscription will be canceled."
+        complete_sign_up: "COMPLETE SIGN UP"
+        go_back: "GO BACK"
+        paypal_express_checkout: "PAYPAL EXPRESS CHECKOUT"
+        your_subscription_data: "YOUR SUBSCRIPTION DATA"
+        subscription_package_renewal: "SUBSCRIPTION PACKAGE RENEWAL"
+        button_change: "CHANGE"
+        credit_card: "Credit Card"
+    unlocks:
+      send_instructions: 'You will receive an email with instructions about how to unlock your account in a few minutes.'
+      unlocked: 'Your account has been unlocked successfully. Please sign in to continue.'
+      send_paranoid_instructions: 'If your account exists, you will receive an email with instructions about how to unlock it in a few minutes.'
+    omniauth_callbacks:
+      success: 'Successfully authenticated from %{kind} account.'
+      failure: 'Could not authenticate you from %{kind} because "%{reason}".'
+    mailer:
+      confirmation_instructions:
+        subject: 'Confirmation instructions'
+      reset_password_instructions:
+        subject: 'Reset password instructions'
+      unlock_instructions:
+        subject: 'Unlock Instructions'

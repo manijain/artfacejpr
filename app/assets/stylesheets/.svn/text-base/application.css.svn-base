@@ -1,0 +1,166 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+ 
+.header {
+	left: 15px;
+  position: relative;
+}
+
+.c_nav_link_bar a {
+	cursor: pointer !important;
+	position: relative;
+	top: 22px;
+	color: black !important;
+}
+
+.c_nav_link_bar_active a {
+	
+} 
+
+.c_nav_link_bar a:hover {
+/*	font-weight: bold; */
+	background-color: #FFF  !important;
+}
+
+.c_nav_image a:hover {
+	background-color: #FFF  !important;
+}
+
+.sign_up_layout_one {
+	width: 820px;
+	margin-left: 2%;
+}
+.sign_up_section_three {
+	background-color: #E9E9E9;
+}
+
+.sign_up_section_four {
+	background-color: #A5A5A5;
+
+}
+.sign_up_section_four h2 {
+	margin: 0 auto;
+}
+.sign_up_section_four_td_left {
+	float: right;
+	vertical-align: middle;
+	padding-top: 5px;
+}
+.sign_up_section_four_td_right select {
+	width: 75px;
+}
+.sign_up_section_four_td_country {
+	width: 100% !important;
+}
+
+.sign_up_section_five {
+	background-color: #EBEBEB;
+}
+
+.sign_up_section_five h2 {
+	margin: 0 auto;
+}
+
+.sign_up_section_six {
+	background-color: #A5A5A5;
+	float: left;
+	width: 100%;
+}
+
+.sign_up_section_six h2 {
+	margin: 0 auto;
+}
+.sign_up_section_six_container {
+	float: left;
+}
+.sign_up_section_six_container div{
+	float: left;
+	margin: 3px 10px 0px 5px;
+}
+.sign_up_section_six_checkbox {
+
+}
+.footer {
+	margin-left: 2%;
+}
+.footer_content {
+	background-color: #727272;
+  float: left;
+  width: 820px;
+  /*
+  	margin: 0 0 0 15px; 
+  	padding-right: 10px; 
+  	padding-left: 5px;
+  */
+}
+.footer_content div {
+	float: left;
+	margin: 3px 10px 0px 5px;
+}
+.footer_links {
+	text-align: center;
+	width: 100%;
+}
+.footer_links a {
+	text-align: center;
+	color: #fff;
+}
+
+.sign_up_layout_two {
+	margin-left: 2%;
+	display: none;
+	width: 820px;
+}
+
+.sign_up_layout_two_section_two {
+	background-color:#E9E9E9;
+}
+.sign_up_layout_two_section_two div {
+	width: 300px;
+}
+
+.sign_up_layout_two_section_two div ul {
+	text-align: right;
+	list-style: none outside none;
+}
+.sign_up_layout_two_section_two div ul li span {
+	margin-left: 10px;
+	float: right;
+}
+
+.sign_up_section_three table {
+	table-layout: fixed;
+}
+
+.sign_up_section_three table td {
+	width: 40%;
+	vertical-align: top;
+}
+#user_email_error_taken {
+	display: none;
+	color: red;
+}
+#user_email_error_invalid {
+	display: none;
+	color: red;
+}
+#password_mismatch_error {
+	display: none;
+	color: red;
+}
+#user_country_error {
+	padding-bottom: 8px;
+	color: red;
+	display: none;
+}

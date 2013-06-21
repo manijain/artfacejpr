@@ -1,0 +1,424 @@
+
+.wrapper_admin{
+margin:0 auto;
+width:800px;
+}
+.head_user_update_admin
+{
+background-color:#FFFFFF;
+height:60px;
+}
+.head_user_update_admin h3{
+ padding: 3px 0 0;
+float:left;
+font-size:20px;
+font-weight:bold;
+}
+.head_user_update_admin h6{
+margin:17px 0 0 0;
+float:left;
+}
+.input1_user_update_admin{
+float:right;
+
+margin: 13px 39px 0 0;
+background-color: #AEAEAE;
+border: 4px solid #E2E2E2;
+color: white;
+width:110px;
+border-radius: 5px; 
+-webkit-border-radius: 5px;
+moz-border-radius: 5px;
+text-align: center; 
+}
+.head1_user_update_admin{
+background-color:#E2E2E2;
+height:155px;
+
+}
+.head1_user_update_admin h1{
+padding: 15px 0 0 20px;
+font-size:20px;
+font-weight:bold;
+}
+.head1_user_first_div_update_admin{
+
+ float:right;
+ margin: -85px 60px 0 0;
+ width: 161px;
+
+}
+.head1_user_first_div_update_admin label{
+   float: right;
+    margin-bottom: -8px;
+    margin-right: -541px !important;
+    margin-top: 35px;
+}
+
+.head1_user_sec_div_update_admin{
+
+margin: 10px 0 0 100px;
+width: 420px;
+}
+
+.head1_user_sec_div_update_admin label {
+    clear: both;
+    margin-bottom: -13px;
+}
+
+.head1_user_update_admin select{
+background-color: #AEAEAE;
+    border: 2px solid white;
+    color: white;
+    border-radius: 5px; 
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    float: right;
+    margin-right: 23px;
+
+}
+.head2_user_update_admin
+{
+background-color:#AEAEAE;
+
+
+}
+.details_user_update_admin{
+
+margin:27px 0 0px 145px;
+}
+.head2_user_update_admin label{
+display: inline !important;
+  font-size: 12px !important;
+  font-weight: bold !important
+
+}
+.head2_user_select1_update_admin
+{
+
+background-color: #AEAEAE;
+border: 2px solid white;
+color: white;
+margin: 0 0 6px 16px;
+padding-bottom: 6px;
+padding-top: 6px;
+width: auto;
+}
+.head2_user_select2_update_admin{
+background-color: #AEAEAE;
+    border: 2px solid white;
+    color: white;
+    margin: 4px 0 0 25px;
+    padding-bottom: 6px;
+    padding-top: 6px;
+    width: 485px;
+    margin-bottom: 6px;
+}
+.head2_user_input1_update_admin{
+    border-radius: 0 0 0 0 !important;
+    margin-top: 4px !important;
+    width: 200px !important;
+
+}
+.head2_user_input2_update_admin{
+    border-radius: 0 0 0 0 !important;
+    margin-top: 4px !important;
+    width: 212px;
+}
+.head2_user_input3_update_admin{
+    margin-left: 25px;
+    width: 482px;
+    border: 1px solid black !important;
+    border-radius: 0 0 0 0 !important;
+    height: 28px !important;
+    margin-top: 4px !important;
+    }
+.head2_user_input4_update_admin{
+margin-left: 26px; 
+width: 483px;
+    border-radius: 0 0 0 0 !important;
+    margin-top: 4px !important;
+}
+.head2_user_input5_update_admin{
+margin-left:88px;
+    border-radius: 0 0 0 0 !important;
+    margin-top: 4px !important;
+    width: 100px;
+}
+.head2_user_input6_update_admin{
+
+width:380px;
+    border-radius: 0 0 0 0 !important;
+    margin-top: 4px !important;
+}
+.head2_user_input7_update_admin{
+ margin-left: 6px;
+    border-radius: 0 0 0 0 !important;
+    margin-top: 4px !important;
+}
+.head2_user_input8_update_admin{
+
+width: 273px;
+border-radius: 0 0 0 0 !important;
+    margin-top: 4px !important;
+}
+
+.head2_user_input9_update_admin{
+ margin-left: 47px;
+    width: 290px;
+    margin-top: 4px !important;
+    border-radius: 0 0 0 0 !important;
+
+}
+.head2_user_update_admin input{
+border:1px solid black!important;
+height: 28px!important;
+margin-bottom: 6px!important;
+}
+.head2_user_update_admin h1{
+padding: 15px 0 0 20px;
+font-size:20px;
+font-weight:bold;
+}
+
+.head3_user_update_admin
+{
+background-color:#F6F6F6;
+ height: 235px;
+}
+.head3_user_update_admin form{
+margin: 19px 0 0 170px;
+}
+.head3_user_update_admin label{
+font-size:12px;
+font-weight:bold;
+display: block;
+margin: 37px -215px 19px 112px;
+}
+.head3_user_update_admin input{
+border:1px solid black!important;
+height: 28px!important;
+width: 237px!important;
+margin: -3px 5px 7px 221px!important;
+border-radius: 0 0 0 0!important;
+margin-top: 4px!important;
+}
+
+.field_with_errors
+{
+background-color:#F6F6F6;
+}
+.field_with_errors label{
+font-size:12px;
+font-weight:bold;
+display: inline;
+margin-left: 130px;
+}
+field_with_errors input{
+border:1px solid black!important;
+height: 28px!important;
+width: 237px!important;
+ margin: -27px 6px 6px 235px!important;
+border-radius: 0 0 0 0!important;
+}
+
+
+.head3_user_update_admin a{
+float: right;
+    font-size: 10px;
+    /*margin-top: -23px;*/
+    text-align: left;
+    width: 320px;
+}
+
+.head3_user_update_admin h1{
+padding: 15px 0 0 20px;
+font-size:20px;
+font-weight:bold;
+}
+
+.head4_user_update_admin
+{
+background-color:#AEAEAE;
+height: 380px;
+}
+.head4_user_update_admin h1{
+padding: 15px 0 0 20px;
+ font-size: 20px;
+    font-weight: bold;
+}
+.payment_method_user_update_admin{
+
+margin:20px;
+}
+.head4_user_label1_update_admin
+{
+margin:0 0 0 20px;
+font-weight:bold;
+font-size:12px;
+display: inline;
+
+}
+.head4_user_select1_update_admin{
+ background: none repeat scroll 0 0 #AEAEAE;
+    border: 2px solid white;
+    border-radius: 5px 5px 5px 5px;
+    color: white;
+    height: 29px;
+    margin: 0 0 0 83px;
+    width: 245px;
+}
+
+.head4_user_input1_update_admin{
+ border: 1px solid!important;
+    float: right!important;
+    padding: 6px!important;
+    width: 262px!important;
+    height: 25px !important;
+    margin-top: 0 !important;
+    border-radius: 0 0 0 0!important;
+}
+.head4_user_label2_update_admin{
+ clear: right;
+ width: 200px;
+ margin-bottom: -17px !important;
+}
+.head4_user_input2_update_admin{
+ border: 1px solid!important;
+    float: right;
+    height: 25px!important;
+    margin-top: -22px!important;
+    width: 262px;
+    border-radius: 0 0 0 0 !important;
+
+}
+
+.head5_user_label1_update_admin{
+    display: inline;
+    margin-left: 10px;
+}
+.head4_user_label3_update_admin{
+ margin: 0 0 0 113px;
+ display: inline;
+}
+.head4_user_select2_update_admin{
+ background-color: #AEAEAE;
+    border: 2px solid white;
+    border-radius: 5px 5px 5px 5px;
+    color: white;
+    padding: 5px;
+    width: auto;
+}
+.head4_user_select3_update_admin{
+ background-color: #AEAEAE;
+    border: 2px solid white;
+    border-radius: 5px 5px 5px 5px;
+    color: white;
+    padding: 5px;
+    width: auto;
+}
+
+.head4_user_input3_update_admin{
+
+ border: 1px solid!important;
+    float: right;
+    height: 25px!important;
+    margin: -39px 47px -10px 0 !important;
+    width: 215px;
+    border-radius: 0 0 0 0 !important;
+}
+
+.head4_user_submit_update_admin{
+
+ background-color: #AEAEAE!important;
+    border: 2px solid white!important;
+    border-radius: 5px 5px 5px 5px!important;
+    clear: right;
+    float: right;
+    height: 28px;
+     margin: -35px 0 0!important;
+     width: 44px!important;
+}
+.head4_user_line_update_admin{
+
+border:1px dashed black;
+margin:15px 23px 0;
+}
+.head4_user_paypal_update_admin{
+
+margin: 20px;
+}
+.head5_user_update_admin
+{
+background-color:#E2E2E2;
+HEIGHT:290PX;
+}
+.head5_user_update_admin h1{
+padding: 15px 0 0 20px;
+font-size:20px;
+font-weight:bold;
+}
+.head5_user_rights_update_admin{
+margin:20px!important;
+/*float:left;*/
+display: inline;
+width:222px!important;
+}
+.head5_user_line_update_admin{
+border:1px dashed black;
+margin:30px 23px 15px;
+clear:left;
+
+}
+.head5_user_float_update_admin h5{
+    float: right;
+    font-size: 14px;
+    line-height: 20px;
+    margin: -84px 104px 0 39px;
+
+/*float:left;*/
+}
+
+.head5_user_float_update_admin h6{
+    float: right;
+    margin: -54px 101px 0 0;
+/*float:left;*/
+}
+.head5_user_issue_update_admin {
+    float: right;
+    margin-right: 203px;
+    margin-top: -85px;
+}
+
+.head5_user_margin_update_admin{
+ margin: 0;
+}
+.head5_user_h5_update_admin{
+
+margin: -21px 0 0 0;
+    width: 370px;
+    display: inline;
+    }
+    
+.head5_user_main_submit_update_admin{
+
+background-color: #AEAEAE;
+    border: 4px solid white;
+    border-radius: 5px 5px 5px 5px;
+    color: white;
+    
+}
+.user_margin1_update_admin{
+
+margin:0 0 0 130px;
+}
+.user_margin2_update_admin{
+
+margin:0 0 0 100px;
+}
+.head_div_set_update_admin
+{
+width:800px;
+margin-top: 10px;
+display: inline;
+}

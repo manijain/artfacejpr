@@ -1,0 +1,11 @@
+%select#select_input_time_span_ends{:style=>"margin-bottom: 0;margin-right: 5px;width: 100px",:name=>"select[time_span_ends]search_type"}
+  %option="is before"
+  %option="is after"
+%input#date_input_time_span_ends_{:type=>"text", :style=>"margin-bottom:0;margin-right:5px;width:190px",:name=>"select[time_span_ends]value"}
+%img#error_text_input_time_span_ends_{"data-original-title"=>"Please choose a date", :src=>"/images/exclamation_mark.png", :style=>"display:none;position:absolute;margin-left:-8px;"}
+:javascript
+  $("#date_input_time_span_ends_").datepicker({
+  onSelect: function() {
+    $("#error_text_input_time_span_ends_").hide()
+  }
+  })

@@ -1,0 +1,91 @@
+%input.hidden#artist_count{:type=>"text", :value=>"#{@artist_names.count}" , :style=>"display:none;"}
+%script{:type=>"text/javascript"}
+  $("#search_data_offers_count").html($("#artist_count").val())
+%span.artist_text_page{:style=>"margin: 10px 0 !important;position: absolute;right: 125px;top: -45px;"}="Page: "
+= will_paginate @artist_names, :remote=>true, :link_separator=>"#{@artist_names.current_page}/#{@artist_names.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"float:right;margin:0;"
+- if @artist_names.count == 0
+  %p="No Results Found"
+- else 
+  %div{:style=>"float:left;display:block"}
+    
+    -#= will_paginate @artist_names, :link_separator=>"#{@artist_names.current_page}/#{@artist_names.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"float: right;position:static;margin:0;"
+  .span10interesting_artists_first_div.search_data_outer_div
+    %ul
+      
+      - @artist_names.each do |artist|
+        %li.small_preview{:style=>"width:32% !important"}
+          %span
+            %i.icon-remove-sign.pointer{:style=>"display:none;position:absolute;z-index:1;top:5px;right:5px", :id=>"remove_artist_#{artist.id}"}
+            
+            %span.admin_artist_name=link_to(artist.artist_name || "unknown", "/admin/artist/#{artist.id}/edit", :style=>"color:black; text-decoration:underline;")
+            -if (artist.artist_birth_date.nil? || artist.artist_death_date.nil?)
+              %span.span10interesting_offers_span_time{:style=>"margin: 5px 0px 0px -72px"}="Not Available"
+            -else
+              %span.span10interesting_offers_span_time{:style=>"margin:5px 0px 0px -72px"}=artist.artist_birth_date.to_s + "-" + artist.artist_death_date.to_s
+          -if (artist.approved_status == false)
+            %span.span10manage_artists_span_status{:style=>"margin:37px 0px 0px 127px"}= "| Unacknowledged"
+          -else
+            %span.span10manage_artists_span_status{:style=>"margin:37px 0px 0px 127px"}="| Acknowledged"
+      
+    %div{:style=>"clear: both;color: black;float: right;width: 500px;"}
+%span.artist_text_page{:style=>"margin: 0 10px 13px 686px !important;position: static;right: 125px;top: -45px;"}="Page: " 
+= will_paginate @artist_names, :remote=>true, :link_separator=>"#{@artist_names.current_page}/#{@artist_names.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"float: right;position:static;margin:5px 8px !important"
+%a=button_to "Add Name", admin_new_artist_path, :style=>"font-size:17px;margin:0px 0px -4px 0px !important"
+%input#delete_artist{:type=>"button", :value=>"Delete Name", :style=>"font-size:16px;margin:-79px 0 4px 116px !important"} 
+%input#cancel_delete_artist{:type=>"button", :value=>"Cancel", :style=>"display:none;font-size:16px;margin:-79px 0 4px 116px !important"}
+-#-unless @artist_names.count == 0
+  -#.span5{:style=>"margin-top:10px"}
+    -#%input.btn#delete_artist{:type=>"button", :value=>"Delete Name"} 
+    -#%input.btn#cancel_delete_artist{:type=>"button", :value=>"Cancel", :style=>"display:none;"}
+      -#%input#artists_public_page_input_button{:type=>"button", :value=>"go", :style=>"float:right;height:30px;width:40px;margin-right:20px;"}
+      -#%input#artists_public_page_input{:type=>"text", :style=>"width:30px;float:right;margin-right:20px;margin-bottom:0;"}
+      -#%span#text_for_page_number{:style=>"float:right;margin-right:20px;line-height:30px;"}="Enter the page number"   
+        
+      %script{:type=>"text/javascript"}
+        $(function(){
+        setTimeout('$("#basic_search_layout_select").children().first().attr("selected","true").change()',150);
+        
+        $("#basic_search_layout_select").change(function() {
+        if ($("#basic_search_layout_select option:selected").index() == 0)
+        {
+        $(".search_data_outer_div ul li .image_area a img").each(function() {
+        var old_img_src = $(this).prop('src')
+        var new_img_src = old_img_src.replace("smalls","smalls").replace("artwork_hires","artwork_thumbnails")
+        new_img_src = new_img_src.replace("mediums","smalls")
+        new_img_src = new_img_src.replace("larges","smalls")
+        $(this).prop('src', new_img_src)
+        })
+
+        $(".search_data_outer_div ul li").addClass("small_preview").removeClass("medium_preview").removeClass("large_preview")
+        }
+        if ($("#basic_search_layout_select option:selected").index() == 1)
+        {
+        $(".search_data_outer_div ul li .image_area a img").each(function() {
+        var old_img_src = $(this).prop('src')
+        var new_img_src = old_img_src.replace("mediums","mediums").replace("artwork_hires","artwork_thumbnails")
+        new_img_src = new_img_src.replace("smalls","mediums")
+        new_img_src = new_img_src.replace("larges","mediums")        
+        $(this).prop('src', new_img_src)
+        })
+        $(".search_data_outer_div ul li").removeClass("small_preview").addClass("medium_preview").removeClass("large_preview")
+        }
+        if ($("#basic_search_layout_select option:selected").index() == 2)
+        {
+        $(".search_data_outer_div ul li .image_area a img").each(function() {
+        var old_img_src = $(this).prop('src')
+        var new_img_src = old_img_src.replace("larges","larges").replace("artwork_hires","artwork_thumbnails")
+        new_img_src = new_img_src.replace("mediums","larges")
+        new_img_src = new_img_src.replace("smalls","larges")
+        $(this).prop('src', new_img_src)
+        })
+        $(".search_data_outer_div ul li").removeClass("small_preview").removeClass("medium_preview").addClass("large_preview")
+        }
+        })
+        })
+
+%script{:type=>"text/javascript"}
+  if ($("#artist_count").val() == "0") {
+  $(".nav_sort_bar").hide()
+  } else {
+  $(".nav_sort_bar").show()
+  }

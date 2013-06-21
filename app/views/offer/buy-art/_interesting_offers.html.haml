@@ -1,0 +1,23 @@
+.span10.span10interesting_offers
+  .span10{:style=>"margin-left:0"}
+    %h4{:style=>"float:left;"}="BUY: INTERESTING OFFERS"
+    %span{:style=>"float:right;line-height:40px;"}
+      ="New offers: 3. "
+      ="Sort list by"
+      %select#buy_interesting_offers_select{:style=>"width:150px;"}
+        %option="date"
+        %option="Popularity"
+        %option="artist name"
+        %option="end date of offer"
+  .span10interesting_offers_first_div
+    %ul{:style=>"margin-left:30px;"}
+      - @buy_interesting_offers.each do |offer|
+        %li
+          %a{:href=>"/offer/show/#{offer.id}"}
+            =image_tag "https://artfacedev-pro.s3.amazonaws.com/public/images/uploaded/artwork/smalls/artwork_thumbnails/#{offer.artwork.id}/#{offer.artwork.artwork_thumbnail_file_name}", :alt=>"image not found", :alt=>"image not found"
+            %i.icon-certificate
+          %span{:style=>"text-align:center"}
+            %span.span10interesting_offers_span_artist=offer.artwork.artist.artist_name || "unknown"
+            %span.span10interesting_offers_span_time=humanize_time(offer.offer_end_date.to_i - Time.now.to_i) || "unknown"
+  .span5{:style=>"margin-top:10px"}
+    %a.btn{:href=>"#"}="SHOW ALL OFFERS"

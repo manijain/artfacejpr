@@ -1,0 +1,9 @@
+= hidden_field_tag :admin_basic_forum_search_value, ""
+/= hidden_field_tag :advance_search_two, 'false'
+= form_for :forum_message, :url=>"/admin/forum", :method=> "POST", :remote=>"true", :html=>{:style=>"margin:0;padding:0;margin-top:20px;width780px", :class=>"pull-left forum_basic_search", :id=>"forum_basic_search"} do |f|
+	= f.hidden_field "search_basic", :name=>"search_basic", :value=>"true"
+	= f.hidden_field "sort_by", :name=>"sort_by"
+	= f.hidden_field "per_page", :name=>"per_page"
+	= f.text_field :search_string, :placeholder=>"Enter your search term", :class=>"forum_message_title pull-left", :style=>"width:450px;margin-right:10px;"
+	= image_tag "/images/plus.png", :class=>"search_toggle pull-left pointer", :style=>"margin-right:10px;"
+	= f.submit "SEARCH", :class=>"btn pull-left", :id=>"admin_forum_basic_search"

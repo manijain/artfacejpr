@@ -1,0 +1,107 @@
+.contact_page {
+  margin-left: 2%;
+  width:820px;
+  float:left;
+}
+.contact_page div {
+  float:left;
+}
+.contact_page div p {
+  float:left;
+  width:50%;
+}
+#ajax_loader{
+  position:absolute;
+  left:30%;
+  top:40%;
+}
+.contact_form textarea {
+  resize:none;
+  height:180px;
+  width:390px;
+  padding:7px;
+}
+.contact_form table tr td img {
+  left: 92%;
+  position: absolute;
+  top: -5px;
+  display:none;
+}
+#contact_flash_message {
+  position:absolute;
+  z-index:2;
+  left:150px;
+  top:300px;
+  border: 1px solid #C7C7C7;
+  background: white;
+  font-size: 16px;
+  line-height: 20px;
+  padding: 12px 50px;
+  box-shadow: 0px 0px 3px #A2A2A2;
+  margin: 20px 0 20px;
+  color: #3C3C3C;
+  text-shadow: 0 1px 0px white;
+  background: #ECECEC;
+  background: -moz-linear-gradient(top, white 0%, #ECECEC 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,white), color-stop(100%,#ECECEC));
+  background: -webkit-linear-gradient(top, white 0%,#ECECEC 100%);
+  background: -o-linear-gradient(top, white 0%,#ECECEC 100%);
+  background: -ms-linear-gradient(top, white 0%,#ECECEC 100%);
+  background: linear-gradient(to bottom, white 0%,#ECECEC 100%);
+  width:auto;
+  height:auto;
+  display:none
+}
+#contact_flash_message span {
+  line-height:45px;
+  font-size:24px
+}
+.contact_page_address{
+  float:left;
+  background-color:#E9E9E9;
+  width:820px;
+}
+.contact_page_address div {
+  width:50%;
+  float:left;
+}
+.contact_page_left_fields {
+  width:420px;
+  float:left;
+  margin:0;
+  padding:0;
+  position:relative;
+}
+.contact_page_left_fields input 
+{
+  width:390px;
+  margin:0;
+}
+#captcha_text {
+  border:none;
+  font-weight:bold;
+  font-family:Modern;
+  width:130px;
+
+}
+#contact_form_submit {
+  float: right;
+
+  margin-bottom: 0;
+}
+#contact_form_submit {
+  float: right;
+}
+.contact_page_captcha {
+  display: inline !important;
+  left: 0 !important;
+  top: 0 !important;
+
+}
+
+.temp_tr_height {
+  height: 50px !important;
+}
+.tooltip-inner {
+  width:170px;
+}

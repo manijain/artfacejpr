@@ -1,0 +1,86 @@
+.buy_art_area {
+  width: 820px;
+  margin-left: 2%;
+  float: left;
+}
+.buy_art_area div.container {
+  margin-left: 2%;  
+}
+.buy_art_area div.search, .user_favourites_container div.search {
+  border-radius: 5px;
+  border: 2px solid #727272;
+  float: left;
+  background: #727272;
+  width: 775px;
+  margin-top: 30px;
+  padding: 20px;
+}
+.buy_art_area, .user_favourites_container div.search * {
+  float: left;
+}
+.buy_art_area div.messages {
+  float: left;
+}
+.buy_art_area div.messages div.nav_sort_messages {
+  float: left;
+}
+.buy_art_area div.messages div.nav_sort_messages * {
+  float: left;
+}
+.buy_art_area div.messages div.messages_container {
+  float: left;
+  width: 100%;
+}
+
+.buy_art_area div.messages div.messages_container * {
+  float: left;
+}
+
+.manage_artist_search {
+  width:820px;
+}
+.manage_artist_search div.search {
+  border-bottom:1px solid black;
+  background:#727272;
+  padding:20px;
+  position:relative;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-top:20px;
+  margin-bottom:20px;
+  display:block;
+  float:left;
+}
+
+.manage_artist_search div.search * {
+  float:left;
+}
+
+.manage_artist_search div.search_advanced {
+  border-bottom:1px solid black;
+  background:#727272;
+  padding:20px;
+  position:relative;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  margin-top:20px;
+  margin-bottom:20px;
+  float:left;
+  display: none;
+}
+
+.manage_artist_search div.search_advanced * {
+  float:left;
+}
+.manage_artist_search div.search_advanced div ul li select {
+  width:130px;
+  margin-right:10px;
+}
+
+.admin_artist_name{
+  font-weight: normal;
+    left: 5px;
+    position: absolute;
+    top: 15px;
+    width: auto;
+}

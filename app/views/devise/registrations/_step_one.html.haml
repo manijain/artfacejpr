@@ -1,0 +1,74 @@
+.sign_up_layout_zero
+	.sign_up_layout_zero_div
+		%h2=t ".title"
+		%table
+			%tr
+				%td=t ".text_one"
+				%td=t ".text_two"
+				%td=t ".text_three"
+	%div
+		%table{:style=>"width:820px;margin-left:2%;background-color:#E9E9E9"}
+			%thead{:style=>"text-align:left;"}
+				- subscription_plan_data
+				%th=""
+				%th=@subscription_plans[0].subscription_name
+				%th=@subscription_plans[1].subscription_name
+				%th=@subscription_plans[2].subscription_name
+				%th=@subscription_plans[3].subscription_name
+				%th=@subscription_plans[4].subscription_name
+			%tbody
+			%tr
+				%td=t ".row_one"
+				%td=@subscription_plans[0].subscription_fee
+				%td=@subscription_plans[1].subscription_fee
+				%td=@subscription_plans[2].subscription_fee
+				%td=@subscription_plans[3].subscription_fee
+				%td=@subscription_plans[4].subscription_fee
+			%tr
+				%td="#{t(".row_two")}".html_safe
+				%td=@subscription_plans[0].subscription_paintings_allowed
+				%td=@subscription_plans[1].subscription_paintings_allowed
+				%td=@subscription_plans[2].subscription_paintings_allowed
+				%td=@subscription_plans[3].subscription_paintings_allowed
+				%td=t ".no_limit" #if @subscription_plans[4].subscription_paintings_allowed == 9999999
+			%tr
+				%td="#{t(".row_three")}".html_safe
+				%td=t ".unlimited_text"
+				%td=t ".unlimited_text"
+				%td=t ".unlimited_text"
+				%td=t ".unlimited_text"
+				%td=t ".unlimited_text"
+			%tr
+				%td="#{t(".row_four")}".html_safe
+				%td=t ".check"
+				%td=t ".check"
+				%td=t ".check"
+				%td=t ".check"
+				%td=t ".check"
+			%tr
+				%td
+	
+				%td
+					%a.btn{:href=>"#plan=basic", :onclick=>"sign_up_all('basic');"}=t(".sign_up")
+				%td
+					%a.btn{:href=>"#plan=plus", :onclick=>"sign_up_all('plus');"}=t(".sign_up")
+				%td
+					%a.btn{:href=>"#plan=pro", :onclick=>"sign_up_all('pro');"}=t(".sign_up")
+				%td
+					%a.btn{:href=>"#plan=premium", :onclick=>"sign_up_all('premium');"}=t(".sign_up")
+				%td
+					%a.btn{:href=>"#plan=no_limit", :onclick=>"sign_up_all('no_limit');"}=t(".sign_up")
+	.sign_up_layout_zero_div
+		%h2=t ".upgrades_title"
+		%table
+			%tr
+				%td="#{t(".upgrades_text_one")}".html_safe
+				%td="#{t(".upgrades_text_two")}".html_safe
+				%td="#{t(".upgrades_text_three")}".html_safe
+	.sign_up_layout_zero_div
+		%h2=t ".subscription_title"
+		%table
+			%tr
+				%td="#{t(".subscription_text_one")}".html_safe
+				%td="#{t(".subscription_text_two")}".html_safe
+				%td="#{t(".subscription_text_three")}".html_safe

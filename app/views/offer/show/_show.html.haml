@@ -1,0 +1,216 @@
+.offer_show_container{:style=>"display:block;float:left;"} 
+  .offer_show_layout_two.span10{:style=>"width:820px;margin-left:2%;display:block;"}
+    .section_one{:style=>"background-color:#727272;margin-bottom:10px;color:#FFF;float:left;width:760px;padding: 10px 30px;"}
+      %h3{:style=>"display:inline;float:left;"}="OFFER &nbsp; # #{@offer.id}".html_safe
+    .section_two{:style=>"margin-left:3%;float:left;width:796px;"}
+      .section_two_one{:style=>"width:62%;float:left;margin-right:10px;"}
+        #img_show_hi_res_all{:style=>"position:relative;float:left;width:480px;height:480px;margin-bottom:10px"}
+          #large_preview_for_hires{:style=>"position:relative;width:480px;height:480px;z-index:1;overflow:hidden"}
+            %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_hires/#{@offer.artwork.id}/#{@offer.artwork.artwork_hires_file_name}", :style=>"height:100%;width:100%"}
+          .hidden#large_preview_for_detail1{:style=>"position:relative;width:480px;height:480px;z-index:1;overflow:hidden"}
+            %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_ones/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_one_file_name}", :style=>"height:100%;width:100%"}
+          .hidden#large_preview_for_detail2{:style=>"position:relative;width:480px;height:480px;z-index:1;overflow:hidden"}
+            %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_twos/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_two_file_name}", :style=>"height:100%;width:100%"}
+          .hidden#large_preview_for_documents{:style=>"position:relative;width:480px;height:480px;z-index:1;overflow:hidden"}
+            %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_documentations/#{@offer.artwork.id}/#{@offer.artwork.artwork_documentation_file_name}", :style=>"height:100%;width:100%"}
+          %i.icon-white.icon-zoom-in.hi-res{:style=>"position: absolute;right: 0px;top: 0;z-index: 2; cursor:pointer;display: block"}
+          %i.hidden.icon-white.icon-zoom-in.detail-1{:style=>"position: absolute;right: 0px;top: 0;z-index: 2; cursor:pointer;display: block"}
+          %i.hidden.icon-white.icon-zoom-in.detail-2{:style=>"position: absolute;right: 0px;top: 0;z-index: 2; cursor:pointer;display: block"}
+          %i.hidden.icon-white.icon-zoom-in.documents{:style=>"position: absolute;right: 0px;top: 0;z-index: 2; cursor:pointer;display: block"}
+          %i.icon-fullscreen.icon-white.hi-res{:style=>"position:absolute;right:5px; bottom:5px; cursor:pointer;z-index:1"}
+          %i.hidden.icon-fullscreen.icon-white.detail-1{:style=>"position:absolute;right:5px; bottom:5px; cursor:pointer;z-index:1"}
+          %i.hidden.icon-fullscreen.icon-white.detail-2{:style=>"position:absolute;right:5px; bottom:5px; cursor:pointer;z-index:1"}
+          %i.hidden.icon-fullscreen.icon-white.documents{:style=>"position:absolute;right:5px; bottom:5px; cursor:pointer;z-index:1"}
+      .section_two_two{:style=>"width:35%;float:left"}
+        %ul{:style=>"float:left;display:inline;list-style:none;margin-left:0;width:100%"}
+          %li{:style=>"float:left;"}
+            - if @offer.artwork.artist.approved_status
+              %h3=@offer.artwork.artist.artist_name
+              %h4
+                = @offer.artwork.artist.artist_birth_year == "0" ? "( Unknown": "( #{@offer.artwork.artist.artist_birth_year}"
+                ="-"
+                = @offer.artwork.artist.artist_death_year == "0" ? " Unknown )": " #{@offer.artwork.artist.artist_death_year} ) "
+            - else
+              %h3="Unknown"
+            %h3="UNTITLED" if @offer.artwork.artwork_title.artwork_title_en.nil?
+            %h3=@offer.artwork.artwork_title.artwork_title_en if @offer.artwork.artwork_title.artwork_title_en
+        %ul{:style=>"list-style:none;margin-left:0px;float:left;width:100%;"}
+          %li{:style=>"float:left;"}
+            %span{:style=>"width:155px;float:left;"}="Fine art category"
+            %span#summary_category{:style=>"float:left;"}=@offer.artwork.artwork_category || "unknown"
+          %li{:style=>"float:left;"}
+            %span{:style=>"width:155px;float:left;"}="Medium"
+            %span#summary_medium{:style=>"float:left;"}=@offer.artwork.artwork_medium || "unknown"
+          %li{:style=>"float:left;"}
+            %span{:style=>"width:155px;float:left;"}="Sizes"
+            %span#summary_size{:style=>"float:left;"}="#{@offer.artwork.artwork_height} x #{@offer.artwork.artwork_width} x #{@offer.artwork.artwork_depth}" if @offer.artwork.artwork_height && @offer.artwork.artwork_width && @offer.artwork.artwork_depth
+            %span#summary_size{:style=>"float:left;"}="UNKNOWN" unless @offer.artwork.artwork_height && @offer.artwork.artwork_width && @offer.artwork.artwork_depth
+          %li{:style=>"float:left;"}
+            %span{:style=>"width:155px;float:left;"}="Date of creation"
+            %span#summary_year{:style=>"float:left;"}="#{@offer.artwork.artwork_creation_year} #{@offer.artwork.artwork_creation_year_era}" if @offer.artwork.artwork_creation_year
+          %li{:style=>"float:left;"}
+            %span{:style=>"width:155px;float:left;"}="Period"
+            %span#summary_period{:style=>"float:left;"}=@offer.artwork.artwork_movement_period || "UNKNOWN"
+          %li{:style=>"float:left;"}
+            %span{:style=>"width:155px;float:left;"}="Signature"
+            %span#summary_signature{:style=>"float:left;"}= "√" if @offer.artwork.artwork_signature_check
+            %span#summary_signature{:style=>"float:left;"}= "No" unless @offer.artwork.artwork_signature_check
+          %li{:style=>"float:left;"}
+            %span{:style=>"width:155px;float:left;"}="Frame"
+            %span#summary_frame{:style=>"float:left;"}= "√" if @offer.artwork.artwork_frame_check
+            %span#summary_frame{:style=>"float:left;"}= "No" unless @offer.artwork.artwork_frame_check
+          %li{:style=>"float:left;"}
+            %span{:style=>"width:155px;float:left;"}="Authentication Certificate"
+            %span#summary_certificate{:style=>"float:left;"}= "√" if @offer.artwork.artwork_certificate_check
+            %span#summary_certificate{:style=>"float:left;"}= "No" unless @offer.artwork.artwork_certificate_check
+          %li{:style=>"float:left;"}
+            %span{:style=>"width:155px;float:left;"}="Country"
+            %span#summary_country{:style=>"float:left;"}= @offer.artwork.artwork_country || "UNKNOWN"
+          %li{:style=>"float:left;"}
+            %span{:style=>"width:155px;float:left;"}="Submitted"
+            %span#summary_submitted{:style=>"float:left;"}= @offer.created_at.to_date
+          %li{:style=>"float:left;"}
+            %span{:style=>"width:155px;float:left;"}="Purpose"
+            %span#summary_purpose{:style=>"float:left;"}=@offer.offer_type || "UNKNOWN"
+    .section_three{:style=>"margin-left:3%;margin-right:3%;margin-top:10px;float:left;width:100%;height:140px;"}
+      .section_three_one.pull-left{:style=>"width:65%;position:relative"}
+        %div{:style=>"float:left;width:100%;"}
+          #img_show_hi_res_parent_div{:style=>"float:left;position:relative;width:95px;margin-right:15px;height:91px;cursor:pointer;"}
+            %img{:id=>"img_show_hi_res", :src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_hires/#{@offer.artwork.id}/#{@offer.artwork.artwork_hires_file_name}", :style=>"height:100%;width:100%", :alt=>"Image not added"}
+            %i.icon-white.icon-zoom-in.hi-res{:style=>"position: absolute;right: 0px;top: 0;z-index: 10;"}
+          #img_show_detail_1_parent_div{:style=>"float:left;position:relative;width:95px;margin-right:15px;height:91px;cursor:pointer;"}
+            %img{:id=>"img_show_detail_1", :src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_ones/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_one_file_name}", :style=>"height:100%;width:100%", :alt=>"Image not added"}
+            %i.icon-white.icon-zoom-in.detail-1{:style=>"position: absolute;right: 0px;top: 0;z-index: 10;"}
+          #img_show_detail_2_parent_div{:style=>"float:left;position:relative;width:95px;margin-right:15px;height:91px;cursor:pointer;"}
+            %img{:id=>"img_show_detail_2", :src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_twos/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_two_file_name}", :style=>"height:100%;width:100%", :alt=>"Image not added"}
+            %i.icon-white.icon-zoom-in.detail-2{:style=>"position: absolute;right: 0px;top: 0;z-index: 10;"}
+          #img_show_documents_parent_div{:style=>"float:left;position:relative;width:95px;margin-right:15px;height:91px;cursor:pointer;"}
+            - unless @offer.artwork.artwork_documentation_file_name.blank?
+              - if @offer.artwork.artwork_documentation_file_name[-4,4] == ".doc" || @offer.artwork.artwork_documentation_file_name[-4,4] == "docx"
+                %a{:target=>"_blank", :href=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_documentations/#{@offer.artwork.id}/#{@offer.artwork.artwork_documentation_file_name}"}
+                  %img{:src=>"/images/word_doc_icon.png"}
+              - if @offer.artwork.artwork_documentation_file_name[-4,4] == ".pdf"
+                %a{:target=>"_blank", :href=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_documentations/#{@offer.artwork.id}/#{@offer.artwork.artwork_documentation_file_name}"}
+                  %img{:src=>"/images/pdf-icon.png"}
+              - else
+                %img#img_show_documents{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_documentations/#{@offer.artwork.id}/#{@offer.artwork.artwork_documentation_file_name}", :style=>"height:100%;width:100%", :alt=>"Image not added"}
+                %i.icon-white.icon-zoom-in.documents{:style=>"position: absolute;right: 0px;top: 0;z-index: 10;"}
+            - else
+              %p="No Upload"
+        %div{:style=>"float:left;width:100%"}
+          %p{:style=>"font-size:10px;display:inline;width:110px;float:left;margin-right:0px;"}
+            =t '.complete_view'
+            %br
+          %p{:style=>"font-size:10px;display:inline;width:110px;float:left;margin-right:0px;"}
+            =t '.detail_one'
+            %br
+          %p{:style=>"font-size:10px;display:inline;width:110px;float:left;margin-right:0px;"}
+            =t '.detail_two'
+            %br
+          %p{:style=>"font-size:10px;display:inline;width:110px;float:left;margin-right:0px;"}
+            =t '.document'
+            %br
+      .section_three_two{:style=>"float:left;width:35%;position:relative;"}
+        %strong=t '.section_three_two_strong_text'
+        %p=t '.section_three_two_text'
+        %br
+        %input.btn#contact_owner{:type=>"button", :style=>"width:175px", :value=>"#{t '.section_three_two_button_one'}"}
+        = content_tag :div, :class=>"pull-left",:id=>"contact_owner_container", :style=>"display:none;position: absolute; background-color: rgb(114, 114, 114); padding: 8px; width: 820px; left: -550px; z-index: 1; border-radius: 5px 5px 5px 5px;" do
+          = content_tag :h4, :class=>"pull-left", :style=>"width:100%;" do
+            ="CONTACT THE OWNER"
+          = content_tag :p, :class=>"pull-left", :style=>"width:25%;" do 
+            ="You can contact the owner anonymously or reveal your identity if you like. If you want to make a price proposal please enter the amount in the form field for the sellers convenience."
+          = form_for :message, :url=> contact_owner_path,:remote=>true, :html=>{:class=>"pull-left", :style=>"width:75%;margin:0;padding:0;"} do |f|
+            = f.hidden_field :offer_id, :value=>"#{@offer.id}"
+            = f.hidden_field :is_parent, :value=>true
+            = f.hidden_field :user_id, :value=>"#{current_user.id}"
+            = content_tag :ul, :class=>"pull-left unstyled", :style=>"width:100%;" do
+              = content_tag :li,:class=>"pull-left", :style=>"width:100%" do
+                =content_tag :span, :class=>"pull-left", :style=>"text-align:right;width:100px;margin-right:5px;" do
+                  ="CONCERN"
+                =f.text_field :message_title, :class=>"pull-left", :style=>"margin-right:5px;width:280px;"
+                =select_tag "message[concern]", options_for_select(["I am interested to buy", "I am interested to lend", "I need more details"]), :class=>"pull-left", :style=>"width:150px;"
+              = content_tag :li,:class=>"pull-left", :style=>"width:100%" do
+                =content_tag :span, :class=>"pull-left", :style=>"text-align:right;width:100px;margin-right:5px;" do
+                  ="OFFER PROPOSAL"
+                =f.text_field :offer_price, :class=>"pull-left", :style=>"margin-right:5px;width:380px;"
+                =select_tag "message[currency]", options_for_select(["$", "€", "£"]), :class=>"pull-left", :style=>"width:50px;"
+              = content_tag :li,:class=>"pull-left", :style=>"width:100%" do
+                = content_tag :div, :class=>"pull-left", :style=>"width:100px;" do
+                  =content_tag :span, :class=>"pull-left", :style=>"text-align:right;margin-right:5px;" do
+                    ="YOUR MESSAGE"
+                  =content_tag :span, :id=>"contact_owner_word_count", :class=>"pull-left", :style=>"text-align:right;margin-right:5px;width:95px;" do
+                    ="0/1000"
+                =f.text_area :message_text, :class=>"pull-left", :style=>"margin-right:5px;width:435px;height:250px;resize:none;margin-left:5px;", :maxlength=>"1000"
+              = content_tag :li,:class=>"pull-left", :style=>"width:100%" do
+                =""
+              = content_tag :li,:class=>"pull-left", :style=>"width:100%" do
+                =content_tag :span, :class=>"pull-left", :style=>"text-align:right;width:100px;margin-right:5px;" do
+                  ="HIDE MY IDENTITY"
+                = f.check_box :hide_identity
+                = f.submit "SEND MESSAGE", :class=>"btn pull-right"
+                = input_tag("cancel_contact_owner","btn pull-right","CANCEL","margin-right:10px;")
+
+    .section_four{:style=>"margin-left:3%;margin-right:3%;margin-top:10px;float:left;width:100%;position:relative;"}
+      .section_four_one{:style=>"float:left;width:65%"}
+        %h3="ABOUT THE PAINTING"
+        %p#summary_description{:style=>"margin: 0px 0px 9px;width: 450px;height: 200px;"}
+          =@offer.artwork.artwork_description.get_description
+      .section_four_two{:style=>"float:left;width:32%;"}
+        - if @offer_in_favourite
+          %input.btn.delete_from_favourite{:type=>"button", :value=>"DELETE FROM FAVOURITES", :style=>"margin-top:65px; display:block", "data-attribute"=>"offer_id=#{@offer.id}"}
+          %input.btn.add_to_favourite{:type=>"button", :value=>"#{t '.section_four_two_button_one'}", :style=>"display:none;margin-top:65px;width:175px", "data-attribute"=>"favourite[offer_id]=#{@offer.id}&favourite[user_id]=#{current_user.id}"}
+        - else
+          %input.btn.delete_from_favourite{:type=>"button", :value=>"DELETE FROM FAVOURITES", :style=>"margin-top:65px; display:none", "data-attribute"=>"offer_id=#{@offer.id}"}
+          %input.btn.add_to_favourite{:type=>"button", :value=>"#{t '.section_four_two_button_one'}", :style=>"display:block;margin-top:65px;width:175px", "data-attribute"=>"favourite[offer_id]=#{@offer.id}&favourite[user_id]=#{current_user.id}"}
+        %input.btn{:disabled=>"true", :type=>"button", :value=>"#{t '.section_four_two_button_two'}", :style=>"margin-top:10px;width:175px"}
+        = content_tag :div, :id=>"report_abuse_container", :class=>"pull-left", :style=>"display:none;background: none repeat scroll 0 0 #727272;border-radius: 5px 5px 5px 5px;left: -20px;padding: 10px;position: absolute;top: 170px;width: 820px;color:white" do
+          = content_tag :h3, "REPORT ABUSE (CONCERNING OFFER # #{@offer.id})"
+          = content_tag :p, :class=>"pull-left", :style=>"width:21%;" do
+            ="In case you see any kind of abuse concerning this peice of art, please let use know. Our specialists will check the incident and try to find a solution. your identity will be made visible to the Artface-Team for further investigation"
+          = form_for :message_admin, :url=>message_admin_report_abuse_path, :remote=>"true", :html=>{:class=>"pull-left", :style=>"width:75%;"}, :remote=>"true" do |f|
+            = f.hidden_field :user_id, :value=>"#{current_user.id}"
+            = f.hidden_field :offer_id, :value=>"#{@offer.id}" 
+            = f.hidden_field :is_solved, :value=>false
+            = content_tag :ul, :class=>"pull-left unstyled", :style=>"width:100%;padding-left:10px;" do 
+              = content_tag :li, :class=>"pull-left", :style=>"width:100%;" do
+                = label_tag :concern, :class=>"pull-left", :style=>"text-align:right;width:150px;margin-right:10px;" do
+                  ="CONCERN"
+                = f.text_field :concern, :class=>"pull-left", :style=>"width:440px;", :placeholder=>"Enter your concern"
+              = content_tag :li, :class=>"pull-left", :style=>"width:100%;" do
+                = label_tag :message_title, :class=>"pull-left", :style=>"text-align:right;width:150px;margin-right:10px;" do
+                  ="KIND OF ABUSE"
+                = f.text_field :message_title, :class=>"pull-left", :style=>"width:440px;", :placeholder=>"e.g. “stolen art” or “seller is not authorized to sell this offer”"
+              = content_tag :li, :class=>"pull-left", :style=>"width:100%;" do
+                = content_tag :div, :class=>"pull-left", :style=>"width:150px;" do
+                  = label_tag :message_text, :class=>"pull-left", :style=>"text-align:right;width:150px;margin-right:10px;" do
+                    ="YOUR MESSAGE"
+                  =content_tag :span, :id=>"report_abuse_word_count", :class=>"pull-left", :style=>"text-align:right;margin-right:5px;width:150px;" do
+                    ="0/1000"
+                = f.text_area :message_text, :class=>"pull-left", :style=>"width:440px;resize:none;height:300px;margin-left:10px;"
+              = content_tag :li, :class=>"pull-left", :style=>"width:100%;" do
+                = f.submit "SEND MESSAGE", :class=>"btn pull-right"
+                = input_tag("cancel_report_abuse","pull-right btn","CANCEL","margin-right:10px")
+        %input.btn#report_abuse{:type=>"button", :value=>"#{t '.section_four_two_button_three'}", :style=>"margin-top:10px;width:175px"}
+    -#.section_five{:style=>"background-color:#727272;margin-bottom:10px;color:#FFF;float:left;width:100%;padding-bottom: 10px;padding-top: 10px;"}
+      %span{:style=>"font-size:10px;float:left;width:60%;line-height:15px;margin-left:10px;"}=t '.section_five_text_one'
+  / .hidden#full_screen_hi_res
+  /   %div
+  /     %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_hires/#{@offer.artwork.id}/#{@offer.artwork.artwork_hires_file_name}", :style=>"width:100%;height:100%"}
+  /   %span#full_screen_hi_res_close
+  /     ="Close x"
+  / .hidden#full_screen_detail_1
+  /   %div
+  /     %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_ones/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_one_file_name}", :style=>"width:100%;height:100%"}
+  /   %span#full_screen_detail_1_close
+  /     ="Close x"
+  / .hidden#full_screen_detail_2
+  /   %div
+  /     %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_twos/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_two_file_name}", :style=>"width:100%;height:100%"}
+  /   %span#full_screen_detail_2_close
+  /     ="Close x"
+  / .hidden#full_screen_documents
+  /   %div
+  /     %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_documentations/#{@offer.artwork.id}/#{@offer.artwork.artwork_documentation_file_name}", :style=>"width:100%;height:100%;"}
+  /   %span#full_screen_documents_close
+  /     ="Close x"

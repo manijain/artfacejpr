@@ -1,0 +1,12 @@
+%select#select_input_submit_date{:style=>"margin-bottom: 0;margin-right: 5px;width: 100px",:name=>"select[submit_date]search_type"}
+  %option="is exactly"
+  %option="is before"
+  %option="is after"
+%input#date_input_submit_date_{:type=>"text", :style=>"margin-bottom:0;float:left;margin-right:5px;width:190px;",:name=>"select[submit_date]value"}
+%img#error_text_input_submit_date_{"data-original-title"=>"Only Characters allowed", :src=>"/images/exclamation_mark.png", :style=>"display:none;position:absolute;right:163px;"}
+:javascript
+  $("#date_input_submit_date_").datepicker({
+  onSelect: function() {
+    $("#error_text_input_submit_date_").hide()
+  }
+  })

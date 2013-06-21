@@ -1,0 +1,23 @@
+.layout_part_two
+	= form_for :forum_message, :url=>forum_new_message_path, :method=>"POST", :html=>{:class=>"forum_new_message"} do |f|
+		= f.hidden_field :offer_id
+		= f.hidden_field :is_parent, :value=>true
+		= f.hidden_field :user_id, :value=>current_user.id
+		= content_tag :ul, :class=>"unstyled" do
+			= content_tag :li do
+				= label_tag :forum_message_title, "#{t '.label_text_one'}"
+				= f.text_field :forum_message_title, :id=>"forum_message_title", :placeholder=>"#{t '.placeholder_text_one'}", :value=>@forum_message_title
+			= content_tag :li do
+				= label_tag :forum_message_text, "#{t '.label_text_two'}"
+				= f.text_area :forum_message_text, :id=>"forum_message_text", :placeholder=>"#{t '.placeholder_text_two'}"
+			= content_tag :li do
+				= label_tag :offer_id, "#{t '.label_text_three'}"
+				= f.text_field :offer_id, :id=>"offer_id", :placeholder=>"#{t '.placeholder_text_three'}"
+				= input_tag("verify_offer_id","btn","#{t '.verify_offer_id'}", "margin-left:10px;")
+		= content_tag :div,:class=>"", :id=>"verified_offer" do
+			=""
+		= content_tag :div, :class=>"pull-left", :style=>"margin-top:20px;width:100%;" do
+			= link_to "#{t '.cancel'}", "/forum", :class=>"btn"
+			= f.submit "#{t '.submit'}", :class=>"btn pull-right"
+		= content_tag :div, :class=>"ajax_overlay" do
+			= image_tag "/images/ajax-loader-big.gif"

@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/ongraphrorapps/!svn/ver/214/artface_svn/app/views/devise/registrations
+END
+_layout_one.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/ongraphrorapps/!svn/ver/221/artface_svn/app/views/devise/registrations/_layout_one.html.haml
+END
+_layout_two.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/ongraphrorapps/!svn/ver/214/artface_svn/app/views/devise/registrations/_layout_two.html.haml
+END
+edit.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/ongraphrorapps/!svn/ver/208/artface_svn/app/views/devise/registrations/edit.html.haml
+END
+new.html.haml
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/ongraphrorapps/!svn/ver/214/artface_svn/app/views/devise/registrations/new.html.haml
+END

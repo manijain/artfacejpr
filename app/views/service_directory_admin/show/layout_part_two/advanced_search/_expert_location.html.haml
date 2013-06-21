@@ -1,0 +1,4 @@
+- country_select_data
+%select#select_input_country{:style=>"float:left;width:300px;width:325px;" ,:name=>"select[country]name"}
+  - @countries.each do |country|
+    %option=country.country_name

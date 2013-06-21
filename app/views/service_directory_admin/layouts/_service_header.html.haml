@@ -1,0 +1,11 @@
+#head.head_admin
+  .logo_admin
+    = link_to image_tag("artface.png"), admin_dashboard_path, :class => "artface"
+  #menu.menu_admin
+    %ul{:style=>"float:right; margin-right:60px;"}
+      %li
+        = "Hello " "#{current_service_partner.salutation}" "#{current_service_partner.first_name}"
+      %li
+        ="|"
+      %li
+        = link_to "LOGOUT", "/service_directory_admin/logout"

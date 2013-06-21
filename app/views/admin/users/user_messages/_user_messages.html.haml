@@ -1,0 +1,90 @@
+.sell-art-area-messages{:style=>"position:relative;"}
+  %span{:style=>"font-size:15px;font-weight:bold;position:relative;left:10px;top:10px;"}="MESSAGES BY USER ##{@user.id} (#{@user.user_first_name} #{@user.user_last_name})  "
+  %a.btn.pull-left{:style=>"float:right;margin-top:10px;", :href=>"/admin/users/#{@user.id}", :id=>"gotouser"}="BACK TO USER OVERVIEW"
+
+#select_search_filter_string.display_none
+  %li{:style=>"width:100%"}
+    %select#advanced_select_{:style=>"width:90px;float:left;"}
+      %option{"data-function"=>"", :selected=>"true"}="Please choose an option"
+      %option{"data-function"=>"if (check_option('Artist Name')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/artist"))}\");} else {alert('Error: Value already used ');}", :value=>"Artist Name"}="Artist Name"
+      %option{"data-function"=>"if (check_option('Artist Name')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/user_messages\/sender_name"))}\");} else {alert('Error: Value already used ');}", :value=>"Sender Name"}="Sender Name"
+      %option{"data-function"=>"if (check_option('Description')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/description"))}\");} else {alert('Error: Value already used ');}", :value=>"Description"}="Description"
+      %option{"data-function"=>"if (check_option('country')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/country"))}\");} else {alert('Error: Value already used ');}", :value=>"country"}="country"   
+      %option{"data-function"=>"if (check_option('amount')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/user_messages\/offer_amount"))}\");} else {alert('Error: Value already used ');}", :value=>"amount"}="amount"   
+    %span#span_{:style=>"float: left;height: 30px;margin-right: 5px;width: 320px;"}
+    %img.pointer.remove_search_field{:src=>"/images/minus.png", :style=>"margin-right:0;float:right !important;"}
+    %img.pointer.add_search_field{:src=>"/images/plus.png", :style=>"margin-right:5px;float:right !important;"}
+
+.buy_art_search.span10 
+  .search
+    %span{:style=>"width:120px;"}
+      %span{:style=>"line-height: 30px;width:inherit;color:white;"}="SEARCH"
+      %span{:style=>"width:inherit;color:white;"}="In User Offers"
+    = form_for :offer, :url => admin_users_user_messages_search_path, :remote=>true do |f|
+      = f.text_field :search_item, :placeholder=>"please enter your search term", :style=>"width:500px;height:30px;"
+      = f.hidden_field :user_id, :value=>params[:id]
+      = f.hidden_field :temp_sort_one, :name=>"sort_by"
+      = f.hidden_field :temp_sort_two, :name=>"offer_status"
+      = f.hidden_field :temp_sort_three, :name=>"per_page"
+      %img.pointer{:src=>"/images/plus.png", :style=>"margin-left:10px;margin-right:10px;marin-top:2px;"}
+      = f.submit :class=> "btn", :value=>"SEARCH"
+  .search_advanced{:style=>"float:left;width:86%"}
+    %div{:style=>"width:15%;margin-right:15px;"}
+      %h4{:style=>"color:white;"}="DETAILED SEARCH"
+      %span{:style=>"color:white;"}
+        %span#search_data_offers_count{:style=>"margin-right:2px;"}="@offers.count"
+        %span="  Results found"
+    = form_for :offer, :url=>admin_users_user_messages_search_path, :method=>"POST",:remote=>true, :html => {:style=>"float:left;width:82%"} do |f|
+      = f.hidden_field :user_id, :value=>params[:id]
+      = f.hidden_field :temp_sort_one, :name=>"sort_by"
+      = f.hidden_field :temp_sort_two, :name=>"offer_status"
+      = f.hidden_field :temp_sort_three, :name=>"per_page"
+      = f.hidden_field :search_advanced, :value=>false
+      %div#search_filters{:style=>"width:84%"}
+        %ul{:style=>"list-style:none;margin-left:0;width:100%"}
+          %li{:style=>"width:100%"}
+            %select#advanced_select_1{:style=>"width:90px;float:left;"}
+              %option{"data-function"=>"", :selected=>"true"}="Please choose an option"
+              %option{"data-function"=>"if (check_option('Artist Name')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/artist"))}\");} else {alert('Error: Value already used ');}", :value=>"Artist Name"}="Artist Name"
+              %option{"data-function"=>"if (check_option('Artist Name')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/user_messages\/sender_name"))}\");} else {alert('Error: Value already used ');}", :value=>"Sender Name"}="Sender Name"
+              %option{"data-function"=>"if (check_option('Description')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/description"))}\");} else {alert('Error: Value already used ');}", :value=>"Description"}="Description"
+              %option{"data-function"=>"if (check_option('country')!=false){$(a).html(\"#{escape_javascript(render("offer\/buy-art\/advanced-search\/country"))}\");} else {alert('Error: Value already used ');}", :value=>"country"}="country"     
+            %span#span_1{:style=>"float: left;height: 30px;margin-right: 5px;width: 320px;"}
+            %img.pointer.remove_search_field{:src=>"/images/minus.png", :style=>"margin-right:0;float:right !important;"}
+            %img.pointer.add_search_field{:src=>"/images/plus.png", :style=>"margin-right:5px;float:right !important;"}
+      = f.submit "SEARCH", :style=>"float:right;", :class=>"btn", :id=>"buy_art_search_submit_button"
+
+
+.sell-art-area-messages{:style=>"position:relative;"}
+  .nav-sort-bar
+    %span="Sort list by"
+    %select#messages_sort_id_one{:style=>"margin-right:10px;margin-left:10px;width:135px;"}
+      %option{:value=>"Artist Name"}="Artist Name"
+      %option{:value=>"offer end date"}="offer end date"
+      %option{:value=>"new messages"}="new messages"
+    %span="Show"
+    %select#messages_sort_id_two{:style=>"margin-right:130px;margin-left:10px;width:130px;"}
+      %option{:value=>"All offers"}="All offers"
+      %option{:value=>"Active offers"}="Active offers"
+      %option{:value=>"Inactive offers"}="Inactive offers"
+    -#%span="Pictures per page"
+    -#%select#sort_id_three
+      %option="6"
+      %option="12"
+      %option="18"
+      %option="24"
+    #sort_id_four{:style=>"float:left;width:230px;"}
+      
+    -##sort_id_five1
+      %span{:style=>"line-height:20px;"}="Page"
+      %i.icon-arrow-left
+      %span{:style=>"line-height:20px;"}="1/22"
+      %i.icon-arrow-right
+  #ajax-loader-big{:style=>"left: 400px;position: absolute;top: 30%;z-index: 100;display:none;"}
+    %img{:src=>"/images/ajax-loader-big.gif"}
+  #offers_messages
+    = render :partial => "admin/users/user_messages/user_messages_data"
+  - unless @offer_with_messages.blank?
+    #messages_unfold_div
+      %input{:type=>"button", :class=>"btn",:id=>"messages_unfold_collapse", :value=>"UNFOLD ALL MESSAGES","data-toggle"=>"0"}
+  #overlay_div{:style=>"background-color: white;display: block;height: 100%;left: 0;opacity: 0.4;position: absolute;top: 0;width: 100%;z-index: 2;display:none;"}

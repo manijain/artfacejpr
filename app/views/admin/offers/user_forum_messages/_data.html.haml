@@ -1,0 +1,29 @@
+%ul.pull-left.unstyled.width_100{:style=>"position:relative;"}
+  %span#text_page{:style=>"margin: 10px 0 !important;position: absolute;right: 125px;top: -45px;"}="Page: "
+  = will_paginate @forum_messages, :link_separator=>"#{@forum_messages.current_page}/#{@forum_messages.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"color:black"
+  - @forum_messages.each do |forum_message|
+    %li.pull-left{:style=>"width:800px;margin-bottom:20px;background-color:#e1e1e1;padding:10px;position:relative;"}
+      = link_to "see this discussion", "/forum/show/#{forum_message.id}",:style=>"text-decoration:none;color:black;position:absolute;right:20px;top:30%", :class=>"btn"
+      - if !forum_message.offer.blank? && !forum_message.offer.artwork.id.blank? && !forum_message.offer.artwork.artwork_thumbnail_file_name.blank?
+        = image_tag PAPERCLIP_STORAGE_PATH + "images/uploaded/artwork/smalls/artwork_thumbnails/" + forum_message.offer.artwork.id.to_s + "/" + forum_message.offer.artwork.artwork_thumbnail_file_name , :style=>"float:left;width:50px;height:50px;margin-left:5px;margin-right:10px;background-color:black"
+      - else
+        = image_tag "/images/image_placeholder.png", :style=>"float:left;width:50px;height:50px;margin-left:5px;margin-right:10px;background-color:black"
+      %div.message_area.pull-left{:style=>"width:720px;"}
+        %ul.unstyled.pull-left{:style=>"width:720px;"}
+          %li.pull-left.width-100
+            %span.pull-left{:style=>"font-weight:bold;text-decoration:underline;"}=forum_message.forum_message_title
+            %span.pull-left{:style=>"margin-left:5px;margin-right:5px;"}="|"
+            %span.pull-left
+              - if @user.id == forum_message.user_id
+                ="You"
+              - else 
+                ="#{forum_message.user.user_first_name[0].capitalize}. #{forum_message.user.user_last_name.capitalize}"
+            %span.pull-left{:style=>"margin-left:5px;margin-right:5px;"}="|"
+            %span.pull-left=forum_message.created_at.to_date
+            %span.pull-left{:style=>"margin-left:5px;margin-right:5px;"}="|"
+            %span.pull-left=forum_message.created_at.strftime('%H:%M')
+            %span.pull-left{:style=>"margin-left:5px;margin-right:5px;"}="|"
+            - unless forum_message.offer_id.blank?
+              = link_to "see offer # #{forum_message.offer_id}" , "/offer/show/#{forum_message.offer_id}", :style=>"text-decoration:underline;color:black;"
+          %li.pull-left.width_100="#{forum_message.reply_count} replies"
+          %li.pull-left.width_100{:style=>"margin-top:10px;"}=forum_message.forum_message_text  

@@ -1,0 +1,20 @@
+%div.pull-left.offer_show_messages{:style=>"margin-left:2%;width:820px;"}
+  %h4{:style=>"margin-right:15px;"}="THIS OFFER: YOUR MESSAGES"
+  - if @messages.blank?
+    %p.pull-left="You have not contacted this author yet"
+  - else
+    %span.pull-left{:style=>"margin-top;10px"}
+      - if @unread_messages
+        ="There #{@unread_messages_count} new replies for your messages"
+      - else
+        ="There are no new replies for your messages"
+    -#%div.nav-sort-bar.pull-left{:style=>"width:85%;padding:5px;"}
+      %span.pull-left{:style=>"line-height:30px;margin-right:10px;"}="Sort list by"
+      -#%select#messages_sort_id_one.pull-left{:style=>"width:120px;"}
+        %option{:value=>"date"}="date"
+        %option{:value=>"highest offer"}="highest offer"
+        %option{:value=>"read"}="read"
+        %option{:value=>"unread"}="unread"
+        %option{:value=>"author"}="author"
+    %div#offers_messages.pull-left.width_100{:style=>"margin-top:15px;"}
+      = render :partial => "offer/show/messages_data"

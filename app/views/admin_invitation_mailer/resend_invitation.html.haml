@@ -1,0 +1,13 @@
+= "Hi #{@user.name}"
+%br
+= "We are waiting for you to join Artface.com"
+%br
+= "kindly visit the link"
+= link_to "login here" , "http://artfacejpr.herokuapp.com/users/login"
+= "to get your free subscription"
+%br
+= "credentials for login are as follows"
+%br
+= "email :   #{@user.email}"
+%br
+= "password: #{@user.password}"

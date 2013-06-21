@@ -1,0 +1,6 @@
+%select#select_input_artist_name_{:style=>"margin-bottom: 0;margin-left:-15px;float: left;margin-right: 5px;width: 100px",:name=>"select[artist_name]search_type"}
+  %option="contains"
+  %option="is exactly"
+  %option="is not"
+%input#text_input_artist_name_{:type=>"text", :style=>"float: left;margin-bottom: 0;width: 200px;" ,:name=>"select[artist_name]value"}
+%img#error_text_input_artist_name_{"data-original-title"=>"Only Characters allowed", :src=>"/images/exclamation_mark.png", :style=>"margin-right:513px;display:none;position:absolute;right:170px;"}

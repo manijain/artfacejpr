@@ -1,0 +1,47 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                              :integer          not null, primary key
+#  email                           :string(255)      default(""), not null
+#  encrypted_password              :string(255)      default(""), not null
+#  reset_password_token            :string(255)
+#  reset_password_sent_at          :datetime
+#  remember_created_at             :datetime
+#  sign_in_count                   :integer          default(0)
+#  current_sign_in_at              :datetime
+#  last_sign_in_at                 :datetime
+#  current_sign_in_ip              :string(255)
+#  last_sign_in_ip                 :string(255)
+#  confirmation_token              :string(255)
+#  confirmed_at                    :datetime
+#  confirmation_sent_at            :datetime
+#  unconfirmed_email               :string(255)
+#  created_at                      :datetime         not null
+#  updated_at                      :datetime         not null
+#  user_gender                     :string(255)
+#  user_first_name                 :string(255)
+#  user_last_name                  :string(255)
+#  user_company                    :string(255)
+#  user_street                     :string(255)
+#  user_zip_code                   :string(255)
+#  user_country                    :string(255)
+#  user_phone_number               :string(255)
+#  user_notification_email_address :string(255)
+#  user_salutation                 :string(255)
+#  user_fax_number                 :string(255)
+#  user_city                       :string(255)
+#  user_tax_id                     :string(255)
+#
+
+class User < ActiveRecord::Base
+  # Include default devise modules. Others available are:
+  # :token_authenticatable,
+  # :lockable, :timeoutable and :omniauthable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
+
+  # Setup accessible (or protected) attributes for your model
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :user_first_name, :user_last_name, :user_company, :user_street, :user_zip_code, :user_country, :user_phone_number, :user_fax_number, :user_salutation, :user_city, :user_tax_id
+  # attr_accessible :title, :body
+end

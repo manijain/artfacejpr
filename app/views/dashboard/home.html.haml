@@ -1,0 +1,39 @@
+= render 'header'
+.container.dashboard
+  .row-fluid
+    .span10.span10dashboard
+      %h2=t '.heading'
+      %h2="#{@user.user_salutation} &nbsp;#{@user.user_last_name}".html_safe
+  .row-fluid{:style=>"margin-bottom:40px;"}
+    .span10.span10dashboard
+      .span4=t '.text_one'
+      .span4=t '.text_two'
+      .span4=t '.text_three'
+  .row-fluid
+    .span10.span10dashboard.dashboard_home
+      %h3=t '.get_started_heading'
+      .span3.span3dashboard_home{:style=>"margin-left:0;"}
+        %img{:href=>"", :alt=> "Image not found"}
+        %div
+          %h5=t '.get_started_step_one'
+          %p=t '.get_started_step_one_text'
+          %a.btn{:href=>"/dashboard/home"}=t '.go_there'
+      .span3.span3dashboard_home
+        %img{:href=>"", :alt=> "Image not found"}
+        %div
+          %h5=t '.get_started_step_two'
+          %p=t '.get_started_step_two_text'
+          %a.btn{:href=>"/dashboard/sell-art-area"}=t '.go_there'
+      .span3.span3dashboard_home
+        %img{:href=>"", :alt=> "Image not found"}
+        %div
+          %h5=t '.get_started_step_three'
+          %p=t '.get_started_step_three_text'
+          %a.btn{:href=>"/dashboard/buy-art-area"}=t '.go_there'
+      .span3.span3dashboard_home
+        %img{:href=>"", :alt=> "Image not found"}
+        %div
+          %h5=t '.get_started_step_four'
+          %p=t '.get_started_step_four_text'
+          %a.btn{:href=>"/dashboard/service"}=t '.go_there'
+= render 'footer'

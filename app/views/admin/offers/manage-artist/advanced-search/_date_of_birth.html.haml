@@ -1,0 +1,12 @@
+%select#select_input_date_of_birth{:style=>"margin-bottom: 0;margin-left:-15px;float: left;margin-right: 5px;width: 100px",:name=>"select[date_of_birth]search_type"}
+  %option="is"
+  %option="is before"
+  %option="is after"
+%input#date_input_date_of_birth_{:type=>"text", :style=>"margin-bottom:0;float:left;margin-right:5px;width:200px",:name=>"select[date_of_birth]value"}
+%img#error_text_input_date_of_birth_{"data-original-title"=>"Please choose a date", :src=>"/images/exclamation_mark.png", :style=>"margin-right:520px;display:none;position:absolute;right:163px;"}
+:javascript
+  $("#date_input_date_of_birth_").datepicker({
+  onSelect: function() {
+    $("#error_text_input_date_of_birth_").hide()
+  }
+  })

@@ -1,0 +1,207 @@
+.sign_up_layout_one
+	.sign_up_section_one
+		%h2
+			=t ".sign_up"
+	.sign_up_section_two	
+		%table
+			%tbody
+				%tr
+					%td=t ".text_one"
+					%td=t ".text_two"
+					%td=t ".text_three"
+		.sign_up_section_three
+			%table
+				%tr
+					%th=t ".subscription_title"
+					%th{:style=>"text-align:left;"}
+						- subscription_plan_data
+						%span#plan_basic.display_none=@subscription_plans[0].subscription_name
+						%span#plan_plus.display_none=@subscription_plans[1].subscription_name
+						%span#plan_pro.display_none=@subscription_plans[2].subscription_name
+						%span#plan_premium.display_none=@subscription_plans[3].subscription_name
+						%span#plan_no_limit.display_none=@subscription_plans[4].subscription_name
+					%th=""
+				%tr
+					%td=t ".subscription_text"
+					%td
+						="annual price:"
+						%span#price_basic.display_none
+							="&dollar;".html_safe
+							=@subscription_plans[0].subscription_fee
+						%span#price_plus.display_none
+							="&dollar;".html_safe
+							=@subscription_plans[1].subscription_fee
+						%span#price_pro.display_none
+							="&dollar;".html_safe
+							=@subscription_plans[2].subscription_fee
+						%span#price_premium.display_none
+							="&dollar;".html_safe
+							=@subscription_plans[3].subscription_fee
+						%span#price_no_limit.display_none
+							="&dollar;".html_safe
+							=@subscription_plans[4].subscription_fee
+						%br
+						="available offers/year: "
+						%span#limit_basic.display_none
+							=@subscription_plans[0].subscription_paintings_allowed
+						%span#limit_plus.display_none
+							=@subscription_plans[1].subscription_paintings_allowed
+						%span#limit_pro.display_none
+							=@subscription_plans[2].subscription_paintings_allowed
+						%span#limit_premium.display_none
+							=@subscription_plans[3].subscription_paintings_allowed
+						%span#limit_no_limit.display_none
+							=t ".no_limit" #if @subscription_plans[4].subscription_paintings_allowed == 9999999
+						%br
+						="viewable offers/year: unlimited.<br />".html_safe
+						%select#subscription_package_renewal
+							%option="auto-renewal"
+							%option="one-year"
+					%td
+						%input.btn{:type=>"button", :value=>"#{t(".change_subscription")}", :onclick=>"go_step_one();"}
+	
+		.sign_up_section_four
+			%h2=t ".personal_data_title"
+			%p=t ".personal_data_text"
+		
+			%table
+				%tbody
+					%tr
+						%td.sign_up_section_four_td_left=t ".full_name"
+						%td.sign_up_section_four_td_right
+							%span
+								%select#user_salutation
+									%option="Mr."
+									%option="Mrs."
+							%input#user_first_name{:type=>"text", :placeholder=>"#{t('.first_name_placeholder')}", :maxlength=>"40"}
+							%img#error_user_first_name{"data-original-title"=>"Please enter your first name", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+							%input#user_last_name{:type=>"text", :placeholder=>"#{t('.last_name_placeholder')}", :maxlength=>"40"}
+							%img#error_user_last_name{"data-original-title"=>"Please enter your last name", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+					%tr
+						%td.sign_up_section_four_td_left=t ".company"
+						%td.sign_up_section_four_td_right
+							%input#user_company{:type=>"text", :placeholder=>"#{t('.company_placeholder')}", :maxlength=>"40"}
+							%img#error_company{"data-original-title"=>"Please enter company name", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+					%tr
+						%td.sign_up_section_four_td_left=t ".address"
+						%td.sign_up_section_four_td_right
+							%input#user_street{:type=>"text", :placeholder=>"#{t('.street_placeholder')}", :maxlength=>"40"}
+							%img#error_user_street{"data-original-title"=>"Please enter your street number", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}	
+					%tr
+						%td.sign_up_section_four_td_left
+						%td.sign_up_section_four_td_right
+							%input#user_zip_code{:type=>"text", :placeholder=>"#{t('.zip_code_placeholder')}", :maxlength=>"15"}
+							%img#error_user_zip_code{"data-original-title"=>"Please enter your zip code", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+							%input#user_city{:type=>"text", :placeholder=>"#{t('.city_placeholder')}", :maxlength=>"40"}
+							%img#error_user_city{"data-original-title"=>"Please enter your city name", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+					%tr
+						%td.sign_up_section_four_td_left=t ".country"
+						%td.sign_up_section_four_td_right
+							- country_select_data
+							%select.sign_up_section_four_td_country#user_country
+								%option= "Please choose a country"
+								- @countries.each do |country|
+									%option=country.country_name
+						%td
+							%span#user_country_error=t ".user_country_error"
+					%tr
+						%td.sign_up_section_four_td_left=t ".phone_fax"
+						%td.sign_up_section_four_td_right
+							%input#user_phone_number{:type=>"text", :placeholder=>"#{t('.phone_number_placeholder')}", :maxlength=>"30"}
+							%img#error_user_phone_number{"data-original-title"=>"Please enter your phone number", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+							%input#user_fax_number{:type=>"text", :placeholder=>"#{t('.fax_number_placeholder')}", :maxlength=>"30"}
+							%img#error_user_fax_number{"data-original-title"=>"Please enter your fax number", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+					%tr
+						%td.sign_up_section_four_td_left=t ".tax_id"
+						%td.sign_up_section_four_td_right
+							%input#user_tax_id{:type=>"text", :placeholder=>"#{t('.tax_id_placeholder')}", :maxlength=>"40"}
+							=t(".tax_id_notice")
+		.sign_up_section_five
+			%h2=t ".login_data_title"
+			%p=t ".login_data_text"
+			%table
+				%tbody
+					%tr
+						%td.sign_up_section_four_td_left=t ".email"
+						%td.sign_up_section_four_td_right
+							%span
+								%input#user_email{:type=>"text", :placeholder=>"#{t('.email_placeholder')}", :maxlength=>"40", :value=>"#{session['recommended_to_email']}"}
+								%img#error_user_email{"data-original-title"=>"Please enter your email address", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+								%span=t ".email_notice"
+					%tr
+						%td.sign_up_section_four_td_left=t ".password"
+						%td.sign_up_section_four_td_right
+							%span
+								%input#user_password{:type=>"password", :placeholder=>"#{t('.password_placeholder')}"}
+								%img#error_user_password{"data-original-title"=>"Please enter a password", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+								%span#password_notice=t ".password_notice"
+					%tr
+						%td
+						%td
+							%input#user_toggle_password_visibility{:type=>"checkbox"}
+							="Password visibility"
+		.sign_up_section_six
+			%h2=t ".payment_method_title"
+			%p=t ".payment_method_text"
+			.sign_up_section_six_container
+				.sign_up_section_six_container_step_one{:style=>"width:820px;float:left;"}
+					%input#radio_payment_card{:type=>"radio", :name=>"radio_payment_type", :checked=>"true", :style=>"float:left;"}
+					%div#radio_payment_card_div_one
+						%div
+							%strong#payment_card_title=t ".payment_card_title"
+							%br
+							=t(".payment_card_text").html_safe
+						%div
+							%select#card_type
+								%option="Credit Card type"
+								%option="Visa"
+								%option="American Express"
+								%option="MasterCard"
+							%img#error_card_type{"data-original-title"=>"Please choose a credit card type", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}	
+							%br
+							%strong=t ".expires"
+							%select#card_expiry_month{:style=>"width:80px;", :type=>"text", :maxlength=>"40"}
+								- (1..12).each do |i|
+									%option="#{i}"
+							%img#error_card_expiry_month{"data-original-title"=>"Please enter valid expiry month", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+							%select#card_expiry_year{:style=>"width:80px;", :type=>"text", :maxlength=>"40"}
+								-(Date.today.year..(Date.today.year + 30)).each do |i|
+									%option="#{i}"
+							%img#error_card_expiry_year{"data-original-title"=>"Please enter valid expiry year", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+						%div
+							%ul.unstyled
+								%li
+									%input#card_number{:type=>"text", :placeholder=>"#{t('.card_number_placeholder')}", :maxlength=>"40"}
+									%img#error_card_number{"data-original-title"=>"Please enter your card number", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+								%li
+									%input#card_owner{:type=>"text", :placeholder=>"#{t('.card_holder_name_placeholder')}", :maxlength=>"40"}
+									%img#error_card_owner{"data-original-title"=>"Please enter card holder's name", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+								%li
+									%input#card_code{:type=>"text", :placeholder=>"#{t('.card_verification_code')}", :maxlength=>"40"}
+									%img#error_card_code{"data-original-title"=>"Please enter your card code", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+					#radio_payment_card_div_two{:style=>"display:none;width:90%;float:left;"}
+						%strong#payment_card_title=t ".payment_card_title"
+						%br
+				.sign_up_section_six_container_step_two{:style=>"width:820px;float:left;"}
+					%input#radio_payment_paypal{:type=>"radio", :name=>"radio_payment_type", :style=>"float:left;"}
+					#radio_payment_paypal_div_one
+						%div
+							%strong#payment_paypal_title=t ".payment_paypal_title"
+							%p=t(".payment_paypal_text_one").html_safe
+						%div
+							%p=t(".payment_paypal_text_one").html_safe
+					#radio_payment_paypal_div_two{:style=>"display:none;width:90%;float:left;"}
+						%strong#payment_paypal_title=t ".payment_paypal_title"
+				.sign_up_section_six_container_step_three{:style=>"width:820px;float:left;"}
+					%input#radio_payment_bank{:type=>"radio", :name=>"radio_payment_type", :style=>"float:left;"}
+					#radio_payment_bank_div_one
+						%div
+							%strong=t ".payment_bank_title"
+							%p=t(".payment_bank_text_one").html_safe
+						%div
+							%p=t(".payment_bank_text_two").html_safe
+					#radio_payment_bank_div_two{:style=>"display:none;width:90%;float:left;"}
+						%strong#payment_paypal_title=t ".payment_bank_title"
+		%div{:style=>"float:right"}
+			%br
+			%button.btn{:onclick=>"one_to_two();"}=t '.continue_sign_up'

@@ -1,0 +1,26 @@
+= form_for :forum_message, :url=>"/admin/users/#{params[:id]}/forum_list_search", :method=>"POST", :remote=>"true", :html=>{:class=>"pull-left forum_advanced_search", :id=>"forum_advanced_search", :style=>"margin-top:30px; display:none;" } do |f|
+	= f.hidden_field "sort_by", :name=>"sort_by"
+	= f.hidden_field "per_page", :name=>"per_page"
+	= f.hidden_field "search_advanced", :name=>"search_advanced", :value=>"true"
+	= content_tag :ul, :class=>"search_filters unstyled pull-left" do
+		= content_tag :li, :class=>"filter_li pull-left" do
+			%select#advanced_select_1.select_first.pull-left
+				%option{"data-function"=>"", :value=>"Please choose an option"} Please choose an option
+				%option{"data-function"=>"if (check_option('Concern')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/search\/advanced_search\/concern"))}\");} else {alert('Error: Value already used ');}", :value=>"Concern"} Concern
+
+				%option{"data-function"=>"if (check_option('date of post')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/search\/advanced_search\/date_of_post"))}\");} else {alert('Error: Value already used ');}", :value=>"date of post"} date of post
+
+				%option{"data-function"=>"if (check_option('offer ID')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/search\/advanced_search\/offer_id"))}\");} else {alert('Error: Value already used ');}", :value=>"offer ID"} offer ID
+
+				%option{"data-function"=>"if (check_option('Artist name')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/search\/advanced_search\/artist"))}\");} else {alert('Error: Value already used ');}", :value=>"Artist name"} Artist name
+
+				%option{"data-function"=>"if (check_option('Title')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/search\/advanced_search\/title"))}\");} else {alert('Error: Value already used ');}", :value=>"Title"} Title
+
+				%option{"data-function"=>"if (check_option('Description')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/search\/advanced_search\/description"))}\");} else {alert('Error: Value already used ');}", :value=>"Description"} Description
+				
+				%option{"data-function"=>"if (check_option('Author')!=false){$(a).html(\"#{escape_javascript(render("admin\/users\/search\/advanced_search\/author"))}\");} else {alert('Error: Value already used ');}", :value=>"Author"} Author
+			= content_tag :span, :id=>"span_1", :class=>"append_span_field" do
+				=""
+			= image_tag "/images/minus.png", :class=>"pointer remove_search_field pull-right"
+			= image_tag "/images/plus.png", :class=>"pointer add_search_field pull-right", :style=>"margin-right:5px;"
+	= f.submit "SEARCH", :class=>"btn submit_button pull-left"

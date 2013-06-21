@@ -1,0 +1,31 @@
+.footer
+  .site_wide_error{:style=>"display:none;"}
+    %pre.prettyprint.linenums{:style=>"width: 820px;height: 20px;"}
+      %span.tag.site_wide_error_text
+  .footer_content
+    %div{:style=>"width:31%;float:left"}
+      %p{:style=>"text-align:center;"}
+        %strong=t '.site_name'
+        %br
+      %p{:style=>"float:left;margin-right:10px"}
+        =t '.footer_text_one'
+    %div{:style=>"width:31%;float:left"}
+      %p{:style=>"text-align:center;margin-right:10px"}
+        %strong=t '.footer_text_two'
+        %br
+      %p=t '.footer_text_three'
+    %div{:style=>"width:31%;float:left"}
+      %p{:style=>"text-align:center;"}
+        %strong=t '.footer_text_four'
+        %br
+      %p
+        ="#{t '.footer_text_five'}".html_safe
+    .footer_links
+      = t '.footer_link_text_one'
+      = link_to "#{t '.footer_link_one'}", "/#disclaimer", :id=>"show_disclaimer"
+      = " | "
+      = link_to "#{t '.footer_link_two'}", "/#privacy_statement", :id=>"show_privacy_statement"
+      = " | "
+      = link_to "#{t '.footer_link_three'}", contact_path
+      = " | "
+      = link_to "#{t '.footer_link_four'}", terms_conditions_path

@@ -1,0 +1,48 @@
+= content_tag :div, :class=>"data pull-left", :style=>"width:100%;border-top:1px solid black;border-bottom:1px solid black;margin-top:20px;position:relative;" do
+  = will_paginate @user_payment, :remote=>true, :link_separator=>"#{@user_payment.current_page}/#{@user_payment.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"color:black"
+  %img#mail_loader_gif{:src=>"/images/ajax-loader-big.gif", :style=>"position:absolute;top:45%;left:45%;display:none;"}
+  #mail_loader_div{:style=>"background-color: white;display: block;height: 100%;left: 0;opacity: 0.4;position: absolute;top: 0;width: 100%;z-index: 2;display:none;"}
+  = content_tag :ul, :class=>"pull-left unstyled main_ul", :style=>"width:100%;" do 
+  
+    - @user_payment.each do |user_payment|
+      = content_tag :li, :class=>"pull-left main_li", :style=>"background-color: #F1F1F1;margin-bottom: 10px;margin-left: 6px;padding: 8px;width:96%;" do
+        = content_tag :ul, :class=>"unstyled pull-left", :style=>"width:23%;" do
+          = content_tag :li, :class=>"pull-left", :style=>"width:85%;" do
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;font-weight:bold" do
+              = user_payment.user_first_name + " " + user_payment.user_last_name
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+              = user_payment.user_country
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+              -#= "#{user_payment.zip_code}, #{user_payment.city}, #{user_payment.country}"
+        = content_tag :ul, :class=>"unstyled pull-left", :style=>"width:31%;" do
+          = content_tag :li, :class=>"pull-left", :style=>"width:85%;" do
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+              - if(user_payment.subscription.auto_renewal == true)
+                = "auto-renewal"
+              - elsif(user_payment.subscription.auto_renewal == false)
+                = "1-year-limit"
+              - else
+                = "Nothing specified"
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+              = "#{user_payment.subscription.subscription_plan.subscription_name} member since: #{user_payment.subscription.subscription_start_date.strftime("%Y-%m")}"
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+              -#= "contact: #{user_payment.email}"
+        = content_tag :ul, :class=>"unstyled pull-left", :style=>"width:21%;" do
+          = content_tag :li, :class=>"pull-left", :style=>"width:85%;" do
+            - if (user_payment.payment.payment_conflict_reason == "")
+              = content_tag :span, :class=>"pull-left", :style=>"width:100%;font-weight:bold;visibility:hidden" do
+                = "Nothing specified"
+            - else  
+              = content_tag :span, :class=>"pull-left", :style=>"width:100%;font-weight:bold;" do
+                = "#{user_payment.payment.payment_conflict_reason}"
+        = content_tag :ul, :class=>"unstyled pull-left", :style=>"width:25%;" do
+          = content_tag :li, :class=>"pull-left", :style=>"width:85%;" do
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;font-weight:bold" do
+              = "due amount: €#{user_payment.payment.transaction_amount.to_i - user_payment.payment.paid_amount.to_i}"
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+              -#= link_to "send email reminder", admin_due_amount_path(:amount_due => user_payment.payment.transaction_amount.to_i - user_payment.payment.paid_amount.to_i), :id => "email_reminder_#{user_payment.id}"
+              = link_to "send email reminder", "#", :id => "reminder_#{user_payment.id}"
+
+
+
+            

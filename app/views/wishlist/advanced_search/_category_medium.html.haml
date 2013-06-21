@@ -1,0 +1,86 @@
+%select#select_input_category_medium_1_{:style=>"float:left;width:50px;margin-bottom:0;margin-right:5px",:name=>"search_params[category]search_type"}
+  %option{:value=>"is"}="is"
+  %option{:value=>"is not"}="is not"
+%select#select_input_category_medium_2_{:style=>"float:left;width:125px;margin-bottom:0;margin-right:5px",:name=>"search_params[category]name"}
+  %option{:value=>"any"}="any"
+  %option{:value=>"painting"}="painting"
+  %option{:value=>"drawing/watercolor"}="drawing/watercolor"
+  %option{:value=>"print/multiple"}="print/multiple"
+  %option{:value=>"tapestry"}="tapestry"
+  %option{:value=>"photography"}="photography"
+%select#select_input_category_medium_sub_select_1_{:style=>"display:none;float:left;width:125px;margin-bottom:0;margin-right:5px;"}
+  %option{:value=>"acrylic"}="acrylic"
+  %option{:value=>"enamel"}="enamel"
+  %option{:value=>"mixed media"}="mixed media"
+  %option{:value=>"oil"}="oil"
+  %option{:value=>"oil/canvas"}="oil/canvas"
+  %option{:value=>"oil/panel"}="oil/panel"
+  %option{:value=>"stained glass"}="stained glass"
+  %option{:value=>"tempera"}="tempera"
+  %option{:value=>"waterpaint"}="waterpaint"
+  %option{:value=>"mosaic"}="mosaic"
+%select#select_input_category_medium_sub_select_2_{:style=>"display:none;float:left;width:125px;margin-bottom:0;margin-right:5px;"}
+  %option{:value=>"calligraph"}="calligraph"
+  %option{:value=>"chalk"}="chalk"
+  %option{:value=>"charcoal"}="charcoal"
+  %option{:value=>"coloured pencils"}="coloured pencils"
+  %option{:value=>"felt pen"}="felt pen"
+  %option{:value=>"gouache"}="gouache"
+  %option{:value=>"indian ink"}="indian ink"
+  %option{:value=>"lead pencil"}="lead pencil"
+  %option{:value=>"mixed media/paper"}="mixed media/paper"
+  %option{:value=>"pastel"}="pastel"
+  %option{:value=>"pencil"}="pencil"
+  %option{:value=>"red chalk"}="red chalk"
+  %option{:value=>"watercolour"}="watercolour"
+%select#select_input_category_medium_sub_select_3_{:style=>"display:none;float:left;width:125px;margin-bottom:0;margin-right:5px;"}
+  %option{:value=>"aquatint"}="aquatint"
+  %option{:value=>"copper engraving"}="copper engraving"
+  %option{:value=>"drypoint"}="drypoint"
+  %option{:value=>"engraving"}="engraving"
+  %option{:value=>"etching"}="etching"
+  %option{:value=>"linocut"}="linocut"
+  %option{:value=>"lithograph"}="lithograph"
+  %option{:value=>"offset"}="offset"
+  %option{:value=>"poster"}="poster"
+  %option{:value=>"serigraph"}="serigraph"
+  %option{:value=>"woodcut"}="woodcut"
+%select#select_input_category_medium_sub_select_5_{:style=>"display:none;float:left;width:125px;margin-bottom:0;margin-right:5px;"}
+  %option{:value=>"bromoil gelatin silver print"}="bromoil gelatin silver print"
+  %option{:value=>"c print"}="c print"
+  %option{:value=>"cibachrome print"}="cibachrome print"
+  %option{:value=>"daguerreotype"}="daguerreotype"
+  %option{:value=>"diapositive"}="diapositive"
+  %option{:value=>"digital image"}="digital image"
+  %option{:value=>"gelatin silver print"}="gelatin silver print"
+  %option{:value=>"hologram"}="hologram"
+  %option{:value=>"polaroid"}="polaroid"
+  
+:javascript
+  $("select[id^=select_input_category_medium_2]").change(function() {
+  temp_index = $("select[id^=select_input_category_medium_2] option:selected").index()  
+  switch(temp_index) {
+  case 0: $("select[id^=select_input_category_medium_sub_select_]").css("display","none")
+  $("select[id^=select_input_category_medium_sub_select_]").attr("name","")
+  break;
+  case 1: $("select[id^=select_input_category_medium_sub_select_]").css("display","none")
+  $("select[id^=select_input_category_medium_sub_select_1]").css("display","block")
+  $("select[id^=select_input_category_medium_sub_select_1]").attr("name","search_params[category]sub_name")
+  break;
+  case 2: $("select[id^=select_input_category_medium_sub_select_]").css("display","none")
+  $("select[id^=select_input_category_medium_sub_select_2]").css("display","block")
+  $("select[id^=select_input_category_medium_sub_select_2]").attr("name","search_params[category]sub_name")
+  break;
+  case 3: $("select[id^=select_input_category_medium_sub_select_]").css("display","none")
+  $("select[id^=select_input_category_medium_sub_select_3]").css("display","block")
+  $("select[id^=select_input_category_medium_sub_select_3]").attr("name","search_params[category]sub_name")
+  break; 
+  case 4: $("select[id^=select_input_category_medium_sub_select_]").css("display","none")
+  $("select[id^=select_input_category_medium_sub_select_]").attr("name","")
+  break;
+  case 5: $("select[id^=select_input_category_medium_sub_select_]").css("display","none")
+  $("select[id^=select_input_category_medium_sub_select_5]").css("display","block")
+  $("select[id^=select_input_category_medium_sub_select_5]").attr("name","search_params[category]sub_name")
+  break;
+  }
+  })

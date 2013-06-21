@@ -1,0 +1,18 @@
+.span10.span10interesting_offers{:style=>"position:relative;"}
+  .span10{:style=>"margin-left:0"}
+    %h4{:style=>"float:left;"}=t '.heading'
+    %span{:style=>"float:right;line-height:40px;"}
+      ="New offers: 3. "
+      ="Sort list by"
+      %select#buy_interesting_offers_select{:style=>"width:150px;"}
+        %option="date"
+        %option="Popularity"
+        %option="artist name"
+        %option="end date of offer"
+  .span10interesting_offers_first_div
+    = render :partial => "offer/home/interesting_offers/interesting_offers_data"
+  .span5{:style=>"margin-top:10px"}
+    %a.btn{:href=>"/buy-art/search"}="SHOW ALL OFFERS"
+  #ajax-loader-big_for_buy_art_interesting_offers{:style=>"left: 400px;position: absolute;top: 30%;z-index: 100;display:none;height:50px;width:50px;"}
+    %img{:src=>"/images/ajax-loader-big.gif",:style=>"width:100%;height:100%;"}
+  #overlay_div_for_buy_art_interesting_offers{:style=>"background-color: white;display: block;height: 100%;left: 0;opacity: 0.4;position: absolute;top: 0;width: 100%;z-index: 2;display:none;"}

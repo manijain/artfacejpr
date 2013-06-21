@@ -1,0 +1,23 @@
+.span10.span10favourites
+  .span10{:style=>"margin-left:0"}
+    %h4{:style=>"float:left;"}="BUY: YOUR FAVOURITES"
+    %span{:style=>"float:right;line-height:40px;"}
+      ="Sort list by"
+      %select{:style=>"width:150px;"}
+        %option="Artist Name"
+        %option="date"
+        %option="time left"
+  .span10favourites_first_div
+    %ul{:style=>"margin-left:30px;"}
+      - @buy_your_favourites.each do |offer|
+        %li
+          %a{:href=>"/offer/show/#{offer.id}"}
+            =image_tag "https://artfacedev-pro.s3.amazonaws.com/public/images/uploaded/artwork/smalls/artwork_thumbnails/#{offer.artwork.id}/#{offer.artwork.artwork_thumbnail_file_name}", :alt=>"image not found", :alt=>"image not found"
+            %i.icon-certificate
+          %span{:style=>"text-align:center"}
+            %span.span10favourites_span_artist=offer.artwork.artist.artist_name || "unknown"
+            %span.span10favourites_span_time=humanize_time(offer.offer_end_date.to_i - Time.now.to_i) || "unknown"
+          %i.icon-remove{:style=>"position:absolute;right:0;display:none;", :id=>"#{offer.id}"}
+  .span5{:style=>"margin-top:10px"}
+    %a.btn{:href=>"/offer/your-favourites"}="GO TO FAVOURITES"
+    %input.btn#delete_offer{:type=>"button", :value=>"DELETE A FAVOURITE"}

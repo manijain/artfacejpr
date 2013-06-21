@@ -1,0 +1,12 @@
+development:
+  bucket: artfacedev-dev
+  access_key_id: AKIAIIF2R4AR4SW6NSZQ
+  secret_access_key: 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
+test:
+  bucket: artfacedev-dev
+  access_key_id: AKIAIIF2R4AR4SW6NSZQ
+  secret_access_key: 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
+production:
+  bucket: artfacedev-pro
+  access_key_id: AKIAIIF2R4AR4SW6NSZQ
+  secret_access_key: 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

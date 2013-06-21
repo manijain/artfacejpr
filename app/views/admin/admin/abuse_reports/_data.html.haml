@@ -1,0 +1,122 @@
+= content_tag :div, :class=>"data pull-left", :style=>"width:100%;border-top:1px solid black;border-bottom:1px solid black;margin-top:20px;position:relative;" do
+  = will_paginate @abuse_report, :remote=>true, :link_separator=>"#{@abuse_report.current_page}/#{@abuse_report.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"color:black"
+  
+  %img#reply_mail_loader_gif{:src=>"/images/ajax-loader-big.gif", :style=>"position:absolute;top:45%;left:45%;display:none;"}
+  #reply_mail_loader_div{:style=>"background-color: white;display: block;height: 100%;left: 0;opacity: 0.4;position: absolute;top: 0;width: 100%;z-index: 2;display:none;"}
+
+  = content_tag :ul, :class=>"pull-left unstyled main_ul", :style=>"width:100%;" do 
+    - @abuse_report.each do |abusereport|
+      = content_tag :li, :class=>"pull-left main_li", :style=>"background-color: #F1F1F1;margin-bottom: 10px;margin-left: 6px;padding: 8px;width:96%;" do
+       
+        = content_tag :span, :class=>"container_close", :style=>"display:none;" do
+          %a.icon-arrow-up.pull-right.pointer.container_close{:id=>"container_close_#{abusereport.id}"}
+        = content_tag :span, :class=>"container_open", :style=>"display:none;" do
+          %a.icon-arrow-down.pull-right.pointer.container_open{:id=>"container_#{abusereport.id}"}
+        = content_tag :span, :class=>"delete_img", :style=>"display:none;" do
+          %a.icon-trash.pull-right.pointer.delete_img{:id=>"delete_#{abusereport.id}"} 
+        = content_tag :span, :class=>"unsolved_img", :style=>"display:none;" do
+          %a.icon-remove.pull-right.pointer.unsolved_img{:id=>"unsolved_#{abusereport.id}"}
+        = content_tag :span, :class=>"solved_img", :style=>"display:none;" do
+          %a.icon-ok.pull-right.pointer.solved_img{:id=>"solved_#{abusereport.id}"}
+        
+        -#= content_tag :li do#, :class=>"unstyled pull-left" do, :style=>"background-color: #F1F1F1;margin-bottom: 10px;margin-left: 6px;padding: 8px;width: 750px; display:none" do
+        -#  %h6= "Rohit"
+        = content_tag :ul, :class=>"unstyled pull-left", :style=>"width:14%;" do
+          - if(abusereport.is_solved ==true)
+            %a.icon-ok.pull-left.pointer.is_solved_img{:id=>"is_solved_#{abusereport.id}"}
+          - else
+            %a.icon-ok.pull-left.pointer.is_solved_img{:style=>"display:none", :id=>"is_solved_#{abusereport.id}"}
+
+          =image_tag "https://artfacedev-pro.s3.amazonaws.com/public/images/uploaded/artwork/smalls/artwork_thumbnails/#{abusereport.offer.artwork.id}/#{abusereport.offer.artwork.artwork_thumbnail_file_name}", :onerror=>'this.src="/assets/image_placeholder.png"', :style=>"float:left"#, :alt=>"image not found" unless abusereport.offer.artwork.nil? 
+        = content_tag :ul, :class=>"unstyled pull-left", :style=>"width:85%;" do
+
+          = content_tag :li, :class=>"pull-left", :style=>"width:100%;" do
+
+
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%" do
+              %u{:style=>"font-weight:bold"}= abusereport.offer.artwork.artist.artist_name
+              = "|"
+              %b= abusereport.concern
+              = "|"
+              = abusereport.user.user_first_name + " " + abusereport.user.user_last_name
+              = "|"
+              = abusereport.created_at.to_date
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+              -#= abuse_reports.street
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+              = abusereport.message_text
+        = content_tag :ul, :class=>"unstyled pull-left", :style=>"width:32%;" do
+          = content_tag :li, :class=>"pull-left", :style=>"width:100%;" do
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;font-weight:bold" do
+              -#= "phone: #{abuse_reports.telephone_number}"
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+              -#= "fax: #{abuse_reports.fax_number}"
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+              -#= "contact: #{abuse_reports.email}"
+        = content_tag :p, :class=>"pull-left", :style=>"width:32%;margin-left:20px;" do
+          -#= "#{abuse_reports.description.first(100)}..."
+
+        = content_tag :div, :id=>"report_abuse_reply_container", :class=>"pull-left", :style=>"display:none;background: none repeat scroll 0 0 #727272;border-radius: 5px 5px 5px 5px;left: 6px;padding: 10px;width: 750px;color:white" do
+          
+          - if (abusereport.is_mailed.nil?)
+
+            = form_for :message_admin, :url=>message_admin_report_abuse_reply_path, :remote=>"true", :html=>{:class=>"pull-left", :style=>"width:75%;"}, :remote=>"true" do |f|
+              = f.hidden_field :user_id, :value=>"#{abusereport.user_id}"
+              = f.hidden_field :message_id, :value=>"#{abusereport.id}"
+              = f.hidden_field :offer_id, :value=>"#{abusereport.offer_id}"
+              -#= f.hidden_field :offer_id, :value=>"" 
+              -#= f.hidden_field :is_solved, :value=>false
+              = content_tag :ul, :class=>"pull-left unstyled", :style=>"width:100%;padding-left:10px;" do 
+                = content_tag :li, :class=>"pull-left", :style=>"width:100%;" do
+                  = label_tag :title, :class=>"pull-left", :style=>"text-align:right;width:150px;margin-right:10px;" do
+                    ="TITLE"
+                  = f.text_field :title, :class=>"pull-left", :style=>"width:387px;position:relative;", :placeholder=>"Enter title"
+                = content_tag :li, :class=>"pull-left", :style=>"width:100%;" do
+                  = content_tag :div, :class=>"pull-left", :style=>"width:150px;" do
+                    = label_tag :reply_message, :class=>"pull-left", :style=>"text-align:right;width:150px;margin-right:10px;" do
+                      ="YOUR REPLY"
+                    -#=content_tag :span, :id=>"report_abuse_word_count", :class=>"pull-left", :style=>"text-align:right;margin-right:5px;width:150px;" do
+                    -#  ="0/1000"
+                  = f.text_area :reply_message, :class=>"pull-left", :style=>"width:387px;resize:none;height:90px;margin-left:10px;position:absolute;"
+                = content_tag :li, :class=>"pull-left", :style=>"width:100%;margin-top:77px" do
+                  = f.submit "SEND MESSAGE", :class=>"btn pull-right", :id => "send_reply_btn"
+                  = input_tag("cancel_report_abuse_reply_#{abusereport.id}","pull-right btn","CANCEL","margin-right:10px")
+
+          - elsif (abusereport.is_mailed ==false)
+            = form_for :message_admin, :url=>message_admin_report_abuse_reply_path, :remote=>"true", :html=>{:class=>"pull-left", :style=>"width:75%;"}, :remote=>"true" do |f|
+              = f.hidden_field :user_id, :value=>"#{abusereport.user_id}"
+              = f.hidden_field :message_id, :value=>"#{abusereport.id}"
+              = f.hidden_field :offer_id, :value=>"#{abusereport.offer_id}"
+              -#= f.hidden_field :offer_id, :value=>"" 
+              -#= f.hidden_field :is_solved, :value=>false
+              = content_tag :ul, :class=>"pull-left unstyled", :style=>"width:100%;padding-left:10px;" do 
+                = content_tag :li, :class=>"pull-left", :style=>"width:100%;" do
+                  = label_tag :title, :class=>"pull-left", :style=>"text-align:right;width:150px;margin-right:10px;" do
+                    ="TITLE"
+                  = f.text_field :title, :class=>"pull-left", :style=>"width:387px;position:relative;", :value=>"#{abusereport.reply_title}"
+                = content_tag :li, :class=>"pull-left", :style=>"width:100%;" do
+                  = content_tag :div, :class=>"pull-left", :style=>"width:150px;" do
+                    = label_tag :reply_message, :class=>"pull-left", :style=>"text-align:right;width:150px;margin-right:10px;" do
+                      ="YOUR REPLY"
+                    -#=content_tag :span, :id=>"report_abuse_word_count", :class=>"pull-left", :style=>"text-align:right;margin-right:5px;width:150px;" do
+                    -#  ="0/1000"
+                  = f.text_area :reply_message, :value=>"#{abusereport.reply_message}", :class=>"pull-left", :style=>"width:387px;resize:none;height:90px;margin-left:10px;position:absolute;"
+                = content_tag :li, :class=>"pull-left", :style=>"width:100%;margin-top:77px" do
+                  = f.submit "SEND MESSAGE", :class=>"btn pull-right", :id => "send_reply_btn"
+                  = input_tag("cancel_report_abuse_reply_#{abusereport.id}","pull-right btn","CANCEL","margin-right:10px")
+
+          - elsif (abusereport.is_mailed ==true)
+            = content_tag :ul, :class=>"unstyled pull-left", :style=>"width:32%;" do
+              = content_tag :li, :class=>"pull-left", :style=>"width:100%;" do
+                = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+                  %b= abusereport.reply_mailed_at.to_date
+                  %b= "|"
+                  %b= abusereport.reply_mailed_at.strftime("%H.%M")
+                  %b= "|"
+                  %b= abusereport.reply_title
+
+                -#= content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+                -#  = abusereport.reply_title
+              = content_tag :li, :class=>"pull-left", :style=>"width:100%;" do
+                = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+                  = abusereport.reply_message

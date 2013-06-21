@@ -1,0 +1,177 @@
+%script{:type=>"text/javascript", :src=>"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"}
+- new_offer_form_data
+= render :partial => 'dashboard/header'
+.offer_layout_one
+	.offer_step_one
+		%span
+			%h2{:style=>"width:400px;display:inline;margin-top:0;"}="ADD NEW OFFER"
+			%a{:style=>"float:right;", :class=>"btn", :href=>"/dashboard"}="CANCEL"
+		%p="You have 8 offers left in your annual subscription. For your new offer please ﬁll in all ﬁelds as complete as possible."
+		%h3="ARTIST"
+		%p="Artface.com has a list of common artist names. To prevent misspelled artist names we verify your input and match it with our database. If your desired artist is not in our database yet we will check your input and add it to our system as soon as possible."
+		%span
+			%span{:style=>"float: left;line-height: 30px;text-align: right;width: 330px;"}
+				="ARTIST NAME"
+			%span{:style=>"color: black;display: block;float: right;"}
+				%input{:type=>"text", :placeholder=>"TYPE IN COMPLETE ARTIST NAME", :style=>"width:400px;", :id=>"new_artist_name", :maxlength=>"40"}
+				%img{"data-original-title"=>"Please enter the artist name", :id=>"error_new_artist_name", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: -5px;display:none"}
+	.offer_step_two
+		%div{:style=>"float:left;width:210px;"}
+			%h3="DESCRIPTION"
+		%div{:style=>"float:left;width:590px;margin-top:15px;"}
+			%ul{:style=>"list-style:none"}
+				%li
+					%span{:style=>"text-align: right;width: 80px;margin: 0;display: inline;float: left;margin-right: 2px;line-height:26px;"}="TITLE"
+					%input{:type=>"text", :style=>"width:430px;", :placeholder=>"UP TO 60 CHARACTERS, UNTITLED IF LEFT BLANK", :id=>"new_artwork_title", :maxlength=>"60"}
+					%span{:style=>"margin-left:2%"}="+"
+				%li
+					%span{:style=>"text-align: right;line-height: 30px;float: left;width: 100px;margin-right: 10px;"}="CATEGORY"
+					%select{:style=>"width:150px;float:left;", :id=>"new_category"}
+						%option="Please choose"
+						- @category.each do |category|
+							%option=category.value	
+					%img{"data-original-title"=>"Please choose a category", :id=>"error_new_category", :src=>"/images/exclamation_mark.png", :style=>"left: -45%;position: relative;top: -5px;display:none"}
+					%span{:style=>"text-align: right;margin-left: 30px;margin-right: 10px;line-height: 30px;float: left"}="MEDIUM"
+					%select{:style=>"width:150px;float:left;", :id=>"new_medium"}
+					%img{"data-original-title"=>"Please choose a medium", :id=>"error_new_medium", :src=>"/images/exclamation_mark.png", :style=>"left: -3%;position: relative;top: -40px;display:none"}
+	.offer_step_three
+		%div{:style=>"float:left;width:200px;"}
+			%h3="SIZES"
+		%div{:style=>"float:left;width:590px;margin-top:15px;"}
+			%ul{:style=>"list-style:none;margin:0 auto;width:640px;"}
+				%li
+					%span{:style=>"margin-right: 7px;float: left;line-height: 30px"}="HEIGHT"
+					%input{:type=>"text", :style=>"width:113px;float:left", :id=>"new_height", :maxlength=>"4"}
+					%img{"data-original-title"=>"Please enter the height", :id=>"error_new_height", :src=>"/images/exclamation_mark.png", :style=>"left: -60%;position: relative;top: -5px;display:none"}
+					%span{:style=>"margin-right:4px;margin-left:4px;float:left;line-height:30px"}="WIDTH"
+					%input{:type=>"text", :style=>"width:113px;float:left;", :id=>"new_width", :maxlength=>"4"}
+					%img{"data-original-title"=>"Please enter the width", :id=>"error_new_width", :src=>"/images/exclamation_mark.png", :style=>"left: -39%;position: relative;top: -5px;display:none"}
+					%span{:style=>"margin-right:4px;margin-left:4px;float:left;line-height:30px"}="DEPTH"
+					%input{:type=>"text", :style=>"width:113px;float:left", :id=>"new_depth", :maxlength=>"4"}
+					%img{"data-original-title"=>"Please enter the width", :id=>"error_new_depth", :src=>"/images/exclamation_mark.png", :style=>"left: -3%;position: relative;top: -40px;display:none"}
+				%li{:style=>"clear:both;"}
+					%span{:style=>"float: left;width: 58px;text-align: right;margin-right: 5px;line-height:30px"}="UNIT"
+					%select{:style=>"width:65px", :id=>"new_size_unit"}
+						- @unit.each do |unit|
+							%option=unit.value
+	.offer_step_four
+		%div{:style=>"float:left;width:210px;"}
+			%h3="DETAILS"
+		%div{:style=>"float:left;width:590px;margin-top:15px;"}
+			%ul{:style=>"list-style:none;margin:0 auto;", :id=>"new_offer_step_four_ul"}
+				%li
+					%span{:style=>"width: 150px;float: left;text-align: right;line-height:30px"}="CREATION YEAR"
+					%input{:type=>"text", :placeholder=>"YEAR", :style=>"margin-left:10px;margin-right:10px;width:60px;", :id=>"new_year", :maxlength=>"4"}
+					%img{"data-original-title"=>"Please enter the year", :id=>"error_new_year", :src=>"/images/exclamation_mark.png", :style=>"left: -5%;position: relative;top: -5px;display:none"}
+					%select{:style=>"width:65px;", :id=>"new_era"}
+						%option="AD"
+						%option="BC"
+				%li
+					%span{:style=>"width: 150px;float: left;text-align: right;"}="CERTIFICATE"
+					%input{:type=>"checkbox", :style=>"margin-right: 10px;margin-left:10px", :id=>"new_certificate"}
+					%span{:style=>"font-size:10px"}="You can upload a scan of the ceriﬁcate in the Images section."
+				%li
+					%span{:style=>"width: 150px;float: left;text-align: right;"}="FRAME"
+					%input{:type=>"checkbox", :style=>"margin-right: 10px;margin-left:10px", :id=>"new_frame"}
+				%li
+					%span{:style=>"width: 150px;float: left;text-align: right;"}="SIGNATURE"
+					%input{:type=>"checkbox", :style=>"margin-right: 10px;margin-left:10px", :id=>"new_signature"}
+				%li{:style=>"margin-top:10px"}
+					%span{:style=>"width: 150px;float: left;text-align: right;line-height:30px"}="MOVEMENT/PERIOD"
+					%input{:type=>"text", :style=>"margin-left:10px;", :placeholder=>"PERIOD", :id=>"new_period", :maxlength=>"40"}
+				%li
+					%span{:style=>"width: 150px;float:left;text-align:right;"}
+						="DESCRIPTION"
+						%br
+						%span{:style=>"font-size:10px;float:right;"}
+							%span#new_description_language_en="English"
+							%br
+							%span#new_description_character_count_en
+						%span{:style=>"float:right;position:relative;top:170px;font-size:24px", :id=>"offer_new_add_description"}
+					%textarea{:style=>"margin: 0px 0px 9px 10px;width: 350px;height: 215px;max-height: 200px;max-width: 350px;min-height: 200px;min-width: 350px;", :placeholder=>"PROVIDE FURTHER DETAILS ABOUT THE ARTWORK: PROVENANCE, INVOICE, CONSERVATION, POSSIBLE DETAILS ON THE AUTHENTICATION CERTFICATE OR REFERENCE TO A CATALOGUE", :id=>"new_description_en", :maxlength=>"1000"}
+					%img{"data-original-title"=>"Please enter the description", :id=>"error_new_description", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: 185px;display:none"}
+			#offer_new_add_description_div{:style=>"position:relative"}
+				%i.icon-plus-sign#offer_new_add_description_icon{:onclick=>"offer_new_add_description_function()", :style=>"left: 130px;position: absolute;"}				
+	.offer_step_five
+		%div{:style=>"float:left;width:210px;"}
+			%h2="IMAGES"
+			%p="Better photographs of your painting will improve your chances to sell.Consider hiring a professional photographer for best color, resolution and quality. We can recommend a good photographer nearby."
+		%div{:style=>"float:left;width:590px;margin-top:15px;"}
+			= form_for :offer, :url => offer_save_image_path, :method=>:post, :remote=>:true, :html=>{:multipart=>:true, :id=>:save_image_form} do |f|
+				%ul{:style=>"list-style:none;margin:0 auto;"}
+					%li{:style=>"margin-top:10px"}
+						%span{:class=>"offer_step_five_file_span_one"}="HI-RES"
+						%input{:type=>"button",:id=>"offer_new_hi_res", :value=>"Choose File", :class=>"btn"}
+						=f.file_field :artwork_hires, :style=>"position:absolute;left:-1000px", :type=>"file", :onchange=>"display_preview(this)", :id=>"img_get_hi_res"
+						%span{:style=>"font-size:8px"}="Upload a high resolution version (jpg, minimum height or width 1000 px)"
+					%li{:style=>"margin-top:10px"}
+						%span{:class=>"offer_step_five_file_span_one"}="THUMBNAIL"
+						%input{:type=>"button", :id=>"offer_new_thumbnail", :value=>"Choose File", :class=>"btn"}
+						=f.file_field :artwork_thumbnail, :style=>"position:absolute;left:-1000px", :type=>"file", :onchange=>"display_preview(this)", :id=>"img_get_thumbnail"
+						%span{:style=>"font-size:8px"}="Upload a small preview for the thumbnail listview (jpg, 18x18 px)"
+					%li{:style=>"margin-top:10px"}
+						%span{:class=>"offer_step_five_file_span_one"}="DETAIL 1"
+						%input{:type=>"button", :id=>"offer_new_detail_1", :value=>"Choose File", :class=>"btn"}
+						=f.file_field :artwork_detail_one, :style=>"position:absolute;left:-1000px", :type=>"file", :onchange=>"display_preview(this)", :id=>"img_get_detail_1"
+						%span{:style=>"font-size:8px"}="Upload a high resolution detail (jpg, minimum height or width 1000 px)"
+					%li{:style=>"margin-top:10px"}
+						%span{:class=>"offer_step_five_file_span_one"}="DETAIL 2"
+						%input{:type=>"button", :id=>"offer_new_detail_2", :value=>"Choose File", :class=>"btn"}
+						=f.file_field :artwork_detail_two, :style=>"position:absolute;left:-1000px", :type=>"file", :onchange=>"display_preview(this)", :id=>"img_get_detail_2"
+						%span{:style=>"font-size:8px"}="Upload a high resolution detail (jpg, minimum height or width 1000 px)"
+					%li{:style=>"margin-top:10px"}
+						%span{:class=>"offer_step_five_file_span_one"}="DOCUMENTS"
+						%input{:type=>"button", :id=>"offer_new_documents", :value=>"Choose File", :class=>"btn"}
+						=f.file_field :artwork_documentation, :style=>"position:absolute;left:-1000px", :type=>"file", :onchange=>"display_preview(this)", :id=>"img_get_documents"
+						%span{:style=>"font-size:8px"}="Upload documents (pdf,eg. certiﬁcates or documentation)"
+					%li{:style=>"margin-top:10px"}
+						=f.hidden_field :thumbnail_crop_x, :id=>"thumbnail_crop_x"
+						=f.hidden_field :thumbnail_crop_y, :id=>"thumbnail_crop_y"
+						=f.hidden_field :thumbnail_crop_w, :id=>"thumbnail_crop_w"
+						=f.hidden_field :thumbnail_crop_h, :id=>"thumbnail_crop_h"
+						=f.hidden_field :hi_res_crop_x, :id=>"hi_res_crop_x"
+						=f.hidden_field :hi_res_crop_y, :id=>"hi_res_crop_y"
+						=f.hidden_field :hi_res_crop_w, :id=>"hi_res_crop_w"
+						=f.hidden_field :hi_res_crop_h, :id=>"hi_res_crop_h"
+						=f.hidden_field :detail_one_crop_x, :id=>"detail_one_crop_x"
+						=f.hidden_field :detail_one_crop_y, :id=>"detail_one_crop_y"
+						=f.hidden_field :detail_one_crop_w, :id=>"detail_one_crop_w"
+						=f.hidden_field :detail_one_crop_h, :id=>"detail_one_crop_h"
+						=f.hidden_field :detail_two_crop_x, :id=>"detail_two_crop_x"
+						=f.hidden_field :detail_two_crop_y, :id=>"detail_two_crop_y"
+						=f.hidden_field :detail_two_crop_w, :id=>"detail_two_crop_w"
+						=f.hidden_field :detail_two_crop_h, :id=>"detail_two_crop_h"
+						=f.hidden_field :documentation_crop_x, :id=>"documentation_crop_x"
+						=f.hidden_field :documentation_crop_y, :id=>"documentation_crop_y"
+						=f.hidden_field :documentation_crop_w, :id=>"documentation_crop_w"
+						=f.hidden_field :documentation_crop_h, :id=>"documentation_crop_h"
+					%li
+						%input{:type=>"submit", :value=>"submit", :id=>"image_form_submit_button", :style=>"display:none"}
+	.offer_step_six
+		%div{:style=>"float:left;width:210px;"}
+			%h2="PLANNING"
+			%p="Decide how, when and how long you want to offer your painting."
+		%div{:style=>"float:left;width:590px;margin-top:15px;"}
+			%ul{:style=>"list-style:none;margin:0 auto;"}
+				%li
+					%span{:style=>"line-height:38px", :class=>"offer_step_five_file_span_one"}="STARTS"
+					%input{:style=>"width: 150px;margin-left: 10px;margin-right: 10px;", :type=>"text", :id=>"new_start_date", :placeholder=>"mm/dd/yyyy", :maxlength=>"40"}
+					%span{:style=>"width: 90px;line-height:30px"}="ENDS"
+					%input{:style=>"width: 150px;margin-left: 10px;margin-right: 10px;", :type=>"text", :id=>"new_end_date", :placeholder=>"mm/dd/yyyy", :maxlength=>"40"}
+				%li
+					%span{:class=>"offer_step_five_file_span_one"}="PURPOSE"
+					%select{:style=>"margin-left:10px;", :id=>"new_purpose"}
+						%option="Please choose"
+						- @purpose.each do |purpose|
+							%option=purpose.value
+	.offer_step_seven
+		%div{:style=>"float:left;"}
+			%a{:value=>"CANCEL", :class=>"btn", :href=>"/dashboard"}="CANCEL"
+		%span{:style=>"float:right;"}
+			%input{:type=>"button", :value=>"PREVIEW", :class=>"btn", :id=>"offer_preview"}
+			%input{:type=>"button", :value=>"SUBMIT", :class=>"btn new_offer_submit"}
+
+
+
+= render :partial => 'offer/summary'
+= render :partial => "layouts/footer"

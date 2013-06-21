@@ -1,0 +1,24 @@
+%div#subscribers_locations_details
+  %h3="SUBSCRIBERS LOCATIONS"
+  %br
+  %u=""
+  %u{:style=>"margin-left:200px;"}="Basic"
+  %u="Plus"
+  %u="Pro"
+  %u="Premium"
+  %u="No limit"
+  %u{:style=>"font-weight: bold;"}="Total"
+  %br
+  -@user= User.all      
+  -@user = @user.uniq{|x| x.user_country}
+
+  %ul
+    -@user.each do |user|
+      %li{:class=>cycle('even', 'odd')}
+        %p{:style=>"font-weight:bold; float:left; width:180px; margin:0px;"}=user.user_country
+        %span= User.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("users.user_country = '#{user.user_country}'").where("subscriptions.subscription_plan_id = 1").count
+        %span= User.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("users.user_country = '#{user.user_country}'").where("subscriptions.subscription_plan_id = 2").count
+        %span= User.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("users.user_country = '#{user.user_country}'").where("subscriptions.subscription_plan_id = 3").count
+        %span= User.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("users.user_country = '#{user.user_country}'").where("subscriptions.subscription_plan_id = 4").count
+        %span= User.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("users.user_country = '#{user.user_country}'").where("subscriptions.subscription_plan_id = 5").count
+        %span= User.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("users.user_country = '#{user.user_country}'").count

@@ -1,0 +1,48 @@
+#div{:center=>"align"}
+  =render :partial=>"/admin/layouts/header"
+.report_section0
+  #head_report.head_statistics_report
+    %h3="STATISTICS"
+  #head1_report.head1_statistics_report
+    %div
+      %span{:style=>"float:left;"}
+        %select{:id=>"statistics_select", :style=>"width:auto;"}
+          %option{:value=>""}
+          %option{:value=>"new subscriptions"} new subscriptions
+          %option{:value=>"new offers"} new offers
+          %option{:value=>"active offers"} active offers
+          %option{:value=>"cancelled offers"} cancelled offers
+          %option{:value=>"unfinished sign-ups"} unfinished sign-ups
+          %option{:value=>"cancelled subscriptions"} cancelled subscriptions
+      %span{:style=>"float:left;margin-left:5px;"}
+        %span="REPORT STARTS"
+        %input#start_date{:type=>"textbox", :style=>"width:100px;"}
+      %span{:style=>"float:left;margin-left:5px;"}
+        %span="ENDS"
+        %input#end_date{:type=>"textbox", :style=>"width:100px;"}
+      %span{:style=>"float:left;margin-left:5px;"}
+        %select{:id=>"interval_select", :style=>"width:auto;"}
+          %option{:value=>"daily"} daily
+          %option{:value=>"monthly"} monthly
+          %option{:value=>"quartly"} quartly
+          %option{:value=>"yearly"} yearly
+//.report_section1#report_section1
+#head2_chart.head2_chart_report
+  =render :partial=>"/admin/reports/chart_statistics"
+#head2_report.head2_statictics_report
+  =render :partial=>"/admin/reports/statistics"
+/
+%br
+%br
+#head4_report.head4_subscribers_location_report
+  =render :partial=>"/admin/reports/subscribers_locations"
+#div{:center=>"align"}
+  =render :partial=>"/admin/layouts/footer"
+
+:javascript
+  $("#start_date").datepicker({
+        dateFormat: "yy-mm-dd"
+  })  
+  $("#end_date").datepicker({
+  	dateFormat: "yy-mm-dd"
+  })

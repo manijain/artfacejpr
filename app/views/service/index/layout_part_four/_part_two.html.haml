@@ -1,0 +1,25 @@
+= content_tag :div, :class=>"search pull-left", :style=>"width:778px;border:1px solid #727272;border-radius:8px;background-color:#727272;padding:5px;" do
+	= content_tag :h3, :class=>"pull-left", :style=>"margin-right:25px;" do
+		= "SEARCH"
+	= form_for :service_partner, :url=>service_search_basic_path,:method=>"POST",:remote=>"true", :html=>{:class=>"filter_2_basic pull-left", :style=>"margin-top:20px;display:block;"} do |f|
+		= f.hidden_field :search_basic, :value=>true
+		= f.hidden_field :search_in, :value=>2
+		= f.text_field :search_term, :class=>"basic_search_term pull-left", :placeholder=>"SEARCH", :style=>"border:1px solid black;width:450px;margin-right:5px"
+		= image_tag "/images/plus.png", :class=>"pull-left search_toggle_2 pointer", :style=>"margin-right:5px;"
+		= f.submit "SEARCH", :class=>"btn pull-left"
+
+	= form_for :service_partner, :url=>service_search_advanced_path, :method=>"POST", :remote=>"true", :html=>{:class=>"filter_2_advanced pull-left", :style=>"display:none;margin-top:20px;"} do |f|
+		= f.hidden_field :search_advanced, :value=>true
+		= f.hidden_field :search_in, :value=>2	
+		= content_tag :ul, :class=>"search_filters unstyled pull-left", :style=>"width:550px;" do
+			= content_tag :li, :class=>"filter_li pull-left" do
+				%select#advanced_select_1.select_first.pull-left{:style=>"width:130px;"}
+					%option{"data-function"=>"$(a).html('')", :value=>"#{t '.select_2'}"}="Please choose"
+					%option{"data-function"=>"if (check_option('Concern')!=false){$(a).html(\"#{escape_javascript(render("service\/index\/\layout_part_four\/advanced_search\/company_location"))}\");} else {alert('Error: Value already used ');}", :value=>"Company Location"}="Company Location"
+					%option{"data-function"=>"if (check_option('Concern')!=false){$(a).html(\"#{escape_javascript(render("service\/index\/\layout_part_four\/advanced_search\/speciality"))}\");} else {alert('Error: Value already used ');}", :value=>"Speciality"}="Speciality"
+					%option{"data-function"=>"if (check_option('Concern')!=false){$(a).html(\"#{escape_javascript(render("service\/index\/\layout_part_four\/advanced_search\/description"))}\");} else {alert('Error: Value already used ');}", :value=>"Description"}="Description"
+				= content_tag :span, :id=>"span_1", :class=>"append_span_field", :style=>"width:340px;" do
+					=""
+				= image_tag "/images/minus.png", :class=>"pointer remove_search_field_2 pull-right"
+				= image_tag "/images/plus.png", :class=>"pointer add_search_field_2 pull-right"
+		= f.submit "SEARCH", :class=>"btn submit_button pull-left"	

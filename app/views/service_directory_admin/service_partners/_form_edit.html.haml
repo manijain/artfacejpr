@@ -1,0 +1,70 @@
+#wrapper.wrapper_service_directory_admin
+  #section1.service_directory_admin_edit_data
+    %h3{:style=>"margin-bottom:50px;"}="EDIT MY CONTACT: " "#{@service_partner.company_name}"
+    =link_to "CANCEL", "/service_directory/overview", :class=>"btn", :style=>"float:right; margin-top:-85px;margin-bottom:50px;"
+  =form_for @service_partner, :url=>{:action=>"update_contact_data"}, :html=>{:id=>"form1"} do |f|
+    #contact_details.service_directory_admin_edit_data_color
+      .service_directory_admin_edit_data_details
+        %h6 FULL NAME
+        =f.select :salutation, options_for_select(['Mr.', 'Ms.'], :selected=>@service_partner.salutation), {}, {:class=>"contact_details_select1"}
+        =f.text_field :first_name, {:placeholder=>"FIRST NAME*", :class=>"contact_details_input1"}
+        %img#error_service_admin_first_name{"data-original-title"=>"Please enter first name", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        =f.text_field :last_name, {:placeholder=>"LAST NAME*", :class=>"contact_details_input1"}
+        %img#error_service_admin_last_name{"data-original-title"=>"Please enter last name", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        %h6 COMPANY
+        =f.text_field :company_name, {:placeholder=>"COMPANY NMAE*", :class=>"contact_details_input2"}
+        %img#error_service_admin_company_name{"data-original-title"=>"Please enter company name", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        %h6 ADDRESS
+        =f.text_field :street, {:placeholder=>"STREET*", :class=>"contact_details_input2"}
+        %img#error_service_admin_street{"data-original-title"=>"Please enter street", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        =f.text_field :zip_code, {:placeholder=>"ZIPCODE*", :class=>"contact_details_input3"}
+        %img#error_service_admin_zip_code{"data-original-title"=>"Please enter zip code", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        =f.text_field :city, {:placeholder=>"CITY*", :class=>"contact_details_input4"}
+        %img#error_service_admin_city{"data-original-title"=>"Please enter city", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        %h6 LOCATION
+        =f.select :country, options_for_select(Country.order(:country_name).pluck(:country_name), :selected=>@service_partner.country), {}, {:class=>"contact_details_select2"}
+        %br
+        %h6 PHONE & FAX
+        =f.text_field :telephone_number, {:placeholder=>"TELEPHONE NUMBER*", :class=>"contact_details_input5"}
+        %img#error_service_admin_telephone_number{"data-original-title"=>"Please enter telephone number", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        =f.text_field :fax_number, {:placeholder=>"FAX NUMBER*", :class=>"contact_details_input6"}
+        %img#error_service_admin_fax_number{"data-original-title"=>"Please enter fax number", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        %h6 WEBSITE
+        =f.text_field :website, {:placeholder=>"COMPANIES WEBSITE URL (EG. WWW.COMPANY.COM)", :class=>"contact_details_input2"}
+        %br
+        %h6 EMAIL(SERVES AS LOGIN)
+        =f.text_field :email, {:placeholder=>"CONTACT PERSONS EMAIL ADDRESS*", :class=>"contact_details_input7"}
+        %img#error_service_admin_email{"data-original-title"=>"Please enter email address", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        %h6 PASSWORD
+        =f.password_field :password, {:placeholder=>"PASSWORD", :class=>"contact_details_input2"}
+        %br
+        %h6 RETYPE PASSWORD
+        =f.password_field :retype_password, {:placeholder=>"PASSWORD", :class=>"contact_details_input2"}
+        %img#error_service_admin_password{"data-original-title"=>"Please renter password", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        %h6 EMPLOYEES
+        =f.text_field :number_of_employees, {:placeholder=>"NUMBER OF EMPLOYEES", :class=>"contact_details_input2"}
+        %br
+        %h6 FOUNDED
+        =f.text_field :founded, {:placeholder=>"YEAR WHEN COMPANY WAS FOUNDED (YYYY)", :class=>"contact_details_input2"}
+        %br
+        %h6 SPECIALITIES
+        =f.text_field :specialities, {:placeholder=>"DEFINE SPECIALTIES OF THE OFFICE", :class=>"contact_details_input2"}
+        %br
+        %h6 DESCRIPTION(IN 1000 CHARACTERS)
+        =f.text_area :description, {:placeholder=>"DESCRIBE THE BENEFITS", :class=>"contact_details_textarea1"}
+        %br
+        -if "#{@service_partner.contact_data_approval}" != "true"
+          %h6 INVITATION APPROVED
+          =f.check_box :contact_data_approval, {:class=>"contact_details_check1"}
+          %span Please check to publish this contact
+        %br
+        %h6 ONLINE STATUS
+        =f.select :status, options_for_select(['Offline', 'Online'], :selected=>@service_partner.status), {}, {:class=>"contact_details_select2"}
+    =link_to "CANCEL", "/service_directory/overview", :class=>"btn", :style=>"margin-top:15px;"
+    =link_to "UPDATE", "#", :class=>"btn", :style=>"float:right; margin-top:15px;", :onclick=>"check_service_admin_validations()"

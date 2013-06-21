@@ -1,0 +1,63 @@
+.about_layout {
+	width:820px;
+	margin-left:2%
+}
+.about_step_one {
+	background-color:#A6A6A6;
+	width:820px;
+	float:left;
+	height:300px
+}
+.about_step_two {
+	width:820px;
+	float:left;
+	height:300px
+}
+.about_step_two div {
+	width:33%;
+	float:left;
+}
+.about_step_three {
+	width:820px;
+	float:left;
+	height:300px
+}
+.about_step_four {
+	width:820px;
+	float:left;
+	height:600px
+}
+.about_step_four div {
+	width:31%;
+	float:left;
+	margin-right:10px
+}
+.about_step_five {
+	width:820px;
+	float:left;
+	height:250px;
+	background-color:#E1E1E1;
+	padding:5px;
+}
+
+.about_step_five div {
+	width:30%;
+	float:left;
+	margin-right: 10px
+}
+.about_step_six {
+	width:820px;
+	float:left;
+	height:250px;
+	padding:5px;
+}
+.about_step_six div {
+	width:30%;
+	float:left;
+	margin-right: 10px;
+}
+.offer_img_div {
+	width:20% !important;
+	float:left !important;
+	margin-right:0px !important;
+}

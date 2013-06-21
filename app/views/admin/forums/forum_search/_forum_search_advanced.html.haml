@@ -1,0 +1,22 @@
+= hidden_field_tag :admin_advanced_forum_search_value, 'false'
+
+= form_for :forum_message, :url=>"/admin/forum", :method=>"POST", :remote=>"true", :html=>{:class=>"pull-left forum_advanced_search", :id=>"forum_advanced_search", :style=>"margin-top:20px;width:78opx" } do |f|
+	= f.hidden_field "search_advanced", :name=>"search_advanced", :value=>"true"
+	= f.hidden_field "sort_by", :name=>"sort_by"
+	= f.hidden_field "per_page", :name=>"per_page"
+	= content_tag :ul, :class=>"search_filters unstyled pull-left" do
+		= content_tag :li, :class=>"filter_li pull-left" do
+			%select#advanced_select_1.select_first.pull-left
+				%option{"data-function"=>"$(a).html('')", :value=>"#{t '.select_0'}"}="Please choose"
+				%option{"data-function"=>"if (check_option('Concern')!=false){$(a).html(\"#{escape_javascript(render("admin\/forums\/forum_search\/advanced_search\/concern"))}\");} else {alert('Error: Value already used ');}", :value=>"Concern"}="Concern"
+				%option{"data-function"=>"if (check_option('Concern')!=false){$(a).html(\"#{escape_javascript(render("admin\/forums\/forum_search\/advanced_search\/date_of_post"))}\");} else {alert('Error: Value already used ');}", :value=>"date of post"}="Date of post"
+				%option{"data-function"=>"if (check_option('Concern')!=false){$(a).html(\"#{escape_javascript(render("admin\/forums\/forum_search\/advanced_search\/offer_id"))}\");} else {alert('Error: Value already used ');}", :value=>"offer ID"}="Offer ID"
+				%option{"data-function"=>"if (check_option('Concern')!=false){$(a).html(\"#{escape_javascript(render("admin\/forums\/forum_search\/advanced_search\/artist"))}\");} else {alert('Error: Value already used ');}", :value=>"Artist name"}="Artist name"
+				%option{"data-function"=>"if (check_option('Concern')!=false){$(a).html(\"#{escape_javascript(render("admin\/forums\/forum_search\/advanced_search\/title"))}\");} else {alert('Error: Value already used ');}", :value=>"Title"}="Title"
+				%option{"data-function"=>"if (check_option('Concern')!=false){$(a).html(\"#{escape_javascript(render("admin\/forums\/forum_search\/advanced_search\/description"))}\");} else {alert('Error: Value already used ');}", :value=>"Description"}="Description"
+				%option{"data-function"=>"if (check_option('Concern')!=false){$(a).html(\"#{escape_javascript(render("admin\/forums\/forum_search\/advanced_search\/author"))}\");} else {alert('Error: Value already used ');}", :value=>"Author"}="Author"
+			= content_tag :span, :id=>"span_1", :class=>"append_span_field" do
+				=""
+			= image_tag "/images/minus.png", :class=>"pointer remove_search_field pull-right"
+			= image_tag "/images/plus.png", :class=>"pointer add_search_field pull-right", :style=>"margin-right:5px;"
+	= f.submit "SEARCH", :class=>"btn submit_button pull-left", :id=>"admin_forum_advanced_search"

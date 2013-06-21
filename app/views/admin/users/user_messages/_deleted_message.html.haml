@@ -1,0 +1,28 @@
+%ul.pull-left.unstyled.width_100{:style=>"margin:0;background-color:#f1f1f1" , :id=> "message_data_part_#{@message.id}"}
+  %li.pull-left.width_100
+    %span.pull-left{:style=>"font-weight:bold;"}=@message.created_at.to_date
+    %span.pull-left{:style=>"margin-right:5px;margin-left:5px"}="|"
+    %span.pull-left{:style=>"font-weight:bold;"}=@message.created_at.strftime("%I:%M")
+    %span.pull-left{:style=>"margin-right:5px;margin-left:5px;"}="|"
+    %span.pull-left{:style=>"font-weight:bold;margin-right:2px;"}
+      ="#{@message.user.user_first_name} #{@message.user.user_last_name}: " unless @message.user.nil?
+    %span.pull-left{:style=>"font-weight:bold;margin-right:2px;"}="Anonymous: " if @message.user.nil?                
+    %span.pull-left{:style=>"font-weight:bold;"}="#{@message.message_title}"
+    - @flag = false
+    -if @message.delete_admin==true
+      %span.pull-left{:style=>"padding-left: 225px;font-weight:bold; color:red;"}="(deleted_by_admin)"
+      - @flag = true
+    -elsif @message.edit_admin==true
+      %span.pull-left{:style=>"padding-left: 225px;font-weight:bold; color:blue;"}="(edited_by_admin)"
+      - @flag = false   
+    %span.message_navigation.pull-right{:style=>"margin-right:10px;"}
+      - unless @flag == true
+        %i.icon-remove-sign.pointer{:id=>"message_delete_#{@message.id}"}
+        %i.icon-pencil.pointer{:id=>"message_edit_#{@message.id}"}
+        %i.icon-arrow-left.pointer{:id=>"message_reply_#{@message.id}"}
+        - if @message.sub_messages.blank?
+                    
+        - else
+          %i.icon-arrow-up.message_parent.pointer{:id=>"message_#{@message.id}"}
+
+  %li.pull-left.width_100=@message.message_text

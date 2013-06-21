@@ -1,0 +1,40 @@
+= javascript_include_tag "admin/admin_artist_validation.js"
+=render :partial => "admin/layouts/application"
+= render :partial => "admin/layouts/header"
+
+%div{:style => "margin-left:100px"}
+	%h3 Add New Artist Name
+	%div#cancel_new_artist=button_to "Cancel", "/admin/offers"
+
+
+
+	= form_for :artist_new, :url => "/admin/artists/create" do |f|
+		-#= render :partial => 'shared/error_messages', :locals => { :object => f }
+
+		= f.label :full_name
+		= f.select :salutation, options_for_select(["Mr.","Ms."])
+		= f.text_field :artist_first_name, :placeholder=>"FIRST NAME*", :style=>"width:200px;"
+		%img#error_new_artist_first_name{"data-original-title"=>"Please enter the artist first name", :src=>"/images/exclamation_mark.png", :style => "display:none"}
+		= f.text_field :artist_last_name, :placeholder=>"LAST NAME*", :style=>"width:200px;"
+		%img#error_new_artist_last_name{"data-original-title"=>"Please enter the artist last name", :src=>"/images/exclamation_mark.png", :style => "display:none"}
+		%br
+		= f.label :birth_date
+		= f.text_field :artist_birth_date, :placeholder=>"YYYY-MM-DD"
+		%br
+		= f.label :death_date
+		= f.text_field :artist_death_date, :placeholder=>"YYYY-MM-DD"
+		%br
+		= f.label :description
+		= f.text_area :artist_description, :placeholder=>"DESCRIBE THE ARTIST", :size => '30x5'
+		%br
+		%div= f.submit :class=> "btn", :value=>"Add", :id => "submit_new_artist"
+
+	%div#cancel_new_artist=button_to "Cancel", "/admin/offers"
+		
+
+	= render :partial => "admin/layouts/footer"
+
+
+:javascript
+	$("#artist_new_artist_birth_date").datepicker({ dateFormat: 'yy-mm-dd' })
+	$("#artist_new_artist_death_date").datepicker({ dateFormat: 'yy-mm-dd' })

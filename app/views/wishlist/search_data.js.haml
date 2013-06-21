@@ -1,0 +1,11 @@
+var temp_id = $('input[value="#{@wishlist.id}"]').filter('#wishlist_id').parent().parent().parent().attr('id')
+$("#" + temp_id + " #search_data").html('#{escape_javascript(render("wishlist\/search_data", :index=>nil))} ');
+$("#" + temp_id + " .pagination a").each(function() {
+$(this).attr("data-remote", "true")
+var temp = $(this).attr("href")
+temp = temp.replace("create","search")
+temp = temp + "&clear_session=false&wishlist_id="+"#{@wishlist.id}"
+$(this).attr('href', temp)
+})
+$("#"+temp_id+" #add_wishlist").prop('value',"SUBMIT");
+$("#"+temp_id+" #cancel_wishlist").hide();

@@ -1,0 +1,49 @@
+.footer
+	.site_wide_error{:style=>"display:none;"}
+		%pre.prettyprint.linenums{:style=>"width: 820px;height: 20px;white-space:nowrap"}
+			%span.tag.site_wide_error_text
+			%span.tag#footer_flash_message=flash[:notice]
+	.footer_content
+		%div{:style=>"width:31%;float:left"}
+			%p{:style=>"text-align:center;"}
+				%strong=t '.site_name'
+			%br
+			%p{:style=>"float:left;margin-right:10px"}
+				="Users currently logged in :"
+				%br
+				="New offers in last 24 hours :  #{Offer.where('created_at   > ?', 24.hours.ago).count}"
+				%br
+				="Ended offers in the last 24 hours:  #{Offer.where('offer_end_date  > ?', 24.hours.ago).where('offer_end_date  < ?', Time.now).count}"  				
+				%br
+				="New subscribers in the last 24 hours:  #{Subscription.where('created_at   > ?', 24.hours.ago).count}"
+				%br
+				="Ended subscriptions (last 24 h): #{Subscription.where('subscription_renewal_date  > ?', 24.hours.ago).where('subscription_renewal_date  < ?', Time.now).where('auto_renewal =?', false).count}"			
+				%br
+				%br
+				%br			
+				=link_to "Unapproved artist names: #{Artist.where(:approved_status=>false).count}" , admin_admin_unknown_artist_path
+				%br
+				=link_to "Reported abuses: #{MessageAdmin.count}", admin_admin_path
+				%br
+				=link_to "Unpaid Subscriptions: #{Subscription.where(:subscription_confirmed => false).count}" , admin_admin_path
+		%div{:style=>"width:31%;"}
+			%p{:style=>"text-align:center;margin-right:10px"}
+				%strong= "Latest Offers"
+				%br
+			%div{:style=>"align:center;"}
+				-@offer = Offer.order('created_at DESC').limit(5).all
+				- @offer.each do |offer|		
+					%ul
+					%img.image_admin{:alt => "image", :src => "/assets/artist2.jpg "}
+					= link_to offer.artwork.artist.artist_name, {:controller=>"/admin/users", :action=>"users_offer_show", :user_id=>offer.seller_id, :id=>offer.id}
+		%div{:style=>"width:31%;float:left"}
+			%p
+				%strong= "Latest Forum Activity"
+			%div
+				-@message = ForumMessage.order('created_at DESC').limit(5).all
+				- @message.each do |message|		
+					%ul
+					= link_to message.forum_message_text, {:controller=>"/admin/forums", :action=>"show", :id=>message.id}	
+
+
+				

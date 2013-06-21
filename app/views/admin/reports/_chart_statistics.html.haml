@@ -1,0 +1,90 @@
+
+:javascript
+  google.load("visualization", "1", {packages:["corechart"]});
+  var rowArray = [],multiRowArray = [],clickTimer;
+  $(document).ready(function(){
+    if(location.search == ""){
+      for (var i=0; i<=5; i++){       
+        var name = $('#statistics_details u[id^=\"plan_\"]').eq(i).text();
+        //var amount = $("#statistics_details ul li[id^=row_1] span").eq(i+1).text();
+        var amount = $("#statistics_details ul li.hidden:last span").eq(i+1).text();
+        rowArray.push([name, parseInt(amount)]);
+      }
+    }
+    else{
+      for(var i=0; i<=5; i++){
+        var name = $('#statistics_details u[id^=\"plan_\"]').eq(i).text();
+        var amount = getUrlVars()["value"+(i+1)];
+        rowArray.push([name, parseInt(amount)]);
+      }
+    }
+    //google.setOnLoadCallback(drawChart);
+    drawChart();
+    $('#statistics_details ul li[id^=\"row_\"]').live('click', function(event){
+      if(event.ctrlKey){
+      
+        var len = multiRowArray.length;
+        if(len ==0){
+          $('#statistics_details ul li').removeClass('changeColor');
+          for (var i=0; i<=5; i++){       
+            var name = $('#statistics_details u[id^=\"plan_\"]').eq(i).text();
+            var amount = $(this).children().eq(i+1).text();
+            multiRowArray.push([name, parseInt(amount)]);
+          }
+        }
+        else{
+          for(var i=0;i<len;i++)
+          {
+            var name = $('#statistics_details u[id^=\"plan_\"]').eq(i).text();
+            var amount = $(this).children().eq(i+1).text();
+            multiRowArray[i].splice(multiRowArray[i].length,0,parseInt(amount));
+          }
+        }
+        $(this).addClass('changeColor');
+        chart.clearChart();
+        rowArray = multiRowArray;
+        //rowArray.concat(multiRowArray);
+        drawChart();
+        clearTimeout(clickTimer);
+        clickTimer = setTimeout(function(){
+          multiRowArray = [];
+          },1000);
+        }
+      else{
+      $('#statistics_details ul li').removeClass('changeColor');
+      $(this).addClass('changeColor');
+      rowArray = [];
+      for (var i=0; i<=5; i++){       
+        var name = $('#statistics_details u[id^=\"plan_\"]').eq(i).text();
+        var amount = $(this).children().eq(i+1).text();
+        rowArray.push([name, parseInt(amount)]);
+      }
+      chart.clearChart();
+      drawChart();
+      }
+    })
+  });
+  function drawChart() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Subscription Plan');
+    if(multiRowArray.length > 0 && multiRowArray[0].length>2) {
+      for( var i =1 ;i<multiRowArray[0].length; i++){
+        data.addColumn('number', 'Subscriber Number '+i);
+      }
+    }
+    else{
+      if(data.getNumberOfColumns()>2){
+        data.removeColumns(2, data.getNumberOfColumns())
+      }
+      data.addColumn('number', 'Subscriber Number');
+    }
+    data.addRows(rowArray);
+    var options = {
+      title: $('#statistics_details u:eq(0)').text(),
+      is3D: 'true'
+    };
+    chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+  }
+
+#chart_div{:style => "width: 900px; height: 400px;"}

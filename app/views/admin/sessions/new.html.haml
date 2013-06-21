@@ -1,0 +1,23 @@
+%body.bg_admin
+  #wrapper.wrapper_admin
+    #head
+      #form.login_admin
+        = link_to image_tag("artface.png"), root_path
+        = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+          = content_tag :div, :class=>"admin_email", :style=>"margin-top:50px;margin-bottom:15px;" do
+            = f.label :email
+            = f.email_field :email, :class=>"fname_admin"
+            = content_tag :div, :class=>"clear" do
+              =""
+          = content_tag :div, :class=>"admin_email", :style=>"margin-top:-15px;margin-bottom:10px;margin-left:-25px;" do		
+            = f.label :password		
+            = f.password_field :password, :class => "password_admin"
+            = content_tag :div, :class=>"clear" do
+              =""
+          = f.submit "ENTER", :class=>"submit_admin", :style =>"margin-left:175px;"
+      - if !notice.nil?
+        %span{:class=>"alert", :style=>"background-color:#FFF;border:0;padding:0;"}
+          = notice
+      - if !alert.nil?
+        %span{:class=>"alert", :style=>"background-color:#FFF;border:0;padding:0;"}
+          = alert

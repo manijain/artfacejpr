@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 1
+  forum_message_id: 1
+  email_notification: false
+
+two:
+  user_id: 1
+  forum_message_id: 1
+  email_notification: false

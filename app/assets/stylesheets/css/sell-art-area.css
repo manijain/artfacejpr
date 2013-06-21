@@ -1,0 +1,105 @@
+.sell-art-area {
+  width: 820px;margin-left: 2%;float: left;
+}
+.sell-art-area-offers {
+  width: inherit;float: left;
+}
+.sell-art-area-messages {
+  width: inherit;float: left;
+  margin-top: 30px;
+}
+
+.sell-art-area select {
+  margin-bottom: 0;
+}
+.sell-art-area-offers select#sort_id_one {
+  width: 120px;
+}
+.sell-art-area-offers select#sort_id_two {
+  width: 130px;
+}
+.sell-art-area-offers select#sort_id_three {
+  width: 50px;
+}
+.sell-art-area-offers select#sort_id_four {
+  width: 130px;
+}
+.sell-art-area-offers ul#ul_one {
+  float:left;list-style: none;width: 100%;margin-left: 10px;margin-top: 10px;
+}
+.sell-art-area-offers ul#ul_one li {
+  width: 30%;margin-right: 10px;margin-left: 10px;position: relative;height: 80px;background-color: #e9e9e9;margin-top: 5px;margin-bottom: 5px; float: left;
+}
+
+.sell-art-area-offers ul#ul_one li a img {
+  height: 65px;padding: 8px;position: absolute;width: 65px;
+}
+.sell-art-area-offers ul#ul_one #span_artist {
+  font-weight: bold;left: 75px;position: absolute;text-align: center;text-decoration: underline;top: 15px;width: auto;
+}
+.sell-art-area-offers ul#ul_one #span_time {
+  left: 80px;position: absolute;top: 33px;font-size:11px;
+}
+.sell-art-area-offers ul#ul_one li i {
+  position: absolute;right: -7px;top: 60%;
+}
+.sell-art-area-offers ul#ul_one li a {
+  float: left;position: relative;text-decoration: none;height: 73px;width: 73px;
+}
+.sell-art-area-offers ul#ul_one li div#inactive {
+  background-color: #E9E9E9;height: inherit;opacity: 0.75;position: absolute;width: 100%;z-index: 2;
+}
+.nav-sort-bar {
+  float: left;
+}
+#offer-viewport {
+  float: left;
+}
+#offer-viewport div#nav-sort-bar-2 {
+  float: left;width: 100%;
+}
+
+.sell-art-area-messages div.nav-sort-bar {
+  float: left;width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.sell-art-area-messages div.nav-sort-bar span {
+  line-height: 30px;
+}
+.sell-art-area-messages div.nav-sort-bar * {
+  float: left;
+}
+.sell-art-area-messages div.nav-sort-bar select#sort_id_one {
+  width: 120px;margin-right:10px;margin-left:5px;
+}
+.sell-art-area-messages div.nav-sort-bar select#sort_id_two {
+  width: 130px;margin-right:10px;margin-left:5px;
+}
+.sell-art-area-messages div.nav-sort-bar select#sort_id_three {
+  width: 50px;margin-right:10px;margin-left:5px;
+}
+.sell-art-area-messages div.nav-sort-bar div#sort_id_four {
+  width: 170px;float: left;
+}
+.sell-art-area-messages div.nav-sort-bar div#sort_id_five {
+  float: right;
+}
+.sell-art-area-messages div.messages-viewport ul {
+  float:left;list-style:none;
+}
+.sell-art-area-messages div.messages-viewport ul li {
+  float:left;width:100%;background-color:#e9e9e9;position: relative;
+}
+.sell-art-area-messages div.messages-viewport ul li img {
+  padding:8px;float:left;margin-right:5px;
+}
+.sell-art-area-messages div.messages-viewport ul li span {
+  float: left;
+  margin-top: 20px;
+  margin-right: 10px;
+}
+.sell-art-area-messages div.messages-viewport div#sort_id_six * {
+  float: right;
+  margin-top: 0;
+}

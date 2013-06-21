@@ -1,0 +1,73 @@
+%div
+  %div.pull-left.width_100
+    %a{:href=>"/admin/forum", :class=>"btn pull-left", :id=>"forum_back"}="BACK TO OVERVIEW"
+    = input_tag("","pull-right btn add_reply","ADD REPLY","color:black")
+  %ul.unstyled.pull-left{:style=>"margin-top:20px;width:auto;"}
+    - @message_array.each_with_index do |forum_message, index|
+      - if index == 0
+        %li.pull-left{:style=>"width:800px;background-color:#e1e1e1;padding:10px;margin-left:0px;border-bottom:1px solid black;"}
+          = input_tag "parent_message_id", "hidden", forum_message[:forum_message].id
+          =hidden_field_tag :user_id, session[:forum_user_id]
+          - unless forum_message[:forum_message].offer.blank? || forum_message[:forum_message].offer.artwork.id.blank? || forum_message[:forum_message].offer.artwork.artwork_thumbnail_file_name.blank?
+            = image_tag PAPERCLIP_STORAGE_PATH + "images/uploaded/artwork/smalls/artwork_thumbnails/" + forum_message[:forum_message].offer.artwork.id.to_s + "/" + forum_message[:forum_message].offer.artwork.artwork_thumbnail_file_name , :style=>"float:left;width:50px;height:50px;margin-left:5px;margin-right:10px;background-color:black;overflow:hidden"
+          - else
+            = image_tag "/images/image_placeholder.png", :style=>"float:left;width:50px;height:50px;margin-left:5px;margin-right:10px;background-color:black;overflow:hidden"
+          //= hidden_field_tag :user_id, 
+          %div.message_area.pull-left{:style=>"width:720px;"}  
+            %ul.pull-left.unstyled.width_100
+              %li.pull-left.width_100
+                %span.pull-left{:style=>"font-weight:bold;text-decoration:underline;"}=forum_message[:forum_message].forum_message_title
+                %span.pull-left{:style=>"margin-left:5px;margin-right:5px;"}="|"
+                %span.pull-left
+                  //- if :user_id == forum_message[:forum_message].user_id
+                  //  ="You"
+                  //- else 
+                  ="#{forum_message[:forum_message].user.user_first_name[0].capitalize}. #{forum_message[:forum_message].user.user_last_name.capitalize}"
+                %span.pull-left{:style=>"margin-left:5px;margin-right:5px;"}="|"
+                %span.pull-left=forum_message[:forum_message].created_at.to_date
+                %span.pull-left{:style=>"margin-left:5px;margin-right:5px;"}="|"
+                %span.pull-left=forum_message[:forum_message].created_at.strftime('%H:%M')
+                %span.pull-left{:style=>"margin-left:5px;margin-right:5px;"}="|"
+                
+                - unless forum_message[:forum_message].offer_id.blank?
+                  = link_to "see offer # #{forum_message[:forum_message].offer_id}" , "/offer/show/#{forum_message[:forum_message].offer_id}", :style=>"text-decoration:underline;color:black;"
+                //%i.icon-arrow-left.pull-right#reply_main.pointer
+              -if forum_message[:forum_message].reply_count == 1
+                %li.pull-left.width_100{:style=>"margin-top:10px;width:100%;"}=forum_message[:forum_message].reply_count.to_s + " reply"
+              -else
+                %li.pull-left.width_100{:style=>"margin-top:10px;width:100%;"}=forum_message[:forum_message].reply_count.to_s + " replies"
+              %li.pull-left.width_100{:style=>"margin-top:10px;width:100%;"}
+                %p.pull-left{:style=>"word-wrap:break-word;width:100%;"}=forum_message[:forum_message].forum_message_text
+      - else
+        %li.pull-left{:style=>"width:800px;background-color:#e1e1e1;padding:10px;margin-left:#{(forum_message[:count] - 1)*10}px;border-bottom:1px solid black;", :id=>"forum_message_#{forum_message[:forum_message].id}"}
+          %div.message_area.pull-left{:style=>"width:786px;"}
+            %ul.pull-left.unstyled.width_100
+              %li.pull-left.width_100
+                %span.pull-left=forum_message[:forum_message].created_at.to_date
+                %span.pull-left{:style=>"margin-left:5px;margin-right:5px;"}="|"
+                %span.pull-left=forum_message[:forum_message].created_at.strftime('%H:%M')
+              
+                %span.pull-left{:style=>"margin-left:5px;margin-right:5px;"}="|"
+                %span.pull-left
+                  //- if @user.id == forum_message[:forum_message].user_id
+                  //  ="You"
+                  //- else 
+                  ="#{forum_message[:forum_message].user.user_first_name[0].capitalize}. #{forum_message[:forum_message].user.user_last_name.capitalize} :  "
+                %i.icon-remove-sign.pull-right#remove_individual.pointer{:style=>"display:none;", "forum_message_id"=> "#{forum_message[:forum_message].id}"}
+                %i.icon-pencil.pull-right#edit_individual.pointer{:style=>"display:none;", "forum_message_id"=>"#{forum_message[:forum_message].id}"}
+                %i.icon-arrow-left.pull-right#reply_individual.pointer{"forum_message_id"=>"#{forum_message[:forum_message].id}", :style=>"display:none;"}
+              
+                -if "#{forum_message[:forum_message].is_deleted}" == "true"
+                  %p.pull-left{:style=>"font-style:italic;"}="This post has been deleted by the forum admin."
+                -elsif  "#{forum_message[:forum_message].is_edited}" == "true"
+                 
+                  %p.pull-left{:style=>"font-style:italic;"}="This post has been edited by the forum admin."
+                  %p.pull-left{:style=>"word-wrap:break-word;width:100%;"}=forum_message[:forum_message].forum_message_text
+                -else
+                  %p.pull-left{:style=>"word-wrap:break-word;width:100%;"}=forum_message[:forum_message].forum_message_text
+    %li.pull-left
+      %div#new_reply_container
+  %div.pull-left.width_100
+    %a#forum_back{:href=>"/admin/forum", :class=>"btn pull-left"}="BACK TO OVERVIEW"
+    
+    = input_tag("","pull-right btn add_reply","ADD REPLY","color:black")

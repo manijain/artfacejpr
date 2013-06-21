@@ -1,0 +1,44 @@
+= render :partial=> 'service_directory_admin/layouts/header'
+
+%div{:style=>"margin-left:2%;width:820px;float:left"}
+  %h2=" SERVICE PARTNER LOGIN"
+  %div{:style=>"float:left;width:50%"}
+    ="Artface offers its members an exclusive directory of handpicked"
+    %br
+    ="service partners around the world. In this section existing service"
+    %br
+    ="partners can login and manage their account data."
+    %br
+    %br
+    ="Are you an art expert, a lawyer specialized in art or a shipping or"
+    %br
+    ="insurance company dealing with arts? If you want to become an"
+    %br
+    ="acknowlegded service partner please send an inquiry."
+
+    
+  %div{:style=>"float:left;width:50%"}
+    = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+      %ul{:style=>"list-style:none"}
+        %li
+          = f.label :email, :style=>"display:inline", :placeholder=>"EMAIL*"
+          %span{:style=>"width:46px;display:inline-block"}
+          = f.email_field :email, {:placeholder=>"EMAIL*"}
+        %li
+          = f.label :password, :style=>"display:inline", :placeholder=>"PASSWORD*"
+          %span{:style=>"width:20px;display:inline-block"}
+          = f.password_field :password, {:placeholder=>"PASSWORD*"}
+        %br
+        %li
+          = link_to "Forgot your password?", new_service_partner_password_path
+          = f.submit "Sign in", :class=>"submit btn", :style=>"float:right;margin-right:80px;"
+    /- if !notice.nil?
+    /  %span{:class=>"alert", :style=>"background-color:#FFF;border:0;padding:0;"}
+    /    = notice
+    - if !alert.nil?
+      %span{:class=>"alert", :style=>"background-color:#FFF;border:0;padding:0;"}
+        = alert
+    %div
+      %br
+      %br
+= render :partial=> 'service_directory_admin/layouts/footer'

@@ -1,0 +1,5 @@
+%div.pull-left{:style=>"width:800px;background-color:#e1e1e1;padding-left:10px;padding-right:10px;"}
+  %h2.pull-left{:style=>"display:inline"}="YOUR PROFILE"
+  %span.pull-right{:style=>"margin-top:15px;line-height:30px"}
+    %p.pull-left{:style=>"margin-right:10px;"}="You are not #{current_user.user_first_name} #{current_user.user_last_name}"
+    = link_to "LOG OUT", "/users/logout", :class=>"pull-left btn"

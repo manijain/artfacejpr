@@ -1,0 +1,50 @@
+= content_tag :div, :class=>"data pull-left", :style=>"width:100%;border-top:1px solid black;border-bottom:1px solid black;margin-top:-46px;position:relative;" do
+  = content_tag :h6, :class=>"pull-left count", :style=>"position:absoluate;margin-top:-100px;margin-left:5px;padding-left:10px;display:none;" do
+    = "#{@forum_messages.count} results found"
+  -if @forum_messages.total_pages > 1
+    %span#text_page{:style=>"margin: 10px 0 !important;position: absolute;right: 135px;top:-65px;"}="Page: "
+  = will_paginate @forum_messages, :link_separator=>"#{@forum_messages.current_page}/#{@forum_messages.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"color:black"
+  - if @forum_messages.blank?
+    %p No messages in forum
+  - else
+    %ul.pull-left.unstyled.width_100{:style=>"position:relative;"}
+      - @forum_messages.each do |forum_message|
+        %li.pull-left.main_forum_li{:style=>"width:800px;margin-bottom:20px;background-color:#e1e1e1;padding:10px;position:relative; list-style:none;", :id=>"forum_message_id_#{forum_message.id}"}
+          =hidden_field_tag :user_id, "#{forum_message.user.id}"
+          -if "#{forum_message.is_deleted}" != "true"
+            %i.icon-remove-sign.pull-right#remove_individual_index.pointer{:style=>"display:none;", "forum_message_id"=> "#{forum_message.id}"}
+            %i.icon-arrow-left.pull-right#reply_individual_index.pointer{:style=>"display:none;", "forum_message_id"=> "#{forum_message.id}"}
+        
+          - if !forum_message.offer.blank? && !forum_message.offer.artwork.id.blank? && !forum_message.offer.artwork.artwork_thumbnail_file_name.blank?
+            = image_tag PAPERCLIP_STORAGE_PATH + "images/uploaded/artwork/smalls/artwork_thumbnails/" + forum_message.offer.artwork.id.to_s + "/" + forum_message.offer.artwork.artwork_thumbnail_file_name , :style=>"float:left;width:50px;height:50px;margin-left:5px;margin-right:10px;background-color:black"
+          - else
+            = image_tag "/images/image_placeholder.png", :style=>"float:left;width:50px;height:50px;margin-left:5px;margin-right:10px;background-color:black"
+          %div.message_area.pull-left{:style=>"width:720px;"}
+            %ul.unstyled.pull-left{:style=>"width:720px;"}
+              %li.pull-left.width-100
+                %span.pull-left{:style=>"font-weight:bold;text-decoration:underline;"}
+                  =link_to "#{forum_message.forum_message_title}", "/admin/forums/show/#{forum_message.id}"
+                %span.pull-left{:style=>"margin-left:5px;margin-right:5px;"}="|"
+                %span.pull-left                 
+                  ="#{forum_message.user.user_first_name[0].capitalize}. #{forum_message.user.user_last_name.capitalize}"
+                %span.pull-left{:style=>"margin-left:5px;margin-right:5px;"}="|"
+                %span.pull-left=forum_message.created_at.to_date
+                %span.pull-left{:style=>"margin-left:5px;margin-right:5px;"}="|"
+                %span.pull-left=forum_message.created_at.strftime('%H:%M')
+                %span.pull-left{:style=>"margin-left:5px;margin-right:5px;"}="|"
+
+                - unless forum_message.offer_id.blank?
+                  = link_to "see offer # #{forum_message.offer_id}" , "/offer/show/#{forum_message.offer_id}", :style=>"text-decoration:underline;color:black;"
+              -if "#{forum_message.is_deleted}" == "true"    
+                %li.pull-left.width_100=""
+              -else
+                %li.pull-left.width_100="#{forum_message.reply_count} replies"
+
+              %li.pull-left.width_100{:style=>"margin-top:10px;"}
+                -if "#{forum_message.is_deleted}" == "true"
+                  %p.pull-left{:style=>"font-style:italic;"}="This post has been deleted by the forum admin."
+                -else
+                  %p.pull-left{:style=>"word-wrap:break-word;width:100%;"}=forum_message.forum_message_text
+  -if @forum_messages.total_pages > 1
+    %span#text_page{:style=>"margin: 10px 0 !important;position: absolute;right: 135px;top:695px;"}="Page: "
+  = will_paginate @forum_messages, :link_separator=>"#{@forum_messages.current_page}/#{@forum_messages.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"float:right;margin-top:770px!important;color:black"    

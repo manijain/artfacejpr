@@ -1,0 +1,72 @@
+.messages.span10
+  %h4="BUY ART: YOUR MESSAGES"
+  .nav_sort_messages
+    %span{:style=>"margin-right:10px;line-height:30px"}="Sort list by"
+    %select{:style=>"color:black;width:120px;margin-right:30px;"}
+      %optiom="Artist name"
+      %option="Popularity"
+      %option="Time left"
+      %option="date"
+    %span{:style=>"margin-right:10px;line-height:30px"}="show"
+    %select{:style=>"margin-right:30px;width:130px"}
+      %option="active offers"
+      %option="inactive offers"
+    .input-append{:style=>"margin-right:25px;"}
+      %input.span2#appendedInput{:type=>"text", :placeholder=>"search in your messages", :style=>"width:200px;"}
+      %span.add-on
+        %i.icon-plus-sign
+    %div{:style=>"float:right;"}
+      %span{:style=>"line-height:20px;"}="Page"
+      %i.icon-arrow-left
+      %span{:style=>"line-height:20px;"}="1/2"
+      %i.icon-arrow-right
+  .messages_container
+    %ul{:style=>"float:left;display:inline;list-style:none;width:100%;margin:0;"}
+      %li{:style=>"background:#e9e9e9;float:left;position:relative;width:100%;padding:10px;"}
+        %img{:src=>"/images/image_placeholder.png", :alt=>"Image Not found", :style=>"margin-right:10px;"}
+        %span{:style=>"text-decoration:underline;font-weigth:bold;"}=" Artist name "
+        %span{:style=>"margin-right:5px;"}=" | "
+        %span{:style=>"margin-right:5px;"}=" highest offer: $120,000,000 " 
+        %span{:style=>"margin-right:5px;"}=" | "
+        %span{:style=>"margin-right:5px;"}=" offer remaining: 2 hours "
+        %i.icon-arrow-down{:style=>"position:absolute;right:10px;top:10px;"}
+        %span{:style=>"width:260px;height:25px;"}
+        %br
+        %span{:style=>"margin-top:0;"}="2 messages "
+        %span{:style=>"margin-top:0;"}="|"
+        %span{:style=>"margin-top:0;"}=" 1 reply unread"
+      %li{:style=>"float:left;position:relative;width:100%;padding:10px;border-bottom:1px solid black"}
+        %span{:style=>"margin-right:5px;"}=" 2011-12-24 "
+        %span{:style=>"margin-right:5px;"}=" | "
+        %span{:style=>"margin-right:5px;"}=" 15.35 " 
+        %span{:style=>"margin-right:5px;"}=" | "
+        %span{:style=>"margin-right:5px;"}=" Your message: When was the certificate issued? "
+        %i.icon-remove-circle{:id=>"remove_circle", :style=>"position:absolute;right:30px;top:10px;"}
+        %i.icon-arrow-left{:style=>"position:absolute;right:20px;top:10px;"}
+        %i.icon-arrow-down{:id=>"arrow_down", :style=>"position:absolute;right:10px;top:10px;"}
+        %span{:style=>"width:260px;height:25px;"}
+        %br
+        %span{:style=>"margin-top:0;"}="Dear Sir, I am interested in the van Gogh you offer. Can you specify when the certificate was issued.. Lorem ipsum dolor sit amet, consectetuer adipiscing"
+      %li{:id=>"reply", :style=>"float:left;position:relative;width:100%;padding:10px;background:#e9e9e9"}
+        %span{:style=>"margin-right:5px;"}=" 2011-12-21 "
+        %span{:style=>"margin-right:5px;"}=" | "
+        %span{:style=>"margin-right:5px;"}=" 15.35 " 
+        %span{:style=>"margin-right:5px;"}=" | "
+        %span{:style=>"margin-right:5px;"}=" Sellers reply: Thank you for the interest "
+        %i.icon-arrow-up{:id=>"arrow_up", :style=>"position:absolute;right:10px;top:10px;"}
+        %span{:style=>"width:260px;height:25px;"}
+        %span{:style=>"margin-top:0;"}="Dear Sir, I was pleased receiving you offer. Unfortunately I will not be able to... Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodoligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputateeget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.<br>Best regards<br>Niels Buenemann".html_safe
+      %li{:style=>"background:#e9e9e9;float:left;position:relative;width:100%;padding:10px;"}
+        %img{:src=>"/images/image_placeholder.png", :alt=>"Image Not found", :style=>"margin-right:10px;"}
+        %span{:style=>"text-decoration:underline;font-weigth:bold;"}=" Artist name "
+        %span{:style=>"margin-right:5px;"}=" | "
+        %span{:style=>"margin-right:5px;"}=" highest offer: $80,000,000 " 
+        %span{:style=>"margin-right:5px;"}=" | "
+        %span{:style=>"margin-right:5px;"}=" offer remaining: 22 hours "
+        %i.icon-arrow-down{:style=>"position:absolute;right:10px;top:10px;"}
+        %span{:style=>"width:260px;height:25px;"}
+        %br
+        %span{:style=>"margin-top:0;"}="3 messages "
+
+  .nav_sort_messages_two
+    %a.btn{:href=>"#"}="UNFOLD ALL MESSAGES"

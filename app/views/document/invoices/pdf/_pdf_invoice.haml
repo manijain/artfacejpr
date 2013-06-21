@@ -1,0 +1,52 @@
+- user = User.find(document.user_id)
+%div{:style => "text-align:center;float:left"}
+  %h2{:style => "font-size:30px;line-height:40px;"}="YOUR SUBSCRIPTION DATA"
+  %ul{:style=>"list-style:none;margin-left:0px;text-align:center;width:500px;float:left"}
+    %li{:style =>"width:600px;float:left;"}
+      %span{:style => "width:350px; font-weight:bold; font-size:17px; margin-bottom:2px;margin-right:20px;text-align:right;float:left;"}="subscription name"
+      %span{:style => "font-size:15px;float:left;"}=user.subscription.subscription_plan.subscription_name
+    %li{:style => " width:600px;float:left;"}
+      %span{:style => "width:350px; font-weight:bold; font-size:17px; margin-bottom:2px;margin-right:20px;text-align:right;float:left;"} ANNUAL PRICE
+      %span{:style => "font-size:15px;float:left;"}=user.subscription.subscription_plan.subscription_fee
+    %li{:style => " width:600px;float:left;"}
+      %span{:style => "width:350px; font-weight:bold; font-size:17px; margin-bottom:2px;margin-right:20px;text-align:right;float:left;"} AVAILABLE OFFERS/YEAR
+      %span{:style => "font-size:15px;float:left;"}=user.subscription.subscription_plan.subscription_paintings_allowed
+    %li{:style => " width:600px;float:left;"}
+      %span{:style => "width:350px; font-weight:bold; font-size:17px; margin-bottom:2px;margin-right:20px;text-align:right;float:left;"} VIEWABLE OFFERS/YEAR
+      %span{:style => "font-size:15px;float:left;"}="unlimited"
+    %li{:style => " width:600px;float:left;"}
+      %span{:style => "width:350px; font-weight:bold; font-size:17px; margin-bottom:2px;margin-right:20px;text-align:right;float:left;"} SUBSCRIPTION METHOD
+      %span{:style => "font-size:15px;float:left;"}=user.subscription.payment_type
+    %li{:style => " width:600px;float:left;"}
+      %span{:style => "width:350px; font-weight:bold; font-size:17px; margin-bottom:2px;margin-right:20px;text-align:right;float:left;"} SUBSCRIPTION PACKAGE RENEWAL
+      %span{:style => "font-size:15px;float:left;"}=user.subscription.auto_renewal
+    %li{:style => " width:600px;float:left;"}
+      %span{:style => "width:350px; font-weight:bold; font-size:17px; margin-bottom:2px;margin-right:20px;text-align:right;float:left;"} FIRST NAME
+      %span{:style => "font-size:15px;float:left;"}=user.user_first_name
+    %li{:style => " width:600px;float:left;"}
+      %span{:style => "width:350px; font-weight:bold; font-size:17px; margin-bottom:2px;margin-right:20px;text-align:right;float:left;"} LAST NAME
+      %span{:style => "font-size:15px;float:left;"}=user.user_last_name
+    %li{:style => " width:600px;float:left;"}
+      %span{:style => "width:350px; font-weight:bold; font-size:17px; margin-bottom:2px;margin-right:20px;text-align:right;float:left;"} COMPANY
+      %span{:style => "font-size:15px;float:left;"}=user.user_company
+    %li{:style => " width:600px;float:left;"}
+      %span{:style => "width:350px; font-weight:bold; font-size:17px; margin-bottom:2px;margin-right:20px;text-align:right;float:left;"} STREET
+      %span{:style => "font-size:15px;float:left;"}=user.user_street
+    %li{:style => " width:600px;float:left;"}
+      %span{:style => "width:350px; font-weight:bold; font-size:17px; margin-bottom:2px;margin-right:20px;text-align:right;float:left;"} ZIP CODE
+      %span{:style => "font-size:15px;float:left;"}=user.user_zip_code
+    %li{:style => " width:600px;float:left;"}
+      %span{:style => "width:350px; font-weight:bold; font-size:17px; margin-bottom:2px;margin-right:20px;text-align:right;float:left;"} CITY
+      %span{:style => "font-size:15px;float:left;"}=user.user_city
+    %li{:style => " width:600px;float:left;"}
+      %span{:style => "width:350px; font-weight:bold; font-size:17px; margin-bottom:2px;margin-right:20px;text-align:right;float:left;"} COUNTRY
+      %span{:style => "font-size:15px;float:left;"}=user.user_country
+    %li{:style => " width:600px;float:left;"}
+      %span{:style => "width:350px; font-weight:bold; font-size:17px; margin-bottom:2px;margin-right:20px;text-align:right;float:left;"} PHONE NUMBER
+      %span{:style => "font-size:15px;float:left;"}=user.user_phone_number
+    %li{:style => " width:600px;float:left;"}
+      %span{:style => "width:350px; font-weight:bold; font-size:17px; margin-bottom:2px;margin-right:20px;text-align:right;float:left;"} FAX NUMBER
+      %span{:style => "font-size:15px;float:left;"}=user.user_fax_number
+    %li{:style => " width:600px;float:left;"}
+      %span{:style => "width:350px; font-weight:bold; font-size:17px; margin-bottom:2px;margin-right:20px;text-align:right;float:left;"} TAX ID
+      %span{:style => "font-size:15px;float:left;"}=user.user_tax_id

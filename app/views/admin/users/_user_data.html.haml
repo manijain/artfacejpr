@@ -1,0 +1,36 @@
+= will_paginate @users, :link_separator=>"#{@users.current_page}/#{@users.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"float: right;position:relative;margin:0; top:-68px"
+-@users.each do |user|    
+  #hh.one_admin
+    %div
+    %h1
+      %u
+        %b
+          = link_to user.user_first_name, "/admin/users/#{user.id}"
+          = link_to user.user_last_name, "/admin/users/#{user.id}"
+      %p= user.user_country
+    %h2        
+      -if user.subscription.auto_renewal==true && user.subscription.subscription_confirmed==false
+        ="auto renewal"
+        =link_to "PAYMENT CONFLICT", admin_admin_path
+      -elsif user.subscription.auto_renewal==true
+        ="auto renewal (#{SubscriptionPlan.find(user.subscription.subscription_plan_id).subscription_name})"
+      -elsif user.subscription.subscription_confirmed==false
+        ="One Year"
+        =link_to "PAYMENT CONFLICT", admin_admin_path
+      -else 
+        ="One Year (#{SubscriptionPlan.find(user.subscription.subscription_plan_id).subscription_name})"           
+      -if user.confirmed_at.blank?
+        %p= "Member since: " "Not Confirmed"
+      -else
+        %p= "Member since: " "#{user.confirmed_at.strftime("%Y-%m")}"
+    %h3
+      = "Active offers: " "#{user.offers.where(:offer_status => true).count}"
+      %p= "Messages: " "#{user.messages.count}"
+    %h4
+      = "Forum Activity: " "#{user.forum_messages.count}"
+      %p=  link_to "LOGIN_AS_THIS_USER", {:controller => "admin/users", :action => "login_as_user", :id => user.id }
+= will_paginate @users, :link_separator=>"#{@users.current_page}/#{@users.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"float: right;position:static;margin:0;"
+
+#ajax-loader-big_for_offers_data{:style=>"left: 400px;position: absolute;top: 400px;z-index: 100;display:none;"}
+  %img{:src=>"/images/ajax-loader-big.gif"}
+#overlay_div_data{:style=>"background-color: white;display: block;height: 500%;left: 0;opacity: 0.4;position: absolute;top: 200px;width: 100%;z-index: 2;display:none;"}

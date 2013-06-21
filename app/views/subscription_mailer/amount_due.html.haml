@@ -1,0 +1,12 @@
+= render :partial => "user_header"
+%br
+%br
+= "You have recently registered at our website, but there has been some difficulty in processing your payment.".html_safe
+%br
+= "Please deposit your due amount of €".html_safe
+= @amount_due
+
+
+%br
+%br
+= render :partial => "user_footer"

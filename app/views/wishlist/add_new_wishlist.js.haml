@@ -1,0 +1,5 @@
+$("#wishlists_container").append('<li>' + '#{escape_javascript(render("wishlist\/wishlist_new"))} ' + '</li>')
+$("div[id^=wishlist_new_]").each(function(index, value) {
+$(this).attr('id',"wishlist_new_"+index)
+})
+filter_single_string = $("#wishlist_new_0 #search_filters ul").html()

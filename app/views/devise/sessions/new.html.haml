@@ -1,0 +1,42 @@
+= render :partial=> 'layouts/header'
+
+%div{:style=>"margin-left:2%;width:820px;float:left"}
+	%h2="LOGIN"
+	%div{:style=>"float:left;width:50%"}
+		="Cum sociis natoque penatibus et magnis dis parturient montes,"
+		%br
+		="nascetur ridiculus mus.orem ipsum dolor sit amet, consectetuer"
+		%br
+		="adipiscing elit. Aenean commodo ligula eget dolor."
+		%br
+		%br
+		="Are you an Artface service partner? "
+		= link_to 'Please login here.', '/service_directory_admin/login'
+
+
+	%div{:style=>"float:left;width:50%"}
+		= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+			%ul{:style=>"list-style:none"}
+				%li
+					= f.label :email, :style=>"display:inline"
+					%span{:style=>"width:46px;display:inline-block"}
+					= f.email_field :email
+				%li
+					= f.label :password, :style=>"display:inline"
+					%span{:style=>"width:20px;display:inline-block"}
+					= f.password_field :password
+				%br
+				%li
+					= link_to "Forgot your password?", new_user_password_path
+					= f.submit "Sign in", :class=>"submit btn", :style=>"float:right"
+		- if !notice.nil?
+			%span{:class=>"alert", :style=>"background-color:#FFF;border:0;padding:0;"}
+				= notice
+		- if !alert.nil?
+			%span{:class=>"alert", :style=>"background-color:#FFF;border:0;padding:0;"}
+				= alert
+		%div
+			%br
+			%br
+			%br
+= render :partial=> 'layouts/footer'

@@ -1,0 +1,433 @@
+= javascript_include_tag "https://raw.github.com/twitter/bootstrap/master/js/bootstrap-tooltip.js"
+%script{:type=>"text/javascript", :src=>"http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"}
+= stylesheet_link_tag "/assets/datepicker_fix.css"
+- new_offer_form_data
+.offer_layout_one
+  %input.hidden#offer_id{:value=>@offer.id}
+    .offer_step_zero{:style=>"background-color:#727272;padding:5px;"}
+      %h2{:style=>"width:400px;display:inline;margin-top:0;color:white"}="EDIT YOUR OFFER &nbsp; # #{@offer.id}".html_safe
+      %span{:style=>"color:white"}="last modified #{@offer.updated_at.to_date}"
+      %a{:style=>"float:right; border: 2px white solid;float: right;", :class=>"btn", :id=>"cancel_button_edit"}="CANCEL"
+  .offer_step_one
+    %p
+      =t '.offer_step_one_p_text_one'
+      ="#{@offers_left}"
+      =t '.offer_step_one_p_text_two'
+    %h3=t '.offer_step_one_heading_two'
+    %p=t '.offer_step_one_text_one'
+    %span#artist_name_span=t '.artist_name'
+    %span.pull-right{:style=>"float:right;width:52%;color:black;"}
+      %input#new_artist_name{:type=>"text", :placeholder=>"#{t '.artist_input_placeholder'}", :maxlength=>"50",:value=>@offer.artwork.artist.artist_name}
+      %img#error_new_artist_name{"data-original-title"=>"Please enter the artist name", :src=>"/images/exclamation_mark.png"}
+  .offer_step_two
+    %h3=t '.step_two_heading'
+    %div#step_one{:style=>"float:left;width:590px;margin-top:15px;"}
+      %ul#offer_new_title_ul{:style=>"margin-left:40px;"}
+        %li.pull-left.width_100{:style=>"display:block"}
+          %ul#multiple_title_box.pull-left.unstyled
+            - @titles_hash.each do |key, value|
+              %li{:style=>"float:left;position:relative;width:575px;"}
+                %span{:style=>"text-align: right;width: 80px;margin: 0;display: inline;float: left;margin-right: 2px;line-height:26px;"}="TITLE in #{key}*"
+                %input{:type=>"text", :style=>"width:430px;", :placeholder=>"#{t '.step_two_input_one_placeholder'}", :id=>"new_artwork_title_#{key}", :maxlength=>"60", :value=>"#{value}"}
+                %img{"data-original-title"=>"Please enter the artwork title", :src=>"/images/exclamation_mark.png", :style=>"display: none;position: absolute;right: 30px;top: -5px;", :id=>"error_new_artwork_title_#{key}"}
+        %li#list_two
+          %span#offer_select_multiple_title_box_span
+            %i.icon-plus-sign#offer_select_multiple_title_box.pointer
+            #offer_new_add_title_select_temp
+              %span="ADD Title"
+              %ul#multiple_title_flags
+                %li
+                  %img#flag_country_ch{:src => "/images/flags/ch.png"}
+                %li
+                  %img#flag_country_fr{:src => "/images/flags/fr.png"}
+                %li
+                  %img#flag_country_fi{:src => "/images/flags/fi.png"}
+                %li
+                  %img#flag_country_ne{:src => "/images/flags/ne.png"}
+          %label
+            =t '.category'
+            %select#new_category
+              %option=t '.please_choose'
+              - @category.each do |category|
+                - if category.value==@offer.artwork.artwork_category
+                  ="<option selected=\"true\">#{category.value}</option>".html_safe
+                - else  
+                  %option=category.value
+            %img#error_new_category{"data-original-title"=>"Please choose a category", :src=>"/images/exclamation_mark.png"}
+          %label
+            =t '.medium'
+            %select#new_medium
+              %option="Please choose category"
+            %input.hidden{:id=>"previous_selected_medium", :value=>"#{@offer.artwork.artwork_medium}"}
+            %img#error_new_medium{"data-original-title"=>"Please choose a medium", :src=>"/images/exclamation_mark.png"}
+  .offer_step_three
+    %h3=t '.step_three_heading'
+    %ul
+      %li
+        %label
+          =t '.height'
+          %input#new_height{:type=>"text", :value=>@offer.artwork.artwork_height, :maxlength=>"10"}
+          %img#error_new_height{"data-original-title"=>"Please enter the height", :src=>"/images/exclamation_mark.png"}
+        %label
+          =t '.width'
+          %input#new_width{:type=>"text", :value=>@offer.artwork.artwork_width, :maxlength=>"10"}
+          %img#error_new_width{"data-original-title"=>"Please enter the width", :src=>"/images/exclamation_mark.png"}
+        %label
+          =t '.depth'
+          %input#new_depth{:type=>"text", :value=>@offer.artwork.artwork_depth, :maxlength=>"10"}
+          %img#error_new_depth{"data-original-title"=>"Please enter the width", :src=>"/images/exclamation_mark.png"}
+      %li{:style=>"clear:both;"}
+        %span{:style=>"float: left;width: 58px;text-align: right;margin-right: 5px;line-height:30px"}=t '.unit'
+        %select#new_size_unit{:style=>"width:65px"}
+          - @unit.each do |unit|
+            - if unit.value==@offer.artwork.artwork_size_unit
+              ="<option selected=\"true\">#{unit.value}</option>".html_safe
+            - else  
+              %option=unit.value
+  .offer_step_four
+    %h3=t ".step_four_heading"
+    %div#offer_step_four_step_one
+      %ul#new_offer_step_four_ul
+        %li
+          %span.label_text=t '.creation_year'
+          %input#new_year{:type=>"text", :value=> @offer.artwork.artwork_creation_year, :placeholder=>"#{t '.year'}", :maxlength=>"4"}
+          %img#error_new_year{"data-original-title"=>"Please enter the year", :src=>"/images/exclamation_mark.png"}
+          %select#new_era
+            - if ("#{t('.ad')}" == @offer.artwork.artwork_creation_year_era)
+              %option{:selected=>"true"}=t '.ad'
+            - else
+              %option=t '.ad'
+            - if ("#{t('.bc')}" == @offer.artwork.artwork_creation_year_era)
+              %option{:selected=>"true"}=t '.bc'
+            - else
+              %option=t '.bc'
+        %li
+          %span.label_text=t '.certificate'
+          - if (@offer.artwork.artwork_certificate_check==true)
+            %input.checkbox#new_certificate{:type=>"checkbox", :checked=>"checked"}
+          - else
+            %input.checkbox#new_certificate{:type=>"checkbox"}
+          %span{:style=>"font-size:10px;line-height:30px;"}=t '.certificate_checkbox_text'
+        %li
+          %span.label_text="FRAME"
+          - if (@offer.artwork.artwork_frame_check==true)
+            %input.checkbox#new_frame{:type=>"checkbox", :checked=>"checked"}
+          - else
+            %input.checkbox#new_frame{:type=>"checkbox"}
+        %li
+          %span.label_text="SIGNATURE"
+          - if (@offer.artwork.artwork_signature_check==true)
+            %input.checkbox#new_signature{:type=>"checkbox", :checked=>"checked"}
+          - else
+            %input.checkbox#new_signature{:type=>"checkbox"}
+        %li{:style=>"margin-top:10px"}
+          %span.label_text="MOVEMENT/PERIOD"
+          %input#new_period{:type=>"text", :style=>"margin-left:10px;", :value=>@offer.artwork.artwork_movement_period, :placeholder=>"MOVEMENT/PERIOD", :maxlength=>"40"}
+          %img#error_new_period{"data-original-title"=>"Please enter the MOVEMENT/PERIOD", :src=>"/images/exclamation_mark.png"}
+        %li{:style=>"position:relative"}
+          %span.label_text="COUNTRY"
+          - country_select_data
+          %select#new_country{:style=>"margin-left:10px;"}
+            %option="please choose a country"
+            - @countries.each do |country|
+              - if @offer.artwork.artwork_country == country.country_name
+                %option{:value=>"#{country.country_name}", :selected=>"selected"}=country.country_name
+              - else
+                %option{:value=>"#{country.country_name}"}=country.country_name
+          %img#error_new_country{"data-original-title"=>"please choose a country", :src=>"/images/exclamation_mark.png"}
+      - @descriptions_hash.each do |key, value| 
+        %li{:style=>"list-style:none;"}
+          %span{:style=>"width: 150px;float:left;text-align:right;"}
+            =t '.description'
+            %span{:style=>"font-size:10px;float:right;"}
+              %span{:id=>"new_description_language_#{key}"}
+                =t '.english' if key == "en"
+                =t '.switzerland' if key == "ch"
+                =t '.french' if key == "fr"
+                =t '.finland' if key == "fi"
+                =t '.nelang' if key == "ne"
+                =t '.us_en' if key == "us"
+              %span{:id=>"new_description_character_count_#{key}"}
+            %span{:style=>"float:right;position:relative;top:170px;font-size:24px", :id=>"offer_new_add_description"}
+          %textarea{:style=>"margin: 0px 0px 9px 10px;width: 350px;height: 215px;max-height: 200px;max-width: 350px;min-height:200px;min-width: 350px;", :placeholder=>"#{t '.default_textarea_placeholder_en'}", :id=>"new_description_#{key}", :maxlength=>"10000"}="#{value}"
+          %img{"data-original-title"=>"Please enter the description", :id=>"error_new_description_#{key}", :src=>"/images/exclamation_mark.png", :style=>"left: -4%;position: relative;top: 185px;display:none"}
+      #offer_new_add_description_div
+        %i.icon-plus-sign#offer_new_add_description_icon.pointer
+        #offer_new_add_description_select_temp
+          %span{:style => "font-size:14px"}
+            ADD TRANSLATION
+          %ul
+            %li
+              %img.pointer#flag_country_ch{:src => "/images/flags/ch.png", :style => "width:22px;height:16px", :title=>"CH"}
+            %li
+              %img.pointer#flag_country_fr{:src => "/images/flags/fr.png", :style => "width:22px;", :title=>"FR"}
+            %li
+              %img.pointer#flag_country_fi{:src => "/images/flags/fi.png", :style => "width:22px;", :title=>"FI"}
+            %li
+              %img.pointer#flag_country_ne{:src => "/images/flags/ne.png", :style => "width:22px;", :title=>"NE"}
+  .offer_step_five
+    #progressbar_parent.display_none
+      %span="UPLOADING IMAGE"
+      %div{:style=>"color: black; position: absolute; z-index: -1; background-color: white; width: 820px; top: -183px; left: 0px; opacity: 0.2; height: 495px;"}
+      #progressbar.display_none
+        .progress-label
+          ="Loading..."
+      #cancel_cropping
+        %input.cancel_hi_res_upload.btn{:type=>"button", :value=>"CANCEL"}
+        %input.cancel_thumbnail_upload.btn{:type=>"button", :value=>"CANCEL"}
+        %input.cancel_detail_one_upload.btn{:type=>"button", :value=>"CANCEL"}
+        %input.cancel_detail_two_upload.btn{:type=>"button", :value=>"CANCEL"}
+        %input.cancel_documents_upload.btn{:type=>"button", :value=>"CANCEL"}
+      #cancel_cropping_close
+        %img.cancel_hi_res_upload.pointer{:src=>"/images/close_button.png"}
+        %img.cancel_thumbnail_upload.pointer{:src=>"/images/close_button.png"}
+        %img.cancel_detail_one_upload.pointer{:src=>"/images/close_button.png"}
+        %img.cancel_detail_two_upload.pointer{:src=>"/images/close_button.png"}
+        %img.cancel_documents_upload.pointer{:src=>"/images/close_button.png"}
+    %img#overlay_ajax_loader_for_new_offer_files{:alt=>"Image not found", :src=>"/images/ajax-loader-big.gif", :style=>"z-index:20;"}
+    #overlay_div_for_new_offer_files
+    %div#thumbnail_div
+      %i.icon-remove-circle.pull-left.pointer
+      %h3{:style=>"margin-top:0;"}="Thumbnail Image"
+      %input.btn#upload_thumbnail{:value=>"Upload New", :type=>"button"}
+      %input#crop_thumbnail.btn{:value=>"Crop Existing", :type=>"button"}
+    %div#detail1_div
+      %i.icon-remove-circle.pull-right.pointer
+      %h3{:style=>"margin-top:0;"}="Detail one Image"
+      %input#upload_detail1.btn{:value=>"Upload New", :type=>"button"}
+      %input.btn#crop_detail1{:value=>"Crop Existing", :type=>"button"}
+    %div#detail2_div
+      %i.icon-remove-circle.pull-right.pointer
+      %h3{:style=>"margin-top:0;"}="Detail two Image"
+      %input.btn#upload_detail2{:value=>"Upload New", :type=>"button"}
+      %input.btn#crop_detail2{:value=>"Crop Existing", :type=>"button"}
+    %div.pull-left{:style=>"width:210px;"}
+      %h2=t '.step_five_heading'
+      %p=t '.step_five_text_one'
+    %div.pull-left{:style=>"width:590px;margin-top:15px;"}
+      = form_for :artwork, :url => offer_save_image_path, :method=>:post, :html=>{:multipart=>:true, :id=>:save_image_form} do |f|
+        %ul.unstyled{:style=>"margin:0 auto;"}
+          %li
+            = image_tag "#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_hires/#{@offer.artwork.id}/#{@offer.artwork.artwork_hires_file_name}", :id=>"small_thumb_on_upload_hi_res"
+            %span.offer_step_five_file_span_one="HI-RES"
+            %input#offer_new_hi_res.btn.pull-right{:type=>"button",:value=>"#{t '.choose_file'}"}
+            %input#offer_new_hi_res_file_delete.btn.pull-right{:type=>"button", :value=>"DELETE", :style=>"display:none;margin-right:10px;"}
+            %input#offer_new_hi_res_file_change.btn.pull-right{:style=>"display:none;margin-right:15px;", :type=>"button", :value=>"CHANGE"}
+            %img#error_new_hi_res{"data-original-title"=>"Please select a High Resolution image", :src=>"/images/exclamation_mark.png"}
+            %span#hi_res_img_name="Upload a high resolution version (jpg, minimum height or width 1000 px)"
+            =f.file_field :artwork_hires, :type=>"file", :id=>"img_get_hi_res"
+          %li
+            %div{:style=>"overflow:hidden;float:left;height:40px;width:40px;margin-left:10px;"}
+              = image_tag "#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_thumbnails/#{@offer.artwork.id}/#{@offer.artwork.artwork_thumbnail_file_name}", :id=>"small_thumb_on_upload_thumbnail", :style=>"margin-left:0"
+            %span.offer_step_five_file_span_one="THUMBNAIL"
+            %input#offer_new_thumbnail.btn.pull-right{:type=>"button",  :value=>"#{t '.choose_file'}"}
+            %input#offer_change_thumbnail.btn.pull-right{:type=>"button",  :value=>"CHANGE", :style=>"display:none;margin-right:10px;"}
+            %input#offer_new_thumbnail_file_delete.btn.pull-right{:type=>"button", :value=>"DELETE", :style=>"display:none;margin-right:10px;"}
+            %input#offer_new_thumbnail_file_change.btn.pull-right{:style=>"display:none;margin-right:15px;", :type=>"button", :value=>"CHANGE"}
+            %span#thumbnail_img_name="After you have uploaded the hi-res image you can choose a different detail for the small thumbnail view"
+            =f.file_field :artwork_thumbnail, :type=>"file", :id=>"img_get_thumbnail"
+          %li
+            = image_tag "#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_ones/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_one_file_name}", :id=>"small_thumb_on_upload_detail_1"
+            %span.offer_step_five_file_span_one="DETAIL 1"
+            %input#offer_new_detail_1.btn.pull-right{:type=>"button", :value=>"#{t '.choose_file'}"}
+            %input#offer_new_detail_1_file_delete.btn.pull-right{:type=>"button", :value=>"DELETE", :style=>"display:none;margin-right:10px;"}
+            %input#offer_new_detail_1_file_change.btn.pull-right{:style=>"display:none;margin-right:15px;", :type=>"button", :value=>"CHANGE"}
+            %span#detail1_img_name="Upload a high resolution detail (jpg, minimum height or width 1000 px)"
+            =f.file_field :artwork_detail_one, :type=>"file", :id=>"img_get_detail_1"
+          %li
+            = image_tag "#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_twos/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_two_file_name}", :id=>"small_thumb_on_upload_detail_2"
+            %span.offer_step_five_file_span_one="DETAIL 2"
+            %input#offer_new_detail_2.btn.pull-right{:type=>"button",:value=>"#{t '.choose_file'}"}
+            %input#offer_new_detail_2_file_delete.btn.pull-right{:type=>"button", :value=>"DELETE", :style=>"display:none;margin-right:10px;"}
+            %input#offer_new_detail_2_file_change.btn.pull-right{:style=>"display:none;margin-right:15px;", :type=>"button", :value=>"CHANGE"}
+            %span#detail2_img_name="Upload a high resolution detail (jpg, minimum height or width 1000 px)"
+            =f.file_field :artwork_detail_two, :type=>"file", :id=>"img_get_detail_2"
+          %li
+            - unless @offer.artwork.artwork_documentation_file_name.blank?
+              - if @offer.artwork.artwork_documentation_file_name[-4,4] == ".doc" || @offer.artwork.artwork_documentation_file_name[-4,4] == "docx"
+                %a{:target=>"_blank", :href=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_documentations/#{@offer.artwork.id}/#{@offer.artwork.artwork_documentation_file_name}"}
+                  %img{:src=>"/images/word_doc_icon.png"}
+              - if @offer.artwork.artwork_documentation_file_name[-4,4] == ".pdf"
+                %a{:target=>"_blank", :href=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_documentations/#{@offer.artwork.id}/#{@offer.artwork.artwork_documentation_file_name}"}
+                  %img{:src=>"/images/pdf-icon.png"}
+              - else
+                %img#small_thumb_on_upload_documents{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/smalls/artwork_documentations/#{@offer.artwork.id}/#{@offer.artwork.artwork_documentation_file_name}", :alt=>"Image not added"}
+            - else
+              %p="No Upload"
+            =# image_tag "#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_documentations/#{@offer.artwork.id}/#{@offer.artwork.artwork_documentation_file_name}", :id=>"small_thumb_on_upload_documents"
+            %span.offer_step_five_file_span_one="DOCUMENTS"
+            %input.btn#offer_new_documents.pull-right{:type=>"button", :value=>"#{t '.choose_file'}"}
+            %input#offer_new_documents_file_delete.btn.pull-right{:type=>"button", :value=>"DELETE", :style=>"display:none;margin-right:10px;"}
+            %input#offer_new_documents_file_change.btn.pull-right{:style=>"display:none;margin-right:15px;", :type=>"button", :value=>"CHANGE"}
+            %img#error_new_documents{"data-original-title"=>"Please select documentation image", :src=>"/images/exclamation_mark.png"}
+            =f.file_field :artwork_documentation, :type=>"file", :id=>"img_get_documents"
+            %span#documents_name{"data-text"=>"#{t '.step_five_text_two'}"}=t '.step_five_text_two'
+            - if @offer.artwork.artwork_documentation_file_name.blank?
+              %input#previous_document_present{:type=>"hidden", :value=>"false"}
+            - else
+              %input#previous_document_present{:type=>"hidden", :value=>"true"}
+          %li{:style=>"display:none;"}
+            =f.hidden_field :thumbnail_crop_x, :id=>"thumbnail_crop_x"
+            =f.hidden_field :thumbnail_crop_y, :id=>"thumbnail_crop_y"
+            =f.hidden_field :thumbnail_crop_w, :id=>"thumbnail_crop_w"
+            =f.hidden_field :thumbnail_crop_h, :id=>"thumbnail_crop_h"
+            =f.hidden_field :hi_res_crop_x, :id=>"hi_res_crop_x"
+            =f.hidden_field :hi_res_crop_y, :id=>"hi_res_crop_y"
+            =f.hidden_field :hi_res_crop_w, :id=>"hi_res_crop_w"
+            =f.hidden_field :hi_res_crop_h, :id=>"hi_res_crop_h"
+            =f.hidden_field :detail_one_crop_x, :id=>"detail_one_crop_x"
+            =f.hidden_field :detail_one_crop_y, :id=>"detail_one_crop_y"
+            =f.hidden_field :detail_one_crop_w, :id=>"detail_one_crop_w"
+            =f.hidden_field :detail_one_crop_h, :id=>"detail_one_crop_h"
+            =f.hidden_field :detail_two_crop_x, :id=>"detail_two_crop_x"
+            =f.hidden_field :detail_two_crop_y, :id=>"detail_two_crop_y"
+            =f.hidden_field :detail_two_crop_w, :id=>"detail_two_crop_w"
+            =f.hidden_field :detail_two_crop_h, :id=>"detail_two_crop_h"
+            =f.hidden_field :documentation_crop_x, :id=>"documentation_crop_x"
+            =f.hidden_field :documentation_crop_y, :id=>"documentation_crop_y"
+            =f.hidden_field :documentation_crop_w, :id=>"documentation_crop_w"
+            =f.hidden_field :documentation_crop_h, :id=>"documentation_crop_h"
+            =f.hidden_field :crop_existing_thumbnail, :id=>"crop_existing_thumbnail"
+            =f.hidden_field :crop_existing_detail_one, :id=>"crop_existing_detail_one"
+            =f.hidden_field :crop_existing_detail_two, :id=>"crop_existing_detail_two"
+          %li{:style=>"display:none;"}
+            %input#image_form_submit_button{:type=>"submit", :value=>"submit"}
+  .offer_step_six
+    %div.pull-left{:style=>"width:210px;"}
+      %h2=t '.step_six_heading'
+      %p=t '.step_six_text_one'
+    %div.pull-left{:style=>"width:590px;margin-top:15px;"}
+      %ul.unstyled{:style=>"margin:0 auto;"}
+        %li{:style=>"position:relative"}
+          %span.offer_step_five_file_span_one{:style=>"line-height:38px"}=t '.starts'
+        - if @offer.offer_start_date.blank?
+          %input#new_start_date{:type=>"text", :placeholder=>"#{t '.step_six_date_placeholder'}", :maxlength=>"40"}
+        - else
+          %input#new_start_date{:value=>@offer.offer_start_date.to_date, :type=>"text", :placeholder=>"#{t '.step_six_date_placeholder'}", :maxlength=>"40"}
+          %img#error_new_start_date{"data-original-title"=>"please choose a start date",  :src=>"/images/exclamation_mark.png"}
+          %span{:style=>"width: 90px;line-height:30px"}="ENDS*"
+        - if @offer.offer_end_date.blank?
+          %input#new_end_date{:type=>"text", :placeholder=>"#{t '.step_six_date_placeholder'}", :maxlength=>"40"}
+        - else 
+          %input#new_end_date{:value=>@offer.offer_end_date.to_date, :type=>"text", :placeholder=>"#{t '.step_six_date_placeholder'}", :maxlength=>"40"}
+          %img#error_new_end_date{"data-original-title"=>"please choose an end date", :src=>"/images/exclamation_mark.png"}
+        %li.pull-left{:style=>"position:relative;"}
+          %span.offer_step_five_file_span_one=t '.purpose'
+          %select#new_purpose
+            %option=t '.please_choose'
+            - @purpose.each do |purpose|
+              - if purpose.value==@offer.offer_type
+                ="<option selected=\"true\">#{purpose.value}</option>".html_safe
+              - else  
+                %option=purpose.value
+          %img#error_new_purpose{"data-original-title"=>"Please select a purpose", :src=>"/images/exclamation_mark.png"}
+  .offer_step_seven
+    %div.pull-left
+      %a.cancel_button_new.btn=t '.cancel'
+      %input#offer_preview.btn{:type=>"button", :value=>"#{t '.preview'}"}
+    %span.pull-right
+      %input.new_offer_submit.btn{:type=>"button", :value=>"#{t '.submit'}"}
+  .hidden#hi_res_large_container.pull-left{:style=>"width:1100px;"}
+    .pull-left{:style=>"width:170px;padding-left:10px;padding-top:10px;padding-right:10px;color:white;"}
+      %h4="CROP IMAGE"
+      %p.pull-left="You can cut away unwanted parts of yours uploaded image by pulling the handles on the left image"
+      %input.btn#button_crop_new_upload_hires_image.pull-left{:value=>"Upload new images", :type=>"button"}
+    #hi_res.pull-left{:style=>"width:700px;"}
+      %a.pull-left
+        %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_hires/#{@offer.artwork.id}/#{@offer.artwork.artwork_hires_file_name}"}
+      %div.hidden#hi_res_overlay
+      %p.hidden.crop_preview_text="The selected area will be shown in the final offer"
+    #img_preview_hi_res_container.pull-right{:style=>"background-color: white;float: left;margin-left: 2px;width: 205px;"}
+      #img_preview_hi_res
+      .pull-left.width_100{:style=>"background-color: #E1E1E1;margin-bottom: 5px;margin-top: 5px;text-align: center;"}
+        %h5.pull-left.width_100="Image Preview"
+        %p.hi_res_img_name.pull-left.width_100
+      %span.pull-left{:style=>"margin-bottom: 10px;margin-top: 10px;padding: 10px;width: 190px;"}
+        %input.btn#button_crop_stop_hires_image.pull-left{:value=>"CANCEL", :type=>"button", :style=>"font-size:10px;margin:0;padding:6px"}
+        %input.btn#button_crop_save_hires_image.pull-right{:value=>"SAVE THIS IMAGE", :type=>"button", :style=>"font-size:10px;margin:0;padding:6px"}
+  .hidden#thumbnail_large_container.pull-left{:style=>"width:1100px;"}
+    .pull-left{:style=>"width:170px;padding-left:10px;padding-top:10px;padding-right:10px;color:white;"}
+      %h4="CROP IMAGE"
+      %p.pull-left="You can cut away unwanted parts of yours uploaded image by pulling the handles on the left image"
+      %input.btn#button_crop_new_upload_thumbnail_image.pull-left{:value=>"Upload new images", :type=>"button"}
+    #thumbnail.pull-left{:style=>"width:700px;"}
+      %a.pull-left
+      %div.hidden#thumbnail_overlay
+      %p.hidden.crop_preview_text="The selected area will be shown in the final offer"
+    #img_preview_thumbnail_container.pull-right{:style=>"background-color: white;float: left;margin-left: 2px;width: 205px;"}
+      #img_preview_thumbnail
+      .pull-left.width_100{:style=>"background-color: #E1E1E1;margin-bottom: 5px;margin-top: 5px;text-align: center;"}
+        %h5.pull-left.width_100="Image Preview"
+        %p.thumbnail_img_name.pull-left.width_100
+      %span.pull-left{:style=>"margin-bottom: 10px;margin-top: 10px;padding: 10px;width: 190px;"}
+        %input.btn#button_crop_stop_thumbnail_image.pull-left{:value=>"Cancel", :type=>"button" , :style=>"font-size:10px;margin:0;padding:6px"}
+        %input.btn#button_crop_save_thumbnail_image.pull-right{:value=>"SAVE THIS IMAGE", :type=>"button", :style=>"font-size:10px;margin:0;padding:6px"}
+  .hidden#detail_1_large_container.pull-left{:style=>"width:1100px;"}
+    .pull-left{:style=>"width:170px;padding-left:10px;padding-top:10px;padding-right:10px;color:white;"}
+      %h4="CROP IMAGE"
+      %p.pull-left="You can cut away unwanted parts of yours uploaded image by pulling the handles on the left image"
+      %input.btn#button_crop_new_upload_detail_1_image{:value=>"Upload new images", :type=>"button"}
+    #detail1.pull-left{:style=>"width:700px;"}
+      %a.pull-left
+        %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_ones/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_one_file_name}"}
+      .hidden#detail1_overlay
+      %p.hidden.crop_preview_text="The selected area will be shown in the final offer"
+    #img_preview_detail_1_container.pull-right{:style=>"background-color: white;float: left;margin-left: 2px;width: 205px;"}
+      #img_preview_detail1
+      .pull-left.width_100{:style=>"background-color: #E1E1E1;margin-bottom: 5px;margin-top: 5px;text-align: center;"}
+        %h5.pull-left.width_100="Image Preview"
+        %p.detail_1_img_name.pull-left.width_100
+      %span.pull-left{:style=>"margin-bottom: 10px;margin-top: 10px;padding: 10px;width: 190px;"}
+        %input.btn#button_crop_stop_detail_one.pull-left{:value=>"Cancel", :type=>"button", :style=>"font-size:10px;margin:0;padding:6px"}
+        %input.btn#button_crop_save_detail_one.pull-right{:value=>"SAVE THIS IMAGE", :type=>"button", :style=>"font-size:10px;margin:0;padding:6px"}
+  .hidden#detail_2_large_container.pull-left{:style=>"width:1100px;"}
+    .pull-left{:style=>"width:170px;padding-left:10px;padding-top:10px;padding-right:10px;color:white;"}
+      %h4="CROP IMAGE"
+      %p.pull-left="You can cut away unwanted parts of yours uploaded image by pulling the handles on the left image"
+      %input.btn#button_crop_new_upload_detail_2_image{:value=>"Upload new images", :type=>"button"}
+    #detail2.pull-left{:style=>"width:700px;"}
+      %a.pull-left
+        %img{:src=>"#{PAPERCLIP_STORAGE_PATH}images/uploaded/artwork/crops/artwork_detail_twos/#{@offer.artwork.id}/#{@offer.artwork.artwork_detail_two_file_name}"}
+      .hidden#detail2_overlay
+      %p.hidden.crop_preview_text="The selected area will be shown in the final offer"
+    #img_preview_detail2_container.pull-right{:style=>"background-color: white;float: left;margin-left: 2px;width: 205px;"}
+      #img_preview_detail2
+      .pull-left.width_100{:style=>"background-color: #E1E1E1;margin-bottom: 5px;margin-top: 5px;text-align: center;"}
+        %h5.pull-left.width_100="Image Preview"
+        %p.detail_2_img_name.pull-left.width_100
+      %span.pull-left{:style=>"margin-bottom: 10px;margin-top: 10px;padding: 10px;width: 190px;"}
+        %input.btn#button_crop_stop_detail_two.pull-left{:value=>"Cancel", :type=>"button", :style=>"font-size:10px;margin:0;padding:6px"}
+        %input.btn#button_crop_save_detail_two.pull-right{:value=>"SAVE THIS IMAGE", :type=>"button", :style=>"font-size:10px;margin:0;padding:6px"}
+  .hidden#documents
+  .hidden#original
+  .offer_step_eight
+    %div{:style=>"float:left;width:210px;"}
+      %h2=t '.step_eight_heading'
+      %p=t '.step_eight_text_one'
+    %div{:style=>"float:left;width:590px;margin-top:15px;"}
+      %ul{:style=>"list-style:none;margin:0 auto;float:left;"}
+        %li{:style=>"float:left;"}
+          %span{:style=>"float:left;line-height:30px", :class=>"offer_step_five_file_span_one"}=t '.active'
+          - if @offer.offer_status
+            %input#new_offer_status{:style=>"float:left;margin-left:5px;margin-right:5px;margin-top: 8px;", :type=>"checkbox", :checked=>"checked"}
+          - else
+            %input#new_offer_status{:style=>"float:left;margin-left:5px;margin-right:5px;margin-top: 8px;", :type=>"checkbox"}
+          %span#text_for_deactive_box{:style=>"float:left;line-height:30px"}=t ".deactive"
+          %select#new_status_desc{:style=>"margin-left:10px;float:left;"}
+            %option="Please choose"
+            - if ("#{t('.sold')}" == @offer.offer_cancellation_reason)
+              %option{:selected=>"true"}=t '.sold'
+            - else
+              %option=t '.sold'
+            - if ("#{t('.lent')}" == @offer.offer_cancellation_reason)
+              %option{:selected=>"true"}=t '.lent'
+            - else
+              %option=t '.lent'
+            - if ("#{t('.personalreason')}" == @offer.offer_cancellation_reason)
+              %option{:selected=>"true"}=t '.personalreason'
+            - else
+              %option=t '.personalreason'
+            - if ("#{t('.paused')}" == @offer.offer_cancellation_reason)
+              %option{:selected=>"true"}=t '.paused'
+            - else
+              %option=t '.paused'

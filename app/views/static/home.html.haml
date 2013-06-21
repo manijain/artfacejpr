@@ -1,0 +1,113 @@
+= render :partial=> 'layouts/header'
+.home_layout{:style=>"width:820px;margin-left:2%"}
+	- if user_signed_in?
+		= "Content to be shown if user is logged in"
+	- else
+		.home_not_logged_in
+			.home_step_one{:style=>"background-color:#A6A6A6;width:820px;float:left;height:300px"}
+				%div.home_slider_parent{:style=>"float:left;left:160px;position:relative;top: 78px;width: auto;height:200px"}
+					%ul#home_slider{:style=>"list-style:none;"}
+						- (0..9).each do |i|
+							%li{:style=>"clear:both"}
+								%div{:style=>"float:left;"}
+									%img{:src=>"#{@header_images[i]}", :style=>"width:150px;float:left"}
+								%div{:style=>"float:left;width:380px;padding-left:10px"}
+									%p{:style=>"float:left;display:inline"}=@header_texts[i].title if @header_texts[i].title
+									%br
+									%p{:style=>"float:left;display:inline"}=@header_texts[i].text if @header_texts[i].text
+									%a{:class=>"btn", :style=>"float:left", :href=>"/about"}="#{t '.button_text_learn_more'}"
+									%a{:class=>"btn", :style=>"float:left", :href=>"/memberfees"}="#{t '.button_text_start_now'}"
+			.home_step_two{:style=>"width:820px;float:left"}
+				%div{:style=>"height:100px;width:820px;float:left"}
+					%h2{:style=>"float: left;font-size: 30px;line-height: 40px;width: 400px"}=t '.step_two_heading'
+					%span{:style=>"float: right;line-height: 56px;width: 100px;"}
+						%a{:style=>"width:80px", :class=>"btn", :href=>"#home_step_five_movie", :role=>"button", "data-toggle"=>"modal"}="play"
+				%div{:style=>"float:left;width:33%;"}
+					%h3=t ".step_two_sub_heading_one"
+					%p=t '.step_two_text_one'
+				%div{:style=>"float:left;width:33%;"}
+					%h3=t '.step_two_sub_heading_two'
+					%p=t '.step_two_text_two'
+				%div{:style=>"float:left;width:33%;"}
+					%h3=t '.step_two_sub_heading_three'
+					%p=t '.step_two_text_three'
+				%div{:style=>"float: left;text-align: center;width: 820px"}
+					%a{:type=>"button", :value=>"", :class=>"btn", :href=>"/users/register"}=t '.link_text_signup'
+			.home_step_three{:style=>"background-color:#A3A3A3;float:left;width:820px;margin-bottom: 10px;margin-top: 10px;padding: 5px 5px 5px 5px;"}
+				%div{:style=>"float:left;width:130px"}
+					%h3=t '.step_three_heading'
+					%p=t '.step_three_text_one'
+					%a{:class=>"btn", :href=>"/offers"}="#{t '.button_text_show_all'}"
+				%div{:style=>"float:left;width:660px;margin-left:2%;margin-top:2%"}
+					%div#slider1.slider{:style=>"overflow:hidden; position:relative;"}
+						%ul{:style=>"margin:0; padding:0;width:100%"}
+							- index = 0
+							- while index < @img_url_array.count - 3
+								%li{:style=>"float:left; margin:0 5px 0 0; list-style:none;width:220px"}
+									%ul{:style=>"list-style:none;background-color:#e9e7e9;float:left;"}
+										%li{:style=>"float:left;height:75px;width:200px;"}
+											%div{:style=>"float:left;"}
+												%div{:style=>"float:left;background:#666;height:50px;width:50px;margin: 11px 2px 0 7px;padding:2px;"}
+													%a{:href=>"/memberfees"}
+														%img{:src=>"#{@img_url_array[index]["artwork_hires"]}", :style=>"width:50px;height:50px;float:left;font-size: 10px;", :alt=>"Image Not Found"}
+												%span{:style=>"text-decoration:underline;margin: 30px 0 0 15px;float:left;"}=@artist[index]["artist_name"]
+										%li{:style=>" border-top: 6px solid #A3A3A3;height:75px;width:200px;float:left;"}
+											%div{:style=>"float:left;"}
+												%div{:style=>"float:left;background:#666;height:50px;width:50px;margin: 11px 2px 0 7px;padding:2px;"}
+													%a{:href=>"/memberfees"}
+														%img{:src=>"#{@img_url_array[(index + 1)]["artwork_hires"]}", :style=>"width:50px;height:50px;float:left;font-size: 10px;", :alt=>"Image Not Found"}
+												%span{:style=>"text-decoration:underline;margin: 30px 0 0 15px;float:left;"}=@artist[index]["artist_name"]
+										%li{:style=>" border-top: 6px solid #A3A3A3;float:left;height:75px;width:200px;"}
+											%div{:style=>"float:left;"}
+												%div{:style=>"float:left;background:#666;height:50px;width:50px;margin: 11px 2px 0 7px;padding:2px;"}
+													%a{:href=>"/memberfees"}
+														%img{:src=>"#{@img_url_array[(index + 2)]["artwork_hires"]}", :style=>"width:50px;height:50px;float:left;font-size: 10px;", :alt=>"Image Not Found"}
+												%span{:style=>"text-decoration:underline;margin: 30px 0 0 15px;float:left;"}=@artist[index]["artist_name"]
+									- index+=3
+					%div.controls
+						%img{:class=>"prev-slide", :src=>"/images/prev.png", :style=>"border-radius: 30px 30px 30px 30px;height: 27px;left: 155px;position: absolute;top: 997px;width: 27px;z-index:10;cursor:pointer;"}
+						%img{:class=>"next-slide", :src=>"/images/next.png", :style=>"border-radius: 30px 30px 30px 30px;height: 27px;left: 820px;position: absolute;top: 997px;width: 27px;z-index:10;cursor:pointer;"}
+
+					:javascript
+						$( '#slider1' ).lemmonSlider({
+						'infinite' : true
+						});
+						function play()
+						{
+						$( "#slider1" ).trigger( 'nextSlide' )
+						}
+						$(function() {
+						slider_interval = setInterval("play()",4000)
+						$(".next-slide").click(function() {
+						clearInterval(slider_interval)
+						})
+						$(".prev-slide").click(function() {
+						clearInterval(slider_interval)
+						})
+						})
+
+			.home_step_four{:style=>"background-color:#E1E1E1;float:left;width:820px;margin-bottom:10px;"}
+				%div{:style=>"float:left;margin-left:20px;width:140px;"}
+					%h3=t '.step_four_heading'
+					%p=t '.step_four_text_two'
+				%div{:style=>"float: left;margin-left: 8px;margin-top:2%;width: 652px;"}
+					- @partners.each do |partner|
+						- if partner.name.length < 15
+							%a{:href=>"http://#{partner.link}", :style=>"float: left;font-size: 12px;height: 40px;line-height: 40px;text-align: center;vertical-align: middle;width: 85px;margin-left:5px;position:relative;"}
+								=image_tag "#{PAPERCLIP_STORAGE_PATH}images/partner_images/smalls/images/#{partner.id}/#{partner.image_file_name}", :alt=>"", :style=>"position:absolute;width:85px;height:40px;top:0;left:0;"
+								%span{:style=>"color:white;position:absolute;top:0;left:0;width:85px;"}="#{partner.name}"
+						- else
+							%a{:href=>"http://#{partner.link}", :style=>"float: left;font-size: 12px;height: 40px;text-align: center;vertical-align: middle;width: 85px;margin-left:5px;position:relative;"}
+								=image_tag "#{PAPERCLIP_STORAGE_PATH}images/partner_images/smalls/images/#{partner.id}/#{partner.image_file_name}", :alt=>"", :style=>"position:absolute;width:85px;height:40px;top:0;left:0;"
+								%span{:style=>"color:white;position:absolute;top:25%;left:0;line-height:13px;font-size:10px;width:85px;"}="#{partner.name}"
+			.home_step_five_movie
+				#home_step_five_movie.modal.hide.fade{:tabindex=>"-1", :role=>"dialog", "aria-labelledby"=>"myModalLabel", "aria-hidden"=>"true", :style=>"width:auto"}
+					.modal-body
+						%video{:src=>"#{@header_movie}", :controls=>"controls", :id=>"home_step_five_movie_player"}
+					.modal-footer
+						%button.btn{"data-dismiss"=>"modal", "aria-hidden"=>"true", :style=>"float:left;width:100%"}="Close"
+.home_privacy_statement
+	= render :partial => "static/privacy_statement", :id=>"#privacy_statement"
+.home_disclaimer
+	= render :partial => "static/disclaimer", :id=>"#disclaimer"
+= render :partial=> 'layouts/footer'

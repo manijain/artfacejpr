@@ -1,0 +1,4 @@
+.layout_part_two
+  = form_for :forum_message, :url=>forum_new_question_path do |f|
+    = f.text_field :forum_message_title, :placeholder=>"#{t '.forum_message_title_placeholder'}", :class=>"forum_message_title"
+    = f.submit "#{t '.post_question'}", :class=>"forum_message_submit btn"

@@ -1,0 +1,7 @@
+.message_reply {
+  margin-left: 10px;
+}
+
+.message_reply .message_reply .message_reply .message_reply {
+  margin-left: 0;
+}

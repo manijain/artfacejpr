@@ -1,0 +1,19 @@
+= render :partial => "admin/layouts/application"
+= render :partial => "admin/layouts/header"
+%h3= "PAYMENTS"
+= render :partial => "admin/admin/payments/search"
+= render :partial => "admin/admin/payments/part_three"
+= content_tag :div, :id=>"search_data_4" do
+	= render :partial => "admin/admin/payments/data"
+
+%h3= "ABUSE REPORTS"
+= render :partial => "admin/admin/abuse_reports/search"
+= render :partial => "admin/admin/abuse_reports/part_three"
+= content_tag :div, :id=>"search_data_3" do
+	= render :partial => "admin/admin/abuse_reports/data"
+
+%h3= "PRICING"
+= content_tag :div, :id=>"pricing_div" do
+	= render :partial => "admin/admin/pricing/pricing_data_plan"
+
+= render :partial => "admin/layouts/footer"

@@ -1,0 +1,13 @@
+= javascript_include_tag "js/jquery-ui-1.9.2.datepicker.js"
+.span10.span10
+  .span10{:style=>"margin-left:0"}
+    %h2.pull-left="BUY: YOUR WISHLISTS"
+  %ul.pull-left.unstyled
+    %li.pull-left{:style=>"width:30%"}="If you cannot find a desired painting on Artface.com just create a wishlist be informed as one of the first when matching offer becomes available. You can "
+    %li.pull-left{:style=>"width:30%;margin-left:20px"}="create a list based on a specific artist, a period, a specific size or just everything together. Get a notification by email if you like."
+  %span{:style=>"font-size:15px;font-weight:bold;position:relative;left:10px;top:10px;"}="WISHLISTS BY USER ##{@user.id} (#{@user.user_first_name} #{@user.user_last_name})  "
+  %a.btn.pull-left{:style=>"float:right;margin-top:10px;", :href=>"/offer/new"}="BACK TO USER OVER"
+  .pull-left
+    %ul.unstyled.pull-left#wishlists_container{:style=>"width:100%"}
+      = render :partial => "admin/offer/user_wishlists/saved_wishlists"
+  %button.btn#add_new_wishlist{:style=>"float:right;", "data-user-id"=>"#{params[:id]}"}="ADD NEW WISH"

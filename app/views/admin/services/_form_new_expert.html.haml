@@ -1,0 +1,70 @@
+#wrapper.wrapper_admin
+  #head_service.head_admin_service{:style=>"margin-bottom:10px;"}
+    %h3 ADD NEW ART EXPERT
+    = link_to "CANCEL", "/admin/services", :class=>"btn", :style=>"float:right; margin-top:-50px;"
+  
+  = form_for @service_partner, :url=>{ :action=>"create_service_partner"}, :html=>{:id=>"form1"} do |f|
+    #head1_service.head1_admin_service
+      .details_admin_service_partner
+        %h6 FULL NAME
+        = f.select :salutation, options_for_select(['Mr.', 'Ms.']), {}, {:class=>"head1_admin_service_select1"}
+        = f.text_field :first_name, {:placeholder=>"FIRST NAME*", :class=>"head1_admin_service_input1"}
+        %img#error_partner_first_name{"data-original-title"=>"Please enter first name", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        = f.text_field :last_name, {:placeholder=>"LAST NAME*", :class=>"head1_admin_service_input1"}
+        %img#error_partner_last_name{"data-original-title"=>"Please enter last name", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        %h6 COMPANY
+        = f.text_field :company_name, {:placeholder=>"COMPANY NAME*", :class=>"head1_admin_service_input2"}
+        %img#error_partner_company_name{"data-original-title"=>"Please enter company name", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        %h6 ADDRESS
+        = f.text_field :street, {:placeholder=>"STREET*", :class=>"head1_admin_service_input2"}
+        %img#error_partner_street{"data-original-title"=>"Please enter street", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        = f.text_field :zip_code, {:placeholder=>"ZIP CODE*", :class=>"head1_admin_service_input4"}
+        %img#error_partner_zip_code{"data-original-title"=>"Please enter zip code", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        = f.text_field :city, {:placeholder=>"CITY*", :class=>"head1_admin_service_input5"}
+        %img#error_partner_city{"data-original-title"=>"Please enter city", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        %h6 COUNTRY
+        = f.select :country, options_for_select(Country.order(:country_name).pluck(:country_name)), {}, {:class=>"head1_admin_service_select2"}
+        %br
+        %h6 PHONE & FAX
+        = f.text_field :telephone_number, {:placeholder=>"TELEPHONE NUMBER*", :class=>"head1_admin_service_input6"}
+        %img#error_partner_telephone_number{"data-original-title"=>"Please enter telephone number", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        = f.text_field :fax_number, {:placeholder=>"FAX NUMBER*", :class=>"head1_admin_service_input7"}
+        %img#error_partner_fax_number{"data-original-title"=>"Please enter fax number", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        %h6 WEBSITE
+        = f.text_field :website, {:placeholder=>"COMAPNIES WEBSITE URL (EG. WWW.COMAPNY.COM)", :class=>"head1_admin_service_input2"}
+        %br
+        %h6 EMAIL (SERVES AS LOGIN)
+        = f.text_field :email, {:placeholder=>"CONTACT PERSONS EMAIL ADDRESS*", :class=>"head1_admin_service_input9"}
+        %img#error_partner_email{"data-original-title"=>"Please enter email id", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        %h6 PASSWORD
+        = f.password_field :password, {:placeholder=>"PASSWORD*", :class=>"head1_admin_service_input2"}
+        %img#error_partner_password{"data-original-title"=>"Please enter password", :src=>"/images/exclamation_mark.png", :style=>"display:none;"}
+        %br
+        %h6 EMPLOYEES
+        = f.text_field :number_of_employees, {:placeholder=>"NUMBER OF EMPLOYEES", :class=>"head1_admin_service_input2"}
+        %br
+        %h6 FOUNDED
+        = f.text_field :founded, {:placeholder=>"YEAR WHEN COMPANY WAS FOUNDED (YYYY)", :class=>"head1_admin_service_input2"}
+        %br
+        %h6 SPECIALITIES
+        = f.text_field :specialities, {:placeholder=>"DEFINE SPECIALTIES OF THE OFFICE/EXPERT", :class=>"head1_admin_service_input2"}
+        %br
+        %h6 DESCRIPTION (1000 CHARACTERS)
+        = f.text_area :description, {:placeholder=>"DESCRIBE THE BENEFITS", :class=>"head1_admin_service_textarea1"}
+        = f.hidden_field :partner_type, :value=>"4"
+        = f.hidden_field :confirmation_sent_at, :value=>Date.today
+    #head2_service.head2_admin_service
+      = link_to "CANCEL", "/admin/services", :class=>"btn"
+      //= f.submit "ADD", :class=>"btn", :style=>"float:right;", :onclick=>"check_partner_validations()"
+      = link_to "ADD" , "#", :class=>"btn", :style=>"float:right;", :onclick=>"check_partner_validations()"
+      = link_to "SEND INVITATION", "#", :class=>"btn", :style=>"float:right;margin-right:10px;", :id=>"send_invitation"
+#ajax-loader-big_for_services_data{:style=>"left: 400px;position: absolute;top: 500px;z-index: 100;display:none;"}
+  %img{:src=>"/images/ajax-loader.gif"}
+#overlay_div_data{:style=>"background-color: white;display: block;height: 500%;left: 0;opacity: 0.4;position: absolute;top: 110px;width: 100%;z-index: 2;display:none;"}
+      

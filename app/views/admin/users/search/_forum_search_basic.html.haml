@@ -1,0 +1,7 @@
+= form_for :forum_message, :url=>"/admin/users/#{params[:id]}/forum_list_search", :remote=>true, :html=>{:style=>"margin:0;padding:0;margin-top:30px", :class=>"pull-left", :id=>"forum_basic_search"} do |f|
+  = f.hidden_field "search_basic", :name=>"search_basic", :value=>"true"
+  = f.hidden_field "sort_by", :name=>"sort_by"
+  = f.hidden_field "per_page", :name=>"per_page"
+  = f.text_field :search_string, :placeholder=>"Enter your search term", :class=>"forum_message_title pull-left", :style=>"width:450px;margin-right:10px;"
+  = image_tag "/images/plus.png", :class=>"search_toggle pull-left pointer", :style=>"margin-right:10px;"
+  = f.submit "SEARCH", :class=>"btn pull-left"

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  concern: MyString
+  message_title: MyString
+  message_text: MyText
+  user_id: 1
+  is_read: false
+  is_parent: false
+  child_of: 1
+
+two:
+  concern: MyString
+  message_title: MyString
+  message_text: MyText
+  user_id: 1
+  is_read: false
+  is_parent: false
+  child_of: 1

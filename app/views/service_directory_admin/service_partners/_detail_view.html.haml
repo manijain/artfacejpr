@@ -1,0 +1,48 @@
+#wrapper.wrapper_service_directory_admin
+  #section1.service_directory_contact_view_head
+    -if "#{@service_partner.partner_type}" == "1"
+      %h3 FIND AN ART INSURANCE COMPANY
+    -elsif "#{@service_partner.partner_type}" == "2"
+      %h3 FIND AN ART SHIPPING COMPANY
+    -elsif "#{@service_partner.partner_type}" == "3"
+      %h3 FIND AN ART LAWYER
+    -elsif "#{@service_partner.partner_type}" == "4"
+      %h3 FIND AN ART EXPERT
+  #contact_view_details.contact_view_details
+    =link_to "GO BACK", "/service_directory/overview", :class=>"btn", :style=>"float:right;"
+    -if "#{@service_partner.partner_type}" == "1"
+      %h5 INSURANCE OFFICE
+    -elsif "#{@service_partner.partner_type}" == "2"
+      %h5 SHIPPING OFFICE
+    -elsif "#{@service_partner.partner_type}" == "3"
+      %h5 LAWYERS OFFICE
+    -elsif "#{@service_partner.partner_type}" == "4"
+      %h5 EXPERT OFFICE
+    %p="#{@service_partner.company_name}"
+    %p="#{@service_partner.salutation} " "#{@service_partner.first_name} " "#{@service_partner.last_name}"
+    %p="#{@service_partner.street}"
+    %p="#{@service_partner.zip_code} " "#{@service_partner.city}"
+    %p="#{@service_partner.country}"
+    %h5 PHONE
+    %p="#{@service_partner.telephone_number}"
+    %h5 FAX
+    %p="#{@service_partner.fax_number}"
+    %h5 WEBSITE
+    %p="#{@service_partner.website}"
+    %h5 EMAIL
+    %p="#{@service_partner.email}"
+    %h5 FOUNDED
+    %p="#{@service_partner.founded}"
+    %h5 NUMBER OF EMPLOYEES
+    %p="#{@service_partner.number_of_employees}"
+    %h5 SPECIALITIES
+    -if "#{@service_partner.specialities}" == ''
+      %p='...'
+    -else
+      %p="#{@service_partner.specialities}"
+    %h5 DESCRIPTION
+    -if "#{@service_partner.description}" == ''
+      %p='...'
+    -else
+      %p="#{@service_partner.description}"
+    =link_to "GO BACK", "/service_directory/overview", :class=>"btn", :style=>"float:right;"

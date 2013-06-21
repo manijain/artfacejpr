@@ -1,0 +1,5 @@
+- message_admin = MessageAdmin.find_by_id(@message_id.to_i)
+
+alert("Reply send successfully to #{@user.email}")
+$("#container_close_#{@message_id}").trigger("click")
+$("#container_close_#{@message_id}").parent().parent().find("#report_abuse_reply_container").html('<ul class="unstyled pull-left" style="width:32%;"><li class="pull-left" style="width:100%;"><span class="pull-left" style="width:100%;"><b>#{message_admin.reply_mailed_at.to_date}</b><b>|</b><b>#{message_admin.reply_mailed_at.strftime("%H.%M")}</b><b>|</b><b>#{message_admin.reply_title}</b></span></li><li class="pull-left" style="width:100%;"><span class="pull-left" style="width:100%;">#{message_admin.reply_message}</span></li></ul>')

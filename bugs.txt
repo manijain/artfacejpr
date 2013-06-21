@@ -1,0 +1,20 @@
+Bugs Still there, Please resolve and confirm:
+
+M02 Bug23 -  When you search a term, the highlighted message part should be shown by unfolding the messages.
+                 -   This message ""There is 1 new message for your offers. Click for details."" does not appear for related case
+                 -    Relevant Drop-downs of sorting should disappear for one message and no message cases.
+
+M02 Bug34 - Wrong button shown in thumbnail when no hires image has been uploaded
+                 - The Jquery upload indicator is still fake one and do not replicate what is needed
+                 - There is no crossing function for thumbnail after a hi-res is uploaded
+                 - The delete button as needed was not activated
+
+M02 Bug44 -  Total issues
+
+M03 Bug 50 -  The sorting option should not appear if there is nothing in forum
+                  -  I tried posting a question and got the error "No page exists at the url" within Artface App
+                  -  Core Issue also not resolved
+
+M03 Bug 58 -  Adding a wish throws a error. Fix it
+
+M03 Bug 60 - The messages section do not work and there are issues in messages else where as well

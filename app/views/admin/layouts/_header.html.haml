@@ -1,0 +1,44 @@
+= javascript_include_tag "admin/admin_offer"
+= javascript_include_tag "admin/admin_favourite"
+= javascript_include_tag "admin/admin_message"
+-#= javascript_include_tag "admin/admin_forum"
+= javascript_include_tag "admin/admin_forum_modified"
+= javascript_include_tag "admin/admin_wishlist"
+-#= javascript_include_tag "admin/admin_offers_offer"
+-#= javascript_include_tag "admin/admin_offers_artist"
+= javascript_include_tag "admin/search_messages"
+= javascript_include_tag "admin/admin_dashboard"
+= javascript_include_tag "admin/admin_search_user"
+= javascript_include_tag "admin/admin_offer_show"
+= javascript_include_tag "admin/admin_users_offer_show"
+= javascript_include_tag "admin/admin_service"
+= javascript_include_tag "admin/admin_edit_service_partner"
+= javascript_include_tag "admin/admin_report"
+= javascript_include_tag "admin/admin_admin"
+= javascript_include_tag "admin/admin_forum_index"
+= javascript_include_tag "admin/admin_offers_new"
+
+#head.head_admin
+  .logo_admin
+    = link_to image_tag("artface.png"), admin_dashboard_path, :class => "artface"
+  #menu.menu_admin
+    %ul
+      %li.active 
+        =link_to "DASHBOARD" , admin_dashboard_path
+      %li 
+        = link_to "USERS", admin_users_path
+      %li 
+        = link_to "OFFERS", admin_offers_path
+      %li 
+        = link_to "FORUM", admin_forum_path
+      %li 
+        = link_to "SERVICE", admin_services_path
+      %li 
+        = link_to "REPORTS", admin_reports_path
+      %li 
+        = link_to "ADMIN", admin_admin_path
+      %li
+        -if admin_user_signed_in?  
+          = link_to "LOGOUT", "/backend/logout"
+            
+         

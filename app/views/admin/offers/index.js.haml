@@ -1,0 +1,10 @@
+-if (params[:choice]=="3")
+	$(".span10demanded_painters_first_div").html('#{escape_javascript(render :partial => "admin/offers/demanded-painters/demanded_painters_data")} ');
+-elsif (params[:choice]=="2")
+	-#alert("2")
+	$(".span10artist_names_first_div").html('#{escape_javascript(render :partial => "admin/offers/manage-artist/search_data")} ');
+-elsif (params[:choice]=="6")
+	-#alert("6")
+	$(".span10interesting_offers_first_div").html('#{escape_javascript(render :partial => "admin/offers/buy-art/search_data")} ');
+	
+

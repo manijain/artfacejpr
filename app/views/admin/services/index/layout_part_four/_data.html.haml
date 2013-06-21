@@ -1,0 +1,64 @@
+= content_tag :div, :class=>"data pull-left", :style=>"width:100%;border-top:1px solid black;border-bottom:1px solid black;margin-top:20px;position:relative;" do
+  -if @service_partner_type_2.total_pages > 1
+    %span#text_page{:style=>"margin: 10px 0 !important;position: absolute;right: 135px;top: -65px;"}="Page: "
+  = will_paginate @service_partner_type_2, :link_separator=>"#{@service_partner_type_2.current_page}/#{@service_partner_type_2.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"float:right;margin:0;color:black"
+  -#:javascript
+  /
+    $(".pagination a").each(function() {
+    $(this).attr("data-remote","true");
+    if ($(this).parent().parent().parent().prop('id') == "search_data_4") {
+    $(this).prop('href',$(this).prop('href')+"&partner_type=4")
+    }
+    if ($(this).parent().parent().parent().prop('id') == "search_data_3") {
+    $(this).prop('href',$(this).prop('href')+"&partner_type=3")
+    }
+    if ($(this).parent().parent().parent().prop('id') == "search_data_2") {
+    $(this).prop('href',$(this).prop('href')+"&partner_type=2")
+    }
+    if ($(this).parent().parent().parent().prop('id') == "search_data_1") {
+    $(this).prop('href',$(this).prop('href')+"&partner_type=1")
+    }
+    })
+    $(document).on('click','.pagination a', function() {
+    if ($(this).parent().parent().parent().prop('id') == "search_data_4") {
+    $(this).prop("href", $(this).prop("href")+"&partner_type=4&per_page="+$(".layout_part_two #sort_by").val())
+    }
+    if ($(this).parent().parent().parent().prop('id') == "search_data_3") {
+    $(this).prop("href", $(this).prop("href")+"&partner_type=3&per_page="+$("#search_data_3 #sort_by").val())
+    }
+    if ($(this).parent().parent().parent().prop('id') == "search_data_2") {
+    $(this).prop("href", $(this).prop("href")+"&partner_type=2&per_page="+$("#search_data_2 #sort_by").val())
+    }
+    if ($(this).parent().parent().parent().prop('id') == "search_data_1") {
+    $(this).prop("href", $(this).prop("href")+"&partner_type=1&per_page="+$("#search_data_1 #sort_by").val())
+    }
+    })
+  = content_tag :ul, :class=>"pull-left unstyled main_ul", :style=>"width:100%;" do 
+    - @service_partner_type_2.each do |service_partner|
+      = content_tag :li, :class=>"pull-left main_li", :style=>"background-color: #F1F1F1;margin-bottom: 10px;margin-left: 6px;padding: 8px;width: 750px;" do
+        = content_tag :span, :class=>"delete_img_onmouseover", :id=>"#{service_partner.id}", :partner_type=> "#{service_partner.partner_type}", :style=>"display:none" do
+          %a.icon-remove-sign.pull-right.pointer.delete_img_onmouseover
+        = content_tag :span, :class=>"edit_img", :style=>"display:none" do
+          %a.icon-pencil.pull-right.pointer.edit_img{:href=>"/admin/services/edit_shipping_company/#{service_partner.id}"}
+       
+        = content_tag :ul, :class=>"unstyled pull-left", :style=>"width:32%;" do
+          = content_tag :li, :class=>"pull-left", :style=>"width:100%;" do
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;font-weight:bold" do
+              = service_partner.company_name
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+              = service_partner.street
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+              = "#{service_partner.zip_code}, #{service_partner.city}, #{service_partner.country}"
+        = content_tag :ul, :class=>"unstyled pull-left", :style=>"width:32%;" do
+          = content_tag :li, :class=>"pull-left", :style=>"width:100%;" do
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;font-weight:bold" do
+              = "phone: #{service_partner.telephone_number}"
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+              = "fax: #{service_partner.fax_number}"
+            = content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+              = "contact: #{service_partner.email}"
+        = content_tag :p, :class=>"pull-left", :style=>"width:32%;margin-left:20px;" do
+          = "#{service_partner.description.first(100)}..."
+  -if @service_partner_type_2.total_pages > 1
+    %span#text_page{:style=>"margin: 10px 0 !important;position:absolute;right:135px;top:595px;"}="Page: "        
+  = will_paginate @service_partner_type_2, :link_separator=>"#{@service_partner_type_2.current_page}/#{@service_partner_type_2.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"float:right;margin-top:670px!important;color:black"

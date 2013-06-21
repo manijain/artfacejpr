@@ -1,0 +1,28 @@
+%input.hidden#painters_count{:type=>"text", :value=>"#{@demanded_painters.count}" , :style=>"display:none;"}
+
+%span.painters_text_page{:style=>"margin: 10px -30px !important;font-size: 14px;position: absolute;right: 125px;top: -45px;"}="Page: "
+= will_paginate @demanded_painters , :remote=>true, :link_separator=>"#{@demanded_painters.current_page}/#{@demanded_painters.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"margin:13px -32px !important;"
+- if @demanded_painters.count == 0
+  %p="No Results Found"
+- else
+  %ul{:style=>"margin-left:30px;"}
+    - @demanded_painters.each do |artist|
+      %li
+        %a{:href=>"artist/#{artist.id}/edit"}
+                  
+          -# if offer.messages.count != 0
+          -#  %span=offer.messages.count
+          -#=image_tag "https://artfacedev-pro.s3.amazonaws.com/public/images/uploaded/artwork/smalls/artwork_thumbnails/#{offer.artwork.id}/#{offer.artwork.artwork_thumbnail_file_name}", :alt=>"image not found", :alt=>"image not found"
+        %span{:style=>"text-align:center"}
+          %span.span10demanded_painters_span_artist{:style=>"margin:-7px 0px 0px -60px"}=artist.artist_name || "unknown"
+          %span.span10demanded_painters_span_time{:style=>"margin:-3px 0px 0 -62px;font-size: 14px;"}= "Requests = " + artist.artist_requests.to_s
+          - if (artist.approved_status == TRUE)
+            %span.span10demanded_painters_span_status{:style=>"margin:30px 0px 0px 40px"}= "| Acknowledge"
+          -else
+            %span.span10demanded_painters_span_status{:style=>"margin:30px 0px 0px 40px"}= "| Unacknowledge"
+          -# if (humanize_time(offer.offer_end_date.to_i - Time.now.to_i)).blank?
+          -#  %span.span10interesting_offers_span_time="Remaining Time: unknown"
+          -# else
+          -#  %span.span10interesting_offers_span_time="Remaining Time: #{humanize_time(offer.offer_end_date.to_i - Time.now.to_i)}"
+%span.painters_text_page{:style=>"margin: 10px 660px !important;font-size: 14px;position: static;right: 125px;top: 183px;"}="Page: "
+= will_paginate @demanded_painters , :remote=>true, :link_separator=>"#{@demanded_painters.current_page}/#{@demanded_painters.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"margin:-20px 40px 0 0 !important;position:static"

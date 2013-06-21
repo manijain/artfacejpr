@@ -1,0 +1,55 @@
+= render :partial=> 'layouts/header'
+.contact_page
+	%h2=t '.heading'
+	%div
+		%p=t '.text_one'
+		%p=t '.text_two'
+	#ajax_loader
+	.contact_form
+		%table{:style=>"position:relative;"}
+			%tr{:style=>"height:30px;"}
+				%td.contact_page_left_fields
+					%input#contact_data_name{:type=>"text", :placeholder=>"#{t '.input_name_placeholder'}", :tabindex=>"1", :maxlength=>"60"}
+					%img#contact_data_name_error{"data-original-title"=>"Please enter your name", :src=>"images/exclamation_mark.png"}
+				%td{:rowspan=>"4"}
+					%textarea#contact_data_message{:type=>"text", :placeholder=>"#{t '.input_message_placeholder'}", :maxlength=>"1000", :tabindex=>"5", :style=>"height:120px;"}
+					%img#contact_data_message_error{"data-original-title"=>"Please enter your message", :src=>"images/exclamation_mark.png", :style=>"display: none;left: 97%;position: absolute;top: 104px;"}
+			%tr{:style=>"height:30px;"}
+				%td.contact_page_left_fields
+					%select#contact_data_concern{:style=>"width:404px;height:32px;margin:0", :tabindex=>"2"}
+						%option="YOUR CONCERN"
+						- @concern.each do |concern|
+							%option=concern.value
+					%img#contact_data_concern_error{"data-original-title"=>"Please select a concern", :src=>"images/exclamation_mark.png"}	
+			%tr{:style=>"height:30px;"}
+				%td.contact_page_left_fields
+					%input#contact_data_email_address{:type=>"text", :placeholder=>"YOUR EMAIL ADDRESS*", :tabindex=>"3", :maxlength=>"60"}
+					%img#contact_data_email_address_error{"data-original-title"=>"Please enter an email address", :src=>"images/exclamation_mark.png"}
+			%tr{:style=>"height:30px;"} 
+				%td.contact_page_left_fields
+					%input#contact_data_phone_number{:type=>"text", :placeholder=>"YOUR TELEPHONE NUMBER", :tabindex=>"4", :maxlength=>"30"}
+					%img#contact_data_phone_number_error{"data-original-title"=>"Invalid telephone number input", :src=>"images/exclamation_mark.png"}
+			%tr{:style=>"height:30px;"}
+				%td{:style=>"width:390px"}
+				%td{:style=>"position:relative"}
+					%img.contact_page_captcha{:src=>@captcha_image_path, :style=>"display:block;position:static;left:0;top:0;"}
+					%input#captcha_text{:type=>"text", :placeholder=>"Retype Captcha", :tabindex=>"6"}
+					%button#contact_form_submit.btn{:tabindex=>"7"}="SUBMIT"
+		%br
+	.contact_page_address
+		%div
+			= link_to image_tag("artface.png"), root_path, :class => "artface", :style=>"float:left;margin:10px;"
+		%div
+			%p
+				="ARTFACE.COM LIMITED<br".html_safe
+				="Apollo House<br>".html_safe
+				="359 Kennington Lane<br>".html_safe
+				="London<br>".html_safe
+				="SE11 5QY<br>".html_safe
+				="Great Britain<br><br>".html_safe
+				="T: +44(0)20 7091 7950<br>".html_safe
+				="F: +44(0)20 7091 7950<br><br>".html_safe
+				="E: info@artface.com<br>".html_safe
+	#contact_flash_message
+		%span#flash_notice=flash[:notice]
+=render :partial=> 'layouts/footer'

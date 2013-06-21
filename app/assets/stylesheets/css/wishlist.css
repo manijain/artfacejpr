@@ -1,0 +1,16 @@
+.wishlist_new {
+	float: left;
+}
+.wishlist_new div#search_filters {
+	float: left;
+	width:600px;
+}
+.wishlist_new div#search_filters ul {
+	list-style:none;
+	margin-left:0;
+	width:100%;
+	float:left;
+}
+.wishlist_new div#search_filters ul li {
+	float: left;
+}

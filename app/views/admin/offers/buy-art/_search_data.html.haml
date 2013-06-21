@@ -1,0 +1,101 @@
+%input.hidden#offer_count{:type=>"text", :value=>"#{@buy_interesting_offers.count}" , :style=>"display:none;"}
+%script{:type=>"text/javascript"}
+  $("#search_data_offers_count").html($("#offer_count").val())
+
+- if @buy_interesting_offers.count == 0
+  %p="No Results Found"
+- else 
+  %div{:style=>"float:left;display:block"}
+    -#%span#text_page{:style=>"margin: 10px 0 !important;position: absolute;right: 125px;top: -45px;"}="Page: "
+  .span10interesting_offers_first_div.search_data_outer_div
+    %ul
+      %span.offer_text_page{:style=>"margin: 11px -74px !important;font-size: 12px;position: absolute;right: 125px;top: -45px;"}="Page: "
+      = will_paginate @buy_interesting_offers, :link_separator=>"#{@buy_interesting_offers.current_page}/#{@buy_interesting_offers.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"float:right;margin: 32px -82px !important;top:-65px !important;"
+      - @buy_interesting_offers.each do |offer|
+        %li.small_preview
+          .image_area
+            %a{:href=>"admin/offer/show/#{offer[:id]}"}
+              -# if offer.messages.count != 0
+                %span{:style=>"background-color: #727272;border: 2px solid white;color: white;left: 2px;position: absolute;text-align: center;top: 20%;width: 16px;z-index: 30;"}=offer.messages.count
+              =image_tag "https://artfacedev-pro.s3.amazonaws.com/public/images/uploaded/artwork/smalls/artwork_thumbnails/#{offer.artwork.id}/#{offer.artwork.artwork_thumbnail_file_name}", :alt=>"image not found" unless offer.artwork.nil?
+          -unless offer.offer_end_date.nil?
+            - if offer.offer_end_date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d") 
+              %i.icon-certificate.pointer{:style=>"display:block;position:absolute;z-index:1;top:53px;right:159px"}
+              //= "#{(offer.offer_end_date - Time.now).to_i}" 
+          %span{:style=>"text-align:center"}
+            %i.icon-remove-sign.pointer{:style=>"display:none;position:absolute;z-index:1;top:5px;right:5px", :id=>"remove_offer_#{offer.id}"}
+            ="Not Found" if offer.artwork.nil?
+            %span.artist_name=offer.artwork.artist.artist_name unless offer.nil? && offer.artwork.nil? && offer.artwork.artist.nil? 
+            %span{:style=>"font-weight: normal;left: 40px;margin-left: 10px;position: relative;top: 15px;width: auto;"}= offer.offer_status==false ? "(inactive)" : ""  
+            %span.remaining_time
+              - if offer.offer_end_date.nil?
+                = "Remaining Time - NA"
+              - elsif offer.offer_end_date.strftime("%Y-%m-%d") > Date.today.strftime("%Y-%m-%d")
+                = "Remaining Time - #{humanize_time (offer.offer_end_date - Time.now)}"
+              -elsif offer.offer_end_date.strftime("%Y-%m-%d") == Date.today.strftime("%Y-%m-%d")
+                = "Remaining Time - #{((offer.offer_end_date - Time.now)/1.hour).round}"
+              - else
+                = "Offer ended"
+      %span.offer_text_page{:style=>"margin: 0 702px !important;position:static;right:125px;top:-45px;margin-bottom:10px;"}="Page: "
+      = will_paginate @buy_interesting_offers, :link_separator=>"#{@buy_interesting_offers.current_page}/#{@buy_interesting_offers.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false, :style=>"float: right;position:static;margin:-20px 1px -5px !important;"
+      %input.btn#delete_offer{:type=>"button", :value=>"Delete Offer", :style=>"clear:both;"}
+      %input.btn#cancel_delete_offer{:type=>"button", :value=>"Cancel", :style=>"display:none;"}
+    %div{:style=>"clear: both;color: black;float: right;width: 500px;"}
+
+-#-unless @buy_interesting_offers.count == 0
+  -#.span5{:style=>"margin-top:10px"}
+    -#
+      -#%input#offers_public_page_input_button{:type=>"button", :value=>"go", :style=>"float:right;height:30px;width:40px;margin-right:20px;"}
+      -#%input#offers_public_page_input{:type=>"text", :style=>"width:30px;float:right;margin-right:20px;margin-bottom:0;"}
+      -#%span#text_for_page_number{:style=>"float:right;margin-right:20px;line-height:30px;"}="Enter the page number"
+    
+      %script{:type=>"text/javascript"}
+        $(function(){
+        setTimeout('$("#basic_search_layout_select").children().first().attr("selected","true").change()',150);
+        
+        $("#basic_search_layout_select").change(function() {
+        if ($("#basic_search_layout_select option:selected").index() == 0)
+        {
+        $(".search_data_outer_div ul li .image_area a img").each(function() {
+        var old_img_src = $(this).prop('src')
+        var new_img_src = old_img_src.replace("smalls","smalls").replace("artwork_hires","artwork_thumbnails")
+        new_img_src = new_img_src.replace("mediums","smalls")
+        new_img_src = new_img_src.replace("larges","smalls")
+        $(this).prop('src', new_img_src)
+        })
+
+        $(".search_data_outer_div ul li").addClass("small_preview").removeClass("medium_preview").removeClass("large_preview")
+        }
+        if ($("#basic_search_layout_select option:selected").index() == 1)
+        {
+        $(".search_data_outer_div ul li .image_area a img").each(function() {
+        var old_img_src = $(this).prop('src')
+        var new_img_src = old_img_src.replace("mediums","mediums").replace("artwork_hires","artwork_thumbnails")
+        new_img_src = new_img_src.replace("smalls","mediums")
+        new_img_src = new_img_src.replace("larges","mediums")        
+        $(this).prop('src', new_img_src)
+        })
+        $(".search_data_outer_div ul li").removeClass("small_preview").addClass("medium_preview").removeClass("large_preview")
+        }
+        if ($("#basic_search_layout_select option:selected").index() == 2)
+        {
+        $(".search_data_outer_div ul li .image_area a img").each(function() {
+        var old_img_src = $(this).prop('src')
+        var new_img_src = old_img_src.replace("larges","larges").replace("artwork_hires","artwork_thumbnails")
+        new_img_src = new_img_src.replace("mediums","larges")
+        new_img_src = new_img_src.replace("smalls","larges")
+        $(this).prop('src', new_img_src)
+        })
+        $(".search_data_outer_div ul li").removeClass("small_preview").removeClass("medium_preview").addClass("large_preview")
+        }
+        })
+        })
+
+%script{:type=>"text/javascript"}
+  if ($("#offer_count").val() == "0") {
+  $(".nav_sort_bar").hide()
+  } else {
+  $(".nav_sort_bar").show()
+  }
+
+

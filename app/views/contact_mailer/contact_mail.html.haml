@@ -1,0 +1,20 @@
+= "Hello admin"
+%br
+%br
+= "Someone has filled the contact form."
+%br
+%br
+= "From: "
+= @contact.name
+= "&lt;#{@contact.email_address}&gt;".html_safe
+%br
+%br
+= "Phone Number: #{@contact.phone_number}"
+%br
+%br
+= "Concern: #{@contact.concern}"
+%br
+%br
+= "Message: "
+%br
+= @contact.message

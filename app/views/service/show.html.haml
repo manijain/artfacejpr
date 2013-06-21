@@ -1,0 +1,82 @@
+= render :partial => "layouts/header"
+= content_tag :div, :class=>"pull-left", :style=>"width:820px;margin-left:2%;" do
+	= content_tag :div, :class=> "pull-left", :style=>"width:100%;" do
+		= content_tag :h3, :class=>"", :style=>"" do
+			="FIND AN ART LAWYER"
+		= content_tag :ul, :class=>"pull-left unstyled", :style=>"width:100%" do
+			= content_tag :li, :class=>"pull-left", :style=>"width:31%;padding:5px;" do
+				= "When buying a pience of art we strongly recommend to settle the deal with the help of a lawyer. Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum "
+			= content_tag :li, :class=>"pull-left", :style=>"width:31%;padding:5px;" do
+				= "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum "
+			= content_tag :li, :class=>"pull-left", :style=>"width:31%;padding:5px;" do
+				=  "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum "
+
+
+		= content_tag :ul, :class=>"unstyled pull-left", :style=>"width:100%;position:relative;" do
+			= content_tag :div, :style=>"position:absolute;right:0px;top:20px;" do
+				= link_to "GO BACK", dashboard_service_path , :class=>"btn"
+			= content_tag :div, :style=>"position:absolute;right:0px;bottom:20px;" do
+				= link_to "GO BACK", dashboard_service_path , :class=>"btn"
+			= content_tag :li, :class=>"pull-left", :style=>"width:auto;" do
+				= content_tag :span, :class=>"pull-left", :style=>"margin-right:10px;width:250px;text-align:right;font-weight:bold;" do 
+					- if @service_partner.partner_type == "1"
+						="ART INSURANCE COMPANY'S OFFICE"
+					- if @service_partner.partner_type == "2"
+						="ART SHIPPING COMPANY'S OFFICE"
+					- if @service_partner.partner_type == "3"
+						="LAWYERS OFFICE"
+					- if @service_partner.partner_type == "4"
+						="ART EXPERT'S OFFICE"
+				= content_tag :span, :class=>"pull-left", :style=>"width:400px;text-align:left;" do
+					= content_tag :strong, :class=>"pull-left", :style=>"width:100%;" do
+						= @service_partner.company_name
+					= content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+						="#{@service_partner.salutation} #{@service_partner.first_name} #{@service_partner.last_name}"
+					= content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+						="#{@service_partner.street}"
+					= content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+						="#{@service_partner.city}"
+					= content_tag :span, :class=>"pull-left", :style=>"width:100%;" do
+						="#{@service_partner.country}"
+			= content_tag :li, :class=>"pull-left", :style=>"width:auto;margin-top:20px;" do
+				= content_tag :span, :class=>"pull-left", :style=>"margin-right:10px;width:250px;text-align:right;font-weight:bold;" do 
+					="PHONE"
+				= content_tag :span, :class=>"pull-left", :style=>"width:400px;text-align:left;" do
+					="#{@service_partner.telephone_number}"
+			= content_tag :li, :class=>"pull-left", :style=>"width:auto;" do
+				= content_tag :span, :class=>"pull-left", :style=>"margin-right:10px;width:250px;text-align:right;font-weight:bold;" do 
+					="FAX"
+				= content_tag :span, :class=>"pull-left", :style=>"width:400px;text-align:left;" do
+					="#{@service_partner.fax_number}"
+			= content_tag :li, :class=>"pull-left", :style=>"width:auto;margin-top:20px;" do
+				= content_tag :span, :class=>"pull-left", :style=>"margin-right:10px;width:250px;text-align:right;font-weight:bold;" do 
+					="WEBSITE"
+				= content_tag :span, :class=>"pull-left", :style=>"width:400px;text-align:left;" do
+					="#{@service_partner.website}"
+			= content_tag :li, :class=>"pull-left", :style=>"width:auto;" do
+				= content_tag :span, :class=>"pull-left", :style=>"margin-right:10px;width:250px;text-align:right;font-weight:bold;" do 
+					="EMAIL"
+				= content_tag :span, :class=>"pull-left", :style=>"width:400px;text-align:left;" do
+					="#{@service_partner.email}"
+			- if @service_partner.partner_type == "3"
+				= content_tag :li, :class=>"pull-left", :style=>"width:auto;margin-top:20px;" do
+					= content_tag :span, :class=>"pull-left", :style=>"margin-right:10px;width:250px;text-align:right;font-weight:bold;" do 
+						="FOUNDED"
+					= content_tag :span, :class=>"pull-left", :style=>"width:400px;text-align:left;" do
+						="#{@service_partner.founded}"
+				= content_tag :li, :class=>"pull-left", :style=>"width:auto;" do
+					= content_tag :span, :class=>"pull-left", :style=>"margin-right:10px;width:250px;text-align:right;font-weight:bold;" do 
+						="NUMBER OF EMPLOYEES"
+					= content_tag :span, :class=>"pull-left", :style=>"width:400px;text-align:left;" do
+						="#{@service_partner.number_of_employees}"
+			= content_tag :li, :class=>"pull-left", :style=>"width:auto;margin-top:20px;" do
+				= content_tag :span, :class=>"pull-left", :style=>"margin-right:10px;width:250px;text-align:right;font-weight:bold;" do 
+					="SPECIALITIES"
+				= content_tag :span, :class=>"pull-left", :style=>"width:400px;text-align:left;" do
+					="#{@service_partner.specialities}"
+			= content_tag :li, :class=>"pull-left", :style=>"width:auto;" do
+				= content_tag :span, :class=>"pull-left", :style=>"margin-right:10px;width:250px;text-align:right;font-weight:bold;" do 
+					="DESCRIPTION"
+				= content_tag :span, :class=>"pull-left", :style=>"width:400px;text-align:left;" do
+					="#{@service_partner.description}"
+= render :partial => "layouts/footer"

@@ -1,0 +1,18 @@
+= content_tag :div, :class=>"pull-left nav_sort_2", :style=>"width:800px;margin-top:15px;padding-left:10px;padding-right:10px;" do 
+  = content_tag :label, :class=>"pull-left", :style=>"width:250px;margin:0" do
+    =content_tag :span, :class=>"pull-left", :style=>"line-height:30px;" do
+      ="Sort list by"
+    -#= select_tag(:sort_by, options_for_select(["first name","last name","amount due","membership time","payment type"]), :id=>"admin_sort_by_attr", :class=>"pull-left", :style=>"width:80px") 
+    %select#admin_payment_sort_by_attr{:class=>"pull-left", :style=>"width:80px;"}
+      %option{:value=>1}="first name"
+      %option{:value=>2}="last name"
+      %option{:value=>3}="amount due"
+      %option{:value=>4}="membership time"
+      %option{:value=>5}="payment type"  
+  = content_tag :label, :class=>"pull-left", :style=>"width:250px;margin:0" do
+    =content_tag :span, :class=>"pull-left", :style=>"line-height:30px;" do
+      ="Address Per Page"  
+    = select_tag(:per_page, options_for_select([6,12,18,24]), :id=>"admin_payment_per_page_item", :class=>"pull-left", :style=>"width:80px")
+
+
+

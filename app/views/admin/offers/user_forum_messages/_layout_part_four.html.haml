@@ -1,0 +1,17 @@
+- collection_for_select_one = ["date","artist","author"]
+- collection_for_select_two = [6,12,18,24]
+
+.forum_area.pull-left.width_100
+  .nav-sort.pull-left.width_100{:style=>"padding-top:20px;border-top:1px solid black;border-bottom:1px solid black"}
+    %label.pull-left{:for=>"sort_by", :style=>"margin-left:10px;margin-right:10px;"}
+      %span.pull-left{:style=>"line-height:30px;margin-right:10px"}="Sort list by"
+      = select_tag(:sort_by,options_for_select(collection_for_select_one), :class=>"sort_by", :style=>"float:left;width:110px;")
+    %label{:for=>"per_page", :class=>"pull-left", :style=>"margin-left:10px;"}
+      %span.pull-left{:style=>"line-height:30px;margin-right:10px"}
+        ="Posts per page"
+      = select_tag(:per_page,options_for_select(collection_for_select_two), :class=>"per_page", :style=>"float:left;width:80px;")
+  #forum_ajax_loader_big{:style=>"left: 400px;position: absolute;top: 100%;z-index: 100;display:none;height:50px;width:50px;"}
+    %img{:style=>"width:100%;height:100%;" ,:src=>"/images/ajax-loader-big.gif"}
+  #overlay_div_for_forum{:style => "background-color: white; height: 100%; left: 0px; opacity: 0.4; position: absolute; top: 80%; width: 100%; z-index: 2; display: none;"}
+  #forum_data.width_100.pull-left
+    = render :partial => "admin/offer/user_forum_messages/data"

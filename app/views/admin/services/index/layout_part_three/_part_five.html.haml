@@ -1,0 +1,6 @@
+=link_to "ADD LAWYER", "/admin/services/new_lawyer", :class=> "btn"
+/ %a=button_to "ADD LAWYER", "/admin/services/new_lawyer"
+/ =link_to "DELETE LAWYER", "" ,:id =>"delete_laywer", :class=>"btn"
+/ =link_to "CANCEL" ,"", :id=>"cancel_lawyer", :style=>"display:none;", :class=>"btn"
+%input.btn#delete_laywer{:type=>"button", :value=>"DELETE LAWYER", :style=>"clear:both;"}
+%input.btn#cancel_laywer{:type=>"button", :value=>"CANCEL", :style=>"display:none;"}

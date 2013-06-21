@@ -1,0 +1,613 @@
+%div#statistics_details
+  %br
+  %br
+  %u{:style=>"font-weight: bold;"}="#{@stat_type}"
+  %u#plan_1="Basic"
+  %u#plan_2="Plus"
+  %u#plan_3="Pro"
+  %u#plan_4="Premium"
+  %u#plan_5="No limit"
+  %u#plan_6{:style=>"font-weight: bold;"}="Total"
+  %br
+  -if "#{@interval}" == "daily"
+    -diff = (@end_date.to_date - @start_date.to_date).to_i
+  -elsif "#{@interval}" == "monthly"
+    -diff = (@end_date.to_date.year * 12 + @end_date.to_date.month) - (@start_date.to_date.year * 12 + @start_date.to_date.month)
+    -start_date_new = @start_date.to_date.strftime("%Y-%m")
+  -elsif "#{@interval}" == "quartly"
+    -diff = ((@end_date.to_date - @start_date.to_date)/90).to_i
+    //-diff = ((@end_date.to_date.month/4)+1) - ((@start_date.to_date.month/4)+1)
+  -elsif "#{@interval}" == "yearly"
+    -year1 = @start_date.split('-')[0]
+    -year2 = @end_date.split('-')[0]
+    -diff = year2.to_i - year1.to_i
+    -start_date_new = @start_date.to_date.strftime("%Y")
+  -p1 = 0
+  -p2 = 0
+  -p3 = 0
+  -p4 = 0
+  -p5 = 0
+  -p6 = 0
+
+  -if "#{@stat_type}" == 'new subscriptions'
+    %ul
+      -(0..diff.to_i).each do |i|
+        %li{:class=>cycle('even', 'odd'), :id=>"row_#{i+1}"}
+          -if "#{@interval}" == "daily"
+            -start_date_new = @start_date.to_date + i
+            %span{:style=>"font-weight: bold;"}=start_date_new
+            %span#data1= @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>1).count
+            %span= @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>2).count
+            %span= @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>3).count
+            %span= @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>4).count
+            %span= @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>5).count
+            %span{:style=>"font-weight: bold;"}= @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").count
+
+          -elsif "#{@interval}" == "monthly"
+            //-if i == 0
+            //  -start_date_new = @start_date.to_date.strftime("%Y-%m")
+            //-else
+            //  -start_date_new = Date.strptime(start_date_new, "%Y-%m").strftime("%Y-%m-%d")
+            //  -start_date_new = start_date_new.to_date
+            //  -start_date_new = start_date_new.strftime("%Y-%m")
+            -if i == 0
+              -start_date_new = @start_date.to_date.strftime("%Y-%m")
+            -else
+              -start_date_new = Date.strptime(start_date_new, "%Y-%m").strftime("%Y-%m-%d")
+              -start_date_new = start_date_new.to_date+1.month
+              -start_date_new = start_date_new.strftime("%Y-%m")
+            %span{:style=>"font-weight: bold;"}=start_date_new
+            -month_value = start_date_new.split('-')[1]
+            %span= @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_plan_id=>1).count
+            %span= @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_plan_id=>2).count
+            %span= @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_plan_id=>3).count
+            %span= @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_plan_id=>4).count
+            %span= @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_plan_id=>5).count
+            %span{:style=>"font-weight: bold;"}= @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").count
+
+          -elsif "#{@interval}" == "quartly"
+            %span{:style=>"font-weight: bold;"}="Quarter " "#{i+1}"
+            %span= @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_plan_id=>1).count
+            %span= @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_plan_id=>2).count
+            %span= @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_plan_id=>3).count
+            %span= @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_plan_id=>4).count
+            %span= @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_plan_id=>5).count
+            %span{:style=>"font-weight: bold;"}= @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").count
+
+          -elsif "#{@interval}" == "yearly"
+            -if i == 0
+              -start_date_new = @start_date.to_date.strftime("%Y")
+            -else
+              -start_date_new = Date.strptime(start_date_new, "%Y").strftime("%Y-%m-%d")
+              -start_date_new = start_date_new.to_date.strftime("%Y").next
+            %span{:style=>"font-weight: bold;"}=start_date_new
+            %span= @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>1).count
+            %span= @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>2).count
+            %span= @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>3).count
+            %span= @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>4).count
+            %span= @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>5).count
+            %span{:style=>"font-weight: bold;"}= @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").count
+
+        %li.hidden
+          -if "#{@interval}" == "daily"
+            -start_date_new = @start_date.to_date + i
+            %span=""
+            %span= p1 = p1+ @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>1).count
+            %span= p2 = p2+ @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>2).count
+            %span= p3 = p3+ @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>3).count
+            %span= p4 = p4+ @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>4).count
+            %span= p5 = p5+ @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>5).count
+            %span= p6 = p6+ @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").count
+
+          -elsif "#{@interval}" == "monthly"
+            %span=""
+            -month_value = start_date_new.split('-')[1]
+            %span= p1 = p1+ @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_plan_id=>1).count
+            %span= p2 = p2+ @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_plan_id=>2).count
+            %span= p3 = p3+ @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_plan_id=>3).count
+            %span= p4 = p4+ @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_plan_id=>4).count
+            %span= p5 = p5+ @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_plan_id=>5).count
+            %span= p6 = p6+ @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").count
+
+          -elsif "#{@interval}" == "quartly"
+            %span=""
+            %span= p1 = p1+ @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_plan_id=>1).count
+            %span= p2 = p2+ @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_plan_id=>2).count
+            %span= p3 = p3+ @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_plan_id=>3).count
+            %span= p4 = p4+ @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_plan_id=>4).count
+            %span= p5 = p5+ @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_plan_id=>5).count
+            %span= p6 = p6+ @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").count
+
+          -elsif "#{@interval}" == "yearly"
+            %span=""
+            %span= p1 = p1+ @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>1).count
+            %span= p2 = p2+ @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>2).count
+            %span= p3 = p3+ @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>3).count
+            %span= p4 = p4+ @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>4).count
+            %span= p5 = p5+ @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_plan_id=>5).count
+            %span= p6 = p6+ @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").count
+
+
+  -elsif "#{@stat_type}" == 'new offers'
+    %ul
+      -(0..diff.to_i).each do |i|
+        %li{:class=>cycle('even', 'odd'), :id=>"row_#{i+1}"}
+          -if "#{@interval}" == 'daily'
+            -start_date_new = @start_date.to_date + i
+            %span{:style=>"font-weight: bold;"}=start_date_new
+            //%span= @offers.where("date(offer_start_date) = '#{start_date_new}'").where("offers.seller_id = subscriptions.user_id").where("subscriptions.subscription_plan_id=1").count
+            %span= @offers.joins(" LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id=1").count
+            %span= @offers.joins(" LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id=2").count
+            %span= @offers.joins(" LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id=3").count
+            %span= @offers.joins(" LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id=4").count
+            %span= @offers.joins(" LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id=5").count
+            %span{:style=>"font-weight: bold;"}= @offers.joins(" LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").count
+
+          -elsif "#{@interval}" == "monthly"
+            -if i == 0
+              -start_date_new = @start_date.to_date.strftime("%Y-%m")
+            -else
+              -start_date_new = Date.strptime(start_date_new, "%Y-%m").strftime("%Y-%m-%d")
+              -start_date_new = start_date_new.to_date+1.month
+              -start_date_new = start_date_new.strftime("%Y-%m")
+            %span{:style=>"font-weight: bold;"}=start_date_new
+            -month_value = start_date_new.split('-')[1]
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on subscriptions.user_id = offers.seller_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("subscriptions.subscription_plan_id=1").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on subscriptions.user_id = offers.seller_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("subscriptions.subscription_plan_id=2").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on subscriptions.user_id = offers.seller_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("subscriptions.subscription_plan_id=3").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on subscriptions.user_id = offers.seller_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("subscriptions.subscription_plan_id=4").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on subscriptions.user_id = offers.seller_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("subscriptions.subscription_plan_id=5").count
+            %span{:style=>"font-weight: bold;"}= @offers.joins("LEFT OUTER JOIN subscriptions on subscriptions.user_id = offers.seller_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").count
+
+          -elsif "#{@interval}" == "quartly"
+            %span{:style=>"font-weight: bold;"}="Quarter #{i+1}"
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("subscriptions.subscription_plan_id = 1").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("subscriptions.subscription_plan_id = 2").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("subscriptions.subscription_plan_id = 3").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("subscriptions.subscription_plan_id = 4").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("subscriptions.subscription_plan_id = 5").count
+            %span{:style=>"font-weight: bold;"}= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").count
+
+          -elsif "#{@interval}" == "yearly"
+            -if i == 0
+              -start_date_new = @start_date.to_date.strftime("%Y")
+            -else
+              -start_date_new = Date.strptime(start_date_new, "%Y").strftime("%Y-%m-%d")
+              -start_date_new = start_date_new.to_date.strftime("%Y").next
+            %span{:style=>"font-weight: bold;"}=start_date_new
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id = 1").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id = 2").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id = 3").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id = 4").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id = 5").count
+            %span{:style=>"font-weight: bold;"}= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").count
+
+        %li.hidden
+          -if "#{@interval}" == "daily"
+            -start_date_new = @start_date.to_date + i
+            %span=""
+            %span= p1 = p1+ @offers.joins(" LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id=1").count
+            %span= p2 = p2+ @offers.joins(" LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id=2").count
+            %span= p3 = p3+ @offers.joins(" LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id=3").count
+            %span= p4 = p4+ @offers.joins(" LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id=4").count
+            %span= p5 = p5+ @offers.joins(" LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id=5").count
+            %span= p6 = p6+ @offers.joins(" LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").count  
+
+          -elsif "#{@interval}" == "monthly"
+            %span=""
+            -month_value = start_date_new.split('-')[1]
+            %span= p1 = p1+ @offers.joins("LEFT OUTER JOIN subscriptions on subscriptions.user_id = offers.seller_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("subscriptions.subscription_plan_id=1").count
+            %span= p2 = p2+ @offers.joins("LEFT OUTER JOIN subscriptions on subscriptions.user_id = offers.seller_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("subscriptions.subscription_plan_id=2").count
+            %span= p3 = p3+ @offers.joins("LEFT OUTER JOIN subscriptions on subscriptions.user_id = offers.seller_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("subscriptions.subscription_plan_id=3").count
+            %span= p4 = p4+ @offers.joins("LEFT OUTER JOIN subscriptions on subscriptions.user_id = offers.seller_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("subscriptions.subscription_plan_id=4").count
+            %span= p5 = p5+ @offers.joins("LEFT OUTER JOIN subscriptions on subscriptions.user_id = offers.seller_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("subscriptions.subscription_plan_id=5").count
+            %span= p6 = p6+ @offers.joins("LEFT OUTER JOIN subscriptions on subscriptions.user_id = offers.seller_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").count
+
+          -elsif "#{@interval}" == "quartly"
+            %span=""
+            %span= p1 = p1+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("subscriptions.subscription_plan_id = 1").count
+            %span= p2 = p2+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("subscriptions.subscription_plan_id = 2").count
+            %span= p3 = p3+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("subscriptions.subscription_plan_id = 3").count
+            %span= p4 = p4+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("subscriptions.subscription_plan_id = 4").count
+            %span= p5 = p5+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("subscriptions.subscription_plan_id = 5").count
+            %span= p6 = p6+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").count
+
+          -elsif "#{@interval}" == "yearly"
+            %span=""
+            %span= p1 = p1+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id = 1").count
+            %span= p2 = p2+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id = 2").count
+            %span= p3 = p3+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id = 3").count
+            %span= p4 = p4+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id = 4").count
+            %span= p5 = p5+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("subscriptions.subscription_plan_id = 5").count
+            %span= p6 = p6+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").count
+
+
+  -elsif "#{@stat_type}" == "active offers"
+    %ul
+      -(0..diff.to_i).each do |i|
+        %li{:class=>cycle('even', 'odd'), :id=>"row_#{i+1}"}
+          -if "#{@interval}" == 'daily'
+            -start_date_new = @start_date.to_date + i
+            %span{:style=>"font-weight: bold;"}=start_date_new
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("'#{start_date_new}' BETWEEN date(offer_start_date) AND date(offer_end_date)").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 1").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 2").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 3").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 4").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 5").count
+            %span{:style=>"font-weight: bold;"}= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").count
+
+          -elsif "#{@interval}" == "monthly"
+            -if i == 0
+              -start_date_new = @start_date.to_date.strftime("%Y-%m")
+            -else
+              -start_date_new = Date.strptime(start_date_new, "%Y-%m").strftime("%Y-%m-%d")
+              -start_date_new = start_date_new.to_date+1.month
+              -start_date_new = start_date_new.strftime("%Y-%m")
+            %span{:style=>"font-weight: bold;"}= start_date_new
+            -month_value = start_date_new.split('-')[1]
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 1").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 2").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 3").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 4").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 5").count
+            %span{:style=>"font-weight: bold;"}= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_status = true").count
+
+          -elsif "#{@interval}" == "quartly"
+            %span{:style=>"font-weight: bold;"}= "Quarter #{i+1}"
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 1").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 2").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 3").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 4").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 5").count
+            %span{:style=>"font-weight: bold;"}= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_status = true").count
+
+          -elsif "#{@interval}" == "yearly"
+            -if i == 0
+              -start_date_new = @start_date.to_date.strftime("%Y")
+            -else
+              -start_date_new = Date.strptime(start_date_new, "%Y").strftime("%Y-%m-%d")
+              -start_date_new = start_date_new.to_date.strftime("%Y").next
+            %span{:style=>"font-weight: bold;"}= start_date_new
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 1").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 2").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 3").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 4").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 5").count
+            %span{:style=>"font-weight: bold;"}= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").count
+
+        %li.hidden
+          -if "#{@interval}" == "daily"
+            -start_date_new = @start_date.to_date + i
+            %span=""
+            %span= p1 = p1+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("'#{start_date_new}' BETWEEN date(offer_start_date) AND date(offer_end_date)").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 1").count
+            %span= p2 = p2+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 2").count
+            %span= p3 = p3+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 3").count
+            %span= p4 = p4+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 4").count
+            %span= p5 = p5+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 5").count
+            %span= p6 = p6+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").count
+
+          -elsif "#{@interval}" == "monthly"
+            %span=""
+            -month_value = start_date_new.split('-')[1]
+            %span= p1 = p1+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 1").count
+            %span= p2 = p2+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 2").count
+            %span= p3 = p3+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 3").count
+            %span= p4 = p4+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 4").count
+            %span= p5 = p5+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 5").count
+            %span= p6 = p6+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_status = true").count
+
+          -elsif "#{@interval}" == "quartly"
+            %span=""
+            %span= p1 = p1+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 1").count
+            %span= p2 = p2+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 2").count
+            %span= p3 = p3+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 3").count
+            %span= p4 = p4+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 4").count
+            %span= p5 = p5+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 5").count
+            %span= p6 = p6+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_status = true").count
+
+          -elsif "#{@interval}" == "yearly"
+            %span=""
+            %span= p1 = p1+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 1").count
+            %span= p2 = p2+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 2").count
+            %span= p3 = p3+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 3").count
+            %span= p4 = p4+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 4").count
+            %span= p5 = p5+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").where("subscriptions.subscription_plan_id = 5").count
+            %span= p6 = p6+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_status = true").count
+
+
+  -elsif "#{@stat_type}" == 'cancelled offers'
+    %ul
+      -(0..diff.to_i).each do |i|
+        %li{:class=>cycle('even', 'odd'), :id=>"row_#{i+1}"}
+          -if "#{@interval}" == 'daily'
+            -start_date_new = @start_date.to_date + i
+            %span{:style=>"font-weight: bold;"}= start_date_new
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 1").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 2").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 3").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 4").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 5").count
+            %span{:style=>"font-weight: bold;"}= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").count
+
+          -elsif "#{@interval}" == "monthly"
+            -if i == 0
+              -start_date_new = @start_date.to_date.strftime("%Y-%m")
+            -else
+              -start_date_new = Date.strptime(start_date_new, "%Y-%m").strftime("%Y-%m-%d")
+              -start_date_new = start_date_new.to_date+1.month
+              -start_date_new = start_date_new.strftime("%Y-%m")
+            %span{:style=>"font-weight: bold;"}= start_date_new
+            -month_value = start_date_new.split('-')[1]
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 1").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 2").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 3").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 4").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 5").count
+            %span{:style=>"font-weight: bold;"}= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_cancellation_reason IS NOT NULL").count
+
+          -elsif "#{@interval}" == "quartly"
+            %span{:style=>"font-weight: bold;"}="Quarter #{i+1}"
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 1").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 2").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 3").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 4").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 5").count
+            %span{:style=>"font-weight: bold;"}= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_cancellation_reason IS NOT NULL").count
+
+          -elsif "#{@interval}" == "yearly"
+            -if i == 0
+              -start_date_new = @start_date.to_date.strftime("%Y")
+            -else
+              -start_date_new = Date.strptime(start_date_new, "%Y").strftime("%Y-%m-%d")
+              -start_date_new = start_date_new.to_date.strftime("%Y").next
+            %span{:style=>"font-weight: bold;"}=start_date_new
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 1").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 2").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 3").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 4").count
+            %span= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 5").count
+            %span{:style=>"font-weight: bold;"}= @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").count
+
+        %li.hidden
+          -if "#{@interval}" == "daily"
+            -start_date_new = @start_date.to_date + i
+            %span=""
+            %span= p1 = p1+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 1").count
+            %span= p2 = p2+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 2").count
+            %span= p3 = p3+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 3").count
+            %span= p4 = p4+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 4").count
+            %span= p5 = p5+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 5").count
+            %span= p6 = p6+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("date(offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").count
+
+          -elsif "#{@interval}" == "monthly"
+            %span=""
+            -month_value = start_date_new.split('-')[1]
+            %span= p1 = p1+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 1").count
+            %span= p2 = p2+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 2").count
+            %span= p3 = p3+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 3").count
+            %span= p4 = p4+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 4").count
+            %span= p5 = p5+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 5").count
+            %span= p6 = p6+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(MONTH from offer_start_date) = '#{month_value}'").where("offers.offer_cancellation_reason IS NOT NULL").count
+
+          -elsif "#{@interval}" == "quartly"
+            %span=""
+            %span= p1 = p1+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 1").count
+            %span= p2 = p2+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 2").count
+            %span= p3 = p3+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 3").count
+            %span= p4 = p4+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 4").count
+            %span= p5 = p5+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 5").count
+            %span= p6 = p6+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(QUARTER from offer_start_date) = '#{i+1}'").where("offers.offer_cancellation_reason IS NOT NULL").count
+
+          -elsif "#{@interval}" == "yearly"
+            %span=""
+            %span= p1 = p1+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 1").count
+            %span= p2 = p2+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 2").count
+            %span= p3 = p3+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 3").count
+            %span= p4 = p4+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 4").count
+            %span= p5 = p5+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").where("subscriptions.subscription_plan_id = 5").count
+            %span= p6 = p6+ @offers.joins("LEFT OUTER JOIN subscriptions on offers.seller_id = subscriptions.user_id").where("extract(YEAR from offer_start_date) = '#{start_date_new}'").where("offers.offer_cancellation_reason IS NOT NULL").count
+
+
+  -elsif "#{@stat_type}" == 'unfinished sign-ups'
+    %ul
+      -(0..diff.to_i).each do |i|
+        %li{:class=>cycle('even', 'odd'), :id=>"row_#{i+1}"}
+          -if "#{@interval}" == "daily"
+            -start_date_new = @start_date.to_date + i
+            %span{:style=>"font-weight: bold;"}= start_date_new
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("date(users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 1").count
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("date(users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 2").count
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("date(users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 3").count
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("date(users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 4").count
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("date(users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 5").count
+            %span{:style=>"font-weight: bold;"}= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("date(users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").count
+
+          -elsif "#{@interval }" == "monthly"
+            -if i == 0
+              -start_date_new = @start_date.to_date.strftime("%Y-%m")
+            -else
+              -start_date_new = Date.strptime(start_date_new, "%Y-%m").strftime("%Y-%m-%d")
+              -start_date_new = start_date_new.to_date+1.month
+              -start_date_new = start_date_new.strftime("%Y-%m")
+            %span{:style=>"font-weight: bold;"}= start_date_new
+            -month_value = start_date_new.split('-')[1]
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(MONTH from users.created_at) = '#{month_value}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 1").count
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(MONTH from users.created_at) = '#{month_value}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 2").count
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(MONTH from users.created_at) = '#{month_value}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 3").count
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(MONTH from users.created_at) = '#{month_value}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 4").count
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(MONTH from users.created_at) = '#{month_value}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 5").count
+            %span{:style=>"font-weight: bold;"}= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(MONTH from users.created_at) = '#{month_value}'").where("users.confirmation_token IS NOT NULL").count
+
+          -elsif "#{@interval}" == "quartly"
+            %span{:style=>"font-weight: bold;"}= "Quarter #{i+1}"
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(QUARTER from users.created_at) = '#{i+1}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 1").count
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(QUARTER from users.created_at) = '#{i+1}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 2").count
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(QUARTER from users.created_at) = '#{i+1}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 3").count
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(QUARTER from users.created_at) = '#{i+1}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 4").count
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(QUARTER from users.created_at) = '#{i+1}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 5").count
+            %span{:style=>"font-weight: bold;"}= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(QUARTER from users.created_at) = '#{i+1}'").where("users.confirmation_token IS NOT NULL").count
+
+          -elsif "#{@interval}" == 'yearly'
+            -if i == 0
+              -start_date_new = @start_date.to_date.strftime("%Y")
+            -else
+              -start_date_new = Date.strptime(start_date_new, "%Y").strftime("%Y-%m-%d")
+              -start_date_new = start_date_new.strftime("%Y")
+            %span{:style=>"font-weight: bold;"}= start_date_new
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(YEAR from users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 1").count
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(YEAR from users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 2").count
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(YEAR from users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 3").count
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(YEAR from users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 4").count
+            %span= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(YEAR from users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 5").count
+            %span{:style=>"font-weight: bold;"}= @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(YEAR from users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").count
+
+        %li.hidden
+          -if "#{@interval}" == "daily"
+            -start_date_new = @start_date.to_date + i
+            %span=""
+            %span= p1 = p1+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("date(users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 1").count
+            %span= p2 = p2+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("date(users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 2").count
+            %span= p3 = p3+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("date(users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 3").count
+            %span= p4 = p4+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("date(users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 4").count
+            %span= p5 = p5+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("date(users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 5").count
+            %span= p6 = p6+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("date(users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").count
+
+          -elsif "#{@interval}" == "monthly"
+            %span=""
+            -month_value = start_date_new.split('-')[1]
+            %span= p1 = p1+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(MONTH from users.created_at) = '#{month_value}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 1").count
+            %span= p2 = p2+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(MONTH from users.created_at) = '#{month_value}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 2").count
+            %span= p3 = p3+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(MONTH from users.created_at) = '#{month_value}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 3").count
+            %span= p4 = p4+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(MONTH from users.created_at) = '#{month_value}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 4").count
+            %span= p5 = p5+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(MONTH from users.created_at) = '#{month_value}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 5").count
+            %span= p6 = p6+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(MONTH from users.created_at) = '#{month_value}'").where("users.confirmation_token IS NOT NULL").count
+
+          -elsif "#{@interval}" == "quartly"
+            %span=""
+            %span= p1 = p1+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(QUARTER from users.created_at) = '#{i+1}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 1").count
+            %span= p2 = p2+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(QUARTER from users.created_at) = '#{i+1}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 2").count
+            %span= p3 = p3+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(QUARTER from users.created_at) = '#{i+1}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 3").count
+            %span= p4 = p4+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(QUARTER from users.created_at) = '#{i+1}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 4").count
+            %span= p5 = p5+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(QUARTER from users.created_at) = '#{i+1}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 5").count
+            %span= p6 = p6+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(QUARTER from users.created_at) = '#{i+1}'").where("users.confirmation_token IS NOT NULL").count
+
+          -elsif "#{@interval}" == "yearly"
+            %span=""
+            %span= p1 = p1+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(YEAR from users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 1").count
+            %span= p2 = p2+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(YEAR from users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 2").count
+            %span= p3 = p3+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(YEAR from users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 3").count
+            %span= p4 = p4+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(YEAR from users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 4").count
+            %span= p5 = p5+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(YEAR from users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").where("subscriptions.subscription_plan_id = 5").count
+            %span= p6 = p6+ @users.joins("LEFT OUTER JOIN subscriptions on users.id = subscriptions.user_id").where("extract(YEAR from users.created_at) = '#{start_date_new}'").where("users.confirmation_token IS NOT NULL").count
+
+
+  -elsif "#{@stat_type}" == "cancelled subscriptions"
+    %ul
+      -(0..diff.to_i).each do |i|
+        %li{:class=>cycle('even', 'odd'), :id=>"row_#{i+1}"}
+          -if "#{@interval}" == "daily"
+            -start_date_new = @start_date.to_date + i
+            %span{:style=>"font-weight: bold;"}= start_date_new
+            %span= @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>1).count
+            %span= @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>2).count
+            %span= @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>3).count
+            %span= @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>4).count
+            %span= @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>5).count
+            %span{:style=>"font-weight: bold;"}= @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).count
+
+          -elsif "#{@interval}" == "monthly"
+            -if i == 0
+              -start_date_new = @start_date.to_date.strftime("%Y-%m")
+            -else
+              -start_date_new = Date.strptime(start_date_new, "%Y-%m").strftime("%Y-%m-%d")
+              -start_date_new = start_date_new.to_date+1.month
+              -start_date_new = start_date_new.strftime("%Y-%m")
+            %span{:style=>"font-weight: bold;"}= start_date_new
+            -month_value = start_date_new.split('-')[1]
+            %span= @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>1).count
+            %span= @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>2).count
+            %span= @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>3).count
+            %span= @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>4).count
+            %span= @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>5).count
+            %span{:style=>"font-weight: bold;"}= @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_confirmed => true).count
+
+          -elsif "#{@interval}" == "quartly"
+            %span{:style=>"font-weight: bold;"}="Quarter #{i+1}"
+            %span= @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 1).count
+            %span= @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 2).count
+            %span= @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 3).count
+            %span= @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 4).count
+            %span= @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 5).count
+            %span{:style=>"font-weight: bold;"}= @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_confirmed => true).count
+
+          -elsif "#{@interval}" == "yearly"
+            -if i == 0
+              -start_date_new = @start_date.to_date.strftime("%Y")
+            -else
+              -start_date_new = Date.strptime(start_date_new, "%Y").strftime("%Y-%m-%d")
+              -start_date_new = start_date_new.strftime("%Y")
+            %span{:style=>"font-weight: bold;"}= start_date_new
+            %span= @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 1).count
+            %span= @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 2).count
+            %span= @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 3).count
+            %span= @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 4).count
+            %span= @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 5).count
+            %span{:style=>"font-weight: bold;"}= @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).count
+
+        %li.hidden
+          -if "#{@interval}" == "daily"
+            -start_date_new = @start_date.to_date + i
+            %span=""
+            %span= p1 = p1+ @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>1).count
+            %span= p2 = p2+ @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>2).count
+            %span= p3 = p3+ @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>3).count
+            %span= p4 = p4+ @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>4).count
+            %span= p5 = p5+ @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>5).count
+            %span= p6 = p6+ @subscriptions.where("date(subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).count
+
+          -elsif "#{@interval}" == "monthly"
+            %span=""
+            -month_value = start_date_new.split('-')[1]
+            %span= p1 = p1+ @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>1).count
+            %span= p2 = p2+ @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>2).count
+            %span= p3 = p3+ @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>3).count
+            %span= p4 = p4+ @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>4).count
+            %span= p5 = p5+ @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_confirmed => true).where(:subscription_plan_id=>5).count
+            %span= p6 = p6+ @subscriptions.where("extract(MONTH from subscription_start_date) = '#{month_value}'").where(:subscription_confirmed => true).count
+
+          -elsif "#{@interval}" == "quartly"
+            %span=""
+            %span= p1 = p1+ @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 1).count
+            %span= p2 = p2+ @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 2).count
+            %span= p3 = p3+ @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 3).count
+            %span= p4 = p4+ @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 4).count
+            %span= p5 = p5+ @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 5).count
+            %span= p6 = p6+ @subscriptions.where("extract(QUARTER from subscription_start_date) = '#{i+1}'").where(:subscription_confirmed => true).count
+
+          -elsif "#{@interval}" == "yearly"
+            %span=""
+            %span= p1 = p1+ @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 1).count
+            %span= p2 = p2+ @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 2).count
+            %span= p3 = p3+ @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 3).count
+            %span= p4 = p4+ @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 4).count
+            %span= p5 = p5+ @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).where(:subscription_plan_id => 5).count
+            %span= p6 = p6+ @subscriptions.where("extract(YEAR from subscription_start_date) = '#{start_date_new}'").where(:subscription_confirmed => true).count
+            
+
+  -elsif "#{@stat_type}" == "paid subscriptions" || "#{@stat_type}" == 'free subscriptions' || "#{@stat_type}" == "total subscriptions" || "#{@stat_type}" == "total earning"
+    %ul
+      %li.even#row_1
+        -u = URI.parse(request.url)
+        -p = CGI.parse(u.query)
+        %span=""
+        %span= p['value1'].first
+        %span= p['value2'].first
+        %span= p['value3'].first
+        %span= p['value4'].first
+        %span= p['value5'].first
+        %span{:style=>"font-weight: bold;"}= p['value6'].first
+
+%br
+%br
+#head3_report.head3_summary_report
+  =render :partial=>"/admin/reports/summary"

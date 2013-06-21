@@ -1,0 +1,12 @@
+.user_documents_container
+  %h4="YOUR INVOICES AND COMMUNICATION"
+  .hr_user_settings
+  %ul.user_documents
+    - @user.documents.each do |document|
+      %li
+        %span=document.file_name
+        %span
+          %p.pull-left{:style=>"display:inline;margin-bottom:0;margin-right:10px;"}="#{document.created_at.to_date} "
+          %a{:href=>"#{document.file_path}", :target=>"_blank"}="download"
+  %a.btn.pull-right{ :target=>"_blank", :style=>"color:black;", :href=>user_zip_download_files_path}="DOWNLOAD ALL"
+

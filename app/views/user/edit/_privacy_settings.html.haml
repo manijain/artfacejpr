@@ -1,0 +1,59 @@
+.privacy_settings_container
+  %h4="YOUR PRIVACY SETTINGS".html_safe
+  .hr_user_settings
+  %input#update_user_settings.btn{:type=>"button", :value=>"update", :style=>" position: absolute;right: 40px;top: 60px;width: 150px;"}
+  %ul.privacy_settings
+    %li
+      %span="SHOW MY IDENTITY BY DEFAULT"
+      - if @user.user_setting.show_identity == true
+        %input#user_identity{:type=>"checkbox", :checked=>"checked"}
+      - else
+        %input#user_identity{:type=>"checkbox"}
+    %li
+      %span="NOTIFICATION BY"
+      %select#user_notification_by{:style=>"width:100px;"}
+        - if @user.user_setting.notification_by == "email"
+          %option{:value=>"email", :selected=>"selected"}="email"
+        - else
+          %option{:value=>"email"}="email"
+        - if @user.user_setting.notification_by == "sms"
+          %option{:value=>"sms", :selected=>"selected"}="sms"
+        - else
+          %option{:value=>"sms"}="sms"
+        - if @user.user_setting.notification_by == "none"
+          %option{:value=>"none", :selected=>"selected"}="none"
+        - else
+          %option{:value=>"none"}="none"
+    %li
+      %span="NOTIFICATION E-MAIL ADDRESS"
+      %input#user_notification_email{:type=>"text", :style=>"border: 1px solid black;width:170px", :value=>"#{@user.user_setting.notification_email}"}
+    %li
+      %span="WHISHLIST NOTIFICATION"
+      - if @user.user_setting.wishlist_notification == true
+        %input#wishist_notification{:type=>"checkbox", :checked=>"checked"}
+      - else
+        %input#wishist_notification{:type=>"checkbox"}
+    %li
+      %span="MESSAGE FROM SELLER NOTIFICATION"
+      - if @user.user_setting.seller_message_notification == true
+        %input#user_seller_message_notification{:type=>"checkbox", :checked=>"checked"}
+      - else
+        %input#user_seller_message_notification{:type=>"checkbox"}
+    %li
+      %span="MESSAGE FROM BUYER NOTIFICATION"
+      - if @user.user_setting.buyer_message_notification == true
+        %input#user_buyer_message_notification{:type=>"checkbox", :checked=>"true"}
+      - else
+        %input#user_buyer_message_notification{:type=>"checkbox"}
+    %li
+      %span="FORUM NOTIFICATION FOR REPLIES"
+      - if @user.user_setting.forum_notification == true
+        %input#user_forum_notifications{:type=>"checkbox", :checked=>"checked"}
+      - else
+        %input#user_forum_notifications{:type=>"checkbox"}
+    %li
+      %span="NOTIFY ME WHEN ONE OF MY OFFERS IS DISCUSSED IN THE FORUM"
+      - if @user.user_setting.user_offer_forum_discussion == true
+        %input#user_offer_forum_discussion{:type=>"checkbox", :checked=>"checked"}
+      - else
+        %input#user_offer_forum_discussion{:type=>"checkbox"}

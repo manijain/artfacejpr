@@ -1,0 +1,90 @@
+= render :partial=> 'layouts/header'
+
+.about_layout
+  = render :partial => 'home_header_artwork'
+  .about_step_two
+    %h2=t '.heading'
+    %div
+      %p=t '.step_text_one'
+    %div
+      %p=t '.step_text_one'
+    %div
+      %p=t '.step_text_three'
+  .about_step_three
+    %div{:style=>"width:20%;float:left;height:300px"}
+      %h3{:style=>"font-size:18px;"}=t '.heading_two'
+      %p=t '.step_three_text'
+    %div{:style=>"width:610px;float:left;height:300px;margin-left:10px;margin-right:10px;"}
+      %ul{:id=>"about_page_slide_show_slider", :style=>"height: 200px !important;margin:0;"}
+        - @about_page_slideshow.each do |slideshow|
+          %li{:style=>"position:relative"}
+            =image_tag PAPERCLIP_STORAGE_PATH + "images/slideshow_images/originals/images/#{slideshow.id}/#{slideshow.image_file_name}", :style=>"width:320px;%;height:100%;position:absolute"
+            -#%span{:style=>"position:absolute;color:blue;left:0;bottom:0;width:100%;text-align:center;"}=slideshow.image_text
+            %div{:style=>"left: 320px;position: absolute;width: 255px;margin-left:20px;bottom:0;"}
+              %strong=slideshow.heading_text
+              %br
+              %span=slideshow.text
+    -#%div#about_page_text_slider.slider
+      -#%ul{:style=>"width:100%"}
+        -#- @about_page_slideshow.each do |slideshow|
+          -#%li{:style=>"height: 200px;width: 270px;"}
+            -#%strong=slideshow.heading_text
+            -#%br
+            -#%span=slideshow.text
+    -#%script{:type=>"text/javascript"}
+      -#$( '#about_page_text_slider' ).lemmonSlider({'infinite' : true})
+      
+      -#%strong=t '.step_three_strong_text_one'
+      -#%p=t '.step_three_text_two'
+  .about_step_four
+    %div
+      %h3{:style=>"font-size:18px;"}="#{t '.step_four_text_heading_one'}".html_safe
+      %div{:style=>"float:left;width:93%;border:1px solid black"}
+
+      .offer_img_div
+        %img{:src=>"", :title=>"temp", :alt=>"img plcholdr", :style=>"width: 45px;height: 45px;margin-top: 10px;"}
+      %div{:style=>"width:75%;float:left;"}
+        =t '.step_four_text_three'
+    %div
+      %h3{:style=>"font-size:18px;"}="#{t '.step_four_heading_two'}".html_safe
+      %div{:style=>"float:left;width:93%;border:1px solid black"}
+
+      .offer_img_div
+        %img{:src=>"", :title=>"temp", :alt=>"img plcholdr", :style=>"width: 45px;height: 45px;margin-top: 10px;"}
+      %div{:style=>"width:75%;float:left;"}
+        =t '.step_four_text_four'
+    %div
+      %h3{:style=>"font-size:18px;"}="FOR ART HISTORIANS<br>AND MUSEUMS".html_safe
+      %div{:style=>"float:left;width:93%;border:1px solid black"}
+
+      .offer_img_div
+        %img{:src=>"", :title=>"temp", :alt=>"img plcholdr", :style=>"width: 45px;height: 45px;margin-top: 10px;"}
+      %div{:style=>"width:75%;float:left;"}
+        =t '.step_four_text_five'
+  .about_step_five
+    %h4=t '.step_five_heading'
+    %div
+      =t '.step_five_text_one'
+    %div
+      =t '.step_five_text_two'
+    %div{:style=>"margin-right:0px"}
+      - @partners.each do |partner|
+        - if partner.name.length < 15
+          %a{:href=>"http://#{partner.link}", :style=>"float: left;font-size: 12px;height: 40px;text-align: center;vertical-align: middle;width: 85px;margin-left:5px;position:relative;margin-bottom:5px;line-height: 40px;"}
+            =image_tag PAPERCLIP_STORAGE_PATH + "images/partner_images/originals/images/#{partner.id.to_s}/#{partner.image_file_name}", :alt=>"", :style=>"position:absolute;width:85px;height:40px;top:0;left:0;"
+            %span{:style=>"color:white;position:absolute;top:0;left:0;width:85px"}="#{partner.name}"
+        - else
+          %a{:href=>"http://#{partner.link}", :style=>"float: left;font-size: 12px;height: 40px;text-align: center;vertical-align: middle;width: 85px;margin-left:5px;position:relative;margin-bottom:5px"}
+            =image_tag PAPERCLIP_STORAGE_PATH + "images/partner_images/originals/images/#{partner.id.to_s}/#{partner.image_file_name}", :alt=>"", :style=>"position:absolute;width:85px;height:40px;top:0;left:0;"
+            %span{:style=>"color:white;position:absolute;top:25%;left:0;line-height:13px;font-size:10px;width:85px"}="#{partner.name}"
+  .about_step_six
+    %h4=t '.step_six_heading'
+    %div
+      =t '.step_six_text_one'
+    %div
+      =t '.step_six_text_two'
+    %div{:style=>"margin-right:0px"}
+      =t '.step_six_text_three'
+    %a{:style=>"float:right;margin-top:30px;", :class=>"btn", :href=>"/users/register"}=t '.step_six_register_link_text'
+
+= render :partial=> 'layouts/footer'

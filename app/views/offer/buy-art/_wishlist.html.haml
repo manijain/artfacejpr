@@ -1,0 +1,22 @@
+.span10.span10wishlist
+  .span10{:style=>"margin-left:0"}
+    %h4{:style=>"float:left;"}="BUY: YOUR WISHLIST"
+    %span{:style=>"float:left;line-height:40px;margin-left:180px;line-height:30px;"}
+      ="New items in your wishlist: 5. "
+      ="Sort list by"
+    %select#buy_wishlist_offers_select{:style=>"width:150px;float:left;"}
+      %option="artist name"
+      %option="date"
+      %option="time left"
+  .span10wishlist_first_div
+    %ul{:style=>"margin-left:30px;"}
+      - @buy_wishlist_offers.each do |offer|
+        %li
+          %a{:href=>"/offer/show/#{offer.id}"}
+            =image_tag "https://artfacedev-pro.s3.amazonaws.com/public/images/uploaded/artwork/smalls/artwork_thumbnails/#{offer.artwork.id}/#{offer.artwork.artwork_thumbnail_file_name}", :alt=>"image not found", :alt=>"image not found"
+            %i.icon-certificate
+          %span{:style=>"text-align:center"}
+            %span.span10wishlist_span_artist=offer.artwork.artist.artist_name || "unknown"
+            %span.span10wishlist_span_time=humanize_time(offer.offer_end_date.to_i - Time.now.to_i) || "unknown"
+  .span5{:style=>"margin-top:10px"}
+    %a.btn{:href=>"#"}="GO TO WISHLIST"

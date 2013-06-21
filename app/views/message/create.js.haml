@@ -1,0 +1,5 @@
+$('.#{@parent_message_id}').after('#{escape_javascript(render :partial => "message_reply_sell_art_area")} ').next().hide().fadeIn(3000);
+if ($('.#{@parent_message_id} ul li span.message_navigation').children().last().attr('class') == "icon-arrow-up" || $('.#{@parent_message_id} ul li span.message_navigation').children().last().attr('class') == "icon-arrow-down")
+{console.log("a")}
+else
+{console.log("b");$('.#{@parent_message_id} ul li span.message_navigation').append('<i style="cursor:pointer;" id=\"message_#{@parent_message_id.split('_')[1]}\" class="icon-arrow-up"></i>')}

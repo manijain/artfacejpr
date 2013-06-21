@@ -1,0 +1,5 @@
+%p="Hi #{@user.user_first_name}  #{@user.user_last_name} "
+%br
+%br
+%p="There is a new reply to a forum message you have created/replied to"
+%a{:href=>"https://artfacedev.herokuapp.com/forum/show/#{@forum_message_notification.forum_message_id}"}="See the notification"

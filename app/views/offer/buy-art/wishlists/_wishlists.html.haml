@@ -1,0 +1,17 @@
+.span10.span10wishlist{:style=>"position:relative"}
+  .span10{:style=>"margin-left:0"}
+    %h4{:style=>"float:left;"}=t '.heading'
+    %span{:style=>"float:right;line-height:40px;"}
+      ="New items in your wishlist: 1. "
+      ="Sort list by"
+      %select#buy_wishlist_offers_select{:style=>"width:150px;"}
+        %option{:value=>"artist name"}="artist name"
+        %option{:value=>"date"}="date"
+        %option{:value=>"time left"}="time left"
+  .span10wishlist_first_div
+    = render :partial => "offer/home/wishlists/wishlists_data"
+  .span5{:style=>"margin-top:10px"}
+    %a.btn{:href=>"/offer/your-wishlists"}="GO TO WISHLIST"
+  #ajax-loader-big_for_buy_art_wishlists{:style=>"left: 400px;position: absolute;top: 30%;z-index: 100;display:none;height:50px;width:50px;"}
+    %img{:src=>"/images/ajax-loader-big.gif",:style=>"width:100%;height:100%;"}
+  #overlay_div_for_buy_art_wishlists{:style=>"background-color: white;display: block;height: 100%;left: 0;opacity: 0.4;position: absolute;top: 0;width: 100%;z-index: 2;display:none;"}

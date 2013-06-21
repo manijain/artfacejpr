@@ -1,0 +1,4 @@
+$("#offers_messages").html('#{escape_javascript(render :partial => "offer/sell-art/sell_art_area_messages_data")} ');
+- if @searching_messages == true
+  - @offer_sell.each do |temp|
+    $("#offer_#{temp.id}").click()

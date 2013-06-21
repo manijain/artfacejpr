@@ -1,0 +1,46 @@
+-#= javascript_include_tag "admin/admin_offers_artist"
+//= javascript_include_tag "admin/admin_offers_artist"
+%h3= "MANAGE ARTIST NAME"
+
+-#= hidden_field_tag :report_basic_search, false
+-#= hidden_field_tag :report_advanced_search, false
+= content_tag :div, :class=>"search pull-left", :style=>"width:840px;border:1px solid #727272;border-radius:8px;background-color:#727272;padding:5px;" do
+  = content_tag :h3, :class=>"pull-left", :style=>"margin-right:25px;" do
+    = "SEARCH"
+  = form_for :artist, :url=>admin_offers_artist_search_path,:method=>"POST",:remote=>"true", :html=>{:class=>"filter_1_basic pull-left", :style=>"margin-top:20px;display:block;"} do |f|
+    = f.hidden_field :search_basic, :value=>true
+    = f.hidden_field :search_in, :value=>2
+    -#= f.hidden_field "sort_by", :name=>"sort_by"
+    -#= f.hidden_field "per_page", :name=>"per_page"
+    = f.text_field :search_artist_basic, :class=>"basic_search_term pull-left", :placeholder=>"SEARCH", :style=>"border:1px solid black;width:450px;margin-right:5px", :id => "search_by_value"
+    = image_tag "/images/plus.png", :class=>"pull-left admin_search_toggle_1 pointer", :style=>"margin-right:5px;"
+    = f.submit "SEARCH", :class=>"btn pull-left", :id=> "artist_basic_search_btn"
+
+
+
+
+  = form_for :artist, :url=>admin_offers_artist_search_path, :method=>"POST", :remote=>"true", :html=>{:class=>"filter_1_advanced pull-left", :style=>"display:none;margin-top:20px;"} do |f|
+    -#= f.hidden_field :search_advanced, :value=>true
+    -#= f.hidden_field :search_in, :value=>3
+    = f.hidden_field :search_artist_advanced, :value=>false
+    -#= f.hidden_field "sort_by", :name=>"sort_by"
+    -#= f.hidden_field "per_page", :name=>"per_page"
+    = content_tag :ul, :class=>"search_filters unstyled pull-left", :style=>"width:550px;" do
+      = content_tag :li, :class=>"filter_li pull-left" do
+        %select#advanced_select_1.select_first.pull-left{:style=>"width:130px;"}
+          %option{"data-function"=>"", :selected=>"true"}="Please choose an option"
+          %option{"data-function"=>"if (check_option('Artist Name')!=false){$(a).html(\"#{escape_javascript(render("admin\/offers\/manage-artist\/advanced-search\/artist"))}\");} else {alert('Error: Value already used ');}", :value=>"Artist Name"}="Artist Name"
+          %option{"data-function"=>"if (check_option('Gender')!=false){$(a).html(\"#{escape_javascript(render("admin\/offers\/manage-artist\/advanced-search\/gender"))}\");} else {alert('Error: Value already used ');}", :value=>"Gender"}="Artist Gender"
+          %option{"data-function"=>"if (check_option('date of birth')!=false){$(a).html(\"#{escape_javascript(render("admin\/offers\/manage-artist\/advanced-search\/date_of_birth"))}\");} else {alert('Error: Value already used ');}", :value=>"date of birth"}="Date of Birth"
+          %option{"data-function"=>"if (check_option('death of death')!=false){$(a).html(\"#{escape_javascript(render("admin\/offers\/manage-artist\/advanced-search\/date_of_death"))}\");} else {alert('Error: Value already used ');}", :value=>"death of death"}="Date of Death"
+          %option{"data-function"=>"if (check_option('Artist Description')!=false){$(a).html(\"#{escape_javascript(render("admin\/offers\/manage-artist\/advanced-search\/description"))}\");} else {alert('Error: Value already used ');}", :value=>"Artist Description"}="Artist Description"
+        = content_tag :span, :id=>"span_1", :class=>"append_span_field", :style=>"width:340px;" do
+          =""
+        = image_tag "/images/minus.png", :class=>"pointer admin_remove_search_field_1 pull-right"
+        = image_tag "/images/plus.png", :class=>"pointer admin_add_search_field_1 pull-right"
+    = f.submit "SEARCH", :class=>"btn submit_button pull-left", :id=> "artist_advanced_search_btn"
+
+
+
+
+

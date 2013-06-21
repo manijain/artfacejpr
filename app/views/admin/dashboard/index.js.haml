@@ -1,0 +1,6 @@
+-if (params[:choice]=="1")
+  $("#stats_partial").html('#{escape_javascript(render :partial => "sub_stats")} ');
+-else
+  $("#mycheck").html('#{escape_javascript(render :partial => "offer_data")} ');
+  $('.pagination a').attr('data-remote', 'true');
+

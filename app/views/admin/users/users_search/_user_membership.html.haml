@@ -1,0 +1,9 @@
+%select#select_input_user_membership{:style=>"margin-bottom: 0;margin-right: 5px;width: 115px;float:left;",:name=>"select[usermembership]search_type"}
+  %option="begins before"
+  %option="begins after"  
+%input#date_input_user_membership_{:type=>"text", :style=>"margin-bottom:0;float:left;margin-right:5px;width:200px;",:name=>"select[usermembership]value"}
+%img#error_text_input_user_membership_{"data-original-title"=>"Only Characters allowed", :src=>"/images/exclamation_mark.png", :style=>"display:none;position:absolute;right:163px;"}
+:javascript
+  $("#date_input_user_membership_").datepicker({
+        dateFormat: "yy-mm-dd"
+  })

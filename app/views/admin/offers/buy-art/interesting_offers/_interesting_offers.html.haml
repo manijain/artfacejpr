@@ -1,0 +1,40 @@
+
+//= javascript_include_tag "admin/admin_offers_offer"
+
+.span10.span10interesting_offers{:style=>"position:relative;margin-top:-70px;"}
+  .span10{:style=>"margin-left:0;font-size: 12px;"}
+    %span{:style=>"float:left;line-height:5px;"}
+      ="Sort list by"
+      %select#buy_interesting_offers_select{:style=>"height: 26px;width: 127px;margin-right: 15px;"}
+        %option="artist name"
+        %option="date"
+        %option="popularity"
+        %option="offer end date"
+      ="Show"
+      %select#show_active_offers_select{:style=>"height: 26px;width: 87px;margin-right: 15px;"}
+        %option="All"
+        %option="Active"
+        %option="Inactive"
+      ="Offers per page"
+      %select#offers_per_page_select{:style=>"height: 26px;width: 63px;margin-right: 15px;"}
+        %option="12"
+        %option{:selected => "selected"}="24"
+        %option="60"
+        %option="120"
+      ="Layout"
+      %select#layout_select{:style=>"height: 26px;width: 140px;margin-right: 15px;"}
+        %option="small preview"
+        %option="medium preview"
+        %option="large preview"
+  .span10interesting_offers_first_div.search_data_outer_div{:style=>"width:800px;"}
+    -#= render :partial => "admin/offers/buy-art/interesting_offers/interesting_offers_data"
+    = render :partial => "admin/offers/buy-art/search_data"
+  -#unless @buy_interesting_offers.count == 0
+  -#.span5{:style=>"margin-top:10px"}
+  -#  %input.btn#delete_offer{:type=>"button", :value=>"Delete Offer"}
+  -#  %input.btn#cancel_delete_offer{:type=>"button", :value=>"Cancel", :style=>"display:none;"}
+  //.span5{:style=>"top:725px"}= will_paginate @buy_interesting_offers , :remote=>true, :link_separator=>"#{@buy_interesting_offers.current_page}/#{@buy_interesting_offers.total_pages}", :previous_label=>'<i class="icon-arrow-left"></i>', :next_label=>'<i class="icon-arrow-right"></i>', :inner_window=>0, :outer_windows=>0, :page_links=>false
+  
+  #ajax-loader-big_for_buy_art_interesting_offers{:style=>"left: 400px;position: absolute;top: 30%;z-index: 100;display:none;height:50px;width:50px;"}
+    %img{:src=>"/images/ajax-loader-big.gif",:style=>"width:100%;height:100%;"}
+  #overlay_div_for_buy_art_interesting_offers{:style=>"background-color: white;display: block;height: 100%;left: 0;opacity: 0.4;position: absolute;top: 0;width: 100%;z-index: 2;display:none;"}

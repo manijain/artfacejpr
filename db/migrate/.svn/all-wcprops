@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/ongraphrorapps/!svn/ver/208/artface_svn/db/migrate
+END
+20121012041139_devise_create_users.rb
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/ongraphrorapps/!svn/ver/208/artface_svn/db/migrate/20121012041139_devise_create_users.rb
+END
+20121012095823_add_attributes_to_users.rb
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/ongraphrorapps/!svn/ver/208/artface_svn/db/migrate/20121012095823_add_attributes_to_users.rb
+END
+20121012113745_remove_town_add_city_to_users.rb
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/ongraphrorapps/!svn/ver/208/artface_svn/db/migrate/20121012113745_remove_town_add_city_to_users.rb
+END
+20121012112905_add_fax_number_to_users.rb
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/ongraphrorapps/!svn/ver/208/artface_svn/db/migrate/20121012112905_add_fax_number_to_users.rb
+END
+20121012114055_add_tax_id_to_users.rb
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/ongraphrorapps/!svn/ver/208/artface_svn/db/migrate/20121012114055_add_tax_id_to_users.rb
+END

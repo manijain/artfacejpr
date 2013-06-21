@@ -1,0 +1,8 @@
+
+.pull-left{:style => "width:100%;"}
+  %div{:id=> "form_edit_message_#{@message.id}", :style => "float:left;height:auto;border: 1pz solid lightgray; padding:6px; width: 98%;"}
+    %label{:style => "float:left;"}="Title : "
+    %input{:id => "edit_message_title_#{@message.id}", :placeholder => "message title", :style => "float:left;width:89%;", :type => "text", :value=> "#{@message.message_title}"}
+    %label{:style => "float:left;"}="Text : "
+    %textarea{:id => "edit_message_text_#{@message.id}", :maxlength => "1000", :placeholder => "your reply", :style => "float:left;min-height:40px;min-width:89%;height:100px;margin:0;width:89%;max-width:89%;max-height:150px;"}=@message.message_text
+    %input.btn{:id => "edit_message_button_#{@message.id}", :style => "float: right; margin: 0px; height: 36px;", :type => "button", :value => "Save"}

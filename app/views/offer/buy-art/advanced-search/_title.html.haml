@@ -1,0 +1,6 @@
+%select#select_input_title_{:style=>"margin-bottom: 0;margin-right: 5px;width: 100px",:name=>"select[title]search_type"}
+  %option="contains"
+  %option="is exactly"
+  %option="is not"
+%input#text_input_title_{:type=>"text", :style=>"float: left;margin-bottom: 0;width: 200px;",:name=>"select[title]value"}
+%img#error_text_input_title_{"data-original-title"=>"Only Characters allowed", :src=>"/images/exclamation_mark.png", :style=>"display:none;position:absolute;right:170px;"}

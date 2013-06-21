@@ -1,0 +1,9 @@
+= render :partial =>"layouts/header"
+
+%div{:style=>"margin-left:2%"}
+	%h2="Please Confirm to proceed"
+	
+	= form_tag :action => 'complete', :token => params[:token], :payer_id => params[:PayerID] do
+		= submit_tag 'Complete Payment', :class=>"btn"
+
+= render :partial =>"layouts/footer"

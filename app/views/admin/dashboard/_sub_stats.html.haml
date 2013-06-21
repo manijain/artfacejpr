@@ -1,0 +1,223 @@
+#head3.head3_admin    
+  %table
+    %th="#{@interval}"
+    %th Basic
+    %th Plus
+    %th Pro
+    %th Premium
+    %th No Limit
+    %tr#paid_subs
+      %td.color1
+        %u Paid subscriptions
+        %p= link_to @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").count, {:controller=>"/admin/reports", :action=>"index", :stat_type=>"paid subscriptions", :value1=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>1).count, :value2=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>2).count, :value3=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>3).count, :value4=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>4).count, :value5=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>5).count, :value6=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").count, :interval=>"#{@interval}"}
+      %td.color2
+        %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>1).count
+      %td.color3
+        %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>1).count
+      %td.color1
+        %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>3).count
+      %td.color2
+        %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>4).count
+      %td.color3
+        %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>5).count
+    %tr
+      %td.color1
+        %u Free subscriptions
+        %p= link_to @subscriptions.where("subscription_confirmed = true AND free_subscription = true").count, {:controller=>"/admin/reports", :action=>"index", :stat_type=>"free subscriptions", :value1=>@subscriptions.where("subscription_confirmed = true AND free_subscription = true").where(:subscription_plan_id=>1).count, :value2=>@subscriptions.where("subscription_confirmed = true AND free_subscription = true").where(:subscription_plan_id=>2).count, :value3=>@subscriptions.where("subscription_confirmed = true AND free_subscription = true").where(:subscription_plan_id=>3).count, :value4=>@subscriptions.where("subscription_confirmed = true AND free_subscription = true").where(:subscription_plan_id=>4).count, :value5=>@subscriptions.where("subscription_confirmed = true AND free_subscription = true").where(:subscription_plan_id=>5).count, :value6=>@subscriptions.where("subscription_confirmed = true AND free_subscription = true").count, :interval=>"#{@interval}"}
+      %td.color2
+        %p= @subscriptions.where("subscription_confirmed = true AND free_subscription = true").where(:subscription_plan_id=>1).count
+      %td.color3
+        %p= @subscriptions.where("subscription_confirmed = true AND free_subscription = true").where(:subscription_plan_id=>2).count
+      %td.color1
+        %p= @subscriptions.where("subscription_confirmed = true AND free_subscription = true").where(:subscription_plan_id=>3).count
+      %td.color2
+        %p= @subscriptions.where("subscription_confirmed = true AND free_subscription = true").where(:subscription_plan_id=>4).count
+      %td.color3
+        %p= @subscriptions.where("subscription_confirmed = true AND free_subscription = true").where(:subscription_plan_id=>5).count
+    %tr
+      %td.color1
+        %u Total subscriptions
+        %p= link_to @subscriptions.where("subscription_confirmed = true").count, {:controller=>"/admin/reports", :action=>"index", :stat_type=>"total subscriptions", :value1=>@subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id => 1).count, :value2=>@subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id=>2).count, :value3=>@subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id=>3).count, :value4=>@subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id=>4).count, :value5=>@subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id=>5).count, :value6=>@subscriptions.where("subscription_confirmed = true").count, :interval=>"#{@interval}"}
+      %td.color2
+        %p= @subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id=>1).count
+      %td.color3
+        %p= @subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id=>2).count
+      %td.color1
+        %p= @subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id=>3).count
+      %td.color2
+        %p= @subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id=>4).count
+      %td.color3
+        %p= @subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id=>5).count
+    %tr
+      %td.color1
+        %u Total earning
+        %p= link_to ((SubscriptionPlan.where(:id => 1).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 1).count) + (SubscriptionPlan.where(:id => 2).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 2).count) + (SubscriptionPlan.where(:id => 3).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 3).count) + (SubscriptionPlan.where(:id => 4).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 4).count) + (SubscriptionPlan.where(:id => 5).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 5).count)), {:controller=>"/admin/reports", :action=>"index", :stat_type=>"total earning", :value1=>(SubscriptionPlan.where(:id => 1).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id => 1).count), :value2=>(SubscriptionPlan.where(:id => 2).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id => 2).count), :value3=>(SubscriptionPlan.where(:id => 3).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id => 3).count), :value4=>(SubscriptionPlan.where(:id => 4).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id => 4).count), :value5=>(SubscriptionPlan.where(:id => 5).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id => 5).count), :value6=>(SubscriptionPlan.where(:id => 1).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 1).count) + (SubscriptionPlan.where(:id => 2).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 2).count) + (SubscriptionPlan.where(:id => 3).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 3).count) + (SubscriptionPlan.where(:id => 4).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 4).count) + (SubscriptionPlan.where(:id => 5).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id => 5).count), :interval=>"#{@interval}"}
+      %td.color2
+        %p= (SubscriptionPlan.where(:id => 1).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id => 1).count)
+      %td.color3
+        %p= (SubscriptionPlan.where(:id => 2).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id => 2).count)
+      %td.color1
+        %p= (SubscriptionPlan.where(:id => 3).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id => 3).count)
+      %td.color2
+        %p= (SubscriptionPlan.where(:id => 4).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id => 4).count)
+      %td.color3
+        %p= (SubscriptionPlan.where(:id => 5).first.subscription_fee) * (@subscriptions.where("subscription_confirmed = true").where(:subscription_plan_id => 5).count)
+
+
+    %tr
+      -if "#{@interval}" == 'today'
+        %td.color1
+          %u New subscriptions
+          %p= link_to @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) = '#{Time.now.to_date}'").count, {:controller=>"/admin/reports", :action=>"index", :stat_type=>"new subscriptions", :value1=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) = '#{Time.now.to_date}'").where(:subscription_plan_id=>1).count, :value2=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) = '#{Time.now.to_date}'").where(:subscription_plan_id=>1).count, :value3=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) = '#{Time.now.to_date}'").where(:subscription_plan_id=>3).count, :value4=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) = '#{Time.now.to_date}'").where(:subscription_plan_id=>4).count, :value5=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) = '#{Time.now.to_date}'").where(:subscription_plan_id=>5).count, :value6=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) = '#{Time.now.to_date}'").count, :interval=>"#{@interval}"}
+        %td.color2
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) = '#{Time.now.to_date}'").where(:subscription_plan_id=>1).count
+        %td.color3
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) = '#{Time.now.to_date}'").where(:subscription_plan_id=>2).count
+        %td.color1
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) = '#{Time.now.to_date}'").where(:subscription_plan_id=>3).count
+        %td.color2
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) = '#{Time.now.to_date}'").where(:subscription_plan_id=>4).count
+        %td.color3
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) = '#{Time.now.to_date}'").where(:subscription_plan_id=>5).count
+            
+      -elsif "#{@interval}" == 'week'
+        %td.color1
+          %u New subscriptions
+          %p= link_to @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_week}' AND '#{DateTime.now.end_of_week}'").count, {:controller=>"/admin/reports", :action=>"index", :stat_type=>"new subscriptions", :value1=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_week}' AND '#{DateTime.now.end_of_week}'").where(:subscription_plan_id=>1).count, :value2=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_week}' AND '#{DateTime.now.end_of_week}'").where(:subscription_plan_id=>2).count, :value3=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_week}' AND '#{DateTime.now.end_of_week}'").where(:subscription_plan_id=>3).count, :value4=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_week}' AND '#{DateTime.now.end_of_week}'").where(:subscription_plan_id=>4).count, :value5=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_week}' AND '#{DateTime.now.end_of_week}'").where(:subscription_plan_id=>5).count, :value6=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_week}' AND '#{DateTime.now.end_of_week}'").count, :interval=>"#{@interval}"}
+          //week = DateTime.now.cweek
+          //wkbegin = Date.commercial(DateTime.now.year, week, 1)
+          //wkend = Date.commercial(DateTime.now.year, week, 7)
+        %td.color2
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_week}' AND '#{DateTime.now.end_of_week}'").where(:subscription_plan_id=>1).count
+        %td.color3
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_week}' AND '#{DateTime.now.end_of_week}'").where(:subscription_plan_id=>2).count
+        %td.color1
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_week}' AND '#{DateTime.now.end_of_week}'").where(:subscription_plan_id=>3).count
+        %td.color2
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_week}' AND '#{DateTime.now.end_of_week}'").where(:subscription_plan_id=>4).count
+        %td.color3
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_week}' AND '#{DateTime.now.end_of_week}'").where(:subscription_plan_id=>5).count
+            
+      -elsif "#{@interval}" == 'month'
+        %td.color1
+          %u New subscriptions
+          %p= link_to @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_month}' AND '#{DateTime.now.end_of_month}'").count, {:controller=>"/admin/reports", :action=>"index", :stat_type=>"new subscriptions", :value1=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_month}' AND '#{DateTime.now.end_of_month}'").where(:subscription_plan_id=>1).count, :value2=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_month}' AND '#{DateTime.now.end_of_month}'").where(:subscription_plan_id=>2).count, :value3=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_month}' AND '#{DateTime.now.end_of_month}'").where(:subscription_plan_id=>3).count, :value4=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_month}' AND '#{DateTime.now.end_of_month}'").where(:subscription_plan_id=>4).count, :value5=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_month}' AND '#{DateTime.now.end_of_month}'").where(:subscription_plan_id=>5).count, :value6=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_month}' AND '#{DateTime.now.end_of_month}'").count, :interval=>"#{@interval}"}
+        %td.color2
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_month}' AND '#{DateTime.now.end_of_month}'").where(:subscription_plan_id=>1).count
+        %td.color3
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_month}' AND '#{DateTime.now.end_of_month}'").where(:subscription_plan_id=>2).count
+        %td.color1
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_month}' AND '#{DateTime.now.end_of_month}'").where(:subscription_plan_id=>3).count
+        %td.color2
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_month}' AND '#{DateTime.now.end_of_month}'").where(:subscription_plan_id=>4).count
+        %td.color3
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_month}' AND '#{DateTime.now.end_of_month}'").where(:subscription_plan_id=>5).count
+            
+      -elsif "#{@interval}" == "quarter"
+        %td.color1
+          %u New subscriptions
+          %p= link_to @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_quarter}' AND '#{DateTime.now.end_of_quarter}'").count, {:controller=>"/admin/reports", :action=>"index", :stat_type=>"new subscriptions", :value1=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_quarter}' AND '#{DateTime.now.end_of_quarter}'").where(:subscription_plan_id=>1).count, :value2=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_quarter}' AND '#{DateTime.now.end_of_quarter}'").where(:subscription_plan_id=>2).count, :value3=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_quarter}' AND '#{DateTime.now.end_of_quarter}'").where(:subscription_plan_id=>3).count, :value4=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_quarter}' AND '#{DateTime.now.end_of_quarter}'").where(:subscription_plan_id=>4).count, :value5=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_quarter}' AND '#{DateTime.now.end_of_quarter}'").where(:subscription_plan_id=>5).count, :value6=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_quarter}' AND '#{DateTime.now.end_of_quarter}'").count, :interval=>"#{@interval}"}
+        %td.color2
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_quarter}' AND '#{DateTime.now.end_of_quarter}'").where(:subscription_plan_id=>1).count
+        %td.color3
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_quarter}' AND '#{DateTime.now.end_of_quarter}'").where(:subscription_plan_id=>2).count
+        %td.color1
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_quarter}' AND '#{DateTime.now.end_of_quarter}'").where(:subscription_plan_id=>3).count
+        %td.color2
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_quarter}' AND '#{DateTime.now.end_of_quarter}'").where(:subscription_plan_id=>4).count
+        %td.color3
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_quarter}' AND '#{DateTime.now.end_of_quarter}'").where(:subscription_plan_id=>5).count            
+          
+      -elsif "#{@interval}" == "#{DateTime.now.year}"
+        %td.color1
+          %u New subscriptions
+          %p= link_to @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_year}' AND '#{DateTime.now.end_of_year}'").count, {:controller=>"/admin/reports", :action=>"index", :stat_type=>"new subscriptions", :value1=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_year}' AND '#{DateTime.now.end_of_year}'").where(:subscription_plan_id=>1).count, :value2=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_year}' AND '#{DateTime.now.end_of_year}'").where(:subscription_plan_id=>2).count, :value3=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_year}' AND '#{DateTime.now.end_of_year}'").where(:subscription_plan_id=>3).count, :value4=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_year}' AND '#{DateTime.now.end_of_year}'").where(:subscription_plan_id=>4).count, :value5=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_year}' AND '#{DateTime.now.end_of_year}'").where(:subscription_plan_id=>5).count, :value6=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_year}' AND '#{DateTime.now.end_of_year}'").count, :interval=>"#{@interval}"}
+        %td.color2
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_year}' AND '#{DateTime.now.end_of_year}'").where(:subscription_plan_id=>1).count
+        %td.color3
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_year}' AND '#{DateTime.now.end_of_year}'").where(:subscription_plan_id=>2).count
+        %td.color1
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_year}' AND '#{DateTime.now.end_of_year}'").where(:subscription_plan_id=>3).count
+        %td.color2
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_year}' AND '#{DateTime.now.end_of_year}'").where(:subscription_plan_id=>4).count
+        %td.color3
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("date(subscription_start_date) BETWEEN '#{DateTime.now.beginning_of_year}' AND '#{DateTime.now.end_of_year}'").where(:subscription_plan_id=>5).count 
+            
+      -elsif "#{@interval}" == "#{DateTime.now.year-1}"
+        %td.color1
+          %u New subscriptions
+          %p= link_to @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (year from subscription_start_date) =#{Time.now.year-1} ").count, {:controller=>"/admin/reports", :action=>"index", :stat_type=>"new subscriptions", :value1=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (year from subscription_start_date) =#{Time.now.year-1} ").where(:subscription_plan_id=>1).count, :value2=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (year from subscription_start_date) =#{Time.now.year-1} ").where(:subscription_plan_id=>2).count, :value3=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (year from subscription_start_date) =#{Time.now.year-1} ").where(:subscription_plan_id=>3).count, :value4=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (year from subscription_start_date) =#{Time.now.year-1} ").where(:subscription_plan_id=>4).count, :value5=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (year from subscription_start_date) =#{Time.now.year-1} ").where(:subscription_plan_id=>5).count, :value6=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (year from subscription_start_date) =#{Time.now.year-1} ").count, :interval=>"#{@interval}"}
+        %td.color2
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (year from subscription_start_date) =#{Time.now.year-1} ").where(:subscription_plan_id=>1).count
+        %td.color3
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (year from subscription_start_date) =#{Time.now.year-1} ").where(:subscription_plan_id=>2).count
+        %td.color1
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (year from subscription_start_date) =#{Time.now.year-1} ").where(:subscription_plan_id=>3).count
+        %td.color2
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (year from subscription_start_date) =#{Time.now.year-1} ").where(:subscription_plan_id=>4).count
+        %td.color3
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (year from subscription_start_date) =#{Time.now.year-1} ").where(:subscription_plan_id=>5).count 
+            
+      -elsif "#{@interval}" == 'tyear'
+        %td.color1
+          %u New subscriptions
+          %p= link_to @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (YEAR from subscription_start_date) BETWEEN #{Time.now.year-2} AND #{Time.now.year-1}").count, {:controller=>"/admin/reports", :action=>"index", :controller=>"/admin/reports", :action=>"index", :stat_type=>"new subscriptions", :value1=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (YEAR from subscription_start_date) BETWEEN #{Time.now.year-2} AND #{Time.now.year-1}").where(:subscription_plan_id=>1).count, :value2=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (YEAR from subscription_start_date) BETWEEN #{Time.now.year-2} AND #{Time.now.year-1}").where(:subscription_plan_id=>2).count, :value3=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (YEAR from subscription_start_date) BETWEEN #{Time.now.year-2} AND #{Time.now.year-1}").where(:subscription_plan_id=>3).count, :value4=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (YEAR from subscription_start_date) BETWEEN #{Time.now.year-2} AND #{Time.now.year-1}").where(:subscription_plan_id=>4).count, :value5=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (YEAR from subscription_start_date) BETWEEN #{Time.now.year-2} AND #{Time.now.year-1}").where(:subscription_plan_id=>5).count, :value6=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (YEAR from subscription_start_date) BETWEEN #{Time.now.year-2} AND #{Time.now.year-1}").count, :interval=>"#{@interval}"}
+        %td.color2
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (YEAR from subscription_start_date) BETWEEN #{Time.now.year-2} AND #{Time.now.year-1}").where(:subscription_plan_id=>1).count
+        %td.color3
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (YEAR from subscription_start_date) BETWEEN #{Time.now.year-2} AND #{Time.now.year-1}").where(:subscription_plan_id=>2).count
+        %td.color1
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (YEAR from subscription_start_date) BETWEEN #{Time.now.year-2} AND #{Time.now.year-1}").where(:subscription_plan_id=>3).count
+        %td.color2
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (YEAR from subscription_start_date) BETWEEN #{Time.now.year-2} AND #{Time.now.year-1}").where(:subscription_plan_id=>4).count
+        %td.color3
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where("extract (YEAR from subscription_start_date) BETWEEN #{Time.now.year-2} AND #{Time.now.year-1}").where(:subscription_plan_id=>5).count 
+
+      -elsif "#{@interval}" == "All"
+        %td.color1
+          %u New subscriptions
+          %p= link_to @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").count, {:controller=>"/admin/reports", :action=>"index", :stat_type=>"new subscriptions", :value1=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>1).count, :value2=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>2).count, :value3=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>3).count, :value4=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>4).count, :value5=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>5).count, :value6=>@subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").count, :interval=>"#{@interval}"}
+        %td.color2
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>1).count
+        %td.color3
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>2).count
+        %td.color1
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>3).count
+        %td.color2
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>4).count
+        %td.color3
+          %p= @subscriptions.where("subscription_confirmed = true AND free_subscription IS NOT true").where(:subscription_plan_id=>5).count 
+            
+        
+    %tr
+      %td.color1
+        %u Unfinished subscriptions
+        %p= link_to @subscriptions.where(:subscription_confirmed => false).count, {:controller=>"/admin/reports", :action=>"index", :stat_type=>"unfinished sign-ups", :value1=>@subscriptions.where(:subscription_confirmed => false).where(:subscription_plan_id=>1).count, :value2=>@subscriptions.where(:subscription_confirmed => false).where(:subscription_plan_id=>2).count, :value3=>@subscriptions.where(:subscription_confirmed => false).where(:subscription_plan_id=>3).count, :value4=>@subscriptions.where(:subscription_confirmed => false).where(:subscription_plan_id=>4).count, :value5=>@subscriptions.where(:subscription_confirmed => false).where(:subscription_plan_id=>5).count, :value6=>@subscriptions.where(:subscription_confirmed => false).count, :interval=>"#{@interval}"}
+      %td.color2
+        %p= @subscriptions.where(:subscription_confirmed => false).where(:subscription_plan_id=>1).count
+      %td.color3
+        %p= @subscriptions.where(:subscription_confirmed => false).where(:subscription_plan_id=>2).count
+      %td.color1
+        %p= @subscriptions.where(:subscription_confirmed => false).where(:subscription_plan_id=>3).count
+      %td.color2
+        %p= @subscriptions.where(:subscription_confirmed => false).where(:subscription_plan_id=>4).count
+      %td.color3
+        %p= @subscriptions.where(:subscription_confirmed => false).where(:subscription_plan_id=>5).count
+    %tr
+      %td.color1
+        %u Cancelled subscriptions
+        %p= link_to @subscriptions.where("auto_renewal = true AND subscription_renewal_date IS NULL").count, {:controller=>"/admin/reports", :action=>"index", :value1=>@subscriptions.where("auto_renewal = true AND subscription_renewal_date IS NULL").where(:subscription_plan_id=>1).count, :value2=>@subscriptions.where("auto_renewal = true AND subscription_renewal_date IS NULL").where(:subscription_plan_id=>2).count, :value3=>@subscriptions.where("auto_renewal = true AND subscription_renewal_date IS NULL").where(:subscription_plan_id=>3).count, :value4=>@subscriptions.where("auto_renewal = true AND subscription_renewal_date IS NULL").where(:subscription_plan_id=>4).count, :value5=>@subscriptions.where("auto_renewal = true AND subscription_renewal_date IS NULL").where(:subscription_plan_id=>5).count, :value6=>@subscriptions.where("auto_renewal = true AND subscription_renewal_date IS NULL").count, :interval=>"#{@interval}"}
+      %td.color2
+        %p= @subscriptions.where("auto_renewal = true AND subscription_renewal_date IS NULL").where(:subscription_plan_id=>1).count
+      %td.color3
+        %p= @subscriptions.where("auto_renewal = true AND subscription_renewal_date IS NULL").where(:subscription_plan_id=>2).count
+      %td.color1
+        %p= @subscriptions.where("auto_renewal = true AND subscription_renewal_date IS NULL").where(:subscription_plan_id=>3).count
+      %td.color2
+        %p= @subscriptions.where("auto_renewal = true AND subscription_renewal_date IS NULL").where(:subscription_plan_id=>4).count
+      %td.color3
+        %p= @subscriptions.where("auto_renewal = true AND subscription_renewal_date IS NULL").where(:subscription_plan_id=>5).count
+  .input= link_to "SHOW DETAILS", admin_reports_path
+#ajax-loader-big_for_statsdash_data{:style=>"left: 400px;position: absolute;top: 600px;z-index: 100;display:none;"}
+  %img{:src=>"/images/ajax-loader-big.gif"}
+#overlay_div_statsdash{:style=>"background-color: white;display: block;height: 500px;left: 0;opacity: 0.4;position: absolute;top: 400px;width: 100%;z-index: 2;display:none;"}
