@@ -16,10 +16,10 @@
 				%img#error_edit_artist_last_name{"data-original-title"=>"Please enter the artist last name", :src=>"/images/exclamation_mark.png", :style => "display:none"}
 				%br
 				%h6 DATE OF BIRTH 
-				= f.text_field :artist_birth_date, :value => @artist.artist_birth_date, :style => "width:493px;margin-left:14px;border-radius: 0 0 0 0 !important;border: 1px solid black !important;"
+				= f.text_field :artist_birth_date, :value => @artist.artist_birth_date, :placeholder=>"YYYY-MM-DD", :style => "width:493px;margin-left:14px;border-radius: 0 0 0 0 !important;border: 1px solid black !important;"
 				%br
 				%h6 DATE OF DEATH
-				= f.text_field :artist_death_date, :value => @artist.artist_death_date, :style => "width:493px;margin-left:14px;border-radius: 0 0 0 0 !important;border: 1px solid black !important;"
+				= f.text_field :artist_death_date, :value => @artist.artist_death_date, :placeholder=>"YYYY-MM-DD", :style => "width:493px;margin-left:14px;border-radius: 0 0 0 0 !important;border: 1px solid black !important;"
 				%br
 				%h6 DESCRIPTION
 				= f.text_area :artist_description, :value => @artist.artist_description, :style => "height:261px;width:493px;margin-left:14px;border-radius: 0 0 0 0 !important;border: 1px solid black !important;"
@@ -36,7 +36,3 @@
 		
 
 	= render :partial => "admin/layouts/footer"
-
-:javascript
-	$("#artist_edit_artist_birth_date").datepicker({ dateFormat: 'yy-mm-dd' })
-	$("#artist_edit_artist_death_date").datepicker({ dateFormat: 'yy-mm-dd' })

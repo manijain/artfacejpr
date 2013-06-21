@@ -206,11 +206,90 @@ $(function() {
 
 
 
+$("#artist_new_artist_birth_date").datepicker({ 
+  dateFormat: 'yy-mm-dd',
+    onClose: function(dateText, inst) {
+      console.log('in start on close')
+      var endDateTextBox = $('#artist_new_artist_death_date');
+      if (endDateTextBox.val() != '') {
+        var testStartDate = new Date(dateText);
+        var testEndDate = new Date(endDateTextBox.val());
+        if (testStartDate > testEndDate){
+          $("#artist_new_artist_birth_date").val("");
+          alert("Date of Birth should be less than Date of Death.");
+        }
+      }
+    },
+    onSelect: function (selectedDate){
+      console.log('in start on select')
+      var start = $(this).datepicker('getDate');
+      // $('#example16_end').datetimepicker('option', 'minDate', new Date(start.getTime()));
+    }
+  })
 
 
+  $("#artist_new_artist_death_date").datepicker({
+    dateFormat: 'yy-mm-dd',
+  
+    onClose: function(dateText, inst) {
+      var startDateTextBox = $('#artist_new_artist_birth_date');
+      if (startDateTextBox.val() != '') {
+        var testStartDate = new Date(startDateTextBox.val());
+        var testEndDate = new Date(dateText);
+        if (testStartDate > testEndDate){
+          $("#artist_new_artist_death_date").val("");
+          alert("Date of Death should be greater than Date of Birth.");
+        }
+      }
+    },
+    onSelect: function (selectedDate){
+      var end = $(this).datepicker('getDate');
+      //$('#example16_start').datetimepicker('option', 'maxDate', new Date(end.getTime()) );
+    }
+  })
 
 
+  $("#artist_edit_artist_birth_date").datepicker({ 
+  dateFormat: 'yy-mm-dd',
+    onClose: function(dateText, inst) {
+      console.log('in start on close')
+      var endDateTextBox = $('#artist_edit_artist_death_date');
+      if (endDateTextBox.val() != '') {
+        var testStartDate = new Date(dateText);
+        var testEndDate = new Date(endDateTextBox.val());
+        if (testStartDate > testEndDate){
+          $("#artist_edit_artist_birth_date").val("");
+          alert("Date of Birth should be less than Date of Death.");
+        }
+      }
+    },
+    onSelect: function (selectedDate){
+      console.log('in start on select')
+      var start = $(this).datepicker('getDate');
+      // $('#example16_end').datetimepicker('option', 'minDate', new Date(start.getTime()));
+    }
+  })
 
+
+  $("#artist_edit_artist_death_date").datepicker({
+    dateFormat: 'yy-mm-dd',
+  
+    onClose: function(dateText, inst) {
+      var startDateTextBox = $('#artist_edit_artist_birth_date');
+      if (startDateTextBox.val() != '') {
+        var testStartDate = new Date(startDateTextBox.val());
+        var testEndDate = new Date(dateText);
+        if (testStartDate > testEndDate){
+          $("#artist_edit_artist_death_date").val("");
+          alert("Date of Death should be greater than Date of Birth.");
+        }
+      }
+    },
+    onSelect: function (selectedDate){
+      var end = $(this).datepicker('getDate');
+      //$('#example16_start').datetimepicker('option', 'maxDate', new Date(end.getTime()) );
+    }
+  })
 
 })
 
